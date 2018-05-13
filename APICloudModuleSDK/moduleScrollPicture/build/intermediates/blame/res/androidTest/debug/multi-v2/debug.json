@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleScrollPicture\\build\\intermediates\\res\\merged\\androidTest\\debug\\values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleScrollPicture\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "56",
+                        "endOffsets": "107"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "E:\\apicloud\\ModulesDevProject_Android\\androidstudio\\APICloudModuleSDK\\moduleScrollPicture\\build\\intermediates\\res\\merged\\androidTest\\debug\\values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "E:\\apicloud\\ModulesDevProject_Android\\androidstudio\\APICloudModuleSDK\\moduleScrollPicture\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "56",
+                        "endOffsets": "107"
+                    }
+                }
+            ]
+        }
+    ]
+}

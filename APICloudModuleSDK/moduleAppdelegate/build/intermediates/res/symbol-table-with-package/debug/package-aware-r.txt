@@ -1,0 +1,2 @@
+demo.superwebview.apicloud.com.moduleappdelegate
+int string app_name 0x7f150001
