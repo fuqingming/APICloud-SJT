@@ -1,0 +1,4 @@
+#Mon May 14 10:42:04 CST 2018
+base.0=F\:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\6
+path.0=classes.dex
+renamed.0=classes.dex

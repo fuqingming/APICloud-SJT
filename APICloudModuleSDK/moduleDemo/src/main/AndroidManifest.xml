@@ -6,14 +6,53 @@
 
     <application android:allowBackup="true"
         android:label="@string/app_name"
-        android:supportsRtl="true">
-
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
         <activity
-            android:name="com.apicloud.moduleDemo.DemoActivity"
+            android:name="com.apicloud.moduleDemo.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar"
-            android:configChanges="orientation|locale" />
+            android:launchMode="singleTask"
+            />
+        <!--我的消息-->
+        <activity
+            android:name="com.apicloud.moduleDemo.MyMessageActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <!--我的悬赏-->
+        <activity
+            android:name="com.apicloud.moduleDemo.MyRewardActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <!--创业加盟-->
+        <activity
+            android:name="com.apicloud.moduleDemo.MyJoinInActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <!--赚钱大厅-->
+        <activity
+            android:name="com.apicloud.moduleDemo.MoneyMakingHallActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <!--资格商家-->
+        <activity
+            android:name="com.apicloud.moduleDemo.BusinessActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <!--咨询与建议-->
+        <activity
+            android:name="com.apicloud.moduleDemo.InformationActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"/>
 
+        <!--RxGalleryFinal-->
+        <activity
+            android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:exported="true" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

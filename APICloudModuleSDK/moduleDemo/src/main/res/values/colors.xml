@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="red_color">#E42837</color>
+    <color name="app_bg_color">#F5EFE5</color>
+    <color name="white_color">#FFFFFF</color>
+    <color name="pers30_black">#4c000000</color>
+    <!-- 对话框 -->
+    <color name="dialog_gray">#F9F9F9</color>
+    <color name="black">#ff000000</color>
+    <color name="black_color">#333333</color>
+    <color name="black_dark">#666666</color>
+    <color name="red">#DB2C2C</color>
+    <color name="blue_color">#007AFF</color>
+    <color name="app_backgrount_color">#F5F5F5</color>
+    <color name="infoTextColor">#999999</color>
+    <color name="gray_text">#FF858585</color>
+    <color name="app_bg">#FFF0F0F0</color>
+    <color name="dark">#888888</color>
+    <color name="spliter_line_color">#D8D8D8</color>
+    <color name="green">#23912E</color>
+    <color name="yellow_color">#E3923B</color>
+    <color name="black_light">#5C5C5C</color>
+    <color name="lib_sb_color_normal_view">#E3E3E3</color>
+    <color name="lib_sb_stroke_color_normal_view">#D2D2D2</color>
+    <color name="lib_sb_color_checked_view">#4AD863</color>
+    <color name="lib_sb_stroke_color_checked_view">@color/lib_sb_color_checked_view</color>
+    <color name="lib_sb_stroke_color_thumb_view">#D2D2D2</color>
+    <color name="lib_sb_color_thumb_view">#FFFFFF</color>
+    <color name="button_bg_color_pressed">#FCFAF8</color>
+    <color name="light_black_line_color">#DCDADA</color>
+    <color name="light_blue_color">#037AFF</color>
+    <!-- 矩形背景被选中后的颜色 -->
+    <color name="rect_select_bg_color">#FCFBF9</color>
+    <color name="gray_color">#ECE5D9</color>
+</resources>

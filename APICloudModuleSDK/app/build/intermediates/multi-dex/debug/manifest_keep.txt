@@ -1,0 +1,3 @@
+# Referenced at F:\work\APICloud-SJT\APICloudModuleSDK\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:31
+-keep class com.apicloud.moduleDemo.base.BaseApplication { <init>(...); }
+

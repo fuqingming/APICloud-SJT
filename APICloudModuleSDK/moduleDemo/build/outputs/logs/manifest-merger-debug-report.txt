@@ -1,0 +1,123 @@
+-- Merging decision tree log ---
+manifest
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-58:12
+INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-58:12
+INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-58:12
+INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-58:12
+INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-58:12
+INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-58:12
+INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-58:12
+	package
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:3:5-42
+		INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml
+		INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-58:12
+		INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-58:12
+		INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:11-69
+uses-permission#android.permission.VIBRATE
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:5:5-66
+	android:name
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:5:22-63
+application
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:7:5-56:19
+	android:supportsRtl
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:9:9-35
+	android:label
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:8:9-41
+	android:allowBackup
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:7:18-44
+	android:theme
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:10:9-40
+activity#com.apicloud.moduleDemo.MainActivity
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:11:9-15:15
+	android:screenOrientation
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:13:13-49
+	android:launchMode
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:14:13-44
+	android:name
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:12:13-64
+activity#com.apicloud.moduleDemo.MyMessageActivity
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:17:9-20:51
+	android:screenOrientation
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:20:13-49
+	android:theme
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:19:13-69
+	android:name
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:18:13-69
+activity#com.apicloud.moduleDemo.MyRewardActivity
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:22:9-25:51
+	android:screenOrientation
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:25:13-49
+	android:theme
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:24:13-69
+	android:name
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:23:13-68
+activity#com.apicloud.moduleDemo.MyJoinInActivity
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:27:9-30:51
+	android:screenOrientation
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:30:13-49
+	android:theme
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:29:13-69
+	android:name
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:28:13-68
+activity#com.apicloud.moduleDemo.MoneyMakingHallActivity
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:32:9-35:51
+	android:screenOrientation
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:35:13-49
+	android:theme
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:34:13-69
+	android:name
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:33:13-75
+activity#com.apicloud.moduleDemo.BusinessActivity
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:37:9-40:51
+	android:screenOrientation
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:40:13-49
+	android:theme
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:39:13-69
+	android:name
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:38:13-68
+activity#com.apicloud.moduleDemo.InformationActivity
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:42:9-45:51
+	android:screenOrientation
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:45:13-49
+	android:theme
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:44:13-69
+	android:name
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:43:13-71
+activity#cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:48:9-51:39
+	android:exported
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:51:13-36
+	android:theme
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:50:13-69
+	android:name
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:49:13-81
+activity#com.yalantis.ucrop.UCropActivity
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:52:9-55:52
+	android:screenOrientation
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:55:13-49
+	android:theme
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:54:13-69
+	android:name
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:53:13-60
+uses-sdk
+INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml
+INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml
+INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml
+INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml
+		INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml
+		INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml

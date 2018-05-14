@@ -1,7 +1,5 @@
 package com.apicloud.moduleDemo;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -16,9 +14,13 @@ import android.view.animation.TranslateAnimation;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.uzmap.pkg.uzcore.UZWebView;
 import com.uzmap.pkg.uzcore.uzmodule.UZModule;
 import com.uzmap.pkg.uzcore.uzmodule.UZModuleContext;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * 该类映射至Javascript中moduleDemo对象<br><br>
@@ -99,7 +101,7 @@ public class APIModuleDemo extends UZModule {
 	 */
 	public void jsmethod_startActivityForResult(UZModuleContext moduleContext){
 		mJsCallback = moduleContext;
-		Intent intent = new Intent(getContext(), DemoActivity.class);
+		Intent intent = new Intent(getContext(), MainActivity.class);
 		intent.putExtra("appParam", moduleContext.optString("appParam"));
 		intent.putExtra("needResult", true);
 		startActivityForResult(intent, ACTIVITY_REQUEST_CODE_A);
