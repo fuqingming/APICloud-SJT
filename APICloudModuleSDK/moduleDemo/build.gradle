@@ -44,6 +44,12 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile 'com.facebook.fresco:fresco:1.5.0'
     //RxGalleryFinal end
+
+    //日期，地址选择器
+    compile 'com.github.addappcn:android-pickers:1.0.3'
+    compile 'com.alibaba:fastjson:1.1.56.android'
+    //日期，地址选择器 end
+
     implementation files('libs/http-1.0.0.jar')
     compile project(':imagetrans')
 }

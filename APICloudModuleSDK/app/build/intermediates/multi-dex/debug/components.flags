@@ -1,0 +1,101 @@
+-injars 'F:\work\APICloud-SJT\APICloudModuleSDK\app\libs\apiEngine v1.1.0.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\multidex-1.0.2.aar\fe2863cc69f884e1d85f2601f4e5307b\jars\classes.jar'(**.class)
+-injars 'F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\libs\http-1.0.0.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\LRecyclerView-1.3.8.aar\611fe8ae595e355d36a41b007716ae1d\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\recyclerview-animators-2.2.3.aar\7b11f16aacb20790a9a33c08c8dfae14\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\library-1.1.3.aar\9d59e7c4eee0ee985ca6848dab0d3b08\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\android-pickers-1.0.3.aar\8d9e48be7c471871bc5dc1a17d6ddf4a\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\ucrop-2.2.0.aar\6f9db65e505f398e20ccbc52bd19a974\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\design-26.1.0.aar\70d88f9d80da2ad6b2fd3f6b0ba5a7ab\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\c165316ba36e7df6772b5957508831ea\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\utilcode-1.9.0.aar\5875f8b59666bf74d77b20eaf410f835\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\novate-1.5.5.aar\1f76cb7f87e315e30bcdf2ef8f96dd21\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\butterknife-8.8.1.aar\482741dffec49fd8cb152c7202f4300f\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\kprogresshud-1.1.0.aar\22c6479196df12f9128ab2be90139f78\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp-urlconnection\2.4.0\a0c195f14cefc7597e0bebf22c3e7b43920dcf4\okhttp-urlconnection-2.4.0.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.7.0\9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4\glide-3.7.0.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\com.nostra13.universalimageloader\universal-image-loader\1.9.5\442dbfb517b9ab5cb5c6da7ebf8cc28ec5bd0375\universal-image-loader-1.9.5.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\fresco-1.5.0.aar\19689094d1b30eb37c55c5e4f9680c22\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\com.alibaba\fastjson\1.1.56.android\4eef0ac3ef5e18db7af5d44ca0228ca5c29dd2f6\fastjson-1.1.56.android.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\leakcanary-android-1.5.4.aar\e3b8da100726d92e4bb73b98e3464ab5\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife-annotations\8.8.1\bc373fb6bc7bca3035041b924f158fd2b946ee8d\butterknife-annotations-8.8.1.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\exifinterface-25.3.1.aar\b5a3eabf27b463f1c02de89a74154e71\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.1.0.aar\843b1900a8f7eacd2fd5c6448e0aa91c\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.1.0.aar\c07924c6e0abd315c824e8f9ae0c5165\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\transition-26.1.0.aar\670d2bd922b49248fa0f69c204bf690a\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\9dd602d552eecd72b3914ba0aa11a583\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\841d3d89d2187a530c398b215e7f7885\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\774d0d52b9b170c5f0ba87a83d2db3aa\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\d2691bff095f0955a48643b7eaef86c9\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-26.1.0.aar\90229bb8311f3c08e5c35acb0333ff5b\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\923ee083bd8a55b4e502fe099b5b619b\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\83ef9693391a127f44d9dd30aa075c54\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\com.android.support\support-annotations\26.1.0\814258103cf26a15fcc26ecce35f5b7d24b73f8\support-annotations-26.1.0.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\converter-gson\2.3.0\9e09011e9767bb76b5e27c9b8223476b93b14631\converter-gson-2.3.0.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\logging-interceptor\3.8.0\f765f004f3e201bd6ad0904266e605d7fb776d5\logging-interceptor-3.8.0.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\adapter-rxjava\2.3.0\43e4ac24adc40a24c51b2d2a71a2483ef1b0ce9a\adapter-rxjava-2.3.0.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\retrofit\2.3.0\bcacde6a8ccedcc56c127403d26b76072fe6214d\retrofit-2.3.0.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.8.0\5a11f020cce2d11eb71ba916700600e18c4547e7\okhttp-3.8.0.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\rxandroid-1.2.1.aar\962d4934eaad14e297d1aab05c01f391\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\io.reactivex\rxjava\1.3.0\af000bec2036a2a9d07197c4b03b8966bfc60b03\rxjava-1.3.0.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp\2.4.0\40340c0748190fe897baf7bffbc1b282734294e5\okhttp-2.4.0.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\rxandroid-2.0.1.aar\3eb3b38bcb5237317a37683d7a619cb7\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\io.reactivex.rxjava2\rxjava\2.1.0\2fdf84dedcaaeabb9d70cde9dbb8aad4eccb80a1\rxjava-2.1.0.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\drawee-1.5.0.aar\5802eb42926aad40347c262619ffb38d\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\imagepipeline-1.5.0.aar\735a17830487d2c73dadc45268649c83\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-1.5.0.aar\3d6a3b6277aa2fe4ad0445004da68b48\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\fbcore-1.5.0.aar\9db625d4d6285dfae284d031b1963bea\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\leakcanary-analyzer-1.5.4.aar\1401d75d76f852d64c12babef6dc2b0f\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.7\751f548c85fa49f330cecbb1875893f971b33c4e\gson-2.7.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.13.0\a9283170b7305c8d92d25aff02a6ab7e45d06cbe\okio-1.13.0.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\com.parse.bolts\bolts-tasks\1.4.0\d85884acf6810a3bbbecb587f239005cbc846dc4\bolts-tasks-1.4.0.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\com.squareup.leakcanary\leakcanary-watcher\1.5.4\5e3dadce30fd748563219945d867a2e96f287931\leakcanary-watcher-1.5.4.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\com.squareup.haha\haha\2.0.3\640a438d2d415c056ca6a673ac26b183b044e160\haha-2.0.3.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\org.reactivestreams\reactive-streams\1.0.0\14b8c877d98005ba3941c9257cfe09f6ed0e0d74\reactive-streams-1.0.0.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\6ce15eec4ae1293739d35bd927d5ef49\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\android.arch.lifecycle\common\1.0.0\e414a4cb28434e25c4f6aa71426eb20cf4874ae9\common-1.0.0.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\android.arch.core\common\1.0.0\a2d487452376193fc8c103dd2b9bd5f2b1b44563\common-1.0.0.jar'(**.class)
+-injars 'F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\build\intermediates\intermediate-jars\debug\classes.jar'(**.class)
+-injars 'F:\work\APICloud-SJT\APICloudModuleSDK\imagetrans\build\intermediates\intermediate-jars\debug\classes.jar'(**.class)
+-injars 'F:\work\APICloud-SJT\APICloudModuleSDK\app\build\intermediates\classes\debug'(**.class)
+-outjars 'F:\work\APICloud-SJT\APICloudModuleSDK\app\build\intermediates\multi-dex\debug\componentClasses.jar'
+
+-libraryjars 'C:\Users\vip\AppData\Local\Android\Sdk\build-tools\26.0.2\lib\shrinkedAndroid.jar'
+
+-forceprocessing
+-dontoptimize
+-dontobfuscate
+-dontusemixedcaseclassnames
+-dontpreverify
+-dontnote **
+-dontwarn **
+-printconfiguration 'F:\work\APICloud-SJT\APICloudModuleSDK\app\build\intermediates\multi-dex\debug\components.flags'
+
+
+# Referenced at F:\work\APICloud-SJT\APICloudModuleSDK\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:31
+-keep class com.apicloud.moduleDemo.base.BaseApplication {
+    <init>(...);
+}
+
+-keep public class * extends android.app.Instrumentation {
+    <init>();
+}
+
+-keep public class * extends android.app.Application {
+    <init>();
+    void attachBaseContext(android.content.Context);
+}
+
+-keep public class * extends android.app.backup.BackupAgent {
+    <init>();
+}
+
+-keep public class * extends java.lang.annotation.Annotation {
+    <fields>;
+    <methods>;
+}
+
+-keep class com.android.tools.ir.** {
+    <fields>;
+    <methods>;
+}

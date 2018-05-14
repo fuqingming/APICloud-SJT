@@ -139,6 +139,7 @@
     <orderEntry type="library" name="com.squareup.leakcanary:leakcanary-analyzer-1.5.4" level="project" />
     <orderEntry type="library" name="com.yalantis:ucrop-2.2.0" level="project" />
     <orderEntry type="library" name="__local_aars__:F.\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\libs\http-1.0.0.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="com.alibaba:fastjson:1.1.56.android@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-fragment-26.1.0" level="project" />
     <orderEntry type="library" name="com.facebook.fresco:imagepipeline-base-1.5.0" level="project" />
     <orderEntry type="library" name="com.android.support:support-vector-drawable-26.1.0" level="project" />
@@ -146,6 +147,7 @@
     <orderEntry type="library" name="__local_aars__:F.\work\APICloud-SJT\APICloudModuleSDK\app\libs\apiEngine v1.1.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-core-utils-26.1.0" level="project" />
     <orderEntry type="library" name="com.google.code.gson:gson:2.7@jar" level="project" />
+    <orderEntry type="library" name="com.github.addappcn:android-pickers-1.0.3" level="project" />
     <orderEntry type="library" name="com.squareup.okio:okio:1.13.0@jar" level="project" />
     <orderEntry type="library" name="com.squareup.retrofit2:retrofit:2.3.0@jar" level="project" />
     <orderEntry type="library" name="com.squareup.okhttp:okhttp-urlconnection:2.4.0@jar" level="project" />

@@ -124,6 +124,8 @@
     <color name="bright_foreground_inverse_material_light">@color/bright_foreground_material_dark</color>
     <color name="bright_foreground_material_dark">@android:color/white</color>
     <color name="bright_foreground_material_light">@android:color/black</color>
+    <color name="btn_cancel_color">#999999</color>
+    <color name="btn_confirm_color">#303F9F</color>
     <color name="button_bg_color_pressed">#FCFAF8</color>
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
@@ -549,6 +551,11 @@
         </attr><attr format="dimension" name="dividerPadding"/></declare-styleable>
     <declare-styleable name="LinearLayoutCompat_Layout"><attr name="android:layout_width"/><attr name="android:layout_height"/><attr name="android:layout_weight"/><attr name="android:layout_gravity"/></declare-styleable>
     <declare-styleable name="ListPopupWindow"><attr name="android:dropDownVerticalOffset"/><attr name="android:dropDownHorizontalOffset"/></declare-styleable>
+    <declare-styleable name="LoopView"><attr name="view_gravity">
+            <enum name="center" value="17"/>
+            <enum name="left" value="3"/>
+            <enum name="right" value="5"/>
+        </attr><attr format="color" name="lineColor"/><attr format="color" name="topBottomTextColor"/><attr format="color" name="centerTextColor"/><attr format="dimension" name="textSize"/><attr format="boolean" name="canLoop"/><attr format="integer" name="initPosition"/><attr format="integer" name="drawItemCount"/><attr format="float" name="lineSpacingMultiplier"/><attr format="reference|integer" name="npv_ShowCount"/><attr format="reference|boolean" name="npv_ShowDivider"/><attr format="reference|color" name="npv_DividerColor"/><attr format="reference|dimension" name="npv_DividerMarginLeft"/><attr format="reference|dimension" name="npv_DividerMarginRight"/><attr format="reference|dimension" name="npv_DividerHeight"/><attr format="reference|color" name="npv_TextColorNormal"/><attr format="reference|color" name="npv_TextColorSelected"/><attr format="reference|color" name="npv_TextColorHint"/><attr format="reference|dimension" name="npv_TextSizeNormal"/><attr format="reference|dimension" name="npv_TextSizeSelected"/><attr format="reference|dimension" name="npv_TextSizeHint"/><attr format="reference" name="npv_TextArray"/><attr format="reference|integer" name="npv_MinValue"/><attr format="reference|integer" name="npv_MaxValue"/><attr format="reference|boolean" name="npv_WrapSelectorWheel"/><attr format="reference|boolean" name="npv_RespondChangeOnDetached"/><attr format="reference|string" name="npv_HintText"/><attr format="reference|string" name="npv_EmptyItemHint"/><attr format="reference|dimension" name="npv_MarginStartOfHint"/><attr format="reference|dimension" name="npv_MarginEndOfHint"/><attr format="reference|dimension" name="npv_ItemPaddingHorizontal"/><attr format="reference|dimension" name="npv_ItemPaddingVertical"/><attr format="reference|boolean" name="npv_RespondChangeInMainThread"/><attr format="reference|string" name="npv_TextEllipsize"/><attr format="reference" name="npv_AlternativeTextArrayWithMeasureHint"/><attr format="reference" name="npv_AlternativeTextArrayWithoutMeasureHint"/><attr format="reference|string" name="npv_AlternativeHint"/></declare-styleable>
     <declare-styleable name="MenuGroup"><attr name="android:id"/><attr name="android:menuCategory"/><attr name="android:orderInCategory"/><attr name="android:checkableBehavior"/><attr name="android:visible"/><attr name="android:enabled"/></declare-styleable>
     <declare-styleable name="MenuItem"><attr name="android:id"/><attr name="android:menuCategory"/><attr name="android:orderInCategory"/><attr name="android:title"/><attr name="android:titleCondensed"/><attr name="android:icon"/><attr name="android:alphabeticShortcut"/><attr name="alphabeticModifiers">
             <flag name="META" value="0x10000"/>
@@ -751,6 +758,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="ad_big_height">150dp</dimen>
     <dimen name="ad_height">90dp</dimen>
+    <dimen name="btn_text_size">16sp</dimen>
     <dimen name="button_text_size">16sp</dimen>
     <dimen name="chart_bottom_padding">15dp</dimen>
     <dimen name="chart_candle_line_width">1dp</dimen>
@@ -913,6 +921,7 @@
     <dimen name="ucrop_size_wrapper_rotate_button">50dp</dimen>
     <dimen name="ucrop_text_size_widget_text">13sp</dimen>
     <dimen name="ucrop_width_horizontal_wheel_progress_line">2dp</dimen>
+    <dimen name="view_text_size">16sp</dimen>
     <drawable name="gallery_default_toolbar_close_image">@drawable/gallery_ic_cross</drawable>
     <drawable name="notification_template_icon_bg">#3333B5E5</drawable>
     <drawable name="notification_template_icon_low_bg">#0cffffff</drawable>

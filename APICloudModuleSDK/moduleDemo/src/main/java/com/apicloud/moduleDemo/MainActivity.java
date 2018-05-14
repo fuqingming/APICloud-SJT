@@ -12,6 +12,9 @@ import com.apicloud.moduleDemo.base.FragmentActivityBase;
 import com.apicloud.moduleDemo.settings.AppSettings;
 import com.apicloud.sdk.moduledemo.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends FragmentActivityBase {
 
     // Tab文字及图标
@@ -116,7 +119,16 @@ public class MainActivity extends FragmentActivityBase {
             setCurrentTab(FragmentHall.class);
             return;
         }
-
+        Intent resultData = new Intent();
+        JSONObject json = new JSONObject();
+        try {
+            json.put("key1", "value1");
+            json.put("key2", "value2");
+            json.put("key3", "value3");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        resultData.putExtra("result", json.toString());
         setResult(RESULT_OK);
         finish();
     }

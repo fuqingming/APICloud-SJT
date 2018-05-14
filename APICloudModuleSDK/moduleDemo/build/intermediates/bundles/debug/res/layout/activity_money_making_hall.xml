@@ -55,6 +55,7 @@
                     android:textSize="14dp"/>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/ll_business"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -70,6 +71,26 @@
                     android:gravity="center"
                     android:text="资格商家"
                     android:textColor="@color/black"
+                    android:textSize="14dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_amount"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                >
+                <CheckBox
+                    android:id="@+id/cb_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:button="@null"
+                    android:drawablePadding="10dp"
+                    android:gravity="center"
+                    android:text="金额选择"
+                    android:textColor="@drawable/selector_text_color"
                     android:textSize="14dp"/>
             </LinearLayout>
 

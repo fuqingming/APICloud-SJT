@@ -50,6 +50,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
+        <!-- 发布活动  装修量房 -->
+        <activity
+            android:name="com.apicloud.moduleDemo.ReleaseRenovationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <!-- RxGalleryFinal -->
         <activity
             android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"

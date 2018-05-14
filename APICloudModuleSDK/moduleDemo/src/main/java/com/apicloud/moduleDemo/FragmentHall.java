@@ -101,19 +101,25 @@ public class FragmentHall extends BaseFragment {
 					case RENOVATION:
 					{
 						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
+						it.putExtra("nTypeSelete",MoneyMakingHallActivity.TYPE_BUSINESS);
+						it.putExtra("nTypeIntent",MoneyMakingHallActivity.TYPE_RENOVATION);
 						startActivity(it);
 					}
 					break;
 
 					case BUILDING:
 					{
-
+						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
+						it.putExtra("nTypeSelete",MoneyMakingHallActivity.TYPE_BUSINESS);
+						startActivity(it);
 					}
 					break;
 
 					case REDUCE_WEIGHT:
 					{
-
+						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
+						it.putExtra("nTypeSelete",MoneyMakingHallActivity.TYPE_AMOUNT);
+						startActivity(it);
 					}
 					break;
 
@@ -131,19 +137,25 @@ public class FragmentHall extends BaseFragment {
 
 					case QUIT_SMOKING:
 					{
-
+						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
+						it.putExtra("nTypeSelete",MoneyMakingHallActivity.TYPE_AMOUNT);
+						startActivity(it);
 					}
 					break;
 
 					case QUIT_DRINKING:
 					{
-
+						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
+						it.putExtra("nTypeSelete",MoneyMakingHallActivity.TYPE_AMOUNT);
+						startActivity(it);
 					}
 					break;
 
 					case GIVE_UP_GAMBLING:
 					{
-
+						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
+						it.putExtra("nTypeSelete",MoneyMakingHallActivity.TYPE_AMOUNT);
+						startActivity(it);
 					}
 					break;
 
