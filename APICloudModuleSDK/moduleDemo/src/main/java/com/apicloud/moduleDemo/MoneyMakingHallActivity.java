@@ -21,6 +21,7 @@ import com.apicloud.moduleDemo.http.ApiStores;
 import com.apicloud.moduleDemo.http.HttpCallback;
 import com.apicloud.moduleDemo.http.HttpClient;
 import com.apicloud.moduleDemo.util.Utils;
+import com.apicloud.moduleDemo.util.alert.AlertUtils;
 import com.apicloud.moduleDemo.util.recycler.BaseRecyclerAdapter;
 import com.apicloud.sdk.moduledemo.R;
 import com.github.jdsjlzx.ItemDecoration.DividerDecoration;
@@ -256,7 +257,7 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
 
             @Override
             public void OnFailure(String message) {
-                kProgressHUD.dismiss();
+                AlertUtils.MessageAlertShow(MoneyMakingHallActivity.this, "错误", message);
             }
 
             @Override
