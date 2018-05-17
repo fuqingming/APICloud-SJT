@@ -14,7 +14,7 @@ public class BaseApplication extends MyApplication {
     public void onCreate() {
         super.onCreate();
         Utils.init(this);//shardPrefrences
-        HttpSetUrl.setAppUrl("http://test.sgpt.dems.cc/");
+        HttpSetUrl.setAppUrl("http://sjt.dev.dems.cc");
 
         //图片选择
         ModelUtils.setDebugModel(true);

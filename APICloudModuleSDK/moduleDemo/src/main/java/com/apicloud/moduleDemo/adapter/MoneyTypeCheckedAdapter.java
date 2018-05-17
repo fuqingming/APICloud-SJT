@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.apicloud.moduleDemo.bean.base.MoneyMakingHallBean;
+import com.apicloud.moduleDemo.bean.base.MoneyMakingHallTypeBean;
 import com.apicloud.sdk.moduledemo.R;
 
 import java.util.ArrayList;
@@ -23,13 +24,13 @@ public class MoneyTypeCheckedAdapter extends BaseAdapter{
     /**
      * 筛选条件数据
      */
-    private List<MoneyMakingHallBean> mDatas = new ArrayList<>();
+    private List<MoneyMakingHallTypeBean> mDatas = new ArrayList<>();
     /**
      * 布局加载器
      */
     private LayoutInflater mInflater;
 
-    public MoneyTypeCheckedAdapter(Context context, List<MoneyMakingHallBean> mDatas) {
+    public MoneyTypeCheckedAdapter(Context context, List<MoneyMakingHallTypeBean> mDatas) {
         this.mDatas = mDatas;
         mInflater = LayoutInflater.from(context);
     }
@@ -61,7 +62,7 @@ public class MoneyTypeCheckedAdapter extends BaseAdapter{
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.mTitleTv.setText(mDatas.get(i).getCityName());
+        viewHolder.mTitleTv.setText(mDatas.get(i).getTitle());
 
         return convertView;
     }

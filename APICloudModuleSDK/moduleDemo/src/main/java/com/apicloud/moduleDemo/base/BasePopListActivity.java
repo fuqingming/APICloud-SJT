@@ -18,6 +18,7 @@ import android.widget.CheckBox;
 import android.widget.PopupWindow;
 
 import com.apicloud.moduleDemo.backhandler.BackHandlerHelper;
+import com.apicloud.moduleDemo.bean.base.MoneyMakingHallBean;
 import com.apicloud.moduleDemo.settings.Constant;
 import com.apicloud.moduleDemo.settings.GlobalInstanceStateHelper;
 import com.apicloud.moduleDemo.util.HUDProgressUtils;
@@ -316,7 +317,6 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
         return res;
     }
 
-    protected abstract BaseAdapter setInitAdapter(List<T> bean) ;
     /**
      * 筛选pop
      */
@@ -329,9 +329,9 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
      * @param itemClickListener 列表项点击事件
      */
     public void showFilterPopupWindow(View parentView,
-                                      AdapterView.OnItemClickListener itemClickListener,List<T> bean,
+                                      AdapterView.OnItemClickListener itemClickListener, BaseAdapter mPopAdapter,
                                       CustomerDismissListener dismissListener) {
-        showFilterPopupWindow(parentView, itemClickListener,bean, dismissListener, 0);
+        showFilterPopupWindow(parentView, itemClickListener,mPopAdapter, dismissListener, 0);
     }
 
     /**
@@ -341,7 +341,7 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
      * @param itemClickListener 列表项点击事件
      */
     public void showFilterPopupWindow(View parentView,
-                                      AdapterView.OnItemClickListener itemClickListener,List<T> bean,
+                                      AdapterView.OnItemClickListener itemClickListener, BaseAdapter mPopAdapter,
                                       CustomerDismissListener dismissListener, float alpha) {
 
         // 判断当前是否显示
@@ -349,7 +349,7 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
             mPopupWindow.dismiss();
             mPopupWindow = null;
         }
-        mPopupWindow = new CommonFilterPop(this, setInitAdapter(bean));
+        mPopupWindow = new CommonFilterPop(this, mPopAdapter);
         mPopupWindow.setOnDismissListener(dismissListener);
         // 绑定筛选点击事件
         mPopupWindow.setOnItemSelectedListener(itemClickListener);
@@ -372,7 +372,7 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
      * @param itemClickListener 点击回调
      * @param tabs              所有的cb(需要几个输入几个就可以,cb1,cb2....)
      */
-    public void filterTabToggle(boolean isChecked, View showView, AdapterView.OnItemClickListener itemClickListener,List<T> bean, final CheckBox... tabs) {
+    public void filterTabToggle(boolean isChecked, View showView,BaseAdapter mPopAdapter, AdapterView.OnItemClickListener itemClickListener, final CheckBox... tabs) {
         if (isChecked) {
             if (tabs.length <= 0) {
                 return;
@@ -382,38 +382,7 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
                 tabs[i].setChecked(false);
             }
 
-            showFilterPopupWindow(showView, itemClickListener, bean,new CustomerDismissListener() {
-                @Override
-                public void onDismiss() {
-                    super.onDismiss();
-                    // 当pop消失时对第一个cb进行.setChecked(false)操作
-                    tabs[0].setChecked(false);
-                }
-            });
-        } else {
-            // 关闭checkBox时直接隐藏popuwindow
-            hidePopListView();
-        }
-    }
-    /**
-     * Tab筛选栏切换
-     *
-     * @param isChecked         选中状态
-     * @param showView          展示pop的跟布局
-     * @param itemClickListener 点击回调
-     * @param tabs              所有的cb(需要几个输入几个就可以,cb1,cb2....)
-     */
-    public void filterTabToggleT(boolean isChecked, View showView,List<T> bean, AdapterView.OnItemClickListener itemClickListener, final CheckBox... tabs) {
-        if (isChecked) {
-            if (tabs.length <= 0) {
-                return;
-            }
-            // 第一个checkBox为当前点击选中的cb,其他cb进行setChecked(false);
-            for (int i = 1; i < tabs.length; i++) {
-                tabs[i].setChecked(false);
-            }
-
-            showFilterPopupWindow(showView, itemClickListener,bean, new CustomerDismissListener() {
+            showFilterPopupWindow(showView, itemClickListener, mPopAdapter,new CustomerDismissListener() {
                 @Override
                 public void onDismiss() {
                     super.onDismiss();

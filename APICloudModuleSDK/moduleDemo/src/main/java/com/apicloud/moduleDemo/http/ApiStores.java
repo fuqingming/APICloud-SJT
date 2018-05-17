@@ -14,14 +14,16 @@ public class ApiStores {
 
     static final String urlVersion = "api/userapi/";
     /** 悬赏任务列表 */
-    public static final String categories =  urlVersion+"guarantee/schedules";
+    public static final String schedules =  urlVersion+"guarantee/schedules";
     public static Map<String,Object> categories(String strCategoryNo,int page){
         Map<String,Object> map = new HashMap<>();
         map.put("categoryNo",strCategoryNo);
         map.put("limit", Constant.PAGE_SIZE);
         map.put("page",page);
-        map.put("categoryNo","18066244377801");
         return map;
     }
+
+    /** 悬赏任务列表 */
+    public static final String categories =  urlVersion+"guarantee/categories";
 
 }

@@ -10,13 +10,13 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.apicloud.moduleDemo.adapter.MoneyMakingHallAdapter;
 import com.apicloud.moduleDemo.adapter.MoneyTypeCheckedAdapter;
 import com.apicloud.moduleDemo.base.BasePopListActivity;
 import com.apicloud.moduleDemo.bean.base.MoneyMakingHallBean;
-import com.apicloud.moduleDemo.bean.response.ResponseBaseBean;
+import com.apicloud.moduleDemo.bean.base.MoneyMakingHallTypeBean;
 import com.apicloud.moduleDemo.bean.response.ResponseMoneyMakingHallBean;
+import com.apicloud.moduleDemo.bean.response.ResponseMoneyMakingHallTypeBean;
 import com.apicloud.moduleDemo.http.ApiStores;
 import com.apicloud.moduleDemo.http.HttpCallback;
 import com.apicloud.moduleDemo.http.HttpClient;
@@ -29,6 +29,7 @@ import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHallBean> {
@@ -53,6 +54,8 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
     private LinearLayout m_llBusiness;
     private LinearLayout m_llAmount;
 
+    private List<MoneyMakingHallTypeBean> m_arrMoneyMakingHallTypeBeans;
+
     @Override
     protected int setLayoutResourceId() {
         return R.layout.activity_money_making_hall;
@@ -61,6 +64,8 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
     @Override
     protected void initData() {
         Utils.initCommonTitle(this,"赚钱大厅",true);
+
+        m_arrMoneyMakingHallTypeBeans = new ArrayList<>();
     }
 
     @Override
@@ -123,7 +128,7 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
                 .setColorResource(R.color.spliter_line_color)
                 .build();
         mRecyclerView.addItemDecoration(divider);
-        mRecyclerView.setLoadMoreEnabled(false);
+        mRecyclerView.setLoadMoreEnabled(true);
         mRecyclerView.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -155,18 +160,16 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
 
         });
 
-//        m_cbAllType.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
-//            @Override
-//            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-//                filterTabToggleT(isChecked, m_cbAllType,DataUtil.initMoneyType(),new AdapterView.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//                        hidePopListView();
-//                        onRefreshView();
-//                    }
-//                }, m_cbAllType, m_cbOrderBy,m_cbAmount);
-//            }
-//        });
+        m_cbAllType.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(m_arrMoneyMakingHallTypeBeans.size() > 0){
+                    showPopAllType(isChecked);
+                }else{
+                    requestCheckBoxAllType(isChecked);
+                }
+            }
+        });
 //
 //        m_cbOrderBy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
 //            @Override
@@ -231,18 +234,45 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
         });
     }
 
-    @Override
-    protected BaseAdapter setInitAdapter(List<MoneyMakingHallBean> bean) {
-        return new MoneyTypeCheckedAdapter(this,bean);
+    private void showPopAllType(boolean isChecked){
+        filterTabToggle(isChecked, m_cbAllType,new MoneyTypeCheckedAdapter(MoneyMakingHallActivity.this,m_arrMoneyMakingHallTypeBeans),new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                hidePopListView();
+                onRefreshView();
+            }
+        }, m_cbAllType, m_cbOrderBy,m_cbAmount);
     }
 
-//    @Override
-//    protected BaseAdapter setInitAdapter(List<MoneyMakingHallTypeBean> bean) {
-//        return new MoneyTypeCheckedAdapter(this,bean);
-//    }
+    protected void requestCheckBoxAllType(final boolean isChecked){
+        HttpClient.get(ApiStores.categories, new HttpCallback<ResponseMoneyMakingHallTypeBean>() {
+            @Override
+            public void OnSuccess(ResponseMoneyMakingHallTypeBean response) {
+                if(response.getSuccess()){
+                    m_arrMoneyMakingHallTypeBeans.addAll(response.getData());
+                    showPopAllType(isChecked);
+                }
+            }
+
+            @Override
+            public void OnFailure(String message) {
+                kProgressHUD.dismiss();
+            }
+
+            @Override
+            public void OnRequestStart() {
+                kProgressHUD.show();
+            }
+
+            @Override
+            public void OnRequestFinish() {
+                kProgressHUD.dismiss();
+            }
+        });
+    }
 
     protected void requestData(){
-        HttpClient.get(ApiStores.categories,ApiStores.categories("18066244377801",mCurrentPage), new HttpCallback<ResponseMoneyMakingHallBean>() {//ResponseHallBean
+        HttpClient.get(ApiStores.schedules,ApiStores.categories("18066244377801",mCurrentPage), new HttpCallback<ResponseMoneyMakingHallBean>() {
             @Override
             public void OnSuccess(ResponseMoneyMakingHallBean response) {
                 if(response.getSuccess()){
