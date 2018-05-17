@@ -8,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.apicloud.moduleDemo.http.HttpClient;
 import com.apicloud.moduleDemo.util.HUDProgressUtils;
-import com.fqm.myutils.http.HttpClient;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
 import butterknife.ButterKnife;

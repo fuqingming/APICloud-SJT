@@ -111,6 +111,7 @@ public class FragmentHall extends BaseFragment {
 					{
 						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
 						it.putExtra("nTypeSelete",MoneyMakingHallActivity.TYPE_BUSINESS);
+						it.putExtra("nTypeIntent",MoneyMakingHallActivity.TYPE_BUILDING);
 						startActivity(it);
 					}
 					break;
@@ -119,6 +120,7 @@ public class FragmentHall extends BaseFragment {
 					{
 						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
 						it.putExtra("nTypeSelete",MoneyMakingHallActivity.TYPE_AMOUNT);
+						it.putExtra("nTypeIntent",MoneyMakingHallActivity.TYPE_REDUCE_WEIGHT);
 						startActivity(it);
 					}
 					break;
@@ -139,6 +141,7 @@ public class FragmentHall extends BaseFragment {
 					{
 						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
 						it.putExtra("nTypeSelete",MoneyMakingHallActivity.TYPE_AMOUNT);
+						it.putExtra("nTypeIntent",MoneyMakingHallActivity.TYPE_QUIT_SMOKING);
 						startActivity(it);
 					}
 					break;
@@ -147,6 +150,7 @@ public class FragmentHall extends BaseFragment {
 					{
 						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
 						it.putExtra("nTypeSelete",MoneyMakingHallActivity.TYPE_AMOUNT);
+						it.putExtra("nTypeIntent",MoneyMakingHallActivity.TYPE_QUIT_DRINKING);
 						startActivity(it);
 					}
 					break;
@@ -155,6 +159,7 @@ public class FragmentHall extends BaseFragment {
 					{
 						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
 						it.putExtra("nTypeSelete",MoneyMakingHallActivity.TYPE_AMOUNT);
+						it.putExtra("nTypeIntent",MoneyMakingHallActivity.TYPE_GIVE_UP_GAMBLING);
 						startActivity(it);
 					}
 					break;

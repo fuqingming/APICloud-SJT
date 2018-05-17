@@ -17,7 +17,7 @@ import com.apicloud.moduleDemo.settings.Constant;
 import com.apicloud.moduleDemo.util.recycler.BaseRecyclerAdapter;
 import com.apicloud.moduleDemo.view.ErrorLayout;
 import com.apicloud.sdk.moduledemo.R;
-import com.fqm.myutils.http.HttpClient;
+import com.apicloud.moduleDemo.http.HttpClient;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.github.jdsjlzx.util.RecyclerViewStateUtils;

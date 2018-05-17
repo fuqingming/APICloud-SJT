@@ -32,6 +32,9 @@ dependencies {
     compile 'jp.wasabeef:recyclerview-animators:2.2.3'
     compile 'com.kaopiz:kprogresshud:1.1.0'
 
+    //图片处理
+    compile 'jp.wasabeef:glide-transformations:2.0.1'
+
     //imageTrans
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
@@ -50,6 +53,5 @@ dependencies {
     compile 'com.alibaba:fastjson:1.1.56.android'
     //日期，地址选择器 end
 
-    implementation files('libs/http-1.0.0.jar')
     compile project(':imagetrans')
 }

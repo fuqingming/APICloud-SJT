@@ -122,6 +122,7 @@
     <orderEntry type="library" name="jp.wasabeef:recyclerview-animators-2.2.3" level="project" />
     <orderEntry type="library" name="com.facebook.fresco:fresco-1.5.0" level="project" />
     <orderEntry type="library" name="com.facebook.fresco:fbcore-1.5.0" level="project" />
+    <orderEntry type="library" name="jp.wasabeef:glide-transformations-2.0.1" level="project" />
     <orderEntry type="library" name="com.android.support:support-core-ui-26.1.0" level="project" />
     <orderEntry type="library" name="com.nostra13.universalimageloader:universal-image-loader:1.9.5@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-compat-26.1.0" level="project" />
@@ -138,7 +139,6 @@
     <orderEntry type="library" name="com.android.support:design-26.1.0" level="project" />
     <orderEntry type="library" name="com.squareup.leakcanary:leakcanary-analyzer-1.5.4" level="project" />
     <orderEntry type="library" name="com.yalantis:ucrop-2.2.0" level="project" />
-    <orderEntry type="library" name="__local_aars__:F.\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\libs\http-1.0.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="com.alibaba:fastjson:1.1.56.android@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-fragment-26.1.0" level="project" />
     <orderEntry type="library" name="com.facebook.fresco:imagepipeline-base-1.5.0" level="project" />

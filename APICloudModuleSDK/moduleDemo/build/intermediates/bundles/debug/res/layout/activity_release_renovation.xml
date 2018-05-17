@@ -40,17 +40,19 @@
                         android:layout_marginLeft="15dp"/>
 
                     <EditText
-                        android:layout_weight="0"
+                        android:id="@+id/et_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@null"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
+                        android:layout_weight="0"
+                        android:background="@null"
                         android:gravity="right"
                         android:hint="请输入"
-                        android:textColorHint="@color/dark"
+                        android:maxLines="1"
                         android:text="家庭装修量房招标"
-                        android:maxLines="1"/>
+                        android:maxLength="15"
+                        android:textColorHint="@color/dark" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -98,15 +100,15 @@
                         android:layout_marginLeft="15dp"/>
 
                     <TextView
-                        android:id="@+id/tv_start_data"
-                        android:layout_weight="1"
+                        android:id="@+id/tv_start_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="10dp"
+                        android:layout_weight="1"
                         android:gravity="right"
-                        android:textColorHint="@color/dark"
-                        android:hint="年-月-日"/>
+                        android:hint="年-月-日"
+                        android:textColorHint="@color/dark" />
                     <ImageView
                         android:layout_weight="0"
                         android:layout_width="wrap_content"
@@ -131,15 +133,15 @@
                         android:layout_marginLeft="15dp"/>
 
                     <TextView
-                        android:id="@+id/tv_end_data"
-                        android:layout_weight="1"
+                        android:id="@+id/tv_end_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="10dp"
+                        android:layout_weight="1"
                         android:gravity="right"
-                        android:textColorHint="@color/dark"
-                        android:hint="年-月-日"/>
+                        android:hint="年-月-日"
+                        android:textColorHint="@color/dark" />
                     <ImageView
                         android:layout_weight="0"
                         android:layout_width="wrap_content"
@@ -164,6 +166,7 @@
                         android:layout_marginLeft="15dp"/>
 
                     <TextView
+                        android:id="@+id/tv_city_location"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -408,6 +411,8 @@
                         android:layout_marginRight="10dp"
                         android:gravity="right"
                         android:hint="0"
+                        android:inputType="number"
+                        android:maxLength="7"
                         android:background="@null"
                         android:textColorHint="@color/dark"/>
                     <TextView
@@ -434,15 +439,18 @@
                         android:layout_marginLeft="15dp"/>
 
                     <EditText
-                        android:layout_weight="1"
+                        android:id="@+id/et_budget"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@null"
                         android:gravity="right"
                         android:hint="0"
-                        android:background="@null"
-                        android:textColorHint="@color/dark"/>
+                        android:inputType="number"
+                        android:maxLength="8"
+                        android:textColorHint="@color/dark" />
                     <TextView
                         android:layout_weight="0"
                         android:layout_width="wrap_content"
@@ -514,15 +522,18 @@
                             android:layout_marginLeft="15dp"/>
 
                         <EditText
-                            android:layout_weight="1"
+                            android:id="@+id/et_amount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:background="@null"
                             android:gravity="right"
                             android:hint="0"
-                            android:textColorHint="@color/dark"
-                            android:background="@null"/>
+                            android:inputType="number"
+                            android:maxLength="7"
+                            android:textColorHint="@color/dark" />
                         <TextView
                             android:layout_weight="0"
                             android:layout_width="wrap_content"
@@ -622,7 +633,7 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:text="提交"
+                android:text="立即发布"
                 android:textColor="@color/white_color"
                 android:background="@drawable/normal_login_mode_bg_selector"
                 android:layout_marginTop="20dp"

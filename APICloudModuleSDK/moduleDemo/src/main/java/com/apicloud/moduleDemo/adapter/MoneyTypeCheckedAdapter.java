@@ -61,7 +61,7 @@ public class MoneyTypeCheckedAdapter extends BaseAdapter{
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.mTitleTv.setText(mDatas.get(i).getName());
+        viewHolder.mTitleTv.setText(mDatas.get(i).getCityName());
 
         return convertView;
     }

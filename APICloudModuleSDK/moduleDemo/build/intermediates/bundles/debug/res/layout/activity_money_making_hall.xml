@@ -149,5 +149,5 @@
         android:textColor="@color/white_color"
         android:gravity="center"
         android:textSize="@dimen/eightteen"
-        android:text="我也发布量房"/>
+        />
 </LinearLayout>

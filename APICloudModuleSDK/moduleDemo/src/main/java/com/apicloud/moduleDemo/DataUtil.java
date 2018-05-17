@@ -29,16 +29,6 @@ public class DataUtil {
         videoPlayBackBeans.add(new MyRewardBean(R.mipmap.head_s,"孙杰","上海浦东新区","1000","2018-02-05 13:13","[装修量房]-家庭装修量房招标","婚房装修，预算有限"));
         return videoPlayBackBeans;
     }
-    public static List<MoneyMakingHallBean> initMoneyMakingHall(){
-        List<MoneyMakingHallBean> videoPlayBackBeans = new ArrayList<>();
-        videoPlayBackBeans.add(new MoneyMakingHallBean(R.mipmap.head_s,"孙杰","上海浦东新区","1000","2018-02-05 13:13","[装修量房]-家庭装修量房招标","婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限"));
-        videoPlayBackBeans.add(new MoneyMakingHallBean(R.mipmap.head_s,"孙杰","上海浦东新区","1000","2018-02-05 13:13","[装修量房]-家庭装修量房招标","婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限"));
-        videoPlayBackBeans.add(new MoneyMakingHallBean(R.mipmap.head_s,"孙杰","上海浦东新区","1000","2018-02-05 13:13","[装修量房]-家庭装修量房招标","婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限"));
-        videoPlayBackBeans.add(new MoneyMakingHallBean(R.mipmap.head_s,"孙杰","上海浦东新区","1000","2018-02-05 13:13","[装修量房]-家庭装修量房招标","婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限"));
-        videoPlayBackBeans.add(new MoneyMakingHallBean(R.mipmap.head_s,"孙杰","上海浦东新区","1000","2018-02-05 13:13","[装修量房]-家庭装修量房招标","婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限"));
-        videoPlayBackBeans.add(new MoneyMakingHallBean(R.mipmap.head_s,"孙杰","上海浦东新区","1000","2018-02-05 13:13","[装修量房]-家庭装修量房招标","婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限婚房装修，预算有限"));
-        return videoPlayBackBeans;
-    }
     public static List<MyJoinInBean> initMyJoinIn(){
         List<MyJoinInBean> videoPlayBackBeans = new ArrayList<>();
         videoPlayBackBeans.add(new MyJoinInBean("申请创业","昵称","等待审核","2018-02-05 12:07","13386174433"));
@@ -61,27 +51,5 @@ public class DataUtil {
         videoPlayBackBeans.add(new BusinessBean(R.mipmap.head_s,"孙杰","上海浦东新区"));
         videoPlayBackBeans.add(new BusinessBean(R.mipmap.head_s,"孙杰","上海浦东新区"));
         return videoPlayBackBeans;
-    }
-    public static List<MoneyMakingHallBean> initMoneyType(){
-        List<MoneyMakingHallBean> mDatas = new ArrayList<>();
-        mDatas.add(new MoneyMakingHallBean("装修量房","1"));
-        mDatas.add(new MoneyMakingHallBean("买建材","1"));
-        mDatas.add(new MoneyMakingHallBean("减肥","1"));
-        mDatas.add(new MoneyMakingHallBean("设计师创业","1"));
-        mDatas.add(new MoneyMakingHallBean("项目经理创业","1"));
-        mDatas.add(new MoneyMakingHallBean("戒烟","1"));
-        mDatas.add(new MoneyMakingHallBean("戒酒","1"));
-        mDatas.add(new MoneyMakingHallBean("戒赌","1"));
-        mDatas.add(new MoneyMakingHallBean("卖建材","1"));
-        mDatas.add(new MoneyMakingHallBean("要买房","1"));
-        mDatas.add(new MoneyMakingHallBean("要卖房","1"));
-        mDatas.add(new MoneyMakingHallBean("办户口","1"));
-        mDatas.add(new MoneyMakingHallBean("办积分","1"));
-        mDatas.add(new MoneyMakingHallBean("办居住证","1"));
-        mDatas.add(new MoneyMakingHallBean("找学校","1"));
-        mDatas.add(new MoneyMakingHallBean("招工人","1"));
-        mDatas.add(new MoneyMakingHallBean("找工作","1"));
-
-        return mDatas;
     }
 }

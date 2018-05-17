@@ -10,8 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
 import com.apicloud.moduleDemo.backhandler.BackHandlerHelper;
+import com.apicloud.moduleDemo.http.HttpClient;
 import com.apicloud.moduleDemo.util.HUDProgressUtils;
-import com.fqm.myutils.http.HttpClient;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
 /**

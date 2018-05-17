@@ -56,6 +56,34 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
+        <!-- 发布活动  买建材 -->
+        <activity
+            android:name="com.apicloud.moduleDemo.ReleaseBuildingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <!-- 发布活动  减肥 -->
+        <activity
+            android:name="com.apicloud.moduleDemo.ReleaseReduceWeightActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <!-- 发布活动  戒烟 -->
+        <activity
+            android:name="com.apicloud.moduleDemo.ReleaseSmokingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- 发布活动  戒酒 -->
+        <activity
+            android:name="com.apicloud.moduleDemo.ReleaseDrinkingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- 发布活动  戒赌 -->
+        <activity
+            android:name="com.apicloud.moduleDemo.ReleaseGiveUpGamblingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <!-- RxGalleryFinal -->
         <activity
             android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"

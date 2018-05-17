@@ -1,12 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="lottery_main_tab_text">
+    <string-array name="main_tab_text">
 		<item>首页</item>
 		<item>加盟合作</item>
 		<item>""</item>
 		<item>分享</item>
 		<item>我的</item>
 	</string-array>
-       
+	<string-array name="house_style_text">
+		<item>现代简约</item>
+		<item>美式</item>
+		<item>地中海</item>
+		<item>田园</item>
+		<item>新古典</item>
+		<item>中式</item>
+		<item>混搭风</item>
+		<item>其他</item>
+	</string-array>
+	<string-array name="house_type_text">
+		<item>一房</item>
+		<item>二房</item>
+		<item>三房</item>
+		<item>复式</item>
+		<item>平层公寓</item>
+		<item>别墅</item>
+		<item>其他</item>
+	</string-array>
+	<string-array name="house_no_text">
+		<item>不限</item>
+		<item>1家</item>
+		<item>2家</item>
+		<item>3家</item>
+		<item>4家</item>
+		<item>5家</item>
+		<item>6家</item>
+		<item>7家</item>
+		<item>8家</item>
+		<item>9家</item>
+		<item>10家</item>
+		<item>11家</item>
+		<item>12家</item>
+		<item>13家</item>
+		<item>14家</item>
+		<item>15家</item>
+		<item>16家</item>
+		<item>17家</item>
+		<item>18家</item>
+		<item>19家</item>
+		<item>20家</item>
+		<item>21家</item>
+		<item>22家</item>
+		<item>23家</item>
+		<item>24家</item>
+		<item>25家</item>
+		<item>26家</item>
+		<item>27家</item>
+		<item>28家</item>
+		<item>29家</item>
+		<item>30家</item>
+	</string-array>
 </resources>

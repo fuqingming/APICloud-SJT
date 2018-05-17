@@ -15,6 +15,11 @@ import com.apicloud.moduleDemo.adapter.MoneyMakingHallAdapter;
 import com.apicloud.moduleDemo.adapter.MoneyTypeCheckedAdapter;
 import com.apicloud.moduleDemo.base.BasePopListActivity;
 import com.apicloud.moduleDemo.bean.base.MoneyMakingHallBean;
+import com.apicloud.moduleDemo.bean.response.ResponseBaseBean;
+import com.apicloud.moduleDemo.bean.response.ResponseMoneyMakingHallBean;
+import com.apicloud.moduleDemo.http.ApiStores;
+import com.apicloud.moduleDemo.http.HttpCallback;
+import com.apicloud.moduleDemo.http.HttpClient;
 import com.apicloud.moduleDemo.util.Utils;
 import com.apicloud.moduleDemo.util.recycler.BaseRecyclerAdapter;
 import com.apicloud.sdk.moduledemo.R;
@@ -23,6 +28,7 @@ import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHallBean> {
@@ -68,6 +74,26 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
         m_llBusiness = (LinearLayout)findViewById(R.id.ll_business);
         m_llAmount = (LinearLayout)findViewById(R.id.ll_amount);
 
+        switch (getIntent().getIntExtra("nTypeIntent",0)){
+            case TYPE_RENOVATION:
+                m_teRelease.setText("我也发布量房");
+                break;
+            case TYPE_BUILDING:
+                m_teRelease.setText("发布买建材赚赏金");
+                break;
+            case TYPE_REDUCE_WEIGHT:
+                m_teRelease.setText("我也要减肥赚赏金");
+                break;
+            case TYPE_QUIT_SMOKING:
+                m_teRelease.setText("我也要戒烟赚赏金");
+                break;
+            case TYPE_QUIT_DRINKING:
+                m_teRelease.setText("我也要戒酒赚赏金");
+                break;
+            case TYPE_GIVE_UP_GAMBLING:
+                m_teRelease.setText("我也要戒赌赚赏金");
+                break;
+        }
         switch (getIntent().getIntExtra("nTypeSelete",0)){
             case TYPE_BUSINESS:
                 m_llBusiness.setVisibility(View.VISIBLE);
@@ -129,44 +155,44 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
 
         });
 
-        m_cbAllType.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                filterTabToggleT(isChecked, m_cbAllType,DataUtil.initMoneyType(),new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                        hidePopListView();
-                        onRefreshView();
-                    }
-                }, m_cbAllType, m_cbOrderBy,m_cbAmount);
-            }
-        });
-
-        m_cbOrderBy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                filterTabToggleT(isChecked, m_cbOrderBy,DataUtil.initMoneyType(),new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                        hidePopListView();
-                        onRefreshView();
-                    }
-                }, m_cbOrderBy, m_cbAllType,m_cbAmount);
-            }
-        });
-
-        m_cbAmount.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                filterTabToggleT(isChecked, m_cbAmount,DataUtil.initMoneyType(),new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                        hidePopListView();
-                        onRefreshView();
-                    }
-                },m_cbAmount , m_cbAllType,m_cbOrderBy);
-            }
-        });
+//        m_cbAllType.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+//                filterTabToggleT(isChecked, m_cbAllType,DataUtil.initMoneyType(),new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+//                        hidePopListView();
+//                        onRefreshView();
+//                    }
+//                }, m_cbAllType, m_cbOrderBy,m_cbAmount);
+//            }
+//        });
+//
+//        m_cbOrderBy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+//                filterTabToggleT(isChecked, m_cbOrderBy,DataUtil.initMoneyType(),new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+//                        hidePopListView();
+//                        onRefreshView();
+//                    }
+//                }, m_cbOrderBy, m_cbAllType,m_cbAmount);
+//            }
+//        });
+//
+//        m_cbAmount.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+//                filterTabToggleT(isChecked, m_cbAmount,DataUtil.initMoneyType(),new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+//                        hidePopListView();
+//                        onRefreshView();
+//                    }
+//                },m_cbAmount , m_cbAllType,m_cbOrderBy);
+//            }
+//        });
 
         m_tvBusiness.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,22 +209,21 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
                 switch (getIntent().getIntExtra("nTypeIntent",0)){
                     case TYPE_RENOVATION:
                         it = new Intent(MoneyMakingHallActivity.this,ReleaseRenovationActivity.class);
-
                         break;
                     case TYPE_BUILDING:
-
+                        it = new Intent(MoneyMakingHallActivity.this,ReleaseBuildingActivity.class);
                         break;
                     case TYPE_REDUCE_WEIGHT:
-
+                        it = new Intent(MoneyMakingHallActivity.this,ReleaseReduceWeightActivity.class);
                         break;
                     case TYPE_QUIT_SMOKING:
-
+                        it = new Intent(MoneyMakingHallActivity.this,ReleaseSmokingActivity.class);
                         break;
                     case TYPE_QUIT_DRINKING:
-
+                        it = new Intent(MoneyMakingHallActivity.this,ReleaseDrinkingActivity.class);
                         break;
                     case TYPE_GIVE_UP_GAMBLING:
-
+                        it = new Intent(MoneyMakingHallActivity.this,ReleaseGiveUpGamblingActivity.class);
                         break;
                 }
                 startActivity(it);
@@ -217,32 +242,27 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
 //    }
 
     protected void requestData(){
+        HttpClient.get(ApiStores.categories,ApiStores.categories("18066244377801",mCurrentPage), new HttpCallback<ResponseMoneyMakingHallBean>() {//ResponseHallBean
+            @Override
+            public void OnSuccess(ResponseMoneyMakingHallBean response) {
+                if(response.getSuccess()){
+                    executeOnLoadDataSuccess(response.getData().getContent(),true);
+                }
+            }
 
-        executeOnLoadDataSuccess(DataUtil.initMoneyMakingHall(),true);
-        executeOnLoadFinish();
-//        HttpClient.get(ApiStores.changePwd,ApiStores.changePwd("","",""), new HttpCallback<ResponseBaseBean>() {//ResponseHallBean
-//            @Override
-//            public void OnSuccess(ResponseBaseBean response) {
-//                if(response.getResult()){
-//                    List<TeacherAnalysisBean> responseFragmentHallBeen = new ArrayList<>();
-//                    responseFragmentHallBeen.addAll(response.getContent().getJuemi().getData());
-//                    executeOnLoadDataSuccess(responseFragmentHallBeen);
-//                }
-//            }
-//
-//            @Override
-//            public void OnFailure(String message) {
-//                executeOnLoadDataError(null);
-//            }
-//
-//            @Override
-//            public void OnRequestStart() {
-//            }
-//
-//            @Override
-//            public void OnRequestFinish() {
-//                executeOnLoadFinish();
-//            }
-//        });
+            @Override
+            public void OnFailure(String message) {
+                executeOnLoadDataError(null);
+            }
+
+            @Override
+            public void OnRequestStart() {
+            }
+
+            @Override
+            public void OnRequestFinish() {
+                executeOnLoadFinish();
+            }
+        });
     }
 }

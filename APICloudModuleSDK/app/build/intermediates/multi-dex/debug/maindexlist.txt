@@ -329,6 +329,7 @@ android/arch/lifecycle/Lifecycle$State.class
 android/support/v4/view/ViewPager$1.class
 android/support/v4/view/ViewPager$LayoutParams.class
 android/support/transition/ViewUtils.class
+com/apicloud/moduleDemo/http/HttpSetUrl.class
 com/blankj/utilcode/constant/TimeConstants.class
 android/support/v4/internal/view/SupportMenu.class
 android/support/transition/Transition$2.class
@@ -495,7 +496,6 @@ android/support/v7/widget/RecyclerView$LayoutParams.class
 retrofit2/http/DELETE.class
 android/support/v4/app/FrameMetricsAggregator$FrameMetricsApi24Impl.class
 android/support/transition/Slide$2.class
-com/fqm/myutils/http/HttpSetUrl.class
 com/blankj/utilcode/util/SpanUtils$CustomImageSpan.class
 android/support/design/widget/BaseTransientBottomBar$7.class
 android/support/v4/view/ViewCompat$ViewCompatApi17Impl.class
@@ -1036,7 +1036,6 @@ com/facebook/imageutils/BitmapUtil.class
 com/facebook/drawee/interfaces/DraweeController.class
 io/reactivex/processors/UnicastProcessor.class
 okhttp3/MediaType.class
-com/fqm/myutils/http/ApiService.class
 okhttp3/HttpUrl.class
 com/facebook/drawee/drawable/ArrayDrawable.class
 uk/co/senab/photoview/PhotoViewAttacher.class
@@ -1085,6 +1084,7 @@ okhttp3/Response$Builder.class
 rx/plugins/RxJavaErrorHandler.class
 io/reactivex/subjects/ReplaySubject.class
 com/facebook/drawee/backends/pipeline/DraweeConfig.class
+com/apicloud/moduleDemo/http/ApiService.class
 okhttp3/MultipartBody$Part.class
 okhttp3/logging/package-info.class
 com/facebook/imagepipeline/producers/LocalExifThumbnailProducer.class

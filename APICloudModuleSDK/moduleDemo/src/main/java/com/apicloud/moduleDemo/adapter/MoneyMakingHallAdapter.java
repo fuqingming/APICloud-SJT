@@ -5,6 +5,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.apicloud.moduleDemo.bean.base.MoneyMakingHallBean;
+import com.apicloud.moduleDemo.util.ImageLoader;
+import com.apicloud.moduleDemo.util.TimeUtils;
 import com.apicloud.moduleDemo.util.recycler.BaseRecyclerAdapter;
 import com.apicloud.moduleDemo.util.recycler.BaseRecyclerViewHolder;
 import com.apicloud.sdk.moduledemo.R;
@@ -34,13 +36,14 @@ public class MoneyMakingHallAdapter extends BaseRecyclerAdapter<MoneyMakingHallB
         TextView tvTitle = holder.getView().findViewById(R.id.tv_title);
         TextView tvText = holder.getView().findViewById(R.id.tv_text);
 
-        ivIcon.setImageResource(data.getIcon());
-        tvName.setText(data.getName());
-        tvAddress.setText(data.getAddress());
-        tvAmount.setText(data.getAmount());
-        tvTime.setText(data.getTime());
+        ImageLoader.getInstace().loadCircleImg(mContext, ivIcon, data.getUserInfo().getAvatar(),R.mipmap.head_s);
+
+        tvName.setText(data.getUserInfo().getNickname());
+        tvAddress.setText(data.getProvinceName()+data.getCityName()+data.getCountyName());
+        tvAmount.setText(data.getPersonnelAmount());
+        tvTime.setText(TimeUtils.time2String(data.getCreated(),TimeUtils.TIME_FORMAT_SHOW));
         tvTitle.setText(data.getTitle());
-        tvText.setText(data.getText());
+        tvText.setText(data.getRemark());
     }
 
 }

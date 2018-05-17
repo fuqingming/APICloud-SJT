@@ -44,7 +44,7 @@ public class MainActivity extends FragmentActivityBase {
     @Override
     protected void init() {
         super.init();
-        m_textArray = getResources().getStringArray(R.array.lottery_main_tab_text);
+        m_textArray = getResources().getStringArray(R.array.main_tab_text);
         m_layoutInflater = LayoutInflater.from(this);
         AppSettings.setAutoLogin(true);
         AppSettings.setNickname("1111111");

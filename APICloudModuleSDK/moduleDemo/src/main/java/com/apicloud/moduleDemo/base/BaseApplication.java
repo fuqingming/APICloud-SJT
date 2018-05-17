@@ -1,13 +1,11 @@
 package com.apicloud.moduleDemo.base;
 
+import com.apicloud.moduleDemo.http.HttpSetUrl;
 import com.blankj.utilcode.util.Utils;
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.fqm.myutils.http.HttpSetUrl;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.uzmap.pkg.uzapp.UZApplication;
-
 import cn.finalteam.rxgalleryfinal.utils.ModelUtils;
 
 public class BaseApplication extends MyApplication {
@@ -16,7 +14,7 @@ public class BaseApplication extends MyApplication {
     public void onCreate() {
         super.onCreate();
         Utils.init(this);//shardPrefrences
-        HttpSetUrl.setAppUrl("http://gxt.mqcll.cn/");
+        HttpSetUrl.setAppUrl("http://test.sgpt.dems.cc/");
 
         //图片选择
         ModelUtils.setDebugModel(true);

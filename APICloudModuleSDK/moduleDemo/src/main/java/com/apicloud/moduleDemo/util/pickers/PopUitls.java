@@ -18,7 +18,7 @@ import cn.addapp.pickers.picker.SinglePicker;
  */
 
 public class PopUitls {
-    public static void showStyleSelect(Activity activity,String[] strArr,String strTitle,final OnTaskSuccessComplete onTaskSuccess){
+    public static void showPopSelect(Activity activity,String strArr[] ,String strTitle,final OnTaskSuccessComplete onTaskSuccess){
         SinglePicker<String> picker = new SinglePicker<>(activity,strArr);
         picker.setCanLoop(false);//不禁用循环
         picker.setTopBackgroundColor(0xFFEEEEEE);
