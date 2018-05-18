@@ -17,7 +17,35 @@ public class Const {
 
     public class Phone
     {
-        public static final String CUSTOMER_SERVICE_PHONE = "400-888-213";	// 客服
-        public static final String CUSTOMER_SERVICE_PHONE_PLAY = "4008657633";	// 客服
+        public static final String CUSTOMER_SERVICE_PHONE = "021-64183359";	// 客服
+    }
+
+    public class ActivityType
+    {
+        public static final int ACTIVITY_IS_PAYMENT = 1;	// 等待支付
+        public static final int ACTIVITY_IS_EXAMINE = 5;	// 等待审核
+        public static final int ACTIVITY_IS_BIDDING = 8;	// 竞标中
+        public static final int ACTIVITY_IS_BEGINING = 10;	// 进行中
+        public static final int ACTIVITY_IS_FINISH = 20;	// 已完成
+    }
+
+    public class ScopeType
+    {
+        public static final int ALL_CITY = 1;	// 全国
+        public static final int INDEX_CITY = 2;	// 指定城市
+    }
+
+    public class ActionType
+    {
+        public static final int ACTIVITY_RELEASE = 1;	    // 发布
+        public static final int ACTIVITY_TRUSTEESHIP = 5;	// 托管资金
+        public static final int ACTIVITY_EXAMINE = 10;	    // 审核
+        public static final int ACTIVITY_BIDDING = 15;	    // 竞标
+        public static final int ACTIVITY_BEGINING = 25;	    // 进行
+    }
+
+    public class RoleType{
+        public static final int DESIGNER_ENTREPRENEURSHIP = 2;	    // 设计师
+        public static final int MANAGER_ENTREPRENEURSHIP = 8;	    // 项目经理
     }
 }

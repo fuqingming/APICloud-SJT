@@ -10,6 +10,11 @@ public class MoneyMakingHallTypeBean implements Serializable{
     private String categoryNo;
     private String title;
 
+    public MoneyMakingHallTypeBean(String categoryNo, String title) {
+        this.categoryNo = categoryNo;
+        this.title = title;
+    }
+
     public String getCategoryNo() {
         return categoryNo;
     }

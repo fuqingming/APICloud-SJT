@@ -16,7 +16,7 @@ public class MoneyMakingHallBean implements Serializable{
     private String title;
     private String resourceType;
     private String modelType;
-    private String scheduleStatus;
+    private int scheduleStatus;
     private String closeType;
     private String closeTypeName;
     private String scheduleStatusName;
@@ -37,7 +37,7 @@ public class MoneyMakingHallBean implements Serializable{
     private double lat;
     private String categoryNo;
     private String categoryName;
-    private String scopeType;
+    private int scopeType;
     private String scheduleScope;
     private String topShow;
     private String ruleRemark;
@@ -91,11 +91,11 @@ public class MoneyMakingHallBean implements Serializable{
         this.modelType = modelType;
     }
 
-    public String getScheduleStatus() {
+    public int getScheduleStatus() {
         return scheduleStatus;
     }
 
-    public void setScheduleStatus(String scheduleStatus) {
+    public void setScheduleStatus(int scheduleStatus) {
         this.scheduleStatus = scheduleStatus;
     }
 
@@ -259,11 +259,11 @@ public class MoneyMakingHallBean implements Serializable{
         this.categoryName = categoryName;
     }
 
-    public String getScopeType() {
+    public int getScopeType() {
         return scopeType;
     }
 
-    public void setScopeType(String scopeType) {
+    public void setScopeType(int scopeType) {
         this.scopeType = scopeType;
     }
 

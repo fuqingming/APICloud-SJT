@@ -1,6 +1,5 @@
 package com.apicloud.moduleDemo;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.DisplayMetrics;
@@ -17,7 +16,7 @@ import android.widget.Toast;
 import com.apicloud.moduleDemo.adapter.PictureSelectionAdapter;
 import com.apicloud.moduleDemo.backhandler.OnTaskSuccessComplete;
 import com.apicloud.moduleDemo.base.BaseAppCompatActivity;
-import com.apicloud.moduleDemo.bean.base.DataBean;
+import com.apicloud.moduleDemo.bean.base.DateBean;
 import com.apicloud.moduleDemo.util.TimeUtils;
 import com.apicloud.moduleDemo.util.Utils;
 import com.apicloud.moduleDemo.util.pickers.AddressPickTask;
@@ -25,15 +24,10 @@ import com.apicloud.moduleDemo.util.pickers.PopUitls;
 import com.apicloud.sdk.moduledemo.R;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-import cn.addapp.pickers.common.LineConfig;
 import cn.addapp.pickers.entity.City;
 import cn.addapp.pickers.entity.County;
 import cn.addapp.pickers.entity.Province;
-import cn.addapp.pickers.listeners.OnItemPickListener;
-import cn.addapp.pickers.picker.DatePicker;
-import cn.addapp.pickers.picker.SinglePicker;
 import cn.finalteam.rxgalleryfinal.RxGalleryFinal;
 import cn.finalteam.rxgalleryfinal.bean.MediaBean;
 import cn.finalteam.rxgalleryfinal.imageloader.ImageLoaderType;
@@ -139,7 +133,7 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
                 PopUitls.showDataSelect(ReleaseRenovationActivity.this, new OnTaskSuccessComplete() {
                     @Override
                     public void onSuccess(Object obj) {
-                        DataBean dataBean = (DataBean) obj;
+                        DateBean dataBean = (DateBean) obj;
                         m_lonStartDate = dataBean.getYear() + "-" + dataBean.getMonth() + "-" + dataBean.getDay();
                         m_tvStartDate.setText(m_lonStartDate);
                     }
@@ -153,7 +147,7 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
                 PopUitls.showDataSelect(ReleaseRenovationActivity.this, new OnTaskSuccessComplete() {
                     @Override
                     public void onSuccess(Object obj) {
-                        DataBean dataBean = (DataBean) obj;
+                        DateBean dataBean = (DateBean) obj;
                         m_lonEndDate = dataBean.getYear() + "-" + dataBean.getMonth() + "-" + dataBean.getDay();
                         m_tvEndDate.setText(m_lonEndDate);
                     }

@@ -11,6 +11,7 @@ import android.widget.GridView;
 import com.apicloud.moduleDemo.adapter.ModuleSelectionAdapter;
 import com.apicloud.moduleDemo.base.BaseFragment;
 import com.apicloud.moduleDemo.settings.AppSettings;
+import com.apicloud.moduleDemo.settings.Const;
 import com.apicloud.moduleDemo.util.Utils;
 import com.apicloud.sdk.moduledemo.R;
 
@@ -30,8 +31,8 @@ public class FragmentHall extends BaseFragment {
 	private ModuleSelectionAdapter m_adapter;
 
 	private int[] m_arrIcon = { R.mipmap.zhuangxiu, R.mipmap.maijiancai, R.mipmap.jianfei,
-			R.mipmap.shejishichuangye, R.mipmap.xiangmujinglichuangye, R.mipmap.jieyan,
-			R.mipmap.jiejiu, R.mipmap.jiedu, R.mipmap.zixunyujianyi };
+								R.mipmap.shejishichuangye, R.mipmap.xiangmujinglichuangye, R.mipmap.jieyan,
+								R.mipmap.jiejiu, R.mipmap.jiedu, R.mipmap.zixunyujianyi };
 
 	private String[] m_arrText = { "装修量房", "买建材", "减肥",
 								   "设计师创业", "项目经理创业", "戒烟",
@@ -127,13 +128,19 @@ public class FragmentHall extends BaseFragment {
 
 					case DESIGNER_ENTREPRENEURSHIP:
 					{
-
+						it = new Intent(getMContext(),EntrepreneurshipActivity.class);
+						it.putExtra("strTitle","设计师创业");
+						it.putExtra("strRoleType", Const.RoleType.DESIGNER_ENTREPRENEURSHIP);
+						startActivity(it);
 					}
 					break;
 
 					case MANAGER_ENTREPRENEURSHIP:
 					{
-
+						it = new Intent(getMContext(),EntrepreneurshipActivity.class);
+						it.putExtra("strTitle","项目经理创业");
+						it.putExtra("strRoleType", Const.RoleType.MANAGER_ENTREPRENEURSHIP);
+						startActivity(it);
 					}
 					break;
 

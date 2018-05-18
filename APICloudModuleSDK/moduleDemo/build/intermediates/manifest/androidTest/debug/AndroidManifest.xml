@@ -85,6 +85,10 @@
         <activity
             android:name="com.apicloud.moduleDemo.ReleaseGiveUpGamblingActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> <!-- 活动  详情 -->
+        <activity
+            android:name="com.apicloud.moduleDemo.RenovationDetailsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> <!-- RxGalleryFinal -->
         <activity
             android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"

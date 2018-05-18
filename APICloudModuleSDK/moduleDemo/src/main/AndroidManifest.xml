@@ -78,6 +78,18 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="portrait"/>
 
+        <!--活动  详情-->
+        <activity
+            android:name="com.apicloud.moduleDemo.RenovationDetailsActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"/>
+
+        <!--创业列表-->
+        <activity
+            android:name="com.apicloud.moduleDemo.EntrepreneurshipActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"/>
+
         <!--RxGalleryFinal-->
         <activity
             android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"

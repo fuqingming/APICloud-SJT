@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.apicloud.moduleDemo.adapter.PictureSelectionAdapter;
 import com.apicloud.moduleDemo.backhandler.OnTaskSuccessComplete;
 import com.apicloud.moduleDemo.base.BaseAppCompatActivity;
-import com.apicloud.moduleDemo.bean.base.DataBean;
+import com.apicloud.moduleDemo.bean.base.DateBean;
 import com.apicloud.moduleDemo.util.Utils;
 import com.apicloud.moduleDemo.util.pickers.AddressPickTask;
 import com.apicloud.moduleDemo.util.pickers.PopUitls;
@@ -113,7 +113,7 @@ public class ReleaseGiveUpGamblingActivity extends BaseAppCompatActivity {
                 PopUitls.showDataSelect(ReleaseGiveUpGamblingActivity.this, new OnTaskSuccessComplete() {
                     @Override
                     public void onSuccess(Object obj) {
-                        DataBean dataBean = (DataBean) obj;
+                        DateBean dataBean = (DateBean) obj;
                         m_tvClosingDate.setText(dataBean.getYear() + "-" + dataBean.getMonth() + "-" + dataBean.getDay());
                     }
                 });
@@ -126,7 +126,7 @@ public class ReleaseGiveUpGamblingActivity extends BaseAppCompatActivity {
                 PopUitls.showDataSelect(ReleaseGiveUpGamblingActivity.this, new OnTaskSuccessComplete() {
                     @Override
                     public void onSuccess(Object obj) {
-                        DataBean dataBean = (DataBean) obj;
+                        DateBean dataBean = (DateBean) obj;
                         m_tvStartData.setText(dataBean.getYear() + "-" + dataBean.getMonth() + "-" + dataBean.getDay());
                     }
                 });
@@ -139,7 +139,7 @@ public class ReleaseGiveUpGamblingActivity extends BaseAppCompatActivity {
                 PopUitls.showDataSelect(ReleaseGiveUpGamblingActivity.this, new OnTaskSuccessComplete() {
                     @Override
                     public void onSuccess(Object obj) {
-                        DataBean dataBean = (DataBean) obj;
+                        DateBean dataBean = (DateBean) obj;
                         m_tvEndData.setText(dataBean.getYear() + "-" + dataBean.getMonth() + "-" + dataBean.getDay());
                     }
                 });

@@ -40,16 +40,4 @@ public class DataUtil {
         videoPlayBackBeans.add(new MyJoinInBean("申请创业","昵称","等待审核","2018-02-05 12:07","13386174433"));
         return videoPlayBackBeans;
     }
-    public static List<BusinessBean> initBusiness(){
-        List<BusinessBean> videoPlayBackBeans = new ArrayList<>();
-        videoPlayBackBeans.add(new BusinessBean(R.mipmap.head_s,"孙杰","上海浦东新区"));
-        videoPlayBackBeans.add(new BusinessBean(R.mipmap.head_s,"孙杰","上海浦东新区"));
-        videoPlayBackBeans.add(new BusinessBean(R.mipmap.head_s,"孙杰","上海浦东新区"));
-        videoPlayBackBeans.add(new BusinessBean(R.mipmap.head_s,"孙杰","上海浦东新区"));
-        videoPlayBackBeans.add(new BusinessBean(R.mipmap.head_s,"孙杰","上海浦东新区"));
-        videoPlayBackBeans.add(new BusinessBean(R.mipmap.head_s,"孙杰","上海浦东新区"));
-        videoPlayBackBeans.add(new BusinessBean(R.mipmap.head_s,"孙杰","上海浦东新区"));
-        videoPlayBackBeans.add(new BusinessBean(R.mipmap.head_s,"孙杰","上海浦东新区"));
-        return videoPlayBackBeans;
-    }
 }

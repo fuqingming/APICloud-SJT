@@ -584,6 +584,10 @@
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c165316ba36e7df6772b5957508831ea\\res\\drawable-xhdpi-v4\\abc_ic_star_black_16dp.png"
     },
     {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_shape_round_green.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\drawable\\shape_round_green.xml"
+    },
+    {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_design_ic_visibility.png.flat",
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\70d88f9d80da2ad6b2fd3f6b0ba5a7ab\\res\\drawable-xxxhdpi-v4\\design_ic_visibility.png"
     },
@@ -638,6 +642,10 @@
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_ic_star_black_16dp.png.flat",
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c165316ba36e7df6772b5957508831ea\\res\\drawable-hdpi-v4\\abc_ic_star_black_16dp.png"
+    },
+    {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_activity_details.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_details.xml"
     },
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_notification_template_media.xml.flat",
@@ -918,6 +926,10 @@
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_loading_04.png.flat",
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\LRecyclerView-1.3.8.aar\\611fe8ae595e355d36a41b007716ae1d\\res\\drawable-hdpi-v4\\loading_04.png"
+    },
+    {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_dialog_commom.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\layout\\dialog_commom.xml"
     },
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\mipmap-xhdpi-v4_xiangmujinglichuangye.png.flat",
@@ -2068,6 +2080,10 @@
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c165316ba36e7df6772b5957508831ea\\res\\drawable-mdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png"
     },
     {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_bg_round_white.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\drawable\\bg_round_white.xml"
+    },
+    {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim_abc_popup_enter.xml.flat",
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c165316ba36e7df6772b5957508831ea\\res\\anim\\abc_popup_enter.xml"
     },
@@ -2278,6 +2294,10 @@
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\color_abc_primary_text_disable_only_material_light.xml.flat",
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c165316ba36e7df6772b5957508831ea\\res\\color\\abc_primary_text_disable_only_material_light.xml"
+    },
+    {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_bg_bottom_round_primary.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\drawable\\bg_bottom_round_primary.xml"
     },
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldrtl-xhdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",

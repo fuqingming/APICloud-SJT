@@ -5,6 +5,11 @@ import android.view.View;
 
 import com.apicloud.moduleDemo.adapter.BusinessAdapter;
 import com.apicloud.moduleDemo.base.BaseListActivity;
+import com.apicloud.moduleDemo.bean.response.ResponseBaseBean;
+import com.apicloud.moduleDemo.bean.response.ResponseBusinessBean;
+import com.apicloud.moduleDemo.http.ApiStores;
+import com.apicloud.moduleDemo.http.HttpCallback;
+import com.apicloud.moduleDemo.http.HttpClient;
 import com.apicloud.moduleDemo.util.Utils;
 import com.apicloud.moduleDemo.util.recycler.BaseRecyclerAdapter;
 import com.apicloud.sdk.moduledemo.R;
@@ -12,6 +17,8 @@ import com.github.jdsjlzx.ItemDecoration.DividerDecoration;
 import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
+
+import java.util.ArrayList;
 
 public class BusinessActivity extends BaseListActivity {
 
@@ -36,7 +43,7 @@ public class BusinessActivity extends BaseListActivity {
     protected void initLayoutManager() {
         LinearLayoutManager m_linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(m_linearLayoutManager);
-        mRecyclerView.setLoadMoreEnabled(false);
+        mRecyclerView.setLoadMoreEnabled(true);
         DividerDecoration divider = new DividerDecoration.Builder(this)
                 .setHeight(R.dimen.one)
                 .setColorResource(R.color.spliter_line_color)
@@ -78,31 +85,27 @@ public class BusinessActivity extends BaseListActivity {
 
     protected void requestData(){
 
-        executeOnLoadDataSuccess(DataUtil.initBusiness(),true);
-        executeOnLoadFinish();
-//        HttpClient.get(ApiStores.changePwd,ApiStores.changePwd("","",""), new HttpCallback<ResponseBaseBean>() {//ResponseHallBean
-//            @Override
-//            public void OnSuccess(ResponseBaseBean response) {
-//                if(response.getResult()){
-//                    List<TeacherAnalysisBean> responseFragmentHallBeen = new ArrayList<>();
-//                    responseFragmentHallBeen.addAll(response.getContent().getJuemi().getData());
-//                    executeOnLoadDataSuccess(responseFragmentHallBeen);
-//                }
-//            }
-//
-//            @Override
-//            public void OnFailure(String message) {
-//                executeOnLoadDataError(null);
-//            }
-//
-//            @Override
-//            public void OnRequestStart() {
-//            }
-//
-//            @Override
-//            public void OnRequestFinish() {
-//                executeOnLoadFinish();
-//            }
-//        });
+        HttpClient.get(ApiStores.companies,ApiStores.companies(mCurrentPage), new HttpCallback<ResponseBusinessBean>() {//ResponseHallBean
+            @Override
+            public void OnSuccess(ResponseBusinessBean response) {
+                if(response.getSuccess()){
+                    executeOnLoadDataSuccess(response.getData().getContent(),false);
+                }
+            }
+
+            @Override
+            public void OnFailure(String message) {
+                executeOnLoadDataError(null);
+            }
+
+            @Override
+            public void OnRequestStart() {
+            }
+
+            @Override
+            public void OnRequestFinish() {
+                executeOnLoadFinish();
+            }
+        });
     }
 }

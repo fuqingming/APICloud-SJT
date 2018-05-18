@@ -23,6 +23,7 @@ public class TimeUtils {
     public static final String TIME_FORMAT = "yyyy-MM-dd";
     public static final String TIME_FORMAT_SHOW = "yyyy-MM-dd HH:mm";
     public static final String TIME_FORMAT_NORMAL_SHOW = "yyyy.MM.dd HH:mm:ss";
+    public static final String TIME_FORMAT_NORMAL_SHOW_TYPE = "yyyy.MM.dd HH:mm";
     public static final String DAY_FORMAT_NORMAL = "yyyy.MM.dd";
 
     public static String covertTimeFormat(final String strTime,

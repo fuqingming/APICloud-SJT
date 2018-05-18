@@ -1,12 +1,10 @@
 package com.apicloud.moduleDemo.util.pickers;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Color;
 
-import com.apicloud.moduleDemo.ReleaseRenovationActivity;
 import com.apicloud.moduleDemo.backhandler.OnTaskSuccessComplete;
-import com.apicloud.moduleDemo.bean.base.DataBean;
+import com.apicloud.moduleDemo.bean.base.DateBean;
 
 import cn.addapp.pickers.common.LineConfig;
 import cn.addapp.pickers.listeners.OnItemPickListener;
@@ -69,7 +67,7 @@ public class PopUitls {
         picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
             @Override
             public void onDatePicked(String year, String month, String day) {
-                DataBean dataBean = new DataBean(year,month,day);
+                DateBean dataBean = new DateBean(year,month,day);
                 if (onTaskSuccess != null)
                 {
                     onTaskSuccess.onSuccess(dataBean);

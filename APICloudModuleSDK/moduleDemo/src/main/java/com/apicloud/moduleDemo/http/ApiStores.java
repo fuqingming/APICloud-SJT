@@ -26,4 +26,21 @@ public class ApiStores {
     /** 悬赏任务列表 */
     public static final String categories =  urlVersion+"guarantee/categories";
 
+    /** 资格商家列表 */
+    public static final String companies =  urlVersion+"guarantee/companies";
+    public static Map<String,Object> companies(int page){
+        Map<String,Object> map = new HashMap<>();
+        map.put("limit", Constant.PAGE_SIZE);
+        map.put("page",page);
+        return map;
+    }
+
+    /** 悬赏任务详情 */
+    public static final String schedulesDetails =  urlVersion+"guarantee/schedules";
+    public static Map<String,Object> schedulesDetails(String strScheduleNo){
+        Map<String,Object> map = new HashMap<>();
+        map.put("scheduleNo",strScheduleNo);
+        return map;
+    }
+
 }

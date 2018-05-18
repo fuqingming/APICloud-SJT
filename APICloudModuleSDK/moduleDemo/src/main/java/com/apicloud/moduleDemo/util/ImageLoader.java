@@ -80,6 +80,9 @@ public class ImageLoader {
     public void loadRoundedCornersImg(Context context , ImageView imageView , String imgUrl, int radius){
         load(context,imageView,imgUrl,null,null,false,true,false,radius);
     }
+    public void loadRoundedCornersImg(Context context , ImageView imageView , String imgUrl, int radius,int pic){
+        load(context,imageView,imgUrl,context.getResources().getDrawable(pic),null,false,true,false,radius);
+    }
 
     /**
      * 调用加载图片方法 -- 是否加载为灰度图片

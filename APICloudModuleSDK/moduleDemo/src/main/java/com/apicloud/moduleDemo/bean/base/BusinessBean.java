@@ -7,38 +7,58 @@ import java.io.Serializable;
  */
 
 public class BusinessBean implements Serializable{
-    private int icon;
-    private String name;
-    private String address;
+    private String id;
+    private String logoUrl;
+    private String tenantNo;
+    private String companyName;
+    private String brandName;
+    private AddressBean address;
 
-    public BusinessBean(int icon, String name, String address) {
-        this.icon = icon;
-        this.name = name;
-        this.address = address;
-
+    public String getId() {
+        return id;
     }
 
-    public int getIcon() {
-        return icon;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setIcon(int icon) {
-        this.icon = icon;
+    public String getLogoUrl() {
+        return logoUrl;
     }
 
-    public String getName() {
-        return name;
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getTenantNo() {
+        return tenantNo;
     }
 
-    public String getAddress() {
+    public void setTenantNo(String tenantNo) {
+        this.tenantNo = tenantNo;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    public AddressBean getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(AddressBean address) {
         this.address = address;
     }
 }
