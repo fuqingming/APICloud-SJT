@@ -17,6 +17,7 @@
 -injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\com.nostra13.universalimageloader\universal-image-loader\1.9.5\442dbfb517b9ab5cb5c6da7ebf8cc28ec5bd0375\universal-image-loader-1.9.5.jar'(**.class)
 -injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\fresco-1.5.0.aar\19689094d1b30eb37c55c5e4f9680c22\jars\classes.jar'(**.class)
 -injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\com.alibaba\fastjson\1.1.56.android\4eef0ac3ef5e18db7af5d44ca0228ca5c29dd2f6\fastjson-1.1.56.android.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\3.0.0\5871fb60dc68d67da54a663c3fd636a10a532948\jsr305-3.0.0.jar'(**.class)
 -injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\leakcanary-android-1.5.4.aar\e3b8da100726d92e4bb73b98e3464ab5\jars\classes.jar'(**.class)
 -injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife-annotations\8.8.1\bc373fb6bc7bca3035041b924f158fd2b946ee8d\butterknife-annotations-8.8.1.jar'(**.class)
 -injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\exifinterface-25.3.1.aar\b5a3eabf27b463f1c02de89a74154e71\jars\classes.jar'(**.class)

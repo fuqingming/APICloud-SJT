@@ -30,7 +30,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apicloud.moduleDemo.backhandler.OnTaskSuccessComplete;
+import com.apicloud.moduleDemo.bean.response.LoginBean;
+import com.apicloud.moduleDemo.http.ApiStores;
+import com.apicloud.moduleDemo.http.HttpCallback;
+import com.apicloud.moduleDemo.http.HttpClient;
+import com.apicloud.moduleDemo.http.HttpSetUrl;
 import com.apicloud.sdk.moduledemo.R;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -889,4 +895,33 @@ public class Utils {
 //                .setAdapter(new MyImageTransAdapter())
 //                .show();
 //    }
+
+    public static void login(final Context context){
+        HttpClient.init(context.getApplicationContext(),false);
+        final KProgressHUD kProgressHUD = new HUDProgressUtils().showLoadingImage(context);
+        HttpClient.post(ApiStores.login,ApiStores.login("13175220672","111111"), new HttpCallback<LoginBean>() {//ResponseHallBean
+            @Override
+            public void OnSuccess(LoginBean response) {
+                if(response.getSuccess()){
+                    HttpSetUrl.setHeaderAuthUuid(response.getData().getUid());
+                    HttpClient.init(context.getApplicationContext(),true);
+                }
+            }
+
+            @Override
+            public void OnFailure(String message) {
+                Utils.showToast(context,""+message);
+            }
+
+            @Override
+            public void OnRequestStart() {
+                kProgressHUD.show();
+            }
+
+            @Override
+            public void OnRequestFinish() {
+                kProgressHUD.dismiss();
+            }
+        });
+    }
 }

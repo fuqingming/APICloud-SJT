@@ -666,18 +666,18 @@ public final class R {
         public static final int toolbar_title = 0x7f09012b;
         public static final int top = 0x7f09012c;
         public static final int topPanel = 0x7f09012d;
-        public static final int ucrop = 0x7f090169;
-        public static final int ucrop_frame = 0x7f09016a;
-        public static final int ucrop_photobox = 0x7f09016b;
-        public static final int up = 0x7f09016d;
-        public static final int useLogo = 0x7f09016e;
-        public static final int view_overlay = 0x7f090172;
-        public static final int withText = 0x7f090176;
-        public static final int wrap_content = 0x7f090177;
-        public static final int wrapper_controls = 0x7f090178;
-        public static final int wrapper_reset_rotate = 0x7f090179;
-        public static final int wrapper_rotate_by_angle = 0x7f09017a;
-        public static final int wrapper_states = 0x7f09017b;
+        public static final int ucrop = 0x7f09016d;
+        public static final int ucrop_frame = 0x7f09016e;
+        public static final int ucrop_photobox = 0x7f09016f;
+        public static final int up = 0x7f090171;
+        public static final int useLogo = 0x7f090172;
+        public static final int view_overlay = 0x7f090176;
+        public static final int withText = 0x7f09017a;
+        public static final int wrap_content = 0x7f09017b;
+        public static final int wrapper_controls = 0x7f09017c;
+        public static final int wrapper_reset_rotate = 0x7f09017d;
+        public static final int wrapper_rotate_by_angle = 0x7f09017e;
+        public static final int wrapper_states = 0x7f09017f;
     }
     public static final class integer {
         public static final int abc_config_activityDefaultDur = 0x7f0a0000;
@@ -713,23 +713,23 @@ public final class R {
         public static final int abc_search_dropdown_item_icons_2line = 0x7f0b0018;
         public static final int abc_search_view = 0x7f0b0019;
         public static final int abc_select_dialog_material = 0x7f0b001a;
-        public static final int notification_media_action = 0x7f0b0067;
-        public static final int notification_media_cancel_action = 0x7f0b0068;
-        public static final int notification_template_big_media = 0x7f0b0069;
-        public static final int notification_template_big_media_narrow = 0x7f0b006b;
-        public static final int notification_template_media = 0x7f0b0070;
-        public static final int notification_template_part_chronometer = 0x7f0b0072;
-        public static final int notification_template_part_time = 0x7f0b0073;
-        public static final int select_dialog_item_material = 0x7f0b0077;
-        public static final int select_dialog_multichoice_material = 0x7f0b0078;
-        public static final int select_dialog_singlechoice_material = 0x7f0b0079;
-        public static final int support_simple_spinner_dropdown_item = 0x7f0b007a;
-        public static final int ucrop_activity_photobox = 0x7f0b007c;
-        public static final int ucrop_aspect_ratio = 0x7f0b007d;
-        public static final int ucrop_controls = 0x7f0b007e;
-        public static final int ucrop_layout_rotate_wheel = 0x7f0b007f;
-        public static final int ucrop_layout_scale_wheel = 0x7f0b0080;
-        public static final int ucrop_view = 0x7f0b0081;
+        public static final int notification_media_action = 0x7f0b0069;
+        public static final int notification_media_cancel_action = 0x7f0b006a;
+        public static final int notification_template_big_media = 0x7f0b006b;
+        public static final int notification_template_big_media_narrow = 0x7f0b006d;
+        public static final int notification_template_media = 0x7f0b0072;
+        public static final int notification_template_part_chronometer = 0x7f0b0074;
+        public static final int notification_template_part_time = 0x7f0b0075;
+        public static final int select_dialog_item_material = 0x7f0b0079;
+        public static final int select_dialog_multichoice_material = 0x7f0b007a;
+        public static final int select_dialog_singlechoice_material = 0x7f0b007b;
+        public static final int support_simple_spinner_dropdown_item = 0x7f0b007c;
+        public static final int ucrop_activity_photobox = 0x7f0b007e;
+        public static final int ucrop_aspect_ratio = 0x7f0b007f;
+        public static final int ucrop_controls = 0x7f0b0080;
+        public static final int ucrop_layout_rotate_wheel = 0x7f0b0081;
+        public static final int ucrop_layout_scale_wheel = 0x7f0b0082;
+        public static final int ucrop_view = 0x7f0b0083;
     }
     public static final class menu {
         public static final int ucrop_menu_activity = 0x7f0c0000;
@@ -766,13 +766,13 @@ public final class R {
         public static final int abc_shareactionprovider_share_with = 0x7f0e001c;
         public static final int abc_shareactionprovider_share_with_application = 0x7f0e001d;
         public static final int abc_toolbar_collapse_description = 0x7f0e001e;
-        public static final int search_menu_title = 0x7f0e0067;
-        public static final int status_bar_notification_info_overflow = 0x7f0e0068;
-        public static final int ucrop_error_input_data_is_absent = 0x7f0e0071;
-        public static final int ucrop_label_edit_photo = 0x7f0e0072;
-        public static final int ucrop_label_original = 0x7f0e0073;
-        public static final int ucrop_menu_crop = 0x7f0e0074;
-        public static final int ucrop_mutate_exception_hint = 0x7f0e0075;
+        public static final int search_menu_title = 0x7f0e0068;
+        public static final int status_bar_notification_info_overflow = 0x7f0e0069;
+        public static final int ucrop_error_input_data_is_absent = 0x7f0e0072;
+        public static final int ucrop_label_edit_photo = 0x7f0e0073;
+        public static final int ucrop_label_original = 0x7f0e0074;
+        public static final int ucrop_menu_crop = 0x7f0e0075;
+        public static final int ucrop_mutate_exception_hint = 0x7f0e0076;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat = 0x7f0f0003;

@@ -9,6 +9,7 @@ import com.tamic.novate.Novate;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -43,24 +44,6 @@ public class HttpClient {
 
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
-            Interceptor headerInterceptor = new Interceptor() {
-                @Override
-                public Response intercept(Chain chain) throws IOException {
-                    Request originalRequest = chain.request();
-                    Request.Builder requestBuilder = originalRequest.newBuilder()
-                            .header("X-Requested-With", "XMLHttpRequest")
-                            .header("Content-Type", "application/json")
-                            .header("X-Auth-City", HttpSetUrl.getHeaderAuthCity())
-                            .header("X-Auth-uuid", HttpSetUrl.getHeaderAuthUuid())
-                            .header("X-Auth-App", "5006")
-                            .header("X-Auth-Token", HttpSetUrl.getHeaderAuthToken())
-                            .method(originalRequest.method(), originalRequest.body());
-                    Request request = requestBuilder.build();
-                    return chain.proceed(request);
-                }
-            };
-            builder.addInterceptor(headerInterceptor);
-
             builder.connectTimeout(15, TimeUnit.SECONDS);
             builder.readTimeout(20, TimeUnit.SECONDS);
             builder.writeTimeout(20, TimeUnit.SECONDS);
@@ -69,8 +52,16 @@ public class HttpClient {
             OkHttpClient okHttpClient = builder.build();
 
             String baseUrl = HttpSetUrl.getAppUrl();
+            Map<String, String> headers = new HashMap<>();
+            headers.put("X-Requested-With", "XMLHttpRequest");
+            headers.put("Content-Type", "application/json");
+            headers.put("X-Auth-City", HttpSetUrl.getHeaderAuthCity());
+            headers.put("X-Auth-uuid",  HttpSetUrl.getHeaderAuthUuid());
+            headers.put("X-Auth-App", "5006");
+            headers.put("X-Auth-Token", HttpSetUrl.getHeaderAuthToken());
 
             mNovate = new Novate.Builder(appliactionContext)
+                    .addHeader(headers)
                     .addCache(false)
                     .baseUrl(baseUrl)
                     .client(okHttpClient)
@@ -96,7 +87,10 @@ public class HttpClient {
 
     public static <T> void post(String url,Map<String,Object> params,HttpCallback<T> httpCallback){
         mNovate.rxBody(url,params,httpCallback);
+    }
 
+    public static <T> void post(String url,String jsonString,HttpCallback<T> httpCallback){
+        mNovate.rxJson(url,jsonString,httpCallback);
     }
 
     public static <T> void uploadFile(String url, File file, HttpCallback<T> httpCallback){

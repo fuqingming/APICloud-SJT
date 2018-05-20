@@ -12,7 +12,9 @@ android/support/compat/R.class
 android/support/annotation/IdRes.class
 com/facebook/common/internal/Objects.class
 cn/addapp/pickers/common/ConfirmDialog.class
+javax/annotation/WillCloseWhenClosed.class
 android/support/v4/widget/CircularProgressDrawable$1.class
+javax/annotation/meta/TypeQualifierValidator.class
 butterknife/BindDrawable.class
 android/support/media/ExifInterface$ByteOrderedDataInputStream.class
 android/support/multidex/MultiDexExtractor.class
@@ -23,9 +25,11 @@ android/support/design/widget/BaseTransientBottomBar$BaseCallback.class
 android/support/v7/widget/AdapterHelper$UpdateOp.class
 android/support/v4/media/AudioAttributesCompatApi21$Wrapper.class
 rx/annotations/Experimental.class
+javax/annotation/Nonnull.class
 android/support/v4/widget/CircularProgressDrawable$Ring.class
 android/support/transition/Transition.class
 android/support/v4/view/ViewCompat$ViewCompatApi24Impl.class
+javax/annotation/ParametersAreNullableByDefault.class
 android/support/annotation/Dimension.class
 android/support/v7/widget/RecyclerView$ItemAnimator.class
 com/facebook/common/file/FileTree.class
@@ -55,6 +59,7 @@ android/support/v4/app/NotificationCompat$NotificationCompatBaseImpl.class
 android/support/v7/widget/RecyclerView$OnChildAttachStateChangeListener.class
 cn/addapp/pickers/picker/DateTimePicker$6.class
 android/support/v7/widget/RecyclerView.class
+javax/annotation/concurrent/GuardedBy.class
 android/support/v4/app/NotificationCompatApi20.class
 android/support/multidex/MultiDexExtractor$1.class
 retrofit2/http/FieldMap.class
@@ -112,6 +117,7 @@ android/support/v4/app/NotificationCompatApi24.class
 android/support/v4/view/ViewPager$ItemInfo.class
 android/support/annotation/DimenRes.class
 android/support/v7/view/menu/ShowableListMenu.class
+javax/annotation/meta/TypeQualifierNickname.class
 android/support/v4/app/ServiceCompat$StopForegroundFlags.class
 android/support/design/widget/BaseTransientBottomBar$Duration.class
 retrofit2/http/Body.class
@@ -238,7 +244,9 @@ android/support/annotation/GuardedBy.class
 cn/addapp/pickers/listeners/OnItemPickListener.class
 android/support/v4/view/ViewPager$3.class
 android/support/v4/util/Pools$SynchronizedPool.class
+javax/annotation/Syntax.class
 android/support/v7/view/menu/MenuItemImpl.class
+javax/annotation/CheckForNull.class
 com/facebook/cache/disk/DefaultDiskStorage$PurgingVisitor.class
 android/support/design/widget/TabLayout$Mode.class
 android/support/annotation/AnimatorRes.class
@@ -271,6 +279,7 @@ android/support/v4/media/MediaMetadataCompat$1.class
 com/nostra13/universalimageloader/cache/disc/naming/Md5FileNameGenerator.class
 android/support/transition/Slide$GravityFlag.class
 android/support/transition/Slide$3.class
+javax/annotation/MatchesPattern$Checker.class
 android/support/v7/app/AppCompatDelegateImplV14.class
 butterknife/internal/ListenerMethod.class
 android/support/v4/view/ViewCompat.class
@@ -280,6 +289,7 @@ android/support/design/widget/TabLayout$TabGravity.class
 android/support/v7/widget/RecyclerView$2.class
 android/support/transition/Slide$6.class
 android/support/media/ExifInterface.class
+javax/annotation/WillNotClose.class
 android/support/v4/app/NotificationCompatJellybean.class
 android/support/v7/widget/RecyclerView$ViewCacheExtension.class
 cn/addapp/pickers/picker/DateTimePicker$9.class
@@ -327,11 +337,13 @@ android/support/v4/text/util/LinkifyCompat$LinkifyMask.class
 android/support/v7/widget/RecyclerView$OnScrollListener.class
 android/arch/lifecycle/Lifecycle$State.class
 android/support/v4/view/ViewPager$1.class
+javax/annotation/concurrent/NotThreadSafe.class
 android/support/v4/view/ViewPager$LayoutParams.class
 android/support/transition/ViewUtils.class
 com/apicloud/moduleDemo/http/HttpSetUrl.class
 com/blankj/utilcode/constant/TimeConstants.class
 android/support/v4/internal/view/SupportMenu.class
+javax/annotation/CheckForSigned.class
 android/support/transition/Transition$2.class
 android/support/annotation/StyleRes.class
 android/support/annotation/XmlRes.class
@@ -397,9 +409,12 @@ android/support/v4/app/FrameMetricsAggregator$FrameMetricsBaseImpl.class
 android/support/design/widget/AppBarLayout$Behavior.class
 cn/addapp/pickers/picker/DateTimePicker$OnTimePickListener.class
 android/support/v7/widget/RecyclerView$SavedState.class
+javax/annotation/Nonnegative.class
+javax/annotation/WillClose.class
 retrofit2/http/Streaming.class
 com/uzmap/pkg/uzcore/UZCoreUtil.class
 android/support/v7/widget/ViewInfoStore$ProcessCallback.class
+javax/annotation/Detainted.class
 cn/addapp/pickers/common/BaseDialog$2.class
 io/reactivex/annotations/Nullable.class
 com/facebook/common/internal/VisibleForTesting.class
@@ -408,6 +423,7 @@ android/support/v4/content/res/TypedArrayUtils.class
 android/support/annotation/RestrictTo$Scope.class
 android/support/v7/app/AppCompatDelegate$NightMode.class
 android/support/v7/widget/ViewBoundsCheck$BoundFlags.class
+javax/annotation/meta/TypeQualifier.class
 android/support/design/widget/BaseTransientBottomBar$4.class
 cn/addapp/pickers/widget/WheelView.class
 android/support/v4/media/VolumeProviderCompat$1.class
@@ -430,6 +446,7 @@ android/support/design/widget/CoordinatorLayout$DispatchChangeEvent.class
 android/support/v4/app/RemoteInput.class
 com/uzmap/pkg/uzcore/annotation/UzJavascriptMethod.class
 android/support/v4/app/NotificationCompatApi26$Builder.class
+javax/annotation/RegEx$Checker.class
 io/reactivex/annotations/Beta.class
 android/support/v4/view/ViewPager.class
 android/support/v4/app/RemoteInputCompatBase.class
@@ -469,6 +486,7 @@ android/support/design/widget/BaseTransientBottomBar$2.class
 android/support/v7/view/menu/MenuBuilder$Callback.class
 android/support/v4/util/SparseArrayCompat.class
 com/facebook/binaryresource/BinaryResource.class
+javax/annotation/concurrent/Immutable.class
 cn/addapp/pickers/common/ConfirmDialog$2.class
 android/support/v4/media/session/PlaybackStateCompat$ShuffleMode.class
 com/yalantis/ucrop/UCrop.class
@@ -519,6 +537,7 @@ cn/addapp/pickers/picker/DateTimePicker$OnMonthDayTimePickListener.class
 android/support/v7/app/ActionBar$TabListener.class
 android/support/v7/app/AppCompatDelegateImplN.class
 com/yalantis/ucrop/view/GestureCropImageView.class
+javax/annotation/meta/Exclusive.class
 android/support/transition/WindowIdImpl.class
 android/support/v4/app/NotificationCompat$BuilderExtender.class
 android/support/v4/media/MediaBrowserCompat$SearchCallback.class
@@ -531,6 +550,7 @@ android/support/design/widget/FloatingActionButton.class
 com/blankj/utilcode/util/Utils.class
 android/support/v4/util/Pools$SimplePool.class
 android/support/v4/util/ArrayMap$1.class
+javax/annotation/MatchesPattern.class
 android/support/annotation/ArrayRes.class
 retrofit2/http/Multipart.class
 android/support/v4/content/res/FontResourcesParserCompat$FetchStrategy.class
@@ -571,6 +591,7 @@ android/support/v4/net/ConnectivityManagerCompat$ConnectivityManagerCompatApi24I
 android/support/annotation/AnyThread.class
 android/arch/lifecycle/LifecycleObserver.class
 android/support/v4/app/BaseFragmentActivityApi16.class
+javax/annotation/OverridingMethodsMustInvokeSuper.class
 android/support/v4/math/MathUtils.class
 com/facebook/imagepipeline/request/MediaVariations.class
 android/support/v7/widget/ChildHelper.class
@@ -590,6 +611,7 @@ android/support/v7/widget/Toolbar.class
 android/support/multidex/MultiDexApplication.class
 butterknife/BindColor.class
 android/support/v7/widget/RecyclerView$4.class
+javax/annotation/Nullable.class
 android/support/v4/media/AudioAttributesCompat$Builder.class
 android/support/v4/view/ViewCompat$ResolvedLayoutDirectionMode.class
 com/facebook/imagepipeline/request/MediaVariations$1.class
@@ -616,12 +638,15 @@ butterknife/OnPageChange.class
 android/support/v4/util/ContainerHelpers.class
 android/support/annotation/NonNull.class
 android/support/design/widget/CoordinatorLayout$Behavior.class
+javax/annotation/Nonnull$Checker.class
 android/support/design/widget/ViewOffsetHelper.class
 android/support/v4/widget/DrawerLayout$DrawerListener.class
+javax/annotation/concurrent/ThreadSafe.class
 android/support/v7/widget/RecyclerView$SimpleOnItemTouchListener.class
 android/support/v4/app/NotificationCompat$BigTextStyle.class
 android/support/v4/media/MediaDescriptionCompat.class
 android/support/v4/media/session/MediaSessionCompat$QueueItem.class
+javax/annotation/Nonnegative$Checker.class
 android/support/transition/Visibility$DisappearListener.class
 butterknife/OnItemClick.class
 android/support/v4/view/ViewPager$DecorView.class
@@ -629,6 +654,7 @@ android/support/transition/Visibility$1.class
 android/support/v7/widget/TintTypedArray.class
 com/yalantis/ucrop/R$menu.class
 com/facebook/imagepipeline/request/MediaVariations$Builder.class
+javax/annotation/meta/Exhaustive.class
 retrofit2/http/Header.class
 android/support/v4/media/MediaMetadataCompat$BitmapKey.class
 android/support/v4/graphics/drawable/DrawableCompat.class
@@ -637,6 +663,7 @@ android/support/v4/widget/TextViewCompat$TextViewCompatApi17Impl.class
 com/yalantis/ucrop/view/widget/AspectRatioTextView.class
 android/support/design/widget/FloatingActionButton$Size.class
 android/support/v7/app/ActionBarDrawerToggle.class
+javax/annotation/Tainted.class
 android/support/v7/app/ActionBar$OnMenuVisibilityListener.class
 com/yalantis/ucrop/R$string.class
 com/yalantis/ucrop/R$layout.class
@@ -669,6 +696,7 @@ android/support/v7/view/menu/CascadingMenuPopup.class
 butterknife/BindFont$TypefaceStyle.class
 android/support/v7/view/menu/MenuBuilder.class
 android/support/v4/view/ViewCompat$ViewCompatApi18Impl.class
+javax/annotation/PropertyKey.class
 android/support/design/widget/CoordinatorLayout$DefaultBehavior.class
 android/support/v7/widget/GapWorker$LayoutPrefetchRegistryImpl.class
 android/support/v4/text/util/LinkifyCompat$LinkSpec.class
@@ -681,6 +709,7 @@ android/support/v4/view/ViewPager$PagerObserver.class
 android/support/design/widget/AppBarLayout.class
 android/support/v4/content/res/FontResourcesParserCompat$FontFamilyFilesResourceEntry.class
 com/facebook/imagepipeline/common/RotationOptions.class
+javax/annotation/RegEx.class
 android/support/v4/widget/ViewDragHelper.class
 com/alibaba/fastjson/parser/Feature.class
 com/uzmap/pkg/uzapp/UZApplication.class
@@ -690,6 +719,7 @@ butterknife/OnTextChanged$Callback.class
 android/support/v7/app/ActionBar$Tab.class
 android/support/v7/view/menu/CascadingMenuPopup$2.class
 retrofit2/http/QueryMap.class
+javax/annotation/meta/When.class
 android/support/v4/app/ActivityCompat.class
 android/support/design/widget/CoordinatorLayout$HierarchyChangeListener.class
 android/support/transition/SidePropagation.class
@@ -707,6 +737,7 @@ android/support/design/widget/FloatingActionButtonImpl$InternalVisibilityChanged
 android/support/design/widget/DirectedAcyclicGraph.class
 com/yalantis/ucrop/UCropActivity$3.class
 butterknife/BindArray.class
+javax/annotation/CheckReturnValue.class
 android/support/v4/app/NotificationCompat$NotificationCompatApi24Impl.class
 android/support/design/widget/BaseTransientBottomBar$SnackbarBaseLayout.class
 android/support/design/R.class
@@ -723,6 +754,7 @@ android/support/v4/view/NestedScrollingChildHelper.class
 android/support/v4/view/OnApplyWindowInsetsListener.class
 android/support/v4/view/NestedScrollingParentHelper.class
 butterknife/OnTextChanged.class
+javax/annotation/Signed.class
 butterknife/internal/ListenerClass$NONE.class
 android/support/design/R$style.class
 com/uzmap/pkg/uzcore/annotation/UzJavascriptProperty.class
@@ -746,6 +778,7 @@ android/support/v4/app/RemoteInputCompatBase$RemoteInput$Factory.class
 android/support/v4/view/NestedScrollingParent2.class
 android/support/v7/widget/RecyclerView$OnItemTouchListener.class
 android/support/v4/media/session/PlaybackStateCompat.class
+javax/annotation/Untainted.class
 com/yalantis/ucrop/view/OverlayView.class
 android/support/media/ExifInterface$Rational.class
 android/support/v4/view/ViewCompat$FocusRelativeDirection.class
@@ -769,6 +802,7 @@ cn/addapp/pickers/common/ConfirmDialog$4.class
 android/support/v7/app/ActionBarDrawerToggle$DelegateProvider.class
 android/support/v4/app/NotificationCompat$NotificationCompatApi19Impl.class
 android/support/annotation/RequiresApi.class
+javax/annotation/ParametersAreNonnullByDefault.class
 android/support/v4/media/session/PlaybackStateCompat$RepeatMode.class
 android/support/v4/media/AudioAttributesCompat$AudioManagerHidden.class
 android/support/design/widget/TabLayout$PagerAdapterObserver.class
@@ -802,6 +836,7 @@ android/support/annotation/IntRange.class
 android/support/v4/app/NavUtils.class
 android/support/v7/widget/ViewUtils.class
 cn/addapp/pickers/common/BaseDialog.class
+javax/annotation/meta/TypeQualifierDefault.class
 android/support/design/widget/FloatingActionButton$ShadowDelegateImpl.class
 io/reactivex/annotations/CheckReturnValue.class
 butterknife/OnLongClick.class

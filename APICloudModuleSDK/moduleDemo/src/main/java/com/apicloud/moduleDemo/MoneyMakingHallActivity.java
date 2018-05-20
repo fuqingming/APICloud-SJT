@@ -19,6 +19,7 @@ import com.apicloud.moduleDemo.bean.response.ResponseMoneyMakingHallTypeBean;
 import com.apicloud.moduleDemo.http.ApiStores;
 import com.apicloud.moduleDemo.http.HttpCallback;
 import com.apicloud.moduleDemo.http.HttpClient;
+import com.apicloud.moduleDemo.settings.Const;
 import com.apicloud.moduleDemo.util.PopDataUtil;
 import com.apicloud.moduleDemo.util.Utils;
 import com.apicloud.moduleDemo.util.alert.AlertUtils;
@@ -33,15 +34,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHallBean> {
-    public static final int TYPE_BUSINESS = 0;
-    public static final int TYPE_AMOUNT = 1;
 
-    public static final int TYPE_RENOVATION = 0;
-    public static final int TYPE_BUILDING = 1;
-    public static final int TYPE_REDUCE_WEIGHT = 2;
-    public static final int TYPE_QUIT_SMOKING = 3;
-    public static final int TYPE_QUIT_DRINKING = 4;
-    public static final int TYPE_GIVE_UP_GAMBLING = 5;
+
 
     private MoneyMakingHallAdapter m_moneyMakingHallAdapter = new MoneyMakingHallAdapter();
 
@@ -55,8 +49,14 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
     private LinearLayout m_llAmount;
 
     private List<MoneyMakingHallTypeBean> m_arrAllType;
+    private List<MoneyMakingHallTypeBean> m_arrOrderByBean;
     private List<MoneyMakingHallTypeBean> m_arrOrderByBeans;
     private List<MoneyMakingHallTypeBean> m_arrOrderByAmountBeans;
+
+    private String m_strCategoryNo;
+    private String m_strAmount = "";
+    private String m_strOrderBy = "";
+    private boolean m_isType = true;
 
     @Override
     protected int setLayoutResourceId() {
@@ -67,8 +67,13 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
     protected void initData() {
         Utils.initCommonTitle(this,"赚钱大厅",true);
 
+        m_moneyMakingHallAdapter.setType(m_isType);
+
+        m_strCategoryNo = getIntent().getStringExtra("strTypeIntent");
+
         m_arrAllType = new ArrayList<>();
-        m_arrOrderByBeans = PopDataUtil.initOrderByData();
+        m_arrOrderByBean = PopDataUtil.initOrderByData();
+        m_arrOrderByBeans = PopDataUtil.initOrderByDatas();
         m_arrOrderByAmountBeans = PopDataUtil.initOrderByAmountData();
     }
 
@@ -83,36 +88,8 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
         m_llBusiness = (LinearLayout)findViewById(R.id.ll_business);
         m_llAmount = (LinearLayout)findViewById(R.id.ll_amount);
 
-        switch (getIntent().getIntExtra("nTypeIntent",0)){
-            case TYPE_RENOVATION:
-                m_teRelease.setText("我也发布量房");
-                break;
-            case TYPE_BUILDING:
-                m_teRelease.setText("发布买建材赚赏金");
-                break;
-            case TYPE_REDUCE_WEIGHT:
-                m_teRelease.setText("我也要减肥赚赏金");
-                break;
-            case TYPE_QUIT_SMOKING:
-                m_teRelease.setText("我也要戒烟赚赏金");
-                break;
-            case TYPE_QUIT_DRINKING:
-                m_teRelease.setText("我也要戒酒赚赏金");
-                break;
-            case TYPE_GIVE_UP_GAMBLING:
-                m_teRelease.setText("我也要戒赌赚赏金");
-                break;
-        }
-        switch (getIntent().getIntExtra("nTypeSelete",0)){
-            case TYPE_BUSINESS:
-                m_llBusiness.setVisibility(View.VISIBLE);
-                m_llAmount.setVisibility(View.GONE);
-                break;
-            case TYPE_AMOUNT:
-                m_llBusiness.setVisibility(View.GONE);
-                m_llAmount.setVisibility(View.VISIBLE);
-                break;
-        }
+        viewInit();
+
         super.initView();
     }
 
@@ -121,10 +98,45 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
         return m_moneyMakingHallAdapter;
     }
 
+    private void viewInit(){
+
+        switch (m_strCategoryNo){
+            case Const.CategoryNo.TYPE_RENOVATION:
+                m_teRelease.setText("我也发布量房");
+                m_llBusiness.setVisibility(View.VISIBLE);
+                m_llAmount.setVisibility(View.GONE);
+                break;
+            case Const.CategoryNo.TYPE_BUILDING:
+                m_teRelease.setText("发布买建材赚赏金");
+                m_llBusiness.setVisibility(View.VISIBLE);
+                m_llAmount.setVisibility(View.GONE);
+                break;
+            case Const.CategoryNo.TYPE_REDUCE_WEIGHT:
+                m_teRelease.setText("我也要减肥赚赏金");
+                m_llBusiness.setVisibility(View.GONE);
+                m_llAmount.setVisibility(View.VISIBLE);
+                break;
+            case Const.CategoryNo.TYPE_QUIT_SMOKING:
+                m_teRelease.setText("我也要戒烟赚赏金");
+                m_llBusiness.setVisibility(View.GONE);
+                m_llAmount.setVisibility(View.VISIBLE);
+                break;
+            case Const.CategoryNo.TYPE_QUIT_DRINKING:
+                m_teRelease.setText("我也要戒酒赚赏金");
+                m_llBusiness.setVisibility(View.GONE);
+                m_llAmount.setVisibility(View.VISIBLE);
+                break;
+            case Const.CategoryNo.TYPE_GIVE_UP_GAMBLING:
+                m_teRelease.setText("我也要戒赌赚赏金");
+                m_llBusiness.setVisibility(View.GONE);
+                m_llAmount.setVisibility(View.VISIBLE);
+                break;
+        }
+    }
+
     @Override
     protected void initLayoutManager() {
-        LinearLayoutManager m_linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(m_linearLayoutManager);
+
         View m_headerBanner = LayoutInflater.from(this).inflate(R.layout.common_money_making_hall_head,mRecyclerView, false);
         mRecyclerViewAdapter.addHeaderView(m_headerBanner);
         DividerDecoration divider = new DividerDecoration.Builder(this)
@@ -133,26 +145,6 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
                 .build();
         mRecyclerView.addItemDecoration(divider);
         mRecyclerView.setLoadMoreEnabled(true);
-        mRecyclerView.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                onRefreshView();
-            }
-        });
-
-        mRecyclerView.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-
-                if ( REQUEST_COUNT <= totalPage) {
-                    mCurrentPage++;
-                    requestData();
-                    isRequestInProcess = true;
-                } else {
-                    mRecyclerView.setNoMore(true);
-                }
-            }
-        });
 
         mRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -178,9 +170,11 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
         m_cbOrderBy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                filterTabToggle(isChecked, m_cbOrderBy,new MoneyTypeCheckedAdapter(MoneyMakingHallActivity.this,m_arrOrderByBeans),new AdapterView.OnItemClickListener() {
+                filterTabToggle(isChecked, m_cbOrderBy,new MoneyTypeCheckedAdapter(MoneyMakingHallActivity.this,m_isType ? m_arrOrderByBean : m_arrOrderByBeans),new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                        m_strOrderBy = (m_isType ? m_arrOrderByBean : m_arrOrderByBeans).get(position).getCategoryNo();
+                        m_strAmount = "";
                         hidePopListView();
                         onRefreshView();
                     }
@@ -194,6 +188,8 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
                 filterTabToggle(isChecked, m_cbAmount,new MoneyTypeCheckedAdapter(MoneyMakingHallActivity.this,m_arrOrderByAmountBeans),new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                        m_strOrderBy = "";
+                        m_strAmount = m_arrOrderByAmountBeans.get(position).getCategoryNo();
                         hidePopListView();
                         onRefreshView();
                     }
@@ -213,23 +209,23 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
             @Override
             public void onClick(View view) {
                 Intent it = null;
-                switch (getIntent().getIntExtra("nTypeIntent",0)){
-                    case TYPE_RENOVATION:
+                switch (m_strCategoryNo){
+                    case Const.CategoryNo.TYPE_RENOVATION:
                         it = new Intent(MoneyMakingHallActivity.this,ReleaseRenovationActivity.class);
                         break;
-                    case TYPE_BUILDING:
+                    case Const.CategoryNo.TYPE_BUILDING:
                         it = new Intent(MoneyMakingHallActivity.this,ReleaseBuildingActivity.class);
                         break;
-                    case TYPE_REDUCE_WEIGHT:
+                    case Const.CategoryNo.TYPE_REDUCE_WEIGHT:
                         it = new Intent(MoneyMakingHallActivity.this,ReleaseReduceWeightActivity.class);
                         break;
-                    case TYPE_QUIT_SMOKING:
+                    case Const.CategoryNo.TYPE_QUIT_SMOKING:
                         it = new Intent(MoneyMakingHallActivity.this,ReleaseSmokingActivity.class);
                         break;
-                    case TYPE_QUIT_DRINKING:
+                    case Const.CategoryNo.TYPE_QUIT_DRINKING:
                         it = new Intent(MoneyMakingHallActivity.this,ReleaseDrinkingActivity.class);
                         break;
-                    case TYPE_GIVE_UP_GAMBLING:
+                    case Const.CategoryNo.TYPE_GIVE_UP_GAMBLING:
                         it = new Intent(MoneyMakingHallActivity.this,ReleaseGiveUpGamblingActivity.class);
                         break;
                 }
@@ -243,7 +239,39 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 hidePopListView();
-                onRefreshView();
+                String strCategoryNo = m_arrAllType.get(position).getCategoryNo();
+                Intent it ;
+                if(strCategoryNo.equals(Const.CategoryNo.DESIGNER_ENTREPRENEURSHIP)){
+                    it = new Intent(MoneyMakingHallActivity.this,EntrepreneurshipActivity.class);
+                    it.putExtra("strTitle","设计师创业");
+                    it.putExtra("strRoleType", Const.RoleType.DESIGNER_ENTREPRENEURSHIP);
+                    startActivity(it);
+                    return;
+                }else if(strCategoryNo.equals(Const.CategoryNo.MANAGER_ENTREPRENEURSHIP)){
+                    it = new Intent(MoneyMakingHallActivity.this,EntrepreneurshipActivity.class);
+                    it.putExtra("strTitle","项目经理创业");
+                    it.putExtra("strRoleType", Const.RoleType.MANAGER_ENTREPRENEURSHIP);
+                    startActivity(it);
+                    return;
+                }else if(strCategoryNo.equals(Const.CategoryNo.TYPE_RENOVATION) || strCategoryNo.equals(Const.CategoryNo.TYPE_BUILDING)){
+                    m_isType = true;
+                    m_moneyMakingHallAdapter.setType(m_isType);
+                    m_strCategoryNo = m_arrAllType.get(position).getCategoryNo();
+                    m_strOrderBy = "";
+                    m_strAmount = "";
+                    onRefreshView();
+                }else if(strCategoryNo.equals(Const.CategoryNo.TYPE_REDUCE_WEIGHT) || strCategoryNo.equals(Const.CategoryNo.TYPE_QUIT_SMOKING) ||
+                        strCategoryNo.equals(Const.CategoryNo.TYPE_QUIT_DRINKING) || strCategoryNo.equals(Const.CategoryNo.TYPE_GIVE_UP_GAMBLING)){
+                    m_isType = false;
+                    m_moneyMakingHallAdapter.setType(m_isType);
+                    m_strCategoryNo = m_arrAllType.get(position).getCategoryNo();
+                    m_strOrderBy = "";
+                    m_strAmount = "";
+                    onRefreshView();
+                }else{
+                    Utils.showToast(MoneyMakingHallActivity.this,"敬请期待~!");
+                }
+
             }
         }, m_cbAllType, m_cbOrderBy,m_cbAmount);
     }
@@ -260,6 +288,7 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
 
             @Override
             public void OnFailure(String message) {
+                m_cbAllType.setChecked(false);
                 AlertUtils.MessageAlertShow(MoneyMakingHallActivity.this, "错误", message);
             }
 
@@ -276,10 +305,11 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
     }
 
     protected void requestData(){
-        HttpClient.get(ApiStores.schedules,ApiStores.categories("18066244377801",mCurrentPage), new HttpCallback<ResponseMoneyMakingHallBean>() {
+        HttpClient.get(ApiStores.schedules,ApiStores.categories(mCurrentPage,m_strCategoryNo,m_strAmount,m_strOrderBy), new HttpCallback<ResponseMoneyMakingHallBean>() {
             @Override
             public void OnSuccess(ResponseMoneyMakingHallBean response) {
                 if(response.getSuccess()){
+                    viewInit();
                     executeOnLoadDataSuccess(response.getData().getContent(),true);
                 }
             }
@@ -291,6 +321,7 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
 
             @Override
             public void OnRequestStart() {
+                kProgressHUD.show();
             }
 
             @Override

@@ -11,6 +11,8 @@ import com.apicloud.moduleDemo.util.recycler.BaseRecyclerAdapter;
 import com.apicloud.moduleDemo.util.recycler.BaseRecyclerViewHolder;
 import com.apicloud.sdk.moduledemo.R;
 
+import java.util.List;
+
 /**
  * Created by HH
  * Date: 2017/11/13
@@ -18,7 +20,13 @@ import com.apicloud.sdk.moduledemo.R;
 
 public class MoneyMakingHallAdapter extends BaseRecyclerAdapter<MoneyMakingHallBean> {
 
+    private boolean mIsType;
+
     public MoneyMakingHallAdapter() {
+    }
+
+    public void setType(boolean isType) {
+        this.mIsType = isType;
     }
 
     @Override
@@ -40,7 +48,12 @@ public class MoneyMakingHallAdapter extends BaseRecyclerAdapter<MoneyMakingHallB
 
         tvName.setText(data.getUserInfo().getNickname());
         tvAddress.setText(data.getProvinceName()+data.getCityName()+data.getCountyName());
-        tvAmount.setText(data.getPersonnelAmount());
+        if(mIsType){
+            tvAmount.setText(data.getPersonnelAmount());
+        }else{
+            tvAmount.setText(data.getGuaranteeAmount());
+        }
+
         tvTime.setText(TimeUtils.time2String(data.getCreated(),TimeUtils.TIME_FORMAT_SHOW));
         tvTitle.setText(data.getTitle());
         tvText.setText(data.getRemark());

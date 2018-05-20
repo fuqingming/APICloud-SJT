@@ -52,7 +52,7 @@ public class HttpSetUrl {
     // Header X-Auth-Token
     public static String getHeaderAuthToken()
     {
-        return SPUtils.getInstance(serverSp).getString(X_AUTH_TOKEN,"");
+        return SPUtils.getInstance(serverSp).getString(X_AUTH_TOKEN,"1");
     }
     public static void setHeaderAuthToken(String strHeaderAuthToken)
     {

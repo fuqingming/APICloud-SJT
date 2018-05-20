@@ -41,8 +41,7 @@ public class BusinessActivity extends BaseListActivity {
 
     @Override
     protected void initLayoutManager() {
-        LinearLayoutManager m_linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(m_linearLayoutManager);
+
         mRecyclerView.setLoadMoreEnabled(true);
         DividerDecoration divider = new DividerDecoration.Builder(this)
                 .setHeight(R.dimen.one)
@@ -50,27 +49,6 @@ public class BusinessActivity extends BaseListActivity {
                 .build();
 
         mRecyclerView.addItemDecoration(divider);
-
-        mRecyclerView.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                onRefreshView();
-            }
-        });
-
-        mRecyclerView.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-
-                if ( REQUEST_COUNT <= totalPage) {
-                    mCurrentPage++;
-                    requestData();
-                    isRequestInProcess = true;
-                } else {
-                    mRecyclerView.setNoMore(true);
-                }
-            }
-        });
 
         mRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override

@@ -77,30 +77,7 @@ public class MyMessageActivity extends BaseListActivity {
 
     @Override
     protected void initLayoutManager() {
-        LinearLayoutManager m_linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(m_linearLayoutManager);
         mRecyclerView.setLoadMoreEnabled(false);
-
-        mRecyclerView.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                onRefreshView();
-            }
-        });
-
-        mRecyclerView.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-
-                if ( REQUEST_COUNT <= totalPage) {
-                    mCurrentPage++;
-                    requestData();
-                    isRequestInProcess = true;
-                } else {
-                    mRecyclerView.setNoMore(true);
-                }
-            }
-        });
 
         mRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override

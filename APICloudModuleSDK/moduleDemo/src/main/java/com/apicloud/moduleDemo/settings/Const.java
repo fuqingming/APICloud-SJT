@@ -48,4 +48,15 @@ public class Const {
         public static final int DESIGNER_ENTREPRENEURSHIP = 2;	    // 设计师
         public static final int MANAGER_ENTREPRENEURSHIP = 8;	    // 项目经理
     }
+
+    public class CategoryNo{
+        public static final String TYPE_RENOVATION = "18066244377801";              //装修量房
+        public static final String TYPE_BUILDING = "18066244772511";                //买建材
+        public static final String TYPE_REDUCE_WEIGHT = "18066249534541";           //减肥
+        public static final String DESIGNER_ENTREPRENEURSHIP = "18090484592661";    //设计师创业
+        public static final String MANAGER_ENTREPRENEURSHIP = "18100862440751";     //项目经理创业
+        public static final String TYPE_QUIT_SMOKING = "18058329388341";            //戒烟
+        public static final String TYPE_QUIT_DRINKING = "18058329101091";           //戒酒
+        public static final String TYPE_GIVE_UP_GAMBLING = "18058328920311";        //戒赌
+    }
 }

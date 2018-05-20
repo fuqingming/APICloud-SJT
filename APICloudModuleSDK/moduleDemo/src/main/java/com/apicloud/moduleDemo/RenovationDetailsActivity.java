@@ -102,6 +102,10 @@ public class RenovationDetailsActivity extends BaseAppCompatActivity {
         m_tvBegining = findViewById(R.id.tv_begining);
         m_tvFinish = findViewById(R.id.tv_finish);
 
+        m_llShare = findViewById(R.id.ll_share);
+        m_llComment = findViewById(R.id.ll_comment);
+        m_llMsg = findViewById(R.id.ll_msg);
+
         //动态设置高度
         ViewTreeObserver vto = m_progressBar.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener(){
@@ -172,12 +176,6 @@ public class RenovationDetailsActivity extends BaseAppCompatActivity {
 
             }
         });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Utils.showToast(this,m_progressBar.getWidth()+"@@@"+m_llByWidth.getWidth());
     }
 
     @Override

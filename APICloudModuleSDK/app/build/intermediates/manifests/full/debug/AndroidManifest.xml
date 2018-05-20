@@ -21,8 +21,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <meta-data
         android:name="android.support.VERSION"
@@ -113,6 +113,10 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> <!-- 创业列表 -->
         <activity
             android:name="com.apicloud.moduleDemo.EntrepreneurshipActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> <!-- 设计师/项目经理 详情 -->
+        <activity
+            android:name="com.apicloud.moduleDemo.EntrepreneurshipDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> <!-- RxGalleryFinal -->
         <activity

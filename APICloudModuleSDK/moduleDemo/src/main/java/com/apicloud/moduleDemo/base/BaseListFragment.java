@@ -14,6 +14,7 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 
 import com.apicloud.moduleDemo.settings.Constant;
+import com.apicloud.moduleDemo.util.HUDProgressUtils;
 import com.apicloud.moduleDemo.util.recycler.BaseRecyclerAdapter;
 import com.apicloud.moduleDemo.view.ErrorLayout;
 import com.apicloud.sdk.moduledemo.R;
@@ -23,6 +24,7 @@ import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.github.jdsjlzx.util.RecyclerViewStateUtils;
 import com.github.jdsjlzx.view.CommonHeader;
 import com.github.jdsjlzx.view.LoadingFooter;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,7 @@ import jp.wasabeef.recyclerview.adapters.AnimationAdapter;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
 public abstract class BaseListFragment<T> extends Fragment {
+    protected KProgressHUD kProgressHUD;
     /**每一页展示多少条数据*/
     protected int mCurrentPage = 0;
     protected int totalPage = 10;
@@ -69,6 +72,7 @@ public abstract class BaseListFragment<T> extends Fragment {
             }
             return mContentView;
         }
+        kProgressHUD = new HUDProgressUtils().showLoadingImage(getContext());
         HttpClient.init(getContext().getApplicationContext(),false);
         mContext = getContext();
         mContentView = inflater.inflate(setLayoutResourceId(),null);
@@ -223,6 +227,9 @@ public abstract class BaseListFragment<T> extends Fragment {
 
     // 完成刷新
     protected void executeOnLoadFinish() {
+        if(kProgressHUD.isShowing()){
+            kProgressHUD.dismiss();
+        }
         setSwipeRefreshLoadedState();
         isRequestInProcess = false;
         mIsStart = false;

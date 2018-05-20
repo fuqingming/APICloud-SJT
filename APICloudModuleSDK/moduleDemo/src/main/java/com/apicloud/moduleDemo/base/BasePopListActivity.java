@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -27,6 +28,8 @@ import com.apicloud.moduleDemo.view.ErrorLayout;
 import com.apicloud.moduleDemo.view.popupwindow.CommonFilterPop;
 import com.apicloud.sdk.moduledemo.R;
 import com.apicloud.moduleDemo.http.HttpClient;
+import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
+import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.github.jdsjlzx.util.RecyclerViewStateUtils;
@@ -81,7 +84,7 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
     }
 
     protected void init(){
-        HttpClient.init(getApplicationContext(),false);
+        HttpClient.init(getApplicationContext(),true);
     }
 
     protected int setLayoutResourceId() {
@@ -112,6 +115,9 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
             }
         }
 
+        LinearLayoutManager m_linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(m_linearLayoutManager);
+
         AnimationAdapter adapter = new ScaleInAnimationAdapter(mListAdapter);
         adapter.setFirstOnly(false);
         adapter.setDuration(500);
@@ -123,6 +129,27 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
 
         initLayoutManager();
+
+        mRecyclerView.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                onRefreshView();
+            }
+        });
+
+        mRecyclerView.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+
+                if ( REQUEST_COUNT <= totalPage) {
+                    mCurrentPage++;
+                    requestData();
+                    isRequestInProcess = true;
+                } else {
+                    mRecyclerView.setNoMore(true);
+                }
+            }
+        });
 
         mRecyclerView.setLScrollListener(new LRecyclerView.LScrollListener() {
 
@@ -217,6 +244,9 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
 
     // 完成刷新
     protected void executeOnLoadFinish() {
+        if(kProgressHUD.isShowing()){
+            kProgressHUD.dismiss();
+        }
         setSwipeRefreshLoadedState();
         isRequestInProcess = false;
         mIsStart = false;

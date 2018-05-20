@@ -42,8 +42,6 @@ public class FragmentMyReleaseReward extends BaseListFragment {
 
     @Override
     protected void initLayoutManager() {
-        LinearLayoutManager m_linearLayoutManager = new LinearLayoutManager(getMContext(), LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(m_linearLayoutManager);
         mRecyclerView.setLoadMoreEnabled(false);
 
         DividerDecoration divider = new DividerDecoration.Builder(getMContext())
@@ -52,27 +50,6 @@ public class FragmentMyReleaseReward extends BaseListFragment {
                 .build();
 
         mRecyclerView.addItemDecoration(divider);
-
-        mRecyclerView.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                onRefreshView();
-            }
-        });
-
-        mRecyclerView.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-
-                if ( REQUEST_COUNT <= totalPage) {
-                    mCurrentPage++;
-                    requestData();
-                    isRequestInProcess = true;
-                } else {
-                    mRecyclerView.setNoMore(true);
-                }
-            }
-        });
 
         mRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override

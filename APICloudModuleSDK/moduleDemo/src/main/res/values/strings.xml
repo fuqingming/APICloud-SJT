@@ -10,4 +10,5 @@
     <string name="tip_network_error">没有可用的网络</string>
     <string name="at_your_in_group">%s在群聊中@了你</string>
     <string name="msg_recall_by_user">This message has been recalled by %1$s</string>
+    <string name="rule">1、客户信息资源\n2、办公场地和设备（电脑自备）\n3、相关公司和资质的挂靠\n4、设计师及助理\n5、材料商供应体系\n6、财务人员和客服人员及人事。代理注册公司。</string>
 </resources>

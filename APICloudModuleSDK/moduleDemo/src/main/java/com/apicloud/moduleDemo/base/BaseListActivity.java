@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -18,14 +19,18 @@ import com.apicloud.moduleDemo.backhandler.BackHandlerHelper;
 import com.apicloud.moduleDemo.http.HttpClient;
 import com.apicloud.moduleDemo.settings.Constant;
 import com.apicloud.moduleDemo.settings.GlobalInstanceStateHelper;
+import com.apicloud.moduleDemo.util.HUDProgressUtils;
 import com.apicloud.moduleDemo.util.recycler.BaseRecyclerAdapter;
 import com.apicloud.moduleDemo.view.ErrorLayout;
 import com.apicloud.sdk.moduledemo.R;
+import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
+import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.github.jdsjlzx.util.RecyclerViewStateUtils;
 import com.github.jdsjlzx.view.CommonHeader;
 import com.github.jdsjlzx.view.LoadingFooter;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +39,7 @@ import jp.wasabeef.recyclerview.adapters.AnimationAdapter;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
 public abstract class BaseListActivity<T> extends AppCompatActivity {
+    protected KProgressHUD kProgressHUD;
     /**每一页展示多少条数据*/
     protected int mCurrentPage = 0;
     protected int totalPage = 10;
@@ -63,6 +69,7 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
+        kProgressHUD = new HUDProgressUtils().showLoadingImage(this);
         setContentView(setLayoutResourceId());
         mRecyclerView = (LRecyclerView) findViewById(R.id.recycler_view);
 
@@ -106,6 +113,9 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
             }
         }
 
+        LinearLayoutManager m_linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(m_linearLayoutManager);
+
         AnimationAdapter adapter = new ScaleInAnimationAdapter(mListAdapter);
         adapter.setFirstOnly(false);
         adapter.setDuration(500);
@@ -117,6 +127,27 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
 
         initLayoutManager();
+
+        mRecyclerView.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+
+                if ( REQUEST_COUNT <= totalPage) {
+                    mCurrentPage++;
+                    requestData();
+                    isRequestInProcess = true;
+                } else {
+                    mRecyclerView.setNoMore(true);
+                }
+            }
+        });
+
+        mRecyclerView.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                onRefreshView();
+            }
+        });
 
         mRecyclerView.setLScrollListener(new LRecyclerView.LScrollListener() {
 
@@ -211,6 +242,9 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
 
     // 完成刷新
     protected void executeOnLoadFinish() {
+        if(kProgressHUD.isShowing()){
+            kProgressHUD.dismiss();
+        }
         setSwipeRefreshLoadedState();
         isRequestInProcess = false;
         mIsStart = false;

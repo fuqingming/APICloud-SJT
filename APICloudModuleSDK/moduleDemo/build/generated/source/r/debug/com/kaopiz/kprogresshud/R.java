@@ -21,6 +21,6 @@ public final class R {
         public static int label = 0x7f0c0087;
     }
     public static final class layout {
-        public static int kprogresshud_hud = 0x7f0f0054;
+        public static int kprogresshud_hud = 0x7f0f0056;
     }
 }

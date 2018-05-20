@@ -53,5 +53,7 @@ dependencies {
     compile 'com.alibaba:fastjson:1.1.56.android'
     //日期，地址选择器 end
 
+    compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.0'
+
     compile project(':imagetrans')
 }

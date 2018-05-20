@@ -10,6 +10,11 @@ import android.widget.GridView;
 
 import com.apicloud.moduleDemo.adapter.ModuleSelectionAdapter;
 import com.apicloud.moduleDemo.base.BaseFragment;
+import com.apicloud.moduleDemo.bean.response.LoginBean;
+import com.apicloud.moduleDemo.bean.response.ResponseBusinessBean;
+import com.apicloud.moduleDemo.http.ApiStores;
+import com.apicloud.moduleDemo.http.HttpCallback;
+import com.apicloud.moduleDemo.http.HttpClient;
 import com.apicloud.moduleDemo.settings.AppSettings;
 import com.apicloud.moduleDemo.settings.Const;
 import com.apicloud.moduleDemo.util.Utils;
@@ -48,12 +53,12 @@ public class FragmentHall extends BaseFragment {
 	private ModuleSelectionAdapter m_adapterWill;
 
 	private int[] m_arrIconWill = { R.mipmap.maijianvaiwill, R.mipmap.yaomaifang, R.mipmap.yaomaifangwill,
-			R.mipmap.banhukou, R.mipmap.banjifen, R.mipmap.banjuzhuzheng,
-			R.mipmap.zhaoxuexiao, R.mipmap.zhaogongren, R.mipmap.zhaogongzuo };
+									R.mipmap.banhukou, R.mipmap.banjifen, R.mipmap.banjuzhuzheng,
+									R.mipmap.zhaoxuexiao, R.mipmap.zhaogongren, R.mipmap.zhaogongzuo };
 
-	private String[] m_arrTextWill = { "卖建材", "要买房", "要卖房",
-			"办户口", "办积分", "办居住证",
-			"找学校", "招工人", "找工作" };
+	private String[] m_arrTextWill = {  "卖建材", "要买房", "要卖房",
+										"办户口", "办积分", "办居住证",
+										"找学校", "招工人", "找工作" };
 
 	private enum FunctionIndexWill{MAIJIANVAIWILL, YAOMAIFANG, YAOMAIFANGWILL ,
 		BANHUKOU , BANJIFEN , BANJUZHUZHENG,
@@ -102,8 +107,7 @@ public class FragmentHall extends BaseFragment {
 					case RENOVATION:
 					{
 						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
-						it.putExtra("nTypeSelete",MoneyMakingHallActivity.TYPE_BUSINESS);
-						it.putExtra("nTypeIntent",MoneyMakingHallActivity.TYPE_RENOVATION);
+						it.putExtra("strTypeIntent",Const.CategoryNo.TYPE_RENOVATION);
 						startActivity(it);
 					}
 					break;
@@ -111,8 +115,7 @@ public class FragmentHall extends BaseFragment {
 					case BUILDING:
 					{
 						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
-						it.putExtra("nTypeSelete",MoneyMakingHallActivity.TYPE_BUSINESS);
-						it.putExtra("nTypeIntent",MoneyMakingHallActivity.TYPE_BUILDING);
+						it.putExtra("strTypeIntent",Const.CategoryNo.TYPE_BUILDING);
 						startActivity(it);
 					}
 					break;
@@ -120,8 +123,7 @@ public class FragmentHall extends BaseFragment {
 					case REDUCE_WEIGHT:
 					{
 						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
-						it.putExtra("nTypeSelete",MoneyMakingHallActivity.TYPE_AMOUNT);
-						it.putExtra("nTypeIntent",MoneyMakingHallActivity.TYPE_REDUCE_WEIGHT);
+						it.putExtra("strTypeIntent",Const.CategoryNo.TYPE_REDUCE_WEIGHT);
 						startActivity(it);
 					}
 					break;
@@ -147,8 +149,7 @@ public class FragmentHall extends BaseFragment {
 					case QUIT_SMOKING:
 					{
 						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
-						it.putExtra("nTypeSelete",MoneyMakingHallActivity.TYPE_AMOUNT);
-						it.putExtra("nTypeIntent",MoneyMakingHallActivity.TYPE_QUIT_SMOKING);
+						it.putExtra("strTypeIntent",Const.CategoryNo.TYPE_QUIT_SMOKING);
 						startActivity(it);
 					}
 					break;
@@ -156,8 +157,7 @@ public class FragmentHall extends BaseFragment {
 					case QUIT_DRINKING:
 					{
 						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
-						it.putExtra("nTypeSelete",MoneyMakingHallActivity.TYPE_AMOUNT);
-						it.putExtra("nTypeIntent",MoneyMakingHallActivity.TYPE_QUIT_DRINKING);
+						it.putExtra("strTypeIntent",Const.CategoryNo.TYPE_QUIT_DRINKING);
 						startActivity(it);
 					}
 					break;
@@ -165,8 +165,7 @@ public class FragmentHall extends BaseFragment {
 					case GIVE_UP_GAMBLING:
 					{
 						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
-						it.putExtra("nTypeSelete",MoneyMakingHallActivity.TYPE_AMOUNT);
-						it.putExtra("nTypeIntent",MoneyMakingHallActivity.TYPE_GIVE_UP_GAMBLING);
+						it.putExtra("strTypeIntent",Const.CategoryNo.TYPE_GIVE_UP_GAMBLING);
 						startActivity(it);
 					}
 					break;
@@ -209,6 +208,7 @@ public class FragmentHall extends BaseFragment {
 					{
 //						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
 //						startActivity(it);
+						login();
 					}
 					break;
 
@@ -281,5 +281,9 @@ public class FragmentHall extends BaseFragment {
 		}
 
 		return listData;
+	}
+
+	private void login(){
+		Utils.login(getMContext());
 	}
 }

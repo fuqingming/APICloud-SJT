@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@color/white_color"
@@ -94,7 +94,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/shape_rectangle_dark_red"
             android:paddingTop="45dp"
-            android:text="sssssssssssssssssssssssssssssssssssssssssssssssss"
+            android:text="@string/rule"
             android:paddingBottom="5dp"
             android:paddingRight="5dp"
             android:paddingLeft="5dp"
