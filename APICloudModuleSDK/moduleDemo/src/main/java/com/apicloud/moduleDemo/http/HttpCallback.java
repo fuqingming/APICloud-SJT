@@ -1,5 +1,7 @@
 package com.apicloud.moduleDemo.http;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.tamic.novate.Throwable;
 import com.tamic.novate.callback.RxStringCallback;
@@ -28,7 +30,7 @@ public abstract class HttpCallback<T> extends RxStringCallback {
     @Override
     public void onNext(Object tag, String response) {
         Class<T> entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-
+        Log.d("@@",response);
         OnSuccess(transform(response,entityClass));
     }
 

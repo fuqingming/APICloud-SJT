@@ -244,13 +244,13 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
                 if(strCategoryNo.equals(Const.CategoryNo.DESIGNER_ENTREPRENEURSHIP)){
                     it = new Intent(MoneyMakingHallActivity.this,EntrepreneurshipActivity.class);
                     it.putExtra("strTitle","设计师创业");
-                    it.putExtra("strRoleType", Const.RoleType.DESIGNER_ENTREPRENEURSHIP);
+                    it.putExtra("nRoleType", Const.RoleType.DESIGNER_ENTREPRENEURSHIP);
                     startActivity(it);
                     return;
                 }else if(strCategoryNo.equals(Const.CategoryNo.MANAGER_ENTREPRENEURSHIP)){
                     it = new Intent(MoneyMakingHallActivity.this,EntrepreneurshipActivity.class);
                     it.putExtra("strTitle","项目经理创业");
-                    it.putExtra("strRoleType", Const.RoleType.MANAGER_ENTREPRENEURSHIP);
+                    it.putExtra("nRoleType", Const.RoleType.MANAGER_ENTREPRENEURSHIP);
                     startActivity(it);
                     return;
                 }else if(strCategoryNo.equals(Const.CategoryNo.TYPE_RENOVATION) || strCategoryNo.equals(Const.CategoryNo.TYPE_BUILDING)){
@@ -305,7 +305,7 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
     }
 
     protected void requestData(){
-        HttpClient.get(ApiStores.schedules,ApiStores.categories(mCurrentPage,m_strCategoryNo,m_strAmount,m_strOrderBy), new HttpCallback<ResponseMoneyMakingHallBean>() {
+        ApiStores.categories(mCurrentPage,m_strCategoryNo,m_strAmount,m_strOrderBy, new HttpCallback<ResponseMoneyMakingHallBean>() {
             @Override
             public void OnSuccess(ResponseMoneyMakingHallBean response) {
                 if(response.getSuccess()){
@@ -321,7 +321,9 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
 
             @Override
             public void OnRequestStart() {
-                kProgressHUD.show();
+                if(mCurrentPage > 1){
+                    kProgressHUD.show();
+                }
             }
 
             @Override
@@ -329,5 +331,6 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
                 executeOnLoadFinish();
             }
         });
+
     }
 }

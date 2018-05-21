@@ -65,6 +65,7 @@ public class HttpClient {
                     .addCache(false)
                     .baseUrl(baseUrl)
                     .client(okHttpClient)
+                    .addCookie(true)
                     .build();
         }
     }

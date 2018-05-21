@@ -58,7 +58,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     protected abstract int setLayoutResourceId();
 
     protected void init(){
-        HttpClient.init(getApplicationContext(),false);
+        HttpClient.init(getApplicationContext(),true);
     }
 
     protected abstract void setUpView();

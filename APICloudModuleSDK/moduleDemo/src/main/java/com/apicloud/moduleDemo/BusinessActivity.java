@@ -62,8 +62,7 @@ public class BusinessActivity extends BaseListActivity {
     }
 
     protected void requestData(){
-
-        HttpClient.get(ApiStores.companies,ApiStores.companies(mCurrentPage), new HttpCallback<ResponseBusinessBean>() {//ResponseHallBean
+        ApiStores.companies(mCurrentPage, new HttpCallback<ResponseBusinessBean>() {//ResponseHallBean
             @Override
             public void OnSuccess(ResponseBusinessBean response) {
                 if(response.getSuccess()){

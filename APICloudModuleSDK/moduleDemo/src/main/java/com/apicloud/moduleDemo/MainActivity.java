@@ -46,11 +46,6 @@ public class MainActivity extends FragmentActivityBase {
         super.init();
         m_textArray = getResources().getStringArray(R.array.main_tab_text);
         m_layoutInflater = LayoutInflater.from(this);
-        AppSettings.setAutoLogin(true);
-        AppSettings.setNickname("1111111");
-        AppSettings.setPhone("13386174433");
-        AppSettings.setUserId("1");
-        AppSettings.setHeadPic("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2966021298,3341101515&fm=23&gp=0.jpg");
 
     }
 

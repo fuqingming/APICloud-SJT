@@ -97,6 +97,14 @@
         <activity
             android:name="com.apicloud.moduleDemo.EntrepreneurshipDetailsActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> <!-- 申请创业 -->
+        <activity
+            android:name="com.apicloud.moduleDemo.ApplyEntrepreneurshipActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> <!-- 找公司 -->
+        <activity
+            android:name="com.apicloud.moduleDemo.FindCompanyActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> <!-- RxGalleryFinal -->
         <activity
             android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"

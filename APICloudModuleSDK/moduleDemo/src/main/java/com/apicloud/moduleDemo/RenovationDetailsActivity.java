@@ -180,7 +180,7 @@ public class RenovationDetailsActivity extends BaseAppCompatActivity {
 
     @Override
     protected void setUpData() {
-        HttpClient.get(ApiStores.schedulesDetails,ApiStores.schedulesDetails(m_strScheduleNo), new HttpCallback<ResponseMoneyMakingHallBean>() {
+        ApiStores.schedulesDetails(m_strScheduleNo,new HttpCallback<ResponseMoneyMakingHallBean>() {
             @Override
             public void OnSuccess(ResponseMoneyMakingHallBean response) {
                 if(response.getSuccess()){

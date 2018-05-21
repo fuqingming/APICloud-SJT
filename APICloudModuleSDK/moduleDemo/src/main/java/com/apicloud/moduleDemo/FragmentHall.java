@@ -96,11 +96,11 @@ public class FragmentHall extends BaseFragment {
 		m_gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-				if(!AppSettings.isAutoLogin()){
-//					Intent it = new Intent(getMContext(),LoginActivity.class);
-//					startActivity(it);
-					return;
-				}
+//				if(!AppSettings.isAutoLogin()){
+////					Intent it = new Intent(getMContext(),LoginActivity.class);
+////					startActivity(it);
+//					return;
+//				}
 				Intent it ;
 				switch (FunctionIndex.values()[position])
 				{
@@ -196,11 +196,11 @@ public class FragmentHall extends BaseFragment {
 		m_gridViewWill.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-				if(!AppSettings.isAutoLogin()){
-//					Intent it = new Intent(getMContext(),LoginActivity.class);
-//					startActivity(it);
-					return;
-				}
+//				if(!AppSettings.isAutoLogin()){
+////					Intent it = new Intent(getMContext(),LoginActivity.class);
+////					startActivity(it);
+//					return;
+//				}
 				Intent it ;
 				switch (FunctionIndexWill.values()[position])
 				{
@@ -208,7 +208,7 @@ public class FragmentHall extends BaseFragment {
 					{
 //						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
 //						startActivity(it);
-						login();
+						Utils.login(getMContext(),null);
 					}
 					break;
 
@@ -281,9 +281,5 @@ public class FragmentHall extends BaseFragment {
 		}
 
 		return listData;
-	}
-
-	private void login(){
-		Utils.login(getMContext());
 	}
 }

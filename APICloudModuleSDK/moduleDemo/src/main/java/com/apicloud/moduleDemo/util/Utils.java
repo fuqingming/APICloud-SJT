@@ -35,6 +35,7 @@ import com.apicloud.moduleDemo.http.ApiStores;
 import com.apicloud.moduleDemo.http.HttpCallback;
 import com.apicloud.moduleDemo.http.HttpClient;
 import com.apicloud.moduleDemo.http.HttpSetUrl;
+import com.apicloud.moduleDemo.settings.AppSettings;
 import com.apicloud.sdk.moduledemo.R;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
@@ -896,21 +897,32 @@ public class Utils {
 //                .show();
 //    }
 
-    public static void login(final Context context){
+    public static void login(final Context context ,final OnTaskSuccessComplete onTaskSuccessComplete){
         HttpClient.init(context.getApplicationContext(),false);
         final KProgressHUD kProgressHUD = new HUDProgressUtils().showLoadingImage(context);
-        HttpClient.post(ApiStores.login,ApiStores.login("13175220672","111111"), new HttpCallback<LoginBean>() {//ResponseHallBean
+        ApiStores.login("13175220672","111111",new HttpCallback<LoginBean>() {//ResponseHallBean
             @Override
             public void OnSuccess(LoginBean response) {
                 if(response.getSuccess()){
                     HttpSetUrl.setHeaderAuthUuid(response.getData().getUid());
                     HttpClient.init(context.getApplicationContext(),true);
+                    AppSettings.setAutoLogin(true);
+                    AppSettings.setNickname("1111111");
+                    AppSettings.setPhone("13175220672");
+                    AppSettings.setUserId(response.getData().getUid());
+                    AppSettings.setHeadPic("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2966021298,3341101515&fm=23&gp=0.jpg");
+                    if(onTaskSuccessComplete!=null){
+                        onTaskSuccessComplete.onSuccess(true);
+                    }
                 }
             }
 
             @Override
             public void OnFailure(String message) {
                 Utils.showToast(context,""+message);
+                if(onTaskSuccessComplete!=null){
+                    onTaskSuccessComplete.onSuccess(false);
+                }
             }
 
             @Override

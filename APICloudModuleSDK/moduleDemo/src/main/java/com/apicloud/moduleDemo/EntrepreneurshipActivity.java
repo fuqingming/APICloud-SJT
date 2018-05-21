@@ -6,11 +6,13 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import com.apicloud.moduleDemo.adapter.EntrepreneurshipAdapter;
+import com.apicloud.moduleDemo.backhandler.OnTaskSuccessComplete;
 import com.apicloud.moduleDemo.base.BaseGridViewActivity;
 import com.apicloud.moduleDemo.bean.response.ResponseEntrepreneurshipBean;
 import com.apicloud.moduleDemo.http.ApiStores;
 import com.apicloud.moduleDemo.http.HttpCallback;
 import com.apicloud.moduleDemo.http.HttpClient;
+import com.apicloud.moduleDemo.settings.AppSettings;
 import com.apicloud.moduleDemo.settings.Const;
 import com.apicloud.moduleDemo.util.Utils;
 import com.apicloud.moduleDemo.util.recycler.BaseRecyclerAdapter;
@@ -67,7 +69,22 @@ public class EntrepreneurshipActivity extends BaseGridViewActivity {
         header.findViewById(R.id.ll_apply).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(!AppSettings.isAutoLogin()){
+                    Utils.login(EntrepreneurshipActivity.this, new OnTaskSuccessComplete() {
+                        @Override
+                        public void onSuccess(Object obj) {
+                            if((boolean)obj){
+                                Intent it = new Intent(EntrepreneurshipActivity.this,ApplyEntrepreneurshipActivity.class);
+                                it.putExtra("strRoleType", getIntent().getIntExtra("nRoleType",Const.RoleType.DESIGNER_ENTREPRENEURSHIP));
+                                startActivity(it);
+                            }
+                        }
+                    });
+                }else{
+                    Intent it = new Intent(EntrepreneurshipActivity.this,ApplyEntrepreneurshipActivity.class);
+                    it.putExtra("strRoleType",getIntent().getIntExtra("nRoleType",Const.RoleType.DESIGNER_ENTREPRENEURSHIP));
+                    startActivity(it);
+                }
             }
         });
 
@@ -75,7 +92,22 @@ public class EntrepreneurshipActivity extends BaseGridViewActivity {
         header.findViewById(R.id.ll_find).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(!AppSettings.isAutoLogin()){
+                    Utils.login(EntrepreneurshipActivity.this, new OnTaskSuccessComplete() {
+                        @Override
+                        public void onSuccess(Object obj) {
+                            if((boolean)obj){
+                                Intent it = new Intent(EntrepreneurshipActivity.this,FindCompanyActivity.class);
+                                it.putExtra("strRoleType",getIntent().getIntExtra("nRoleType",Const.RoleType.DESIGNER_ENTREPRENEURSHIP));
+                                startActivity(it);
+                            }
+                        }
+                    });
+                }else{
+                    Intent it = new Intent(EntrepreneurshipActivity.this,FindCompanyActivity.class);
+                    it.putExtra("strRoleType",getIntent().getIntExtra("nRoleType",Const.RoleType.DESIGNER_ENTREPRENEURSHIP));
+                    startActivity(it);
+                }
             }
         });
 
@@ -101,8 +133,7 @@ public class EntrepreneurshipActivity extends BaseGridViewActivity {
     }
 
     protected void requestData(){
-
-        HttpClient.get(ApiStores.designers,ApiStores.designers(getIntent().getIntExtra("strRoleType",2),mCurrentPage), new HttpCallback<ResponseEntrepreneurshipBean>() {//ResponseHallBean
+        ApiStores.designers(getIntent().getIntExtra("nRoleType",Const.RoleType.DESIGNER_ENTREPRENEURSHIP),mCurrentPage,new HttpCallback<ResponseEntrepreneurshipBean>(){
             @Override
             public void OnSuccess(ResponseEntrepreneurshipBean response) {
                 if(response.getSuccess()){
