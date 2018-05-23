@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
+import android.media.session.MediaSession;
 import android.net.Uri;
 import android.os.IBinder;
 import android.provider.MediaStore;
@@ -29,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.apicloud.moduleDemo.backhandler.OnTaskSuccessComplete;
 import com.apicloud.moduleDemo.bean.response.LoginBean;
 import com.apicloud.moduleDemo.http.ApiStores;
@@ -37,17 +39,36 @@ import com.apicloud.moduleDemo.http.HttpClient;
 import com.apicloud.moduleDemo.http.HttpSetUrl;
 import com.apicloud.moduleDemo.settings.AppSettings;
 import com.apicloud.sdk.moduledemo.R;
+import com.google.gson.Gson;
 import com.kaopiz.kprogresshud.KProgressHUD;
+import com.tamic.novate.Novate;
+import com.tamic.novate.callback.RxStringCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.Headers;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class Utils {
 
@@ -897,42 +918,61 @@ public class Utils {
 //                .show();
 //    }
 
-    public static void login(final Context context ,final OnTaskSuccessComplete onTaskSuccessComplete){
-        HttpClient.init(context.getApplicationContext(),false);
-        final KProgressHUD kProgressHUD = new HUDProgressUtils().showLoadingImage(context);
-        ApiStores.login("13175220672","111111",new HttpCallback<LoginBean>() {//ResponseHallBean
-            @Override
-            public void OnSuccess(LoginBean response) {
-                if(response.getSuccess()){
-                    HttpSetUrl.setHeaderAuthUuid(response.getData().getUid());
-                    HttpClient.init(context.getApplicationContext(),true);
-                    AppSettings.setAutoLogin(true);
-                    AppSettings.setNickname("1111111");
-                    AppSettings.setPhone("13175220672");
-                    AppSettings.setUserId(response.getData().getUid());
-                    AppSettings.setHeadPic("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2966021298,3341101515&fm=23&gp=0.jpg");
-                    if(onTaskSuccessComplete!=null){
-                        onTaskSuccessComplete.onSuccess(true);
-                    }
-                }
-            }
+    public static void login(final Context context ,final OnTaskSuccessComplete onTaskSuccessComplete,final KProgressHUD kProgressHUD){
+        OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象。
 
+        JSONObject js = new JSONObject();
+        try {
+            js.put("remember-me",1);
+            js.put("authChannel",1000);
+            js.put("password","111111");
+            js.put("username","13175220672");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), js.toString());
+
+        final Request request = new Request.Builder()
+                .addHeader("X-Requested-With", "XMLHttpRequest")
+                .addHeader("Content-Type", "application/json")
+                .addHeader("X-Auth-City", HttpSetUrl.getHeaderAuthCity())
+
+                .addHeader("X-Auth-uuid",  HttpSetUrl.getHeaderAuthUuid())
+                .addHeader("X-Auth-App", "5006")
+                .addHeader("X-Auth-Token", HttpSetUrl.getHeaderAuthToken())
+                .url( "http://sjt.dev.dems.cc/api/login")
+                .post(body)
+                .build();
+        kProgressHUD.show();
+        client.newCall(request).enqueue(new Callback() {
             @Override
-            public void OnFailure(String message) {
-                Utils.showToast(context,""+message);
+            public void onFailure(Call call, IOException e) {
+                kProgressHUD.dismiss();
                 if(onTaskSuccessComplete!=null){
                     onTaskSuccessComplete.onSuccess(false);
                 }
             }
 
+            //成功时调用的方法
             @Override
-            public void OnRequestStart() {
-                kProgressHUD.show();
-            }
-
-            @Override
-            public void OnRequestFinish() {
+            public void onResponse(Call call, Response response) throws IOException {
                 kProgressHUD.dismiss();
+                Gson gson = new Gson();
+
+                String json = response.body().string();
+                LoginBean beanjson = gson.fromJson(json, LoginBean.class);
+
+                HttpSetUrl.setHeaderAuthToken(response.header("X-Auth-Token"));
+                HttpSetUrl.setHeaderAuthUuid(beanjson.getData().getUid());
+                AppSettings.setAutoLogin(true);
+                AppSettings.setNickname("1111111");
+                AppSettings.setPhone("13175220672");
+                AppSettings.setUserId(beanjson.getData().getUid());
+                AppSettings.setHeadPic("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2966021298,3341101515&fm=23&gp=0.jpg");
+                HttpClient.init(context.getApplicationContext(),true);
+                if(onTaskSuccessComplete!=null){
+                    onTaskSuccessComplete.onSuccess(true);
+                }
             }
         });
     }

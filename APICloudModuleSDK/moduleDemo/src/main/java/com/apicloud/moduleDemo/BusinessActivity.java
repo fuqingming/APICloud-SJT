@@ -17,6 +17,7 @@ import com.github.jdsjlzx.ItemDecoration.DividerDecoration;
 import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
+import com.tamic.novate.RxApiManager;
 
 import java.util.ArrayList;
 
@@ -84,5 +85,11 @@ public class BusinessActivity extends BaseListActivity {
                 executeOnLoadFinish();
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RxApiManager.get().cancel(0);
     }
 }

@@ -1,5 +1,6 @@
 package com.apicloud.moduleDemo.http;
 
+import com.apicloud.moduleDemo.bean.response.LoginBean;
 import com.apicloud.moduleDemo.settings.Constant;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -79,7 +80,7 @@ public class ApiStores {
     }
 
     /** 登陆 */
-    public static <T> void login(String username,String password,HttpCallback<T> httpCallback){
+    public static <T> void login(String username, String password, HttpCallback<LoginBean> httpCallback){
         String url =  "/api/login";
 
         JSONObject js = new JSONObject();

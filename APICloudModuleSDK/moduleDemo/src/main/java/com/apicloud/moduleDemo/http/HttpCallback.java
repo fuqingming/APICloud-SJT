@@ -30,7 +30,6 @@ public abstract class HttpCallback<T> extends RxStringCallback {
     @Override
     public void onNext(Object tag, String response) {
         Class<T> entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-        Log.d("@@",response);
         OnSuccess(transform(response,entityClass));
     }
 

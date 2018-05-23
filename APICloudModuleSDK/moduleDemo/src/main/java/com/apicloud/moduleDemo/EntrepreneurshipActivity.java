@@ -69,22 +69,9 @@ public class EntrepreneurshipActivity extends BaseGridViewActivity {
         header.findViewById(R.id.ll_apply).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!AppSettings.isAutoLogin()){
-                    Utils.login(EntrepreneurshipActivity.this, new OnTaskSuccessComplete() {
-                        @Override
-                        public void onSuccess(Object obj) {
-                            if((boolean)obj){
-                                Intent it = new Intent(EntrepreneurshipActivity.this,ApplyEntrepreneurshipActivity.class);
-                                it.putExtra("strRoleType", getIntent().getIntExtra("nRoleType",Const.RoleType.DESIGNER_ENTREPRENEURSHIP));
-                                startActivity(it);
-                            }
-                        }
-                    });
-                }else{
-                    Intent it = new Intent(EntrepreneurshipActivity.this,ApplyEntrepreneurshipActivity.class);
-                    it.putExtra("strRoleType",getIntent().getIntExtra("nRoleType",Const.RoleType.DESIGNER_ENTREPRENEURSHIP));
-                    startActivity(it);
-                }
+                Intent it = new Intent(EntrepreneurshipActivity.this,ApplyEntrepreneurshipActivity.class);
+                it.putExtra("strRoleType", getIntent().getIntExtra("nRoleType",Const.RoleType.DESIGNER_ENTREPRENEURSHIP));
+                startActivity(it);
             }
         });
 
@@ -92,22 +79,9 @@ public class EntrepreneurshipActivity extends BaseGridViewActivity {
         header.findViewById(R.id.ll_find).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!AppSettings.isAutoLogin()){
-                    Utils.login(EntrepreneurshipActivity.this, new OnTaskSuccessComplete() {
-                        @Override
-                        public void onSuccess(Object obj) {
-                            if((boolean)obj){
-                                Intent it = new Intent(EntrepreneurshipActivity.this,FindCompanyActivity.class);
-                                it.putExtra("strRoleType",getIntent().getIntExtra("nRoleType",Const.RoleType.DESIGNER_ENTREPRENEURSHIP));
-                                startActivity(it);
-                            }
-                        }
-                    });
-                }else{
-                    Intent it = new Intent(EntrepreneurshipActivity.this,FindCompanyActivity.class);
-                    it.putExtra("strRoleType",getIntent().getIntExtra("nRoleType",Const.RoleType.DESIGNER_ENTREPRENEURSHIP));
-                    startActivity(it);
-                }
+                Intent it = new Intent(EntrepreneurshipActivity.this,ApplyEntrepreneurshipActivity.class);
+                it.putExtra("strRoleType", getIntent().getIntExtra("nRoleType",Const.RoleType.DESIGNER_ENTREPRENEURSHIP));
+                startActivity(it);
             }
         });
 

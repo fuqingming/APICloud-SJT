@@ -208,7 +208,7 @@ public class FragmentHall extends BaseFragment {
 					{
 //						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
 //						startActivity(it);
-						Utils.login(getMContext(),null);
+						Utils.login(getMContext(),null,kProgressHUD);
 					}
 					break;
 

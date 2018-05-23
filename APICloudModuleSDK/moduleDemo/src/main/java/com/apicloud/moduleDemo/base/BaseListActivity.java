@@ -331,6 +331,10 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        if(kProgressHUD.isShowing()){
+            kProgressHUD.dismiss();
+        }
+
         if (!BackHandlerHelper.handleBackPress(this)) {
             super.onBackPressed();
         }

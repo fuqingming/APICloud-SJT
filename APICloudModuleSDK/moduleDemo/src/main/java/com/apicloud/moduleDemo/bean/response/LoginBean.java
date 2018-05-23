@@ -1,5 +1,7 @@
 package com.apicloud.moduleDemo.bean.response;
 
+import android.media.session.MediaSession;
+
 import com.apicloud.moduleDemo.bean.base.BusinessBean;
 
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.List;
  */
 
 public class LoginBean extends ResponseBaseBean{
+
     private Data data;
 
     public Data getData() {
