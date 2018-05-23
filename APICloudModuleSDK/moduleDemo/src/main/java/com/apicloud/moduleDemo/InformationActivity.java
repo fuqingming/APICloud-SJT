@@ -1,7 +1,11 @@
 package com.apicloud.moduleDemo;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,14 +15,26 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.apicloud.moduleDemo.adapter.PictureSelectionAdapter;
+import com.apicloud.moduleDemo.backhandler.OnTaskSuccessComplete;
 import com.apicloud.moduleDemo.base.BaseAppCompatActivity;
+import com.apicloud.moduleDemo.bean.response.LoginBean;
+import com.apicloud.moduleDemo.http.ApiStores;
+import com.apicloud.moduleDemo.http.HttpCallback;
 import com.apicloud.moduleDemo.settings.AppSettings;
+import com.apicloud.moduleDemo.util.DownloadThread;
 import com.apicloud.moduleDemo.util.RegexUtil;
+import com.apicloud.moduleDemo.util.UploadHandler;
 import com.apicloud.moduleDemo.util.Utils;
+import com.apicloud.moduleDemo.util.alert.AlertUtils;
 import com.apicloud.sdk.moduledemo.R;
 
+import org.json.JSONArray;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import cn.finalteam.rxgalleryfinal.RxGalleryFinal;
 import cn.finalteam.rxgalleryfinal.bean.MediaBean;
@@ -31,7 +47,7 @@ public class InformationActivity extends BaseAppCompatActivity {
     private PictureSelectionAdapter m_pictureSelectionAdapter;
 
     private List<MediaBean> m_arrDatas;
-    private List<MediaBean> list = null;
+    private List<MediaBean> m_arrMediaBean = null;
 
     private GridView m_gridView;
     private EditText m_etName;
@@ -44,6 +60,10 @@ public class InformationActivity extends BaseAppCompatActivity {
     private String m_strText;
     private String m_strName;
     private String m_strPhone;
+    private JSONArray m_jsonArrData;
+
+    private UploadHandler m_uploadHandler = new UploadHandler();
+    private List<DownloadThread> threads = new ArrayList<>();
 
     @Override
     protected int setLayoutResourceId() {
@@ -78,7 +98,7 @@ public class InformationActivity extends BaseAppCompatActivity {
         m_gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                if(list == null || list.isEmpty() || list.size() == 9){
+                if(m_arrMediaBean == null || m_arrMediaBean.isEmpty() || m_arrMediaBean.size() == 9){
                     openRadios();
                 }else if(position == 0 && m_arrDatas.get(position) == null){
                     openRadios();
@@ -89,7 +109,56 @@ public class InformationActivity extends BaseAppCompatActivity {
         m_btnCommit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(isInputValid()){
+                    if(m_arrMediaBean != null && m_arrMediaBean.size() > 0){
+                        kProgressHUD.show();
+                        m_uploadHandler.setMessages(threads, new OnTaskSuccessComplete() {
+                            @Override
+                            public void onSuccess(Object obj) {
+                                if(obj != null){
+                                    m_jsonArrData = (JSONArray) obj;
+                                    commitInformation();
+                                }else{
+                                    Utils.showToast(InformationActivity.this,"图片上传失败，请重新上传！");
+                                    kProgressHUD.dismiss();
+                                }
+                            }
+                        });
+                        Message message = new Message();
+                        message.what = DownloadThread.THREAD_BEGIN;
+                        m_uploadHandler.sendMessage(message);
+                    }else{
+                        commitInformation();
+                    }
+                }
+            }
+        });
+    }
 
+    private void commitInformation(){
+        ApiStores.informationActivity(m_strTitle, m_strName, m_strPhone, m_strText, m_jsonArrData, new HttpCallback<LoginBean>() {
+
+            @Override
+            public void OnSuccess(LoginBean response) {
+
+            }
+
+            @Override
+            public void OnFailure(String message) {
+                kProgressHUD.dismiss();
+                AlertUtils.MessageAlertShow(InformationActivity.this,"错误",message);
+            }
+
+            @Override
+            public void OnRequestStart() {
+                if(!kProgressHUD.isShowing()){
+                    kProgressHUD.show();
+                }
+            }
+
+            @Override
+            public void OnRequestFinish() {
+                kProgressHUD.dismiss();
             }
         });
     }
@@ -102,8 +171,8 @@ public class InformationActivity extends BaseAppCompatActivity {
                 .with(InformationActivity.this)
                 .image()
                 .multiple();
-        if (list != null && !list.isEmpty()) {
-            rxGalleryFinal.selected(list);
+        if (m_arrMediaBean != null && !m_arrMediaBean.isEmpty()) {
+            rxGalleryFinal.selected(m_arrMediaBean);
         }
         rxGalleryFinal.maxSize(9)
                 .imageLoader(ImageLoaderType.FRESCO)
@@ -111,12 +180,18 @@ public class InformationActivity extends BaseAppCompatActivity {
 
                     @Override
                     protected void onEvent(ImageMultipleResultEvent imageMultipleResultEvent) throws Exception {
-                        list = imageMultipleResultEvent.getResult();
+                        m_arrMediaBean = imageMultipleResultEvent.getResult();
                         m_arrDatas.clear();
-                        if(list.size() < 9){
+                        threads.clear();
+                        if(m_arrMediaBean.size() < 9){
                             m_arrDatas.add(null);
                         }
-                        m_arrDatas.addAll(list);
+                        m_arrDatas.addAll(m_arrMediaBean);
+
+                        for(int i = 0 ; i < m_arrMediaBean.size(); i ++){
+                            File file = new File( m_arrMediaBean.get(i).getThumbnailBigPath());
+                            threads.add(new DownloadThread(file,m_uploadHandler));
+                        }
 
                         m_pictureSelectionAdapter.notifyDataSetChanged();
                     }
@@ -136,13 +211,6 @@ public class InformationActivity extends BaseAppCompatActivity {
         if (m_strText.isEmpty()) {
             Utils.showToast(InformationActivity.this, "请输入意见建议");
             m_etText.requestFocus();
-            return false;
-        }
-
-        m_strTitle = m_etTitle.getText().toString().trim();
-        if (m_strTitle.isEmpty()) {
-            Utils.showToast(InformationActivity.this, "请输入标题");
-            m_etTitle.requestFocus();
             return false;
         }
 
@@ -172,6 +240,8 @@ public class InformationActivity extends BaseAppCompatActivity {
             m_etPhone.requestFocus();
             return false;
         }
+
+        m_strTitle = m_etTitle.getText().toString().trim();
 
         return true;
     }

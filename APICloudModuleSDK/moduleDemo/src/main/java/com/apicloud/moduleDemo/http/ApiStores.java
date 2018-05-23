@@ -2,10 +2,20 @@ package com.apicloud.moduleDemo.http;
 
 import com.apicloud.moduleDemo.bean.response.LoginBean;
 import com.apicloud.moduleDemo.settings.Constant;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import rx.Subscriber;
 
 /**
  * Created by HH
@@ -144,20 +154,32 @@ public class ApiStores {
     }
 
     /** 咨询与建议 */
-    public static <T> void informationActivity(String title,String contact,String mobile,String content,HttpCallback<T> httpCallback){
-        String url =  "/api/login";
+    public static <T> void informationActivity(String title, String contact, String mobile, String content, JSONArray jsonArray, HttpCallback<T> httpCallback){
+        String url =  "/api/api/my-suggestions";
 
         JSONObject js = new JSONObject();
         try {
-            js.put("title-me",title);
+            js.put("title",title);
             js.put("contact",contact);
             js.put("mobile",mobile);
             js.put("content",content);
+            js.put("attachments",jsonArray);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         HttpClient.post(url,js.toString(),httpCallback);
+    }
+
+    /** 图片上传 */
+    public static <T> void uploadFiles(File file, Subscriber<ResponseBody> subscriber){
+        String url =  "/api/web/upload";
+
+        RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart("file", file.getName(), RequestBody.create(MediaType.parse("image/*"), file))
+                .build();
+
+        HttpClient.uploadFile(url,requestBody,subscriber);
     }
 
 }

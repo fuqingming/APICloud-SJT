@@ -17,7 +17,10 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
+import rx.Subscriber;
 
 /**
  * Created by HH
@@ -98,12 +101,16 @@ public class HttpClient {
         mNovate.rxUploadWithPart(url,file,httpCallback);
     }
 
-    public static <T> void uploadFiles(String url, Map<String, File> maps, HttpCallback<T> httpCallback){
-        mNovate.rxUploadWithBodyMapByFile(url,maps,httpCallback);
+    public static <T> void uploadFile(String url, Map<String, File> maps, HttpCallback<T> httpCallback){
+        mNovate.rxUploadWithPartMapByFile(url,maps,httpCallback);
     }
 
-    public static <T> void uploadFiles(String url, List<File> list, HttpCallback<T> httpCallback){
+    public static <T> void uploadFile(String url, List<File> list, HttpCallback<T> httpCallback){
         mNovate.rxUploadWithPartListByFile(url,list,httpCallback);
+    }
+
+    public static <T> void uploadFile(String url, RequestBody requestBody , Subscriber<ResponseBody> subscriber){
+        mNovate.upload(url,requestBody,subscriber);
     }
 
 }
