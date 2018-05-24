@@ -1,7 +1,6 @@
 package com.apicloud.moduleDemo;
 
 import android.content.Intent;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,8 +26,6 @@ import com.apicloud.moduleDemo.util.recycler.BaseRecyclerAdapter;
 import com.apicloud.sdk.moduledemo.R;
 import com.github.jdsjlzx.ItemDecoration.DividerDecoration;
 import com.github.jdsjlzx.interfaces.OnItemClickListener;
-import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
-import com.github.jdsjlzx.interfaces.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -149,8 +146,9 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
         mRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent it = new Intent(MoneyMakingHallActivity.this,RenovationDetailsActivity.class);
+                Intent it = new Intent(MoneyMakingHallActivity.this,DetailsActivity.class);
                 it.putExtra("strScheduleNo",m_moneyMakingHallAdapter.getListData().get(position).getScheduleNo());
+                it.putExtra("strCategoryNo",m_strCategoryNo);
                 startActivity(it);
             }
 

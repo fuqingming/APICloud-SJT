@@ -7,6 +7,8 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -18,6 +20,7 @@ import com.apicloud.moduleDemo.adapter.PictureSelectionAdapter;
 import com.apicloud.moduleDemo.backhandler.OnTaskSuccessComplete;
 import com.apicloud.moduleDemo.base.BaseAppCompatActivity;
 import com.apicloud.moduleDemo.bean.base.DateBean;
+import com.apicloud.moduleDemo.bean.base.VerifyMobileBean;
 import com.apicloud.moduleDemo.bean.response.LoginBean;
 import com.apicloud.moduleDemo.http.ApiStores;
 import com.apicloud.moduleDemo.http.HttpCallback;
@@ -55,9 +58,8 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
     private LinearLayout m_llCity;
     private GridView m_gridView;
     private Button m_btnCommit;
-    private RadioGroup m_rgCity;
-    private RadioButton m_rbCityAll;
-    private RadioButton m_rbCityIndex;
+    private CheckBox m_rbCityAll;
+    private CheckBox m_rbCityIndex;
     private TextView m_tvStartDate;
     private TextView m_tvEndDate;
     private TextView m_tvJoinCount;
@@ -115,25 +117,24 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
         m_strArrHouseType  = getResources().getStringArray(R.array.house_type_text);
         m_strArrNoSelect  = getResources().getStringArray(R.array.house_no_text);
 
-        m_llCity = (LinearLayout)findViewById(R.id.ll_city);
-        m_gridView = (GridView) findViewById(R.id.gridview_functions);
-        m_btnCommit = (Button) findViewById(R.id.btn_commit);
-        m_rgCity = (RadioGroup) this.findViewById(R.id.rg_city);
-        m_rbCityAll = (RadioButton) this.findViewById(R.id.rb_city_all);
-        m_rbCityIndex = (RadioButton) this.findViewById(R.id.rb_city_index);
-        m_tvStartDate = (TextView)findViewById(R.id.tv_start_date);
-        m_tvEndDate = (TextView)findViewById(R.id.tv_end_date);
-        m_tvJoinCount = (TextView)findViewById(R.id.tv_join_count);
-        m_tvCity = (TextView)findViewById(R.id.tv_city);
-        m_tvHouseType = (TextView)findViewById(R.id.tv_house_type);
-        m_tvStyle = (TextView)findViewById(R.id.tv_style);
-        m_tvCityLocation = (TextView)findViewById(R.id.tv_city_location);
-        m_etTitle = (EditText)findViewById(R.id.et_title);
-        m_etBudget = (EditText)findViewById(R.id.et_budget);
-        m_etAmount = (EditText)findViewById(R.id.et_amount);
-        m_etText = (EditText)findViewById(R.id.et_text);
-        m_etAdress = (EditText)findViewById(R.id.et_address);
-        m_etSize = (EditText)findViewById(R.id.et_size);
+        m_llCity = findViewById(R.id.ll_city);
+        m_gridView =  findViewById(R.id.gridview_functions);
+        m_btnCommit =  findViewById(R.id.btn_commit);
+        m_rbCityAll = findViewById(R.id.rb_city_all);
+        m_rbCityIndex = findViewById(R.id.rb_city_index);
+        m_tvStartDate = findViewById(R.id.tv_start_date);
+        m_tvEndDate = findViewById(R.id.tv_end_date);
+        m_tvJoinCount = findViewById(R.id.tv_join_count);
+        m_tvCity = findViewById(R.id.tv_city);
+        m_tvHouseType = findViewById(R.id.tv_house_type);
+        m_tvStyle = findViewById(R.id.tv_style);
+        m_tvCityLocation = findViewById(R.id.tv_city_location);
+        m_etTitle = findViewById(R.id.et_title);
+        m_etBudget = findViewById(R.id.et_budget);
+        m_etAmount = findViewById(R.id.et_amount);
+        m_etText = findViewById(R.id.et_text);
+        m_etAdress = findViewById(R.id.et_address);
+        m_etSize = findViewById(R.id.et_size);
 
         m_arrDatas = new ArrayList<>();
         m_arrDatas.add(null);
@@ -264,7 +265,7 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
                             public void onSuccess(Object obj) {
                                 if(obj != null){
                                     m_jsonArrData = (JSONArray) obj;
-                                    commitInformation();
+                                    commitMobileSend();
                                 }else{
                                     Utils.showToast(ReleaseRenovationActivity.this,"图片上传失败，请重新上传！");
                                     kProgressHUD.dismiss();
@@ -275,32 +276,53 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
                         message.what = UploadThread.THREAD_BEGIN;
                         m_uploadHandler.sendMessage(message);
                     }else{
-                        commitInformation();
+                        commitMobileSend();
                     }
                 }
             }
         });
-        //全国or选择城市
-        m_rgCity.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
-
+        //全国
+        m_rbCityAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
-            public void onCheckedChanged(RadioGroup rg, int checkedId) {
-                // TODO Auto-generated method stub
-                if(checkedId == m_rbCityAll.getId()){
-                    m_llCity.setVisibility(View.GONE);
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked){
+                    m_rbCityIndex.setChecked(false);
                     m_strAddress = "";
                     m_nAddressType = 1;
-                }else if(checkedId == m_rbCityIndex.getId()){
+                }
+
+            }
+        });
+
+        //选择城市
+        m_rbCityIndex.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked){
+                    m_rbCityAll.setChecked(false);
                     m_llCity.setVisibility(View.VISIBLE);
                     m_nAddressType = 2;
+                }else{
+                    m_llCity.setVisibility(View.GONE);
                 }
+
             }
         });
     }
 
-    private void commitInformation(){
-        ApiStores.releaseRenovation(m_strTitle, m_lonStartDate, m_lonEndDate, m_nJoinNo, 1,m_strAmount,m_strText,m_strCityLocation,"所在省","所在市","所在区",
-                m_strArs,m_dLat,m_dLng,m_strCategoryNo,m_nAddressType,m_strAddress,m_strHouseType,m_strStyle,m_strSize,m_strBudget,
+    private void commitMobileSend(){
+        Utils.showCommonDialogVerifyCode(ReleaseRenovationActivity.this, kProgressHUD, "", "", new OnTaskSuccessComplete() {
+            @Override
+            public void onSuccess(Object obj) {
+                VerifyMobileBean verifyMobileBean = (VerifyMobileBean)obj;
+                commitInformation(verifyMobileBean.getMobile(),verifyMobileBean.getVerifyCode());
+            }
+        });
+    }
+
+    private void commitInformation(String mobile,String verifyCode){
+        ApiStores.releaseRenovation(m_strTitle, m_lonStartDate, m_lonEndDate, m_nJoinNo,m_strAmount, 1,m_strText,m_strCityLocation,"所在省","所在市","所在区",
+                m_strArs,m_dLat,m_dLng,m_strCategoryNo,m_nAddressType,m_strAddress,m_strHouseType,m_strStyle,m_strSize,m_strBudget,mobile,verifyCode,
                 m_jsonArrData, new HttpCallback<LoginBean>() {
 
                     @Override

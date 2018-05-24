@@ -139,14 +139,14 @@ ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidMan
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:78:13-69
 	android:name
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:77:13-81
-activity#com.apicloud.moduleDemo.RenovationDetailsActivity
+activity#com.apicloud.moduleDemo.DetailsActivity
 ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:82:9-85:51
 	android:screenOrientation
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:85:13-49
 	android:theme
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:84:13-69
 	android:name
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:83:13-77
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:83:13-67
 activity#com.apicloud.moduleDemo.EntrepreneurshipActivity
 ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:88:9-91:51
 	android:screenOrientation

@@ -401,14 +401,14 @@ ADDED from [:moduleDemo] F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\build
 		ADDED from [:moduleDemo] F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\build\intermediates\manifests\full\debug\AndroidManifest.xml:85:13-69
 	android:name
 		ADDED from [:moduleDemo] F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\build\intermediates\manifests\full\debug\AndroidManifest.xml:83:13-81
-activity#com.apicloud.moduleDemo.RenovationDetailsActivity
+activity#com.apicloud.moduleDemo.DetailsActivity
 ADDED from [:moduleDemo] F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\build\intermediates\manifests\full\debug\AndroidManifest.xml:88:9-91:72
 	android:screenOrientation
 		ADDED from [:moduleDemo] F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\build\intermediates\manifests\full\debug\AndroidManifest.xml:90:13-49
 	android:theme
 		ADDED from [:moduleDemo] F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\build\intermediates\manifests\full\debug\AndroidManifest.xml:91:13-69
 	android:name
-		ADDED from [:moduleDemo] F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\build\intermediates\manifests\full\debug\AndroidManifest.xml:89:13-77
+		ADDED from [:moduleDemo] F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\build\intermediates\manifests\full\debug\AndroidManifest.xml:89:13-67
 activity#com.apicloud.moduleDemo.EntrepreneurshipActivity
 ADDED from [:moduleDemo] F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\build\intermediates\manifests\full\debug\AndroidManifest.xml:94:9-97:72
 	android:screenOrientation

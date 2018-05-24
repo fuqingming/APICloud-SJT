@@ -79,24 +79,29 @@ public class ApiStores {
 
     /** 发布装修量房 */
     public static <T> void releaseRenovation(String title, String startDate,
-                                             String endDate, int personnelLimit,int personnelAmount,
-                                             String guaranteeAmount,String remark,String areaName,
+                                             String endDate, int personnelLimit,String personnelAmount,
+                                             int guaranteeAmount,String remark,String areaName,
                                              String provinceName,String cityName,String countyName,
                                              String streetName,double lat,double lng,
                                              String categoryNo,int scopeType,String scheduleScope,
 
                                              String houseType, String houseStyle, String outdoorAcreage, String budgetAmount,
+                                             String mobile,String verifyCode,
                                              JSONArray jsonArray, HttpCallback<T> httpCallback){
         String url =  urlVersion+"my/guarantee/schedules";
 
         JSONObject js = new JSONObject();
         try {
+            js.put("mobile",mobile);
+            js.put("verifyCode",verifyCode);
             js.put("title",title);
             js.put("startDate",startDate);
             js.put("endDate",endDate);
+            js.put("claimStartDate",startDate);
+            js.put("claimEndDate",endDate);
 
             js.put("personnelLimit",personnelLimit);
-            js.put("personnelAmount",personnelAmount);
+            js.put("personnelAmount",Integer.parseInt(personnelAmount));
             js.put("guaranteeAmount",guaranteeAmount);
             js.put("remark",remark);
             js.put("areaName",areaName);
@@ -112,13 +117,29 @@ public class ApiStores {
             js.put("scheduleScope",scheduleScope);
             js.put("countyName",countyName);
 
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("houseType",houseType);
-            jsonObject.put("houseStyle",houseStyle );
-            jsonObject.put("outdoorAcreage",outdoorAcreage );
-            jsonObject.put("budgetAmount",budgetAmount);
+            JSONObject jsonHouseType = new JSONObject();
+            jsonHouseType.put("name","houseType");
+            jsonHouseType.put("title",houseType);
+
+            JSONObject jsonHouseStyle = new JSONObject();
+            jsonHouseStyle.put("name","houseStyle");
+            jsonHouseStyle.put("title",houseStyle);
+
+            JSONObject jsonOutdoorAcreage = new JSONObject();
+            jsonOutdoorAcreage.put("name","outdoorAcreage");
+            jsonOutdoorAcreage.put("title",outdoorAcreage);
+            jsonOutdoorAcreage.put("icon", "平米");
+
+            JSONObject jsonBudgetAmount = new JSONObject();
+            jsonBudgetAmount.put("name","budgetAmount");
+            jsonBudgetAmount.put("title",budgetAmount);
+            jsonBudgetAmount.put("icon", "万");
+
             JSONArray extraFields = new JSONArray();
-            extraFields.put(extraFields);
+            extraFields.put(jsonHouseType);
+            extraFields.put(jsonHouseStyle);
+            extraFields.put(jsonOutdoorAcreage);
+            extraFields.put(jsonBudgetAmount);
 
             js.put("extraFields",extraFields);
             if(jsonArray != null){
@@ -145,7 +166,7 @@ public class ApiStores {
     }
 
     /** 登陆 */
-    public static <T> void login(String username, String password, HttpCallback<LoginBean> httpCallback){
+    public static <T> void login(String username, String password, HttpCallback<T> httpCallback){
         String url =  "/api/login";
 
         JSONObject js = new JSONObject();
@@ -154,6 +175,20 @@ public class ApiStores {
             js.put("authChannel",1000);
             js.put("password",password);
             js.put("username",username);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        HttpClient.post(url,js.toString(),httpCallback);
+    }
+
+    /** 发送短信验证码 */
+    public static <T> void smsSend(String mobile, HttpCallback<T> httpCallback){
+        String url =  "/api/pub/sms/"+mobile;
+
+        JSONObject js = new JSONObject();
+        try {
+            js.put("type","guarantee");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -210,7 +245,7 @@ public class ApiStores {
 
     /** 咨询与建议 */
     public static <T> void informationActivity(String title, String contact, String mobile, String content, JSONArray jsonArray, HttpCallback<T> httpCallback){
-        String url =  "/api/my-suggestions";
+        String url =  urlVersion+"/my-suggestions";
 
         JSONObject js = new JSONObject();
         try {

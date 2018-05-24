@@ -80,7 +80,7 @@
 
         <!--活动  详情-->
         <activity
-            android:name="com.apicloud.moduleDemo.RenovationDetailsActivity"
+            android:name="com.apicloud.moduleDemo.DetailsActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="portrait"/>
 

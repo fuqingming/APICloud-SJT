@@ -87,7 +87,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> <!-- 活动  详情 -->
         <activity
-            android:name="com.apicloud.moduleDemo.RenovationDetailsActivity"
+            android:name="com.apicloud.moduleDemo.DetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> <!-- 创业列表 -->
         <activity

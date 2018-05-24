@@ -19,16 +19,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@color/spliter_line_color"
-                android:layout_marginTop="15dp"
+                android:background="@color/app_backgrount_color"
+
                 >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal"
                     android:background="@color/white_color"
-                    android:layout_marginTop="1dp"
                     android:gravity="center_vertical"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp">
@@ -36,9 +36,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/fifteen"
-                        android:text="活动标题"
-                        android:layout_marginLeft="15dp"/>
-
+                        android:text="活动标题:"
+                        android:textColor="@color/black_color"
+                        android:layout_marginLeft="15dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/fifteen"
+                        android:text="活动"
+                        android:visibility="invisible"
+                        android:textColor="@color/black_color"
+                        />
                     <EditText
                         android:id="@+id/et_title"
                         android:layout_width="match_parent"
@@ -47,10 +56,11 @@
                         android:layout_marginRight="15dp"
                         android:layout_weight="0"
                         android:background="@null"
-                        android:gravity="right"
                         android:hint="请输入"
                         android:maxLines="1"
                         android:text="家庭装修量房招标"
+                        android:textSize="@dimen/fifteen"
+                        android:textColor="@color/black_color"
                         android:maxLength="15"
                         android:textColorHint="@color/dark" />
                 </LinearLayout>
@@ -68,9 +78,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/fifteen"
-                        android:text="资源类型"
-                        android:layout_marginLeft="15dp"/>
-
+                        android:textColor="@color/black_color"
+                        android:text="资源类型:"
+                        android:layout_marginLeft="15dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/fifteen"
+                        android:text="活动"
+                        android:visibility="invisible"
+                        android:textColor="@color/black_color"
+                        />
                     <TextView
                         android:layout_weight="0"
                         android:layout_width="match_parent"
@@ -78,7 +97,8 @@
                         android:background="@null"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
-                        android:gravity="right"
+                        android:textColor="@color/black_color"
+                        android:textSize="@dimen/fifteen"
                         android:maxLines="1"
                         android:text="资源换钱"
                         android:textColorHint="@color/dark"/>
@@ -95,8 +115,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black_color"
                         android:textSize="@dimen/fifteen"
-                        android:text="活动开始时间"
+                        android:text="活动开始时间:"
                         android:layout_marginLeft="15dp"/>
 
                     <TextView
@@ -106,7 +127,8 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
-                        android:gravity="right"
+                        android:textSize="@dimen/fifteen"
+                        android:textColor="@color/black_color"
                         android:hint="年-月-日"
                         android:textColorHint="@color/dark" />
                     <ImageView
@@ -129,7 +151,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/fifteen"
-                        android:text="活动结束时间"
+                        android:textColor="@color/black_color"
+                        android:text="活动结束时间:"
                         android:layout_marginLeft="15dp"/>
 
                     <TextView
@@ -139,7 +162,8 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
-                        android:gravity="right"
+                        android:textSize="@dimen/fifteen"
+                        android:textColor="@color/black_color"
                         android:hint="年-月-日"
                         android:textColorHint="@color/dark" />
                     <ImageView
@@ -149,6 +173,7 @@
                         android:background="@mipmap/more_b"
                         android:layout_marginRight="15dp"/>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -162,8 +187,104 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/fifteen"
-                        android:text="所在区域"
+                        android:text="活动范围:"
+                        android:textColor="@color/black_color"
                         android:layout_marginLeft="15dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/fifteen"
+                        android:text="活动"
+                        android:visibility="invisible"
+                        android:textColor="@color/black_color"
+                        />
+
+
+                    <CheckBox
+                        android:id="@+id/rb_city_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="全国"
+                        android:textColor="@color/black_color"
+                        android:layout_marginRight="20dp"/>
+
+                    <CheckBox
+                        android:id="@+id/rb_city_index"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black_color"
+                        android:text="指定城市" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/white_color"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center_vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:visibility="gone">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/fifteen"
+                        android:text="指定城市:"
+                        android:textColor="@color/black_color"
+                        android:layout_marginLeft="15dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/fifteen"
+                        android:text="活动"
+                        android:visibility="invisible"
+                        android:textColor="@color/black_color"
+                        />
+                    <TextView
+                        android:id="@+id/tv_city"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="10dp"
+                        android:textSize="@dimen/fifteen"
+                        android:textColor="@color/black_color"
+                        android:hint="请选择"
+                        android:textColorHint="@color/dark"/>
+                    <ImageView
+                        android:layout_weight="0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/more_b"
+                        android:layout_marginRight="15dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/white_color"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/fifteen"
+                        android:textColor="@color/black_color"
+                        android:text="所在区域:"
+                        android:layout_marginLeft="15dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/fifteen"
+                        android:text="活动"
+                        android:visibility="invisible"
+                        android:textColor="@color/black_color"
+                        />
 
                     <TextView
                         android:id="@+id/tv_city_location"
@@ -172,7 +293,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="10dp"
-                        android:gravity="right"
+                        android:textSize="@dimen/fifteen"
+                        android:textColor="@color/black_color"
                         android:text="上海市"/>
                     <ImageView
                         android:layout_weight="0"
@@ -194,9 +316,56 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/fifteen"
-                        android:text="楼盘小区"
+                        android:text="房屋类型:"
+                        android:textColor="@color/black_color"
                         android:layout_marginLeft="15dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/fifteen"
+                        android:text="活动"
+                        android:visibility="invisible"
+                        android:textColor="@color/black_color"
+                        />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="新房"
+                        android:textColor="@color/black_color"
+                        android:layout_marginRight="20dp"/>
 
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black_color"
+                        android:text="二手房" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/white_color"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center_vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/fifteen"
+                        android:textColor="@color/black_color"
+                        android:text="楼盘小区:"
+                        android:layout_marginLeft="15dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/fifteen"
+                        android:text="活动"
+                        android:visibility="invisible"
+                        android:textColor="@color/black_color"
+                        />
                     <EditText
                         android:id="@+id/et_address"
                         android:layout_width="match_parent"
@@ -205,7 +374,8 @@
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:background="@null"
-                        android:gravity="right"
+                        android:textSize="@dimen/fifteen"
+                        android:textColor="@color/black_color"
                         android:text="凯旋路2588号" />
                     <ImageView
                         android:layout_weight="0"
@@ -214,82 +384,7 @@
                         android:background="@mipmap/more_b"
                         android:layout_marginRight="15dp"/>
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="@color/white_color"
-                    android:layout_marginTop="1dp"
-                    android:gravity="center_vertical"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp">
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/fifteen"
-                        android:text="活动范围"
-                        android:layout_marginLeft="15dp"/>
 
-                    <RadioGroup
-                        android:id="@+id/rg_city"
-                        android:layout_marginRight="15dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_weight="0"
-                        >
-
-                        <RadioButton
-                            android:id="@+id/rb_city_all"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="全国"
-                            android:layout_marginRight="20dp"/>
-
-                        <RadioButton
-                            android:id="@+id/rb_city_index"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="指定城市" />
-                    </RadioGroup>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/ll_city"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="@color/white_color"
-                    android:layout_marginTop="1dp"
-                    android:gravity="center_vertical"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:visibility="gone">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/fifteen"
-                        android:text="指定城市"
-                        android:layout_marginLeft="15dp"/>
-
-                    <TextView
-                        android:id="@+id/tv_city"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="10dp"
-                        android:gravity="right"
-                        android:hint="请选择"
-                        android:textColorHint="@color/dark"/>
-                    <ImageView
-                        android:layout_weight="0"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/more_b"
-                        android:layout_marginRight="15dp"/>
-                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -303,9 +398,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/fifteen"
-                        android:text="参与商家"
+                        android:text="参与商家:"
+                        android:textColor="@color/black_color"
                         android:layout_marginLeft="15dp"/>
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/fifteen"
+                        android:text="活动"
+                        android:visibility="invisible"
+                        android:textColor="@color/black_color"
+                        />
                     <TextView
                         android:id="@+id/tv_join_count"
                         android:layout_weight="1"
@@ -313,8 +416,20 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="10dp"
-                        android:gravity="right"
-                        android:text="不限  家"/>
+                        android:textSize="@dimen/fifteen"
+                        android:textColor="@color/black_color"
+                        android:textColorHint="@color/dark"
+                        android:hint="不限"
+                        android:text=""/>
+                    <TextView
+                        android:layout_weight="0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="10dp"
+                        android:textSize="@dimen/fifteen"
+                        android:textColor="@color/black_color"
+                        android:text="家"/>
                     <ImageView
                         android:layout_weight="0"
                         android:layout_width="wrap_content"
@@ -335,9 +450,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/fifteen"
-                        android:text="选择户型"
+                        android:textColor="@color/black_color"
+                        android:text="选择户型:"
                         android:layout_marginLeft="15dp"/>
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/fifteen"
+                        android:text="活动"
+                        android:visibility="invisible"
+                        android:textColor="@color/black_color"
+                        />
                     <TextView
                         android:id="@+id/tv_house_type"
                         android:layout_weight="1"
@@ -345,7 +468,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="10dp"
-                        android:gravity="right"
+                        android:textSize="@dimen/fifteen"
+                        android:textColor="@color/black_color"
                         android:hint="请选择"
                         android:textColorHint="@color/dark"/>
                     <ImageView
@@ -368,9 +492,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/fifteen"
-                        android:text="设计风格"
+                        android:text="设计风格:"
+                        android:textColor="@color/black_color"
                         android:layout_marginLeft="15dp"/>
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/fifteen"
+                        android:text="活动"
+                        android:visibility="invisible"
+                        android:textColor="@color/black_color"
+                        />
                     <TextView
                         android:id="@+id/tv_style"
                         android:layout_weight="1"
@@ -378,7 +510,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="10dp"
-                        android:gravity="right"
+                        android:textSize="@dimen/fifteen"
+                        android:textColor="@color/black_color"
                         android:hint="请选择"
                         android:textColorHint="@color/dark"/>
                     <ImageView
@@ -401,9 +534,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/fifteen"
-                        android:text="建筑面积"
+                        android:text="建筑面积:"
+                        android:textColor="@color/black_color"
                         android:layout_marginLeft="15dp"/>
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/fifteen"
+                        android:text="活动"
+                        android:visibility="invisible"
+                        android:textColor="@color/black_color"
+                        />
                     <EditText
                         android:id="@+id/et_size"
                         android:layout_width="match_parent"
@@ -412,7 +553,8 @@
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:background="@null"
-                        android:gravity="right"
+                        android:textSize="@dimen/fifteen"
+                        android:textColor="@color/black_color"
                         android:hint="0"
                         android:inputType="number"
                         android:maxLength="7"
@@ -422,6 +564,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="平方"
+                        android:textSize="@dimen/fifteen"
+                        android:textColor="@color/black_color"
                         android:layout_marginRight="15dp"/>
                 </LinearLayout>
                 <LinearLayout
@@ -437,9 +581,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/fifteen"
-                        android:text="装修预算"
+                        android:text="装修预算:"
+                        android:textColor="@color/black_color"
                         android:layout_marginLeft="15dp"/>
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/fifteen"
+                        android:text="活动"
+                        android:visibility="invisible"
+                        android:textColor="@color/black_color"
+                        />
                     <EditText
                         android:id="@+id/et_budget"
                         android:layout_width="match_parent"
@@ -448,7 +600,8 @@
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:background="@null"
-                        android:gravity="right"
+                        android:textSize="@dimen/fifteen"
+                        android:textColor="@color/black_color"
                         android:hint="0"
                         android:inputType="number"
                         android:maxLength="8"
@@ -458,6 +611,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="万元"
+                        android:textSize="@dimen/fifteen"
+                        android:textColor="@color/black_color"
                         android:layout_marginRight="15dp"/>
                 </LinearLayout>
                 <LinearLayout
@@ -477,22 +632,36 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/fifteen"
-                            android:text="保证金（发布人支付到平台）"
+                            android:textColor="@color/black_color"
+                            android:text="保证金"
                             android:layout_marginLeft="15dp"/>
-
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/fifteen"
+                            android:textColor="@color/dark"
+                            android:text="(发布人支付到平台)"
+                            android:layout_marginLeft="15dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/fifteen"
+                            android:textColor="@color/black_color"
+                            android:text=":"/>
                         <TextView
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="10dp"
-                            android:gravity="right"
+                            android:textSize="@dimen/fifteen"
                             android:text="1"
                             android:textColor="@color/red"/>
                         <TextView
                             android:layout_weight="0"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black_color"
                             android:text="元"
                             android:layout_marginRight="15dp"/>
                     </LinearLayout>
@@ -501,6 +670,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="保证有真是装修需求，活动结束后全额退"
+                        android:textColor="@color/black_color"
                         android:layout_marginLeft="15dp"/>
                 </LinearLayout>
                 <LinearLayout
@@ -531,7 +701,7 @@
                             android:layout_marginRight="10dp"
                             android:layout_weight="1"
                             android:background="@null"
-                            android:gravity="right"
+                            android:textSize="@dimen/fifteen"
                             android:hint="0"
                             android:inputType="number"
                             android:maxLength="7"
@@ -574,7 +744,7 @@
                         android:layout_marginRight="15dp"
                         android:layout_weight="0"
                         android:background="@null"
-                        android:gravity="right"
+                        android:textSize="@dimen/fifteen"
                         android:hint="请输入"
                         android:textColorHint="@color/dark" />
                 </LinearLayout>

@@ -32,12 +32,15 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.apicloud.moduleDemo.backhandler.OnTaskSuccessComplete;
+import com.apicloud.moduleDemo.bean.base.VerifyMobileBean;
 import com.apicloud.moduleDemo.bean.response.LoginBean;
+import com.apicloud.moduleDemo.bean.response.ResponseBaseBean;
 import com.apicloud.moduleDemo.http.ApiStores;
 import com.apicloud.moduleDemo.http.HttpCallback;
 import com.apicloud.moduleDemo.http.HttpClient;
 import com.apicloud.moduleDemo.http.HttpSetUrl;
 import com.apicloud.moduleDemo.settings.AppSettings;
+import com.apicloud.moduleDemo.util.alert.AlertUtils;
 import com.apicloud.sdk.moduledemo.R;
 import com.google.gson.Gson;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -46,6 +49,7 @@ import com.tamic.novate.callback.RxStringCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -472,9 +476,11 @@ public class Utils {
                 onRightButtonClickListener);
     }
 
-    public static Dialog showCommonDialogChangePwd(final Context context, final String strNickname,final OnTaskSuccessComplete onTaskSuccess)
+    private static final int RESEND_VERIFY_CODE_SECOND = 60;
+    private static SmsSendCounter m_myCount = null;
+    public static Dialog showCommonDialogVerifyCode(final Context context,final KProgressHUD kProgressHUD, final String mobile,final String verifyNumber,final OnTaskSuccessComplete onTaskSuccess)
     {
-        View vContent = LayoutInflater.from(context).inflate(R.layout.dialog_common_edit, null);
+        View vContent = LayoutInflater.from(context).inflate(R.layout.dialog_common_verify_code, null);
         final Dialog dlg = new Dialog(context, R.style.common_dialog);
         dlg.setContentView(vContent);
         dlg.setCanceledOnTouchOutside(false); // 点击窗口外区域不消失
@@ -486,9 +492,12 @@ public class Utils {
         //lp.height = (int) (MyApplication.m_nScreenHeight * 0.5);
         lp.width = (int) context.getResources().getDimension(R.dimen.dialog_width);
         dlg.getWindow().setAttributes(lp);
-        final EditText etPwd =  vContent.findViewById(R.id.et_password);
-        etPwd.setText(strNickname);
-        etPwd.setSelection(etPwd.getText().length());
+        final EditText etTel =  vContent.findViewById(R.id.et_tel);
+        final EditText etVerifyNumber =  vContent.findViewById(R.id.et_verify_number);
+
+        etTel.setText(mobile);
+        etVerifyNumber.setText(verifyNumber);
+
         // left button
         Button btnLeft =  vContent.findViewById(R.id.btn_left);
         btnLeft.setOnClickListener(new View.OnClickListener()
@@ -501,6 +510,64 @@ public class Utils {
             }
         });
 
+        final TextView tvSendVerifyCode = vContent.findViewById(R.id.tv_send_verify_code);
+        tvSendVerifyCode.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                String strTel = etTel.getText().toString().trim();
+                if(strTel.isEmpty())
+                {
+                    Utils.showToast(context, "请输入手机号码");
+                    etTel.requestFocus();
+                    return;
+                }
+                else if(etTel.length() < 11)
+                {
+                    Utils.showToast(context, "手机号码需要11位长度");
+                    etTel.requestFocus();
+                    return;
+                }
+                else if(!RegexUtil.checkMobile(strTel))
+                {
+                    Utils.showToast(context, "请输入正确的手机号码");
+                    etTel.requestFocus();
+                    return;
+                }
+
+                ApiStores.smsSend(strTel, new HttpCallback<ResponseBaseBean>() {
+                    @Override
+                    public void OnSuccess(ResponseBaseBean response) {
+                        if(response.getSuccess()){
+                            tvSendVerifyCode.setEnabled(false);
+                            tvSendVerifyCode.setText(String.valueOf(RESEND_VERIFY_CODE_SECOND));
+                            m_myCount = new SmsSendCounter(context,tvSendVerifyCode, RESEND_VERIFY_CODE_SECOND * 1000, 1000);
+                            m_myCount.start();
+                        }else{
+                            Utils.showToast(context,response.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void OnFailure(String message) {
+                        dlg.dismiss();
+                        Utils.showToast(context,message);
+                    }
+
+                    @Override
+                    public void OnRequestStart() {
+                        kProgressHUD.show();
+                    }
+
+                    @Override
+                    public void OnRequestFinish() {
+                        kProgressHUD.dismiss();
+                    }
+                });
+
+            }
+        });
         // right button
         Button btnRight = vContent.findViewById(R.id.btn_right);
         btnRight.setOnClickListener(new View.OnClickListener()
@@ -508,21 +575,52 @@ public class Utils {
             @Override
             public void onClick(View v)
             {
-                String strPwd = etPwd.getText().toString().trim();
-                if (strPwd.isEmpty()) {
-                    Utils.showToast(context, "昵称不能为空");
-                    etPwd.requestFocus();
-                    return;
-                }else if(strPwd.length() < 4){
-                    Utils.showToast(context, "昵称不能少于4个字符");
-                    etPwd.requestFocus();
+                String strTel = etTel.getText().toString().trim();
+                if(strTel.isEmpty())
+                {
+                    Utils.showToast(context, "请输入手机号码");
+                    etTel.requestFocus();
                     return;
                 }
+                else if(etTel.length() < 11)
+                {
+                    Utils.showToast(context, "手机号码需要11位长度");
+                    etTel.requestFocus();
+                    return;
+                }
+                else if(!RegexUtil.checkMobile(strTel))
+                {
+                    Utils.showToast(context, "请输入正确的手机号码");
+                    etTel.requestFocus();
+                    return;
+                }
+
+                // 验证码
+                String m_strVerifyNumber = etVerifyNumber.getText().toString().trim();
+                if(m_strVerifyNumber.isEmpty())
+                {
+                    Utils.showToast(context, "请输入验证码");
+                    etVerifyNumber.requestFocus();
+                    return;
+                }
+                else if(m_strVerifyNumber.length() < 4)
+                {
+                    Utils.showToast(context, "验证码为4位");
+                    etVerifyNumber.requestFocus();
+                    return;
+                }
+
+                if (m_myCount != null)
+                {
+                    m_myCount.cancel();
+                    m_myCount = null;
+                }
+
                 dlg.dismiss();
 
                 if (onTaskSuccess != null)
                 {
-                    onTaskSuccess.onSuccess(strPwd);
+                    onTaskSuccess.onSuccess(new VerifyMobileBean(strTel,m_strVerifyNumber));
                 }
             }
         });
