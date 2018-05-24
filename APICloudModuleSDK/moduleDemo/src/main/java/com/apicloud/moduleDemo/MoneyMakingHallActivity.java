@@ -229,6 +229,7 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
                         it = new Intent(MoneyMakingHallActivity.this,ReleaseGiveUpGamblingActivity.class);
                         break;
                 }
+                it.putExtra("strCategoryNo",m_strCategoryNo);
                 startActivity(it);
             }
         });

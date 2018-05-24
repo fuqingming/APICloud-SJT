@@ -47,7 +47,7 @@ public class PopUitls {
             public void onItemPicked(int index, String item) {
                 if (onTaskSuccess != null)
                 {
-                    onTaskSuccess.onSuccess(item);
+                    onTaskSuccess.onSuccess(index);
                 }
             }
         });

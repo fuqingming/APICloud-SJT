@@ -1,10 +1,7 @@
 package com.apicloud.moduleDemo;
 
-import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Environment;
-import android.os.Handler;
 import android.os.Message;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -21,7 +18,7 @@ import com.apicloud.moduleDemo.bean.response.LoginBean;
 import com.apicloud.moduleDemo.http.ApiStores;
 import com.apicloud.moduleDemo.http.HttpCallback;
 import com.apicloud.moduleDemo.settings.AppSettings;
-import com.apicloud.moduleDemo.util.DownloadThread;
+import com.apicloud.moduleDemo.util.UploadThread;
 import com.apicloud.moduleDemo.util.RegexUtil;
 import com.apicloud.moduleDemo.util.UploadHandler;
 import com.apicloud.moduleDemo.util.Utils;
@@ -33,8 +30,6 @@ import org.json.JSONArray;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import cn.finalteam.rxgalleryfinal.RxGalleryFinal;
 import cn.finalteam.rxgalleryfinal.bean.MediaBean;
@@ -63,7 +58,7 @@ public class InformationActivity extends BaseAppCompatActivity {
     private JSONArray m_jsonArrData;
 
     private UploadHandler m_uploadHandler = new UploadHandler();
-    private List<DownloadThread> threads = new ArrayList<>();
+    private List<UploadThread> m_arrThreads = new ArrayList<>();
 
     @Override
     protected int setLayoutResourceId() {
@@ -112,7 +107,7 @@ public class InformationActivity extends BaseAppCompatActivity {
                 if(isInputValid()){
                     if(m_arrMediaBean != null && m_arrMediaBean.size() > 0){
                         kProgressHUD.show();
-                        m_uploadHandler.setMessages(threads, new OnTaskSuccessComplete() {
+                        m_uploadHandler.setMessages(m_arrThreads, new OnTaskSuccessComplete() {
                             @Override
                             public void onSuccess(Object obj) {
                                 if(obj != null){
@@ -125,7 +120,7 @@ public class InformationActivity extends BaseAppCompatActivity {
                             }
                         });
                         Message message = new Message();
-                        message.what = DownloadThread.THREAD_BEGIN;
+                        message.what = UploadThread.THREAD_BEGIN;
                         m_uploadHandler.sendMessage(message);
                     }else{
                         commitInformation();
@@ -163,6 +158,12 @@ public class InformationActivity extends BaseAppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        m_uploadHandler.removeCallbacksAndMessages(null);
+        super.onBackPressed();
+    }
+
     /**
      * 多选
      */
@@ -182,7 +183,7 @@ public class InformationActivity extends BaseAppCompatActivity {
                     protected void onEvent(ImageMultipleResultEvent imageMultipleResultEvent) throws Exception {
                         m_arrMediaBean = imageMultipleResultEvent.getResult();
                         m_arrDatas.clear();
-                        threads.clear();
+                        m_arrThreads.clear();
                         if(m_arrMediaBean.size() < 9){
                             m_arrDatas.add(null);
                         }
@@ -190,7 +191,7 @@ public class InformationActivity extends BaseAppCompatActivity {
 
                         for(int i = 0 ; i < m_arrMediaBean.size(); i ++){
                             File file = new File( m_arrMediaBean.get(i).getThumbnailBigPath());
-                            threads.add(new DownloadThread(file,m_uploadHandler));
+                            m_arrThreads.add(new UploadThread(file,m_uploadHandler));
                         }
 
                         m_pictureSelectionAdapter.notifyDataSetChanged();

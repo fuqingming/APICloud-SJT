@@ -18,7 +18,7 @@ public final class R {
         public static int background = 0x7f0c001d;
         public static int container = 0x7f0c003a;
         public static int details_label = 0x7f0c0047;
-        public static int label = 0x7f0c008f;
+        public static int label = 0x7f0c0091;
     }
     public static final class layout {
         public static int kprogresshud_hud = 0x7f0f0058;

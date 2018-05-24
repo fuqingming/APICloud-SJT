@@ -2,6 +2,7 @@ package com.apicloud.moduleDemo;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Message;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,11 +18,21 @@ import com.apicloud.moduleDemo.adapter.PictureSelectionAdapter;
 import com.apicloud.moduleDemo.backhandler.OnTaskSuccessComplete;
 import com.apicloud.moduleDemo.base.BaseAppCompatActivity;
 import com.apicloud.moduleDemo.bean.base.DateBean;
+import com.apicloud.moduleDemo.bean.response.LoginBean;
+import com.apicloud.moduleDemo.http.ApiStores;
+import com.apicloud.moduleDemo.http.HttpCallback;
+import com.apicloud.moduleDemo.util.UploadThread;
 import com.apicloud.moduleDemo.util.TimeUtils;
+import com.apicloud.moduleDemo.util.UploadHandler;
 import com.apicloud.moduleDemo.util.Utils;
+import com.apicloud.moduleDemo.util.alert.AlertUtils;
 import com.apicloud.moduleDemo.util.pickers.AddressPickTask;
 import com.apicloud.moduleDemo.util.pickers.PopUitls;
 import com.apicloud.sdk.moduledemo.R;
+
+import org.json.JSONArray;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +50,7 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
     private PictureSelectionAdapter m_pictureSelectionAdapter;
 
     private List<MediaBean> m_arrDatas;
-    private List<MediaBean> list = null;
+    private List<MediaBean> m_arrMediaBean = null;
 
     private LinearLayout m_llCity;
     private GridView m_gridView;
@@ -58,17 +69,36 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
     private EditText m_etAmount;
     private EditText m_etTitle;
     private EditText m_etBudget;
+    private EditText m_etText;
+    private EditText m_etAdress;
+    private EditText m_etSize;
 
     private String m_strTitle;
     private String m_lonStartDate = "";
     private String m_lonEndDate = "";
     private String m_strAddress;
+    private int m_nAddressType;
+    private String m_strArs;
     private String m_strBudget;
     private String m_strAmount;
+    private int m_nJoinNo = 0;
+    private String m_strHouseType = "";
+    private String m_strStyle = "";
+    private String m_strText = "";
+    private String m_strCityLocation;
+    private double m_dLat = 0.0;
+    private double m_dLng = 0.0;
+    private String m_strSize;
 
     private String m_strArrStyle[]  =  null;
     private String m_strArrHouseType[]  = null;
     private String m_strArrNoSelect[]  = null;
+
+    private UploadHandler m_uploadHandler = new UploadHandler();
+    private List<UploadThread> m_arrThreads = new ArrayList<>();
+    private JSONArray m_jsonArrData;
+
+    private String m_strCategoryNo;
 
     @Override
     protected int setLayoutResourceId() {
@@ -78,6 +108,8 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
     @Override
     protected void setUpView() {
         Utils.initCommonTitle(this,"发布活动",true);
+
+        m_strCategoryNo = getIntent().getStringExtra("strCategoryNo");
 
         m_strArrStyle  =  getResources().getStringArray(R.array.house_style_text);
         m_strArrHouseType  = getResources().getStringArray(R.array.house_type_text);
@@ -99,6 +131,9 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
         m_etTitle = (EditText)findViewById(R.id.et_title);
         m_etBudget = (EditText)findViewById(R.id.et_budget);
         m_etAmount = (EditText)findViewById(R.id.et_amount);
+        m_etText = (EditText)findViewById(R.id.et_text);
+        m_etAdress = (EditText)findViewById(R.id.et_address);
+        m_etSize = (EditText)findViewById(R.id.et_size);
 
         m_arrDatas = new ArrayList<>();
         m_arrDatas.add(null);
@@ -114,7 +149,7 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
         m_gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                if(list == null || list.isEmpty() || list.size() == 9){
+                if(m_arrMediaBean == null || m_arrMediaBean.isEmpty() || m_arrMediaBean.size() == 9){
                     openRadios();
                 }else if(position == 0 && m_arrDatas.get(position) == null){
                     openRadios();
@@ -161,7 +196,8 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
                 PopUitls.showPopSelect(ReleaseRenovationActivity.this, m_strArrStyle, "装修风格", new OnTaskSuccessComplete() {
                     @Override
                     public void onSuccess(Object obj) {
-                        m_tvStyle.setText(obj.toString());
+                        m_tvStyle.setText(m_strArrStyle[(int) obj]);
+                        m_strStyle = m_strArrStyle[(int) obj];
                     }
                 });
             }
@@ -173,7 +209,8 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
                 PopUitls.showPopSelect(ReleaseRenovationActivity.this, m_strArrHouseType, "户型结构", new OnTaskSuccessComplete() {
                     @Override
                     public void onSuccess(Object obj) {
-                        m_tvHouseType.setText(obj.toString());
+                        m_tvHouseType.setText(m_strArrHouseType[(int) obj]);
+                        m_strHouseType = m_strArrHouseType[(int) obj];
                     }
                 });
             }
@@ -185,7 +222,8 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
                 PopUitls.showPopSelect(ReleaseRenovationActivity.this, m_strArrNoSelect, "参与商家数量", new OnTaskSuccessComplete() {
                     @Override
                     public void onSuccess(Object obj) {
-                        m_tvJoinCount.setText(obj.toString());
+                        m_tvJoinCount.setText(m_strArrNoSelect[(int) obj]);
+                        m_nJoinNo = (int) obj;
                     }
                 });
             }
@@ -219,7 +257,26 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(isInputValid()){
-
+                    if(m_arrMediaBean != null && m_arrMediaBean.size() > 0){
+                        kProgressHUD.show();
+                        m_uploadHandler.setMessages(m_arrThreads, new OnTaskSuccessComplete() {
+                            @Override
+                            public void onSuccess(Object obj) {
+                                if(obj != null){
+                                    m_jsonArrData = (JSONArray) obj;
+                                    commitInformation();
+                                }else{
+                                    Utils.showToast(ReleaseRenovationActivity.this,"图片上传失败，请重新上传！");
+                                    kProgressHUD.dismiss();
+                                }
+                            }
+                        });
+                        Message message = new Message();
+                        message.what = UploadThread.THREAD_BEGIN;
+                        m_uploadHandler.sendMessage(message);
+                    }else{
+                        commitInformation();
+                    }
                 }
             }
         });
@@ -232,11 +289,43 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
                 if(checkedId == m_rbCityAll.getId()){
                     m_llCity.setVisibility(View.GONE);
                     m_strAddress = "";
+                    m_nAddressType = 1;
                 }else if(checkedId == m_rbCityIndex.getId()){
                     m_llCity.setVisibility(View.VISIBLE);
+                    m_nAddressType = 2;
                 }
             }
         });
+    }
+
+    private void commitInformation(){
+        ApiStores.releaseRenovation(m_strTitle, m_lonStartDate, m_lonEndDate, m_nJoinNo, 1,m_strAmount,m_strText,m_strCityLocation,"所在省","所在市","所在区",
+                m_strArs,m_dLat,m_dLng,m_strCategoryNo,m_nAddressType,m_strAddress,m_strHouseType,m_strStyle,m_strSize,m_strBudget,
+                m_jsonArrData, new HttpCallback<LoginBean>() {
+
+                    @Override
+                    public void OnSuccess(LoginBean response) {
+
+                    }
+
+                    @Override
+                    public void OnFailure(String message) {
+                        kProgressHUD.dismiss();
+                        AlertUtils.MessageAlertShow(ReleaseRenovationActivity.this,"错误",message);
+                    }
+
+                    @Override
+                    public void OnRequestStart() {
+                        if(!kProgressHUD.isShowing()){
+                            kProgressHUD.show();
+                        }
+                    }
+
+                    @Override
+                    public void OnRequestFinish() {
+                        kProgressHUD.dismiss();
+                    }
+                });
     }
 
     private void showToast(String msg) {
@@ -251,8 +340,8 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
                 .with(ReleaseRenovationActivity.this)
                 .image()
                 .multiple();
-        if (list != null && !list.isEmpty()) {
-            rxGalleryFinal.selected(list);
+        if (m_arrMediaBean != null && !m_arrMediaBean.isEmpty()) {
+            rxGalleryFinal.selected(m_arrMediaBean);
         }
         rxGalleryFinal.maxSize(9)
                 .imageLoader(ImageLoaderType.FRESCO)
@@ -260,12 +349,18 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
 
                     @Override
                     protected void onEvent(ImageMultipleResultEvent imageMultipleResultEvent) throws Exception {
-                        list = imageMultipleResultEvent.getResult();
+                        m_arrMediaBean = imageMultipleResultEvent.getResult();
                         m_arrDatas.clear();
-                        if(list.size() < 9){
+                        m_arrThreads.clear();
+                        if(m_arrMediaBean.size() < 9){
                             m_arrDatas.add(null);
                         }
-                        m_arrDatas.addAll(list);
+                        m_arrDatas.addAll(m_arrMediaBean);
+
+                        for(int i = 0 ; i < m_arrMediaBean.size(); i ++){
+                            File file = new File( m_arrMediaBean.get(i).getThumbnailBigPath());
+                            m_arrThreads.add(new UploadThread(file,m_uploadHandler));
+                        }
 
                         m_pictureSelectionAdapter.notifyDataSetChanged();
                     }
@@ -329,6 +424,11 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
             m_etAmount.requestFocus();
             return false;
         }
+
+        m_strText = m_etText.getText().toString();
+        m_strArs = m_etAdress.getText().toString();
+        m_strCityLocation = m_tvCityLocation.getText().toString();
+        m_strSize = m_etSize.getText().toString().trim();
 
         return true;
     }

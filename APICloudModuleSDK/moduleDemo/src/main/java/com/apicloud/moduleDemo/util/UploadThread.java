@@ -34,7 +34,7 @@ import okhttp3.ResponseBody;
 /**
  * @author Robert 
  * */  
-public class DownloadThread extends Thread{  
+public class UploadThread extends Thread{
       
     /**开始上传*/
     public final static int THREAD_BEGIN = 1;  
@@ -51,7 +51,7 @@ public class DownloadThread extends Thread{
     private File mFile;
     private Context mContext;
 
-    public DownloadThread(final File File, Handler mHandler){
+    public UploadThread(final File File, Handler mHandler){
         this.mFile = File;
         this.mHandler = mHandler;
     }  

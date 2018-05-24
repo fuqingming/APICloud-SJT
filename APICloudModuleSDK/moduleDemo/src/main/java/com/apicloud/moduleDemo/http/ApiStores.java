@@ -77,6 +77,61 @@ public class ApiStores {
         HttpClient.get(url,map, httpCallback);
     }
 
+    /** 发布装修量房 */
+    public static <T> void releaseRenovation(String title, String startDate,
+                                             String endDate, int personnelLimit,int personnelAmount,
+                                             String guaranteeAmount,String remark,String areaName,
+                                             String provinceName,String cityName,String countyName,
+                                             String streetName,double lat,double lng,
+                                             String categoryNo,int scopeType,String scheduleScope,
+
+                                             String houseType, String houseStyle, String outdoorAcreage, String budgetAmount,
+                                             JSONArray jsonArray, HttpCallback<T> httpCallback){
+        String url =  urlVersion+"my/guarantee/schedules";
+
+        JSONObject js = new JSONObject();
+        try {
+            js.put("title",title);
+            js.put("startDate",startDate);
+            js.put("endDate",endDate);
+
+            js.put("personnelLimit",personnelLimit);
+            js.put("personnelAmount",personnelAmount);
+            js.put("guaranteeAmount",guaranteeAmount);
+            js.put("remark",remark);
+            js.put("areaName",areaName);
+            js.put("provinceName",provinceName);
+            js.put("cityName",cityName);
+            js.put("countyName",countyName);
+
+            js.put("streetName",streetName);
+            js.put("lat",lat);
+            js.put("lng",lng);
+            js.put("categoryNo",categoryNo);
+            js.put("scopeType",scopeType);
+            js.put("scheduleScope",scheduleScope);
+            js.put("countyName",countyName);
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("houseType",houseType);
+            jsonObject.put("houseStyle",houseStyle );
+            jsonObject.put("outdoorAcreage",outdoorAcreage );
+            jsonObject.put("budgetAmount",budgetAmount);
+            JSONArray extraFields = new JSONArray();
+            extraFields.put(extraFields);
+
+            js.put("extraFields",extraFields);
+            if(jsonArray != null){
+                js.put("attachments",jsonArray);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        HttpClient.post(url,js.toString(),httpCallback);
+    }
+
     /** 已入驻设计师列表 */
     public static <T> void designers(int strRoleType,int page,HttpCallback<T> httpCallback){
         String url =  urlVersion+"cooperation/designers";
@@ -155,7 +210,7 @@ public class ApiStores {
 
     /** 咨询与建议 */
     public static <T> void informationActivity(String title, String contact, String mobile, String content, JSONArray jsonArray, HttpCallback<T> httpCallback){
-        String url =  "/api/api/my-suggestions";
+        String url =  "/api/my-suggestions";
 
         JSONObject js = new JSONObject();
         try {
