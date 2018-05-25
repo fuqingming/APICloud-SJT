@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white_color">
+    android:background="@color/app_backgrount_color">
     <include layout="@layout/common_title"
         android:id="@+id/title"/>
     <ScrollView
@@ -20,15 +20,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@color/spliter_line_color"
-                android:layout_marginTop="15dp"
                 >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal"
                     android:background="@color/white_color"
-                    android:layout_marginTop="1dp"
                     android:gravity="center_vertical"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp">
@@ -36,20 +35,35 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/fifteen"
-                        android:text="活动标题"
-                        android:layout_marginLeft="15dp"/>
-
+                        android:text="活动标题:"
+                        android:textColor="@color/black_color"
+                        android:layout_marginLeft="15dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/fifteen"
+                        android:text="活动"
+                        android:visibility="invisible"
+                        android:textColor="@color/black_color"
+                        />
                     <EditText
-                        android:layout_weight="0"
+                        android:id="@+id/et_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@null"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
-                        android:gravity="right"
-                        android:hint="请输入建材品类"
-                        android:textColorHint="@color/dark"
-                        android:maxLines="1"/>
+                        android:layout_weight="0"
+                        android:background="@null"
+                        android:hint="请输入"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
+                        android:nextFocusForward="@+id/et_mobile"
+                        android:text="家庭装修量房招标"
+                        android:textSize="@dimen/fifteen"
+                        android:textColor="@color/black_color"
+                        android:maxLength="15"
+                        android:textColorHint="@color/dark" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -65,9 +79,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/fifteen"
-                        android:text="资源类型"
-                        android:layout_marginLeft="15dp"/>
-
+                        android:textColor="@color/black_color"
+                        android:text="资源类型:"
+                        android:layout_marginLeft="15dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/fifteen"
+                        android:text="活动"
+                        android:visibility="invisible"
+                        android:textColor="@color/black_color"
+                        />
                     <TextView
                         android:layout_weight="0"
                         android:layout_width="match_parent"
@@ -75,8 +98,9 @@
                         android:background="@null"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
-                        android:gravity="right"
-                        android:maxLines="1"
+                        android:textColor="@color/black_color"
+                        android:textSize="@dimen/fifteen"
+                        android:singleLine="true"
                         android:text="资源换钱"
                         android:textColorHint="@color/dark"/>
                 </LinearLayout>
@@ -92,20 +116,22 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black_color"
                         android:textSize="@dimen/fifteen"
-                        android:text="活动开始时间"
+                        android:text="活动开始时间:"
                         android:layout_marginLeft="15dp"/>
 
                     <TextView
-                        android:id="@+id/tv_start_data"
-                        android:layout_weight="1"
+                        android:id="@+id/tv_start_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="10dp"
-                        android:gravity="right"
-                        android:textColorHint="@color/dark"
-                        android:hint="年-月-日"/>
+                        android:layout_weight="1"
+                        android:textSize="@dimen/fifteen"
+                        android:textColor="@color/black_color"
+                        android:hint="年-月-日"
+                        android:textColorHint="@color/dark" />
                     <ImageView
                         android:layout_weight="0"
                         android:layout_width="wrap_content"
@@ -126,19 +152,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/fifteen"
-                        android:text="活动结束时间"
+                        android:textColor="@color/black_color"
+                        android:text="活动结束时间:"
                         android:layout_marginLeft="15dp"/>
 
                     <TextView
-                        android:id="@+id/tv_end_data"
-                        android:layout_weight="1"
+                        android:id="@+id/tv_end_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="10dp"
-                        android:gravity="right"
-                        android:textColorHint="@color/dark"
-                        android:hint="年-月-日"/>
+                        android:layout_weight="1"
+                        android:textSize="@dimen/fifteen"
+                        android:textColor="@color/black_color"
+                        android:hint="年-月-日"
+                        android:textColorHint="@color/dark" />
                     <ImageView
                         android:layout_weight="0"
                         android:layout_width="wrap_content"
@@ -146,6 +174,7 @@
                         android:background="@mipmap/more_b"
                         android:layout_marginRight="15dp"/>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

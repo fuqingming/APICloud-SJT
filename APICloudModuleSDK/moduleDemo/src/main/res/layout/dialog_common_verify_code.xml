@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>  
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="270dp"
-    android:layout_height="165dp"
+    android:layout_height="wrap_content"
 	android:orientation="vertical"
     android:background="@drawable/shape_rectangle_dialog_edit_bg" >
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="121dp"
+		android:layout_height="wrap_content"
 		android:orientation="vertical">
 		<TextView
 			android:layout_width="wrap_content"
@@ -18,80 +18,93 @@
 			android:textColor="@color/black"
 			android:textSize="@dimen/seventeen" />
 
-		<RelativeLayout
+		<LinearLayout
 			android:layout_width="match_parent"
-			android:layout_height="26dp"
-			android:layout_marginTop="10dp"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
 			android:layout_marginLeft="15dp"
-			android:layout_marginRight="15dp"
-			android:background="@color/spliter_line_color"
-			>
-			<EditText
+			android:layout_marginTop="20dp">
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="手机号"
+				android:textSize="@dimen/thirteen"
+				android:textColor="@color/black_color"/>
+			<TextView
 				android:id="@+id/et_tel"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
-				android:layout_centerInParent="true"
 				android:background="@color/white_color"
 				android:textSize="@dimen/thirteen"
-				android:textColor="@color/black"
-				android:hint="请输入手机号"
-				android:textColorHint="@color/dark"
-				android:layout_margin="1dp"
-				android:paddingLeft="4dp"
-				android:paddingRight="4dp"
-				android:maxLength="11"
-				android:inputType="number"
+				android:layout_marginLeft="10dp"
+				android:textColor="@color/black_color"
+				android:text="111111111"
 				/>
-		</RelativeLayout>
-
-		<RelativeLayout
-			android:layout_width="match_parent"
-			android:layout_height="26dp"
+		</LinearLayout>
+		<ImageView
+			android:layout_width="fill_parent"
+			android:layout_height="1dp"
 			android:layout_marginTop="10dp"
+			android:src="@color/spliter_line_color" />
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
 			android:layout_marginLeft="15dp"
-			android:layout_marginRight="15dp"
-			android:background="@color/spliter_line_color">
-
-			<EditText
-				android:id="@+id/et_verify_number"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_centerInParent="true"
-				android:background="@color/white_color"
+			android:layout_marginTop="10dp"
+			android:layout_marginBottom="10dp">
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="验证码"
 				android:textSize="@dimen/thirteen"
-				android:textColor="@color/black"
-				android:hint="短信验证码"
-				android:inputType="number"
-				android:maxLength="4"
-				android:layout_margin="1dp"
-				android:paddingLeft="4dp"
-				android:paddingRight="4dp"
-				android:textColorHint="@color/dark"
-				/>
+				android:textColor="@color/black_color"/>
 			<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="10dp">
 
-				android:layout_width="82dp"
-				android:layout_height="match_parent"
-				android:gravity="center_vertical"
-				android:layout_alignParentRight="true"
-				android:layout_marginRight="15dp">
+				<EditText
+					android:id="@+id/et_verify_number"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_alignParentLeft="true"
+					android:layout_alignParentStart="true"
+					android:layout_alignParentTop="true"
+					android:background="@color/white_color"
+					android:hint="短信验证码"
+					android:inputType="number"
+					android:maxLength="4"
+					android:paddingRight="4dp"
+					android:textColor="@color/black"
+					android:textColorHint="@color/dark"
+					android:textSize="@dimen/thirteen" />
+				<RelativeLayout
 
-				<TextView
-					android:id="@+id/tv_send_verify_code"
-					android:layout_width="wrap_content"
-					android:layout_height="match_parent"
-					android:layout_centerInParent="true"
-					android:gravity="center"
-					android:text="发送验证码"
-					android:textColor="@color/black_dark"
-					android:textSize="@dimen/twelve" />
+					android:layout_width="82dp"
+					android:layout_height="wrap_content"
+					android:gravity="center_vertical"
+					android:layout_alignParentRight="true"
+					android:layout_marginRight="15dp">
+
+					<TextView
+						android:id="@+id/tv_send_verify_code"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_centerInParent="true"
+						android:gravity="center"
+						android:text="点击获取"
+						android:textColor="@color/red"
+						android:textSize="@dimen/twelve" />
+				</RelativeLayout>
 			</RelativeLayout>
-		</RelativeLayout>
+		</LinearLayout>
+
 	</LinearLayout>
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="44dp"
+		android:layout_height="wrap_content"
 		android:orientation="vertical">
 
 		<!-- 水平分割线 -->
@@ -100,38 +113,39 @@
 			android:layout_height="1dp"
 			android:src="@color/spliter_line_color" />
 
-		<LinearLayout
+		<RelativeLayout
 			android:id="@+id/ll_two_button_area"
-			android:layout_width="fill_parent"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:orientation="horizontal"
-			android:background="@color/spliter_line_color">
+			android:layout_marginBottom="20dp"
+			android:layout_marginTop="20dp">
 
 			<Button
 				android:id="@+id/btn_left"
 				android:layout_weight="1"
-				android:layout_width="match_parent"
+				android:layout_width="wrap_content"
 				android:layout_height="43dp"
 				android:textSize="@dimen/sixteen"
 				android:text="取消"
 				android:gravity="center"
-				android:textColor="@color/dark"
-				android:layout_marginRight="0.5dp"
-				android:background="#FCFCFC"/>
+				android:textColor="@color/black_color"
+				android:layout_marginLeft="10dp"
+				android:background="@drawable/shape_dialog_btn_left"/>
 
 			<Button
 				android:id="@+id/btn_right"
 				android:layout_weight="1"
 				android:layout_height="43dp"
-				android:layout_width="match_parent"
+				android:layout_width="wrap_content"
 				android:gravity="center"
 				android:textSize="@dimen/sixteen"
-				android:layout_marginLeft="0.5dp"
-				android:textColor="@color/red"
+				android:textColor="@color/white_color"
 				android:text="确定"
-				android:background="#FCFCFC"/>
+				android:layout_alignParentRight="true"
+				android:layout_marginRight="10dp"
+				android:background="@drawable/shape_dialog_btn_right"/>
 
-		</LinearLayout>
+		</RelativeLayout>
 	</LinearLayout>
 
 </LinearLayout>

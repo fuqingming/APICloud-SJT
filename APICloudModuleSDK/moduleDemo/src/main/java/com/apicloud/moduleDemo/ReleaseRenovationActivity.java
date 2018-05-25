@@ -1,5 +1,6 @@
 package com.apicloud.moduleDemo;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Message;
@@ -22,8 +23,10 @@ import com.apicloud.moduleDemo.base.BaseAppCompatActivity;
 import com.apicloud.moduleDemo.bean.base.DateBean;
 import com.apicloud.moduleDemo.bean.base.VerifyMobileBean;
 import com.apicloud.moduleDemo.bean.response.LoginBean;
+import com.apicloud.moduleDemo.bean.response.ResponseReleaseBean;
 import com.apicloud.moduleDemo.http.ApiStores;
 import com.apicloud.moduleDemo.http.HttpCallback;
+import com.apicloud.moduleDemo.util.RegexUtil;
 import com.apicloud.moduleDemo.util.UploadThread;
 import com.apicloud.moduleDemo.util.TimeUtils;
 import com.apicloud.moduleDemo.util.UploadHandler;
@@ -74,6 +77,7 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
     private EditText m_etText;
     private EditText m_etAdress;
     private EditText m_etSize;
+    private EditText m_etMobile;
 
     private String m_strTitle;
     private String m_lonStartDate = "";
@@ -91,6 +95,10 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
     private double m_dLat = 0.0;
     private double m_dLng = 0.0;
     private String m_strSize;
+    private String m_strMobile;
+    private String m_strProvinceName;
+    private String m_strCityName;
+    private String m_strCountyName;
 
     private String m_strArrStyle[]  =  null;
     private String m_strArrHouseType[]  = null;
@@ -135,6 +143,7 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
         m_etText = findViewById(R.id.et_text);
         m_etAdress = findViewById(R.id.et_address);
         m_etSize = findViewById(R.id.et_size);
+        m_etMobile = findViewById(R.id.et_mobile);
 
         m_arrDatas = new ArrayList<>();
         m_arrDatas.add(null);
@@ -253,10 +262,42 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
                 task.execute("上海", "上海", "浦东");
             }
         });
+
+        //所在区域
+        m_tvCityLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddressPickTask task = new AddressPickTask(ReleaseRenovationActivity.this);
+                task.setHideProvince(false);
+                task.setHideCounty(false);
+                task.setCallback(new AddressPickTask.Callback() {
+                    @Override
+                    public void onAddressInitFailed() {
+                        showToast("数据初始化失败");
+                    }
+
+                    @Override
+                    public void onAddressPicked(Province province, City city, County county) {
+                        if (county == null) {
+                            m_tvCityLocation.setText(province.getAreaName() + city.getAreaName());
+                            m_strCityName = city.getAreaName();
+                            m_strCountyName = county.getAreaName();
+                        } else {
+                            m_tvCityLocation.setText(province.getAreaName() + city.getAreaName() + county.getAreaName());
+                            m_strProvinceName = province.getAreaName();
+                            m_strCityName = city.getAreaName();
+                            m_strCountyName = county.getAreaName();
+                        }
+                    }
+                });
+                task.execute("上海", "上海", "浦东");
+            }
+        });
         //提交
         m_btnCommit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if(isInputValid()){
                     if(m_arrMediaBean != null && m_arrMediaBean.size() > 0){
                         kProgressHUD.show();
@@ -311,23 +352,31 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
     }
 
     private void commitMobileSend(){
-        Utils.showCommonDialogVerifyCode(ReleaseRenovationActivity.this, kProgressHUD, "", "", new OnTaskSuccessComplete() {
+        Utils.showCommonDialogVerifyCode(ReleaseRenovationActivity.this, kProgressHUD, m_strMobile, "", new OnTaskSuccessComplete() {
             @Override
             public void onSuccess(Object obj) {
-                VerifyMobileBean verifyMobileBean = (VerifyMobileBean)obj;
-                commitInformation(verifyMobileBean.getMobile(),verifyMobileBean.getVerifyCode());
+                commitInformation((String)obj);
             }
         });
     }
 
-    private void commitInformation(String mobile,String verifyCode){
-        ApiStores.releaseRenovation(m_strTitle, m_lonStartDate, m_lonEndDate, m_nJoinNo,m_strAmount, 1,m_strText,m_strCityLocation,"所在省","所在市","所在区",
-                m_strArs,m_dLat,m_dLng,m_strCategoryNo,m_nAddressType,m_strAddress,m_strHouseType,m_strStyle,m_strSize,m_strBudget,mobile,verifyCode,
-                m_jsonArrData, new HttpCallback<LoginBean>() {
+    private void commitInformation(String verifyCode){
+        ApiStores.releaseRenovation(m_strTitle, m_lonStartDate, m_lonEndDate, m_nJoinNo,m_strAmount, 1,m_strText,m_strCityLocation,m_strProvinceName,m_strCityName,m_strCountyName,
+                m_strArs,m_dLat,m_dLng,m_strCategoryNo,m_nAddressType,m_strAddress,m_strHouseType,m_strStyle,m_strSize,m_strBudget,m_strMobile,verifyCode,
+                m_jsonArrData, new HttpCallback<ResponseReleaseBean>() {
 
                     @Override
-                    public void OnSuccess(LoginBean response) {
-
+                    public void OnSuccess(ResponseReleaseBean response) {
+                        if(response.getSuccess()){
+                            Intent it = new Intent(ReleaseRenovationActivity.this,PaymentActivity.class);
+                            it.putExtra("strScheduleNo",response.getData().getScheduleNo());
+                            it.putExtra("strTitle",response.getData().getTitle());
+                            it.putExtra("strStartDate",response.getData().getStartDate());
+                            it.putExtra("strEndDate",response.getData().getEndDate());
+                            it.putExtra("strPersonnelLimit",response.getData().getPersonnelLimit());
+                            it.putExtra("strGuaranteeAmount",response.getData().getGuaranteeAmount());
+                            startActivity(it);
+                        }
                     }
 
                     @Override
@@ -419,9 +468,29 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
             Utils.showToast(ReleaseRenovationActivity.this, "结束时间不能早于开始时间");
             return false;
         }
-//
+
         if(!m_rbCityAll.isChecked() && !m_rbCityIndex.isChecked()){
             Utils.showToast(ReleaseRenovationActivity.this, "请选择活动范围");
+            return false;
+        }
+
+        m_strMobile = m_etMobile.getText().toString().trim();
+        if(m_strMobile.isEmpty())
+        {
+            Utils.showToast(this, "请输入手机号码");
+            m_etMobile.requestFocus();
+            return false;
+        }
+        else if(m_strMobile.length() < 11)
+        {
+            Utils.showToast(this, "手机号码需要11位长度");
+            m_etMobile.requestFocus();
+            return false;
+        }
+        else if(!RegexUtil.checkMobile(m_strMobile))
+        {
+            Utils.showToast(this, "请输入正确的手机号码");
+            m_etMobile.requestFocus();
             return false;
         }
 
@@ -431,6 +500,12 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
                 Utils.showToast(ReleaseRenovationActivity.this, "请选择指定城市");
                 return false;
             }
+        }
+
+        m_strCityLocation = m_tvCityLocation.getText().toString();
+        if(m_strCityLocation.isEmpty()){
+            Utils.showToast(ReleaseRenovationActivity.this, "请选择所在区域");
+            return false;
         }
 
         m_strBudget = m_etBudget.getText().toString().trim();
@@ -449,7 +524,6 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
 
         m_strText = m_etText.getText().toString();
         m_strArs = m_etAdress.getText().toString();
-        m_strCityLocation = m_tvCityLocation.getText().toString();
         m_strSize = m_etSize.getText().toString().trim();
 
         return true;

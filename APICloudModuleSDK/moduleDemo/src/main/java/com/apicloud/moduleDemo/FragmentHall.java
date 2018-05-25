@@ -17,6 +17,7 @@ import com.apicloud.moduleDemo.http.HttpCallback;
 import com.apicloud.moduleDemo.http.HttpClient;
 import com.apicloud.moduleDemo.settings.AppSettings;
 import com.apicloud.moduleDemo.settings.Const;
+import com.apicloud.moduleDemo.util.TimeUtils;
 import com.apicloud.moduleDemo.util.Utils;
 import com.apicloud.sdk.moduledemo.R;
 

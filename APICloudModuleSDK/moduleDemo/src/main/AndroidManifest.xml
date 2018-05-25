@@ -84,6 +84,17 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="portrait"/>
 
+        <!--支付保证金-->
+        <activity
+            android:name="com.apicloud.moduleDemo.PaymentActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <!--订单支付-->
+        <activity
+            android:name="com.apicloud.moduleDemo.OrderPaymentActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"/>
+
         <!--创业列表-->
         <activity
             android:name="com.apicloud.moduleDemo.EntrepreneurshipActivity"

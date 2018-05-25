@@ -90,6 +90,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
+        <!-- 支付保证金 -->
+        <activity
+            android:name="com.apicloud.moduleDemo.PaymentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <!-- 创业列表 -->
         <activity
             android:name="com.apicloud.moduleDemo.EntrepreneurshipActivity"

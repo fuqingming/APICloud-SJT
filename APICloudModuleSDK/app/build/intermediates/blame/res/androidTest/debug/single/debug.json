@@ -592,6 +592,10 @@
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c165316ba36e7df6772b5957508831ea\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
     },
     {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_shape_dialog_btn_right.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\drawable\\shape_dialog_btn_right.xml"
+    },
+    {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_abc_edit_text_material.xml.flat",
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c165316ba36e7df6772b5957508831ea\\res\\drawable\\abc_edit_text_material.xml"
     },
@@ -954,6 +958,10 @@
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\mipmap-xhdpi-v4_xiangmujinglichuangye.png.flat",
         "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\mipmap-xhdpi-v4\\xiangmujinglichuangye.png"
+    },
+    {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_shape_dialog_btn_left.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\drawable\\shape_dialog_btn_left.xml"
     },
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_design_navigation_item_separator.xml.flat",
@@ -2154,6 +2162,10 @@
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_list_longpressed_holo.9.png.flat",
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c165316ba36e7df6772b5957508831ea\\res\\drawable-xxhdpi-v4\\abc_list_longpressed_holo.9.png"
+    },
+    {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_dialog_common_verify_code.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\layout\\dialog_common_verify_code.xml"
     },
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",

@@ -2,9 +2,12 @@ package com.apicloud.moduleDemo.util.pickers;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.text.format.Time;
 
 import com.apicloud.moduleDemo.backhandler.OnTaskSuccessComplete;
 import com.apicloud.moduleDemo.bean.base.DateBean;
+
+import java.util.Calendar;
 
 import cn.addapp.pickers.common.LineConfig;
 import cn.addapp.pickers.listeners.OnItemPickListener;
@@ -55,13 +58,15 @@ public class PopUitls {
     }
 
     public static void showDataSelect(Activity activity,final OnTaskSuccessComplete onTaskSuccess){
+        Time t = new Time();
+        t.setToNow();
         final DatePicker picker = new DatePicker(activity);
         picker.setCanLoop(true);
         picker.setWheelModeEnable(true);
         picker.setTopPadding(15);
-        picker.setRangeStart(2016, 8, 29);
+        picker.setRangeStart(t.year,t.month+1,t.monthDay);
         picker.setRangeEnd(2111, 1, 11);
-        picker.setSelectedItem(2018, 1, 1);
+        picker.setSelectedItem(t.year,t.month+1,t.monthDay);
         picker.setWeightEnable(true);
         picker.setLineColor(Color.BLACK);
         picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {

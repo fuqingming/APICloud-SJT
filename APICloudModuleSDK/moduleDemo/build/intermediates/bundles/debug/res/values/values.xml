@@ -141,6 +141,7 @@
     <string name="error_view_network_error_click_to_refresh">没有可用的网络</string>
     <string name="error_view_no_data">暂无内容</string>
     <string name="msg_recall_by_user">This message has been recalled by %1$s</string>
+    <string name="msg_release_success">也可在"我的-接受的悬赏"中查看客户信息</string>
     <string name="rule">1、客户信息资源\n2、办公场地和设备（电脑自备）\n3、相关公司和资质的挂靠\n4、设计师及助理\n5、材料商供应体系\n6、财务人员和客服人员及人事。代理注册公司。</string>
     <string name="tip_network_error">没有可用的网络</string>
     <style name="AnimBottom" parent="@android:style/Animation">
@@ -148,7 +149,7 @@
         <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
     </style>
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        
         <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/black</item>
         <item name="colorPrimaryDark">@color/black</item>
@@ -210,25 +211,25 @@
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowNoTitle">true</item> <!-- 隐藏标题栏 -->
+        <item name="android:windowNoTitle">true</item> 
         <item name="android:background">@android:color/transparent</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:backgroundDimEnabled">true</item>
-        <item name="android:backgroundDimAmount">0.6</item> <!-- 对话框外区域的灰度 -->
+        <item name="android:backgroundDimAmount">0.6</item> 
     </style>
     <style name="dialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
-        <!--边框-->
+        
         <item name="android:windowIsFloating">true</item>
-        <!--是否浮现在activity之上-->
+        
         <item name="android:windowIsTranslucent">false</item>
-        <!--半透明-->
+        
         <item name="android:windowNoTitle">true</item>
-        <!--无标题-->
+        
         <item name="android:windowBackground">@android:color/transparent</item>
-        <!--背景透明-->
+        
         <item name="android:backgroundDimEnabled">true</item>
-        <!--模糊-->
+        
     </style>
     <style name="dialog_button">
         <item name="android:layout_width">fill_parent</item>

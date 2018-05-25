@@ -2240,6 +2240,10 @@
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c165316ba36e7df6772b5957508831ea\\res\\drawable-xxxhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_dialog_common_verify_code.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\layout\\dialog_common_verify_code.xml"
+    },
+    {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_notification_bg_low_normal.9.png.flat",
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\83ef9693391a127f44d9dd30aa075c54\\res\\drawable-mdpi-v4\\notification_bg_low_normal.9.png"
     },
@@ -2374,6 +2378,10 @@
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_shape_round_brown.xml.flat",
         "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\drawable\\shape_round_brown.xml"
+    },
+    {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_shape_dialog_btn_right.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\drawable\\shape_dialog_btn_right.xml"
     },
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_list_menu_item_icon.xml.flat",
@@ -2522,6 +2530,10 @@
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ucrop_ic_cross.png.flat",
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\ucrop-2.2.0.aar\\6f9db65e505f398e20ccbc52bd19a974\\res\\drawable-hdpi-v4\\ucrop_ic_cross.png"
+    },
+    {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_shape_dialog_btn_left.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\drawable\\shape_dialog_btn_left.xml"
     },
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim_design_bottom_sheet_slide_out.xml.flat",

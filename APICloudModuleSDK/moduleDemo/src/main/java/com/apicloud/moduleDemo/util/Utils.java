@@ -492,7 +492,7 @@ public class Utils {
         //lp.height = (int) (MyApplication.m_nScreenHeight * 0.5);
         lp.width = (int) context.getResources().getDimension(R.dimen.dialog_width);
         dlg.getWindow().setAttributes(lp);
-        final EditText etTel =  vContent.findViewById(R.id.et_tel);
+        final TextView etTel =  vContent.findViewById(R.id.et_tel);
         final EditText etVerifyNumber =  vContent.findViewById(R.id.et_verify_number);
 
         etTel.setText(mobile);
@@ -516,27 +516,7 @@ public class Utils {
             @Override
             public void onClick(View v)
             {
-                String strTel = etTel.getText().toString().trim();
-                if(strTel.isEmpty())
-                {
-                    Utils.showToast(context, "请输入手机号码");
-                    etTel.requestFocus();
-                    return;
-                }
-                else if(etTel.length() < 11)
-                {
-                    Utils.showToast(context, "手机号码需要11位长度");
-                    etTel.requestFocus();
-                    return;
-                }
-                else if(!RegexUtil.checkMobile(strTel))
-                {
-                    Utils.showToast(context, "请输入正确的手机号码");
-                    etTel.requestFocus();
-                    return;
-                }
-
-                ApiStores.smsSend(strTel, new HttpCallback<ResponseBaseBean>() {
+                ApiStores.smsSend(mobile, new HttpCallback<ResponseBaseBean>() {
                     @Override
                     public void OnSuccess(ResponseBaseBean response) {
                         if(response.getSuccess()){
@@ -575,26 +555,6 @@ public class Utils {
             @Override
             public void onClick(View v)
             {
-                String strTel = etTel.getText().toString().trim();
-                if(strTel.isEmpty())
-                {
-                    Utils.showToast(context, "请输入手机号码");
-                    etTel.requestFocus();
-                    return;
-                }
-                else if(etTel.length() < 11)
-                {
-                    Utils.showToast(context, "手机号码需要11位长度");
-                    etTel.requestFocus();
-                    return;
-                }
-                else if(!RegexUtil.checkMobile(strTel))
-                {
-                    Utils.showToast(context, "请输入正确的手机号码");
-                    etTel.requestFocus();
-                    return;
-                }
-
                 // 验证码
                 String m_strVerifyNumber = etVerifyNumber.getText().toString().trim();
                 if(m_strVerifyNumber.isEmpty())
@@ -620,8 +580,37 @@ public class Utils {
 
                 if (onTaskSuccess != null)
                 {
-                    onTaskSuccess.onSuccess(new VerifyMobileBean(strTel,m_strVerifyNumber));
+//                    onTaskSuccess.onSuccess(new VerifyMobileBean(strTel,m_strVerifyNumber));
+                    onTaskSuccess.onSuccess(m_strVerifyNumber);
                 }
+            }
+        });
+
+        dlg.show();
+
+        return dlg;
+    }
+
+    public static Dialog showCommonDialogReleaseSuccess(final Context context,final OnTaskSuccessComplete onTaskSuccess)
+    {
+        View vContent = LayoutInflater.from(context).inflate(R.layout.dialog_common_release_success, null);
+        final Dialog dlg = new Dialog(context, R.style.common_dialog);
+        dlg.setContentView(vContent);
+        dlg.setCanceledOnTouchOutside(false);
+        dlg.setCancelable(false);
+
+        // 必须用代码调整dialog的大小
+        android.view.WindowManager.LayoutParams lp = dlg.getWindow().getAttributes();
+        lp.width = (int) context.getResources().getDimension(R.dimen.dialog_width);
+        dlg.getWindow().setAttributes(lp);
+        final TextView etBtn =  vContent.findViewById(R.id.tv_btn);
+        etBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(onTaskSuccess != null){
+                    onTaskSuccess.onSuccess(null);
+                }
+                dlg.dismiss();
             }
         });
 

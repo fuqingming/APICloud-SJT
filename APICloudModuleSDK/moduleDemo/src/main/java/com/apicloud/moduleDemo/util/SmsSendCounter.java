@@ -29,8 +29,8 @@ public class SmsSendCounter extends CountDownTimer
 	public void onFinish() 
 	{
 		m_btn.setEnabled(true);
-		m_btn.setTextColor(mContext.getResources().getColor(R.color.black_dark));
-		m_btn.setText("获取验证码");
+		m_btn.setTextColor(mContext.getResources().getColor(R.color.red));
+		m_btn.setText("点击获取");
 	}
 
 	@SuppressLint("SetTextI18n")

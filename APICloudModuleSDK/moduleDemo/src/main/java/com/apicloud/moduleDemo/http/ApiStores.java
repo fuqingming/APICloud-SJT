@@ -196,6 +196,15 @@ public class ApiStores {
         HttpClient.post(url,js.toString(),httpCallback);
     }
 
+    /** 悬赏保证金下单 */
+    public static <T> void myGuaranteesSchedulePreay(String strScheduleNo, HttpCallback<T> httpCallback){
+        String url =  urlVersion+"my/guarantee/schedules/"+strScheduleNo+"/prepay";
+
+        JSONObject js = new JSONObject();
+
+        HttpClient.post(url,js.toString(),httpCallback);
+    }
+
     /** 设计师创业/项目经理创业 */
     public static <T> void applyEntrepreneurship(String contact,String mobile,String workingYear,String companyName,String remark,int roleType,HttpCallback<T> httpCallback){
         String applyEntrepreneurship =  urlVersion+"cooperation/applies";
