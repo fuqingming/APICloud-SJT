@@ -7,17 +7,20 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.apicloud.moduleDemo.base.BaseApplication;
+import com.apicloud.moduleDemo.base.MyTransApplication;
 import com.apicloud.moduleDemo.util.imagetrans.imageload.OkHttpImageLoad;
 
 import java.util.HashMap;
 import java.util.regex.Pattern;
+
+import it.liuting.imagetrans.*;
 
 
 /**
  * Created by liuting on 17/6/1.
  */
 
-public class MyImageLoad implements ImageLoad {
+public class MyImageLoad implements it.liuting.imagetrans.ImageLoad {
     private static final Pattern webPattern = Pattern.compile("http[s]*://[[[^/:]&&[a-zA-Z_0-9]]\\.]+(:\\d+)?(/[a-zA-Z_0-9]+)*(/[a-zA-Z_0-9]*([a-zA-Z_0-9]+\\.[a-zA-Z_0-9]+)*)?(\\?(&?[a-zA-Z_0-9]+=[%[a-zA-Z_0-9]-]*)*)*(#[[a-zA-Z_0-9]|-]+)?(.jpg|.png|.gif|.jpeg)?");
     private static final String ASSET_PATH_SEGMENT = "android_asset";
     private static final HashMap<String, LoadCallback> loadCallbackMap = new HashMap<>();
@@ -63,7 +66,7 @@ public class MyImageLoad implements ImageLoad {
 
             @Override
             public void onSuccess() {
-                loadImageFromLocal(BaseApplication.getCachedPath(url), unique, imageView);
+                loadImageFromLocal(MyTransApplication.getCachedPath(url), unique, imageView);
             }
 
             @Override

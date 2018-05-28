@@ -76,7 +76,14 @@ public class OrderPaymentActivity extends BaseAppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(isInputValid()){
-
+                    Utils.showCommonDialogAcceptSuccess(OrderPaymentActivity.this,new OnTaskSuccessComplete() {
+                        @Override
+                        public void onSuccess(Object obj) {
+                            Utils.showToast(OrderPaymentActivity.this,"支付成功");
+                            setResult(RESULT_OK);
+                            finish();
+                        }
+                    } );
                 }
             }
         });

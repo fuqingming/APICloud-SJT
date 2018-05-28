@@ -1,6 +1,7 @@
 package com.apicloud.moduleDemo.bean.base;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by vip on 2018/5/2.
@@ -42,6 +43,7 @@ public class MoneyMakingHallBean implements Serializable{
     private String topShow;
     private String ruleRemark;
     private UserInfoBean userInfo;
+    private List<FileBean> attachments;
 
     public String getId() {
         return id;
@@ -297,5 +299,13 @@ public class MoneyMakingHallBean implements Serializable{
 
     public void setUserInfo(UserInfoBean userInfo) {
         this.userInfo = userInfo;
+    }
+
+    public List<FileBean> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(List<FileBean> attachments) {
+        this.attachments = attachments;
     }
 }

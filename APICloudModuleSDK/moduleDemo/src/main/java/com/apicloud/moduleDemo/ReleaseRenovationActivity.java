@@ -1,5 +1,6 @@
 package com.apicloud.moduleDemo;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -375,7 +376,7 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
                             it.putExtra("strEndDate",response.getData().getEndDate());
                             it.putExtra("strPersonnelLimit",response.getData().getPersonnelLimit());
                             it.putExtra("strGuaranteeAmount",response.getData().getGuaranteeAmount());
-                            startActivity(it);
+                            startActivityForResult(it,MoneyMakingHallActivity.RELEASE_RENOVATION);
                         }
                     }
 
@@ -397,6 +398,16 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
                         kProgressHUD.dismiss();
                     }
                 });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == Activity.RESULT_OK){
+            if(requestCode == MoneyMakingHallActivity.RELEASE_RENOVATION){
+                setResult(RESULT_OK);
+                finish();
+            }
+        }
     }
 
     private void showToast(String msg) {

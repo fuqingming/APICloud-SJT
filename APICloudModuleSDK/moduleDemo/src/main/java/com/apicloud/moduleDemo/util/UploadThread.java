@@ -1,31 +1,18 @@
 package com.apicloud.moduleDemo.util;
   
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.List;
 
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
-import com.apicloud.moduleDemo.bean.base.FileBean;
-import com.apicloud.moduleDemo.bean.response.LoginBean;
-import com.apicloud.moduleDemo.bean.response.ResponseBusinessBean;
+import com.apicloud.moduleDemo.bean.response.ResponseFileBean;
 import com.apicloud.moduleDemo.http.ApiStores;
-import com.apicloud.moduleDemo.http.HttpCallback;
 import com.google.gson.Gson;
 import com.tamic.novate.BaseSubscriber;
 import com.tamic.novate.Throwable;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -68,7 +55,7 @@ public class UploadThread extends Thread{
                 try {
                     Gson gson = new Gson();
                     String json = responseBody.string();
-                    FileBean beanjson = gson.fromJson(json, FileBean.class);
+                    ResponseFileBean beanjson = gson.fromJson(json, ResponseFileBean.class);
                     if(beanjson.getSuccess()){
                         innerjObject = new JSONObject();
                         innerjObject.put("id",beanjson.getData().getId());

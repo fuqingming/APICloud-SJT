@@ -591,7 +591,15 @@ public class Utils {
         return dlg;
     }
 
-    public static Dialog showCommonDialogReleaseSuccess(final Context context,final OnTaskSuccessComplete onTaskSuccess)
+    public static Dialog showCommonDialogAcceptSuccess(final Context context,final OnTaskSuccessComplete onTaskSuccess){
+        return showCommonDialog(context,onTaskSuccess,R.layout.dialog_common_accept_success);
+    }
+
+    public static Dialog showCommonDialogReleaseSuccess(final Context context,final OnTaskSuccessComplete onTaskSuccess){
+        return showCommonDialog(context,onTaskSuccess,R.layout.dialog_common_release_success);
+    }
+
+    public static Dialog showCommonDialog(final Context context,final OnTaskSuccessComplete onTaskSuccess,int layout)
     {
         View vContent = LayoutInflater.from(context).inflate(R.layout.dialog_common_release_success, null);
         final Dialog dlg = new Dialog(context, R.style.common_dialog);

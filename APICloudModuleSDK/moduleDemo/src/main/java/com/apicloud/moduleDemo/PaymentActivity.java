@@ -1,5 +1,6 @@
 package com.apicloud.moduleDemo;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
@@ -45,7 +46,7 @@ public class PaymentActivity extends BaseAppCompatActivity {
 
     @Override
     protected void setUpView() {
-        Utils.initCommonTitle(this,"发布活动",true);
+        Utils.initCommonTitle(this,"支付量房金",true);
 
         m_ivIcon = findViewById(R.id.iv_icon);
         m_tvName = findViewById(R.id.tv_name);
@@ -106,37 +107,42 @@ public class PaymentActivity extends BaseAppCompatActivity {
         String strScheduleNo = getIntent().getStringExtra("strScheduleNo");
         ApiStores.myGuaranteesSchedulePreay(strScheduleNo, new HttpCallback<ResponseOrderBean>() {
 
-                    @Override
-                    public void OnSuccess(final ResponseOrderBean response) {
-                        if(response.getSuccess()){
-                            Utils.showCommonDialogReleaseSuccess(PaymentActivity.this,new OnTaskSuccessComplete() {
-                                @Override
-                                public void onSuccess(Object obj) {
-                                    Intent it = new Intent(PaymentActivity.this,OrderPaymentActivity.class);
-                                    it.putExtra("",response.getData().getAmount());
-                                    startActivity(it);
-                                }
-                            } );
-                        }
-                    }
+            @Override
+            public void OnSuccess(final ResponseOrderBean response) {
+                if(response.getSuccess()){
+                    Intent it = new Intent(PaymentActivity.this,OrderPaymentActivity.class);
+                    it.putExtra("",response.getData().getAmount());
+                    startActivityForResult(it,MoneyMakingHallActivity.RELEASE_RENOVATION);
+                }
+            }
 
-                    @Override
-                    public void OnFailure(String message) {
-                        kProgressHUD.dismiss();
-                        AlertUtils.MessageAlertShow(PaymentActivity.this,"错误",message);
-                    }
+            @Override
+            public void OnFailure(String message) {
+                kProgressHUD.dismiss();
+                AlertUtils.MessageAlertShow(PaymentActivity.this,"错误",message);
+            }
 
-                    @Override
-                    public void OnRequestStart() {
-                        if(!kProgressHUD.isShowing()){
-                            kProgressHUD.show();
-                        }
-                    }
+            @Override
+            public void OnRequestStart() {
+                if(!kProgressHUD.isShowing()){
+                    kProgressHUD.show();
+                }
+            }
 
-                    @Override
-                    public void OnRequestFinish() {
-                        kProgressHUD.dismiss();
-                    }
-                });
+            @Override
+            public void OnRequestFinish() {
+                kProgressHUD.dismiss();
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == Activity.RESULT_OK){
+            if(requestCode == MoneyMakingHallActivity.RELEASE_RENOVATION){
+                setResult(RESULT_OK);
+                finish();
+            }
+        }
     }
 }

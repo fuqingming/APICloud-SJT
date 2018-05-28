@@ -1,5 +1,6 @@
 package com.apicloud.moduleDemo;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +33,7 @@ import java.util.List;
 
 public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHallBean> {
 
-
+    public static  final int RELEASE_RENOVATION = 0;//量房result
 
     private MoneyMakingHallAdapter m_moneyMakingHallAdapter = new MoneyMakingHallAdapter();
 
@@ -137,8 +138,8 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
         View m_headerBanner = LayoutInflater.from(this).inflate(R.layout.common_money_making_hall_head,mRecyclerView, false);
         mRecyclerViewAdapter.addHeaderView(m_headerBanner);
         DividerDecoration divider = new DividerDecoration.Builder(this)
-                .setHeight(R.dimen.one)
-                .setColorResource(R.color.spliter_line_color)
+                .setHeight(R.dimen.five)
+                .setColorResource(R.color.app_backgrount_color)
                 .build();
         mRecyclerView.addItemDecoration(divider);
         mRecyclerView.setLoadMoreEnabled(true);
@@ -207,9 +208,11 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
             @Override
             public void onClick(View view) {
                 Intent it = null;
+                int nResultCode = 0;
                 switch (m_strCategoryNo){
                     case Const.CategoryNo.TYPE_RENOVATION:
                         it = new Intent(MoneyMakingHallActivity.this,ReleaseRenovationActivity.class);
+                        nResultCode = RELEASE_RENOVATION;
                         break;
                     case Const.CategoryNo.TYPE_BUILDING:
                         it = new Intent(MoneyMakingHallActivity.this,ReleaseBuildingActivity.class);
@@ -228,9 +231,18 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
                         break;
                 }
                 it.putExtra("strCategoryNo",m_strCategoryNo);
-                startActivity(it);
+                startActivityForResult(it,nResultCode);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == Activity.RESULT_OK){
+            if(requestCode == RELEASE_RENOVATION){
+
+            }
+        }
     }
 
     private void showPopAllType(boolean isChecked){

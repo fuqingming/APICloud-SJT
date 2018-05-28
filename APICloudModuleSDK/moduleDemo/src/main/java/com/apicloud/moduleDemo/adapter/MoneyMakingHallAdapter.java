@@ -1,6 +1,7 @@
 package com.apicloud.moduleDemo.adapter;
 
 
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,6 +44,7 @@ public class MoneyMakingHallAdapter extends BaseRecyclerAdapter<MoneyMakingHallB
         TextView tvTime = holder.getView().findViewById(R.id.tv_time);
         TextView tvTitle = holder.getView().findViewById(R.id.tv_title);
         TextView tvText = holder.getView().findViewById(R.id.tv_text);
+        ImageView ivType = holder.getView().findViewById(R.id.iv_type);
 
         ImageLoader.getInstace().loadCircleImg(mContext, ivIcon, data.getUserInfo().getAvatar(),R.mipmap.head_s);
 
@@ -55,8 +57,15 @@ public class MoneyMakingHallAdapter extends BaseRecyclerAdapter<MoneyMakingHallB
         }
 
         tvTime.setText(TimeUtils.time2String(data.getCreated(),TimeUtils.TIME_FORMAT_SHOW));
+        if(!"".equals(data.getRemark()) && data.getRemark() != null){
+            tvText.setVisibility(View.VISIBLE);
+        }else{
+            tvText.setVisibility(View.GONE);
+        }
         tvTitle.setText(data.getTitle());
         tvText.setText(data.getRemark());
+
+        ivType.setImageResource(R.mipmap.begining);
     }
 
 }

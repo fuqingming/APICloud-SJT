@@ -386,15 +386,15 @@ public final class R {
         public static int abc_text_size_title_material_toolbar = 0x7f08004c;
         public static int disabled_alpha_material_dark = 0x7f08008c;
         public static int disabled_alpha_material_light = 0x7f08008d;
-        public static int highlight_alpha_material_colored = 0x7f0800ac;
-        public static int highlight_alpha_material_dark = 0x7f0800ad;
-        public static int highlight_alpha_material_light = 0x7f0800ae;
-        public static int item_touch_helper_max_drag_scroll_per_frame = 0x7f0800b3;
-        public static int item_touch_helper_swipe_escape_max_velocity = 0x7f0800b4;
-        public static int item_touch_helper_swipe_escape_velocity = 0x7f0800b5;
-        public static int notification_large_icon_height = 0x7f0800bf;
-        public static int notification_large_icon_width = 0x7f0800c0;
-        public static int notification_subtext_size = 0x7f0800c7;
+        public static int highlight_alpha_material_colored = 0x7f0800ad;
+        public static int highlight_alpha_material_dark = 0x7f0800ae;
+        public static int highlight_alpha_material_light = 0x7f0800af;
+        public static int item_touch_helper_max_drag_scroll_per_frame = 0x7f0800b4;
+        public static int item_touch_helper_swipe_escape_max_velocity = 0x7f0800b5;
+        public static int item_touch_helper_swipe_escape_velocity = 0x7f0800b6;
+        public static int notification_large_icon_height = 0x7f0800c0;
+        public static int notification_large_icon_width = 0x7f0800c1;
+        public static int notification_subtext_size = 0x7f0800c8;
     }
     public static final class drawable {
         public static int abc_ab_share_pack_mtrl_alpha = 0x7f090001;
@@ -517,20 +517,20 @@ public final class R {
         public static int image = 0x7f0c0080;
         public static int info = 0x7f0c008a;
         public static int item_touch_helper_previous_elevation = 0x7f0c008c;
-        public static int line1 = 0x7f0c00a1;
-        public static int line3 = 0x7f0c00a2;
-        public static int listMode = 0x7f0c00a3;
-        public static int list_item = 0x7f0c00a4;
-        public static int media_actions = 0x7f0c00ca;
-        public static int middle = 0x7f0c00ce;
-        public static int multiply = 0x7f0c00d0;
-        public static int never = 0x7f0c00d4;
-        public static int none = 0x7f0c00d5;
-        public static int normal = 0x7f0c00d6;
-        public static int parentPanel = 0x7f0c00dd;
-        public static int progress_circular = 0x7f0c00e5;
-        public static int progress_horizontal = 0x7f0c00e6;
-        public static int radio = 0x7f0c00e7;
+        public static int line1 = 0x7f0c00a2;
+        public static int line3 = 0x7f0c00a3;
+        public static int listMode = 0x7f0c00a4;
+        public static int list_item = 0x7f0c00a5;
+        public static int media_actions = 0x7f0c00c8;
+        public static int middle = 0x7f0c00cc;
+        public static int multiply = 0x7f0c00ce;
+        public static int never = 0x7f0c00d2;
+        public static int none = 0x7f0c00d3;
+        public static int normal = 0x7f0c00d4;
+        public static int parentPanel = 0x7f0c00db;
+        public static int progress_circular = 0x7f0c00e3;
+        public static int progress_horizontal = 0x7f0c00e4;
+        public static int radio = 0x7f0c00e5;
         public static int screen = 0x7f0c0104;
         public static int scrollIndicatorDown = 0x7f0c0106;
         public static int scrollIndicatorUp = 0x7f0c0107;
@@ -565,10 +565,10 @@ public final class R {
         public static int title = 0x7f0c0138;
         public static int title_template = 0x7f0c013a;
         public static int topPanel = 0x7f0c013f;
-        public static int up = 0x7f0c0191;
-        public static int useLogo = 0x7f0c0192;
-        public static int withText = 0x7f0c019a;
-        public static int wrap_content = 0x7f0c019b;
+        public static int up = 0x7f0c018e;
+        public static int useLogo = 0x7f0c018f;
+        public static int withText = 0x7f0c0197;
+        public static int wrap_content = 0x7f0c0198;
     }
     public static final class integer {
         public static int abc_config_activityDefaultDur = 0x7f0d0001;
@@ -603,18 +603,18 @@ public final class R {
         public static int abc_search_dropdown_item_icons_2line = 0x7f0f0019;
         public static int abc_search_view = 0x7f0f001a;
         public static int abc_select_dialog_material = 0x7f0f001b;
-        public static int notification_media_action = 0x7f0f006f;
-        public static int notification_media_cancel_action = 0x7f0f0070;
-        public static int notification_template_big_media = 0x7f0f0071;
-        public static int notification_template_big_media_narrow = 0x7f0f0073;
-        public static int notification_template_lines = 0x7f0f0077;
-        public static int notification_template_media = 0x7f0f0079;
-        public static int notification_template_part_chronometer = 0x7f0f007b;
-        public static int notification_template_part_time = 0x7f0f007c;
-        public static int select_dialog_item_material = 0x7f0f0080;
-        public static int select_dialog_multichoice_material = 0x7f0f0081;
-        public static int select_dialog_singlechoice_material = 0x7f0f0082;
-        public static int support_simple_spinner_dropdown_item = 0x7f0f0083;
+        public static int notification_media_action = 0x7f0f0072;
+        public static int notification_media_cancel_action = 0x7f0f0073;
+        public static int notification_template_big_media = 0x7f0f0074;
+        public static int notification_template_big_media_narrow = 0x7f0f0076;
+        public static int notification_template_lines = 0x7f0f007a;
+        public static int notification_template_media = 0x7f0f007c;
+        public static int notification_template_part_chronometer = 0x7f0f007e;
+        public static int notification_template_part_time = 0x7f0f007f;
+        public static int select_dialog_item_material = 0x7f0f0083;
+        public static int select_dialog_multichoice_material = 0x7f0f0084;
+        public static int select_dialog_singlechoice_material = 0x7f0f0085;
+        public static int support_simple_spinner_dropdown_item = 0x7f0f0086;
     }
     public static final class string {
         public static int abc_action_bar_home_description = 0x7f150001;

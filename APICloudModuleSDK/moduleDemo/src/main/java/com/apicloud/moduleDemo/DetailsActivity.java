@@ -1,31 +1,49 @@
 package com.apicloud.moduleDemo;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.apicloud.moduleDemo.adapter.PhotoAlbumAdapter;
+import com.apicloud.moduleDemo.backhandler.OnTaskSuccessComplete;
 import com.apicloud.moduleDemo.base.BaseAppCompatActivity;
+import com.apicloud.moduleDemo.base.MyApplication;
+import com.apicloud.moduleDemo.bean.base.FileBean;
 import com.apicloud.moduleDemo.bean.base.MoneyMakingHallBean;
+import com.apicloud.moduleDemo.bean.response.ResponseMoneyMakingDetailsBean;
 import com.apicloud.moduleDemo.bean.response.ResponseMoneyMakingHallBean;
 import com.apicloud.moduleDemo.http.ApiStores;
 import com.apicloud.moduleDemo.http.HttpCallback;
+import com.apicloud.moduleDemo.settings.AppSettings;
 import com.apicloud.moduleDemo.settings.Const;
 import com.apicloud.moduleDemo.util.ImageLoader;
 import com.apicloud.moduleDemo.util.TelephonePopupWindow;
 import com.apicloud.moduleDemo.util.TimeUtils;
 import com.apicloud.moduleDemo.util.Utils;
 import com.apicloud.moduleDemo.util.alert.AlertUtils;
+import com.apicloud.moduleDemo.view.SpaceDecoration;
 import com.apicloud.sdk.moduledemo.R;
 
-import org.w3c.dom.Text;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 装修量房详情
@@ -53,34 +71,28 @@ public class DetailsActivity extends BaseAppCompatActivity {
     private TextView m_tvActivityType;//成功进行中
     private TextView m_tvScheduleNo;//编号
     private TextView m_tvTitle;//活动标题
-    private TextView m_tvAmount;//量房费用
-    private TextView m_tvPersonNo;//参与商家
+    private TextView m_tvAmount;//当前量房费用
+    private TextView m_tvAmountType;//参与量房费用
+    private TextView m_tvPersonNo;//当前参与商家
+    private TextView m_tvPersonType;//可以参与商家的数量
     private TextView m_tvAddress;//量房地址
     private TextView m_tvTimeAndTime;//活动周期
     private TextView m_tvHouseType;//户型结构
-    private TextView m_tvHouseType2;//户型结构
     private TextView m_tvAcreage;//建筑面积
     private TextView m_tvStyleType;//设计风格
     private TextView m_tvRenovationAmount;//装修预算
-    private TextView m_tvRenovationAmount2;//装修预算
     private TextView m_tvDetails;//详细内容
-    private TextView m_tvRule;
-    private TextView m_tvExamine;
-    private TextView m_tvBegining;
-    private TextView m_tvFinish;
+    private TextView m_tvRule;//活动规则
+//    private TextView m_tvExamine;//审核
+//    private TextView m_tvBegining;//进行中
+//    private TextView m_tvFinish;//完成
+    private TextView m_tvTitleAmount;//当前量房金
+    private TextView m_tvTitleAddress;//量房地址
+    private TextView m_tvTitlePersonNo;//当前参与量房公司
+    private TextView m_tvTitleDetails;//详细内容
 
-    private TextView m_tvTitleAmount;
-    private TextView m_tvTitleAddress;
-    private TextView m_tvTitlePersonNo;
-    private TextView m_tvTitleDetails;
-    private TextView m_tvCurrentWeight;
-    private TextView m_tvTargetWeight;
-    private LinearLayout m_llType11;
-    private LinearLayout m_llType12;
-    private LinearLayout m_llType21;
-    private LinearLayout m_llType31;
-    private LinearLayout m_llAddress4;
-    private RelativeLayout m_rlBidding4;
+    private RecyclerView recyclerView;
+    private PhotoAlbumAdapter m_pictureUrlAdapter;
 
     @Override
     protected int setLayoutResourceId() {
@@ -94,15 +106,8 @@ public class DetailsActivity extends BaseAppCompatActivity {
         m_strScheduleNo = getIntent().getStringExtra("strScheduleNo");
         m_strCategoryNo = getIntent().getStringExtra("strCategoryNo");
 
-        m_llType11 = findViewById(R.id.ll_type11);
-        m_llType12 = findViewById(R.id.ll_type12);
-        m_llType21 = findViewById(R.id.ll_type21);
-        m_llType31 = findViewById(R.id.ll_type31);
-        m_rlBidding4 = findViewById(R.id.rl_bidding4);
         m_tvTitleAmount = findViewById(R.id.tv_title_amount);
         m_tvTitleAddress = findViewById(R.id.tv_title_address);
-        m_tvCurrentWeight = findViewById(R.id.tv_current_weight);
-        m_tvTargetWeight = findViewById(R.id.tv_target_weight);
 
         m_progressBar = findViewById(R.id.progress_bar);
         m_llByWidth = findViewById(R.id.ll_by_width);
@@ -117,79 +122,60 @@ public class DetailsActivity extends BaseAppCompatActivity {
         m_tvScheduleNo = findViewById(R.id.tv_schedule_no);
         m_tvTitle = findViewById(R.id.tv_title);
         m_tvAmount = findViewById(R.id.tv_amount);
+        m_tvAmountType = findViewById(R.id.tv_amount_type);
         m_tvPersonNo = findViewById(R.id.tv_person_no);
         m_tvTitlePersonNo = findViewById(R.id.tv_title_person_no);
         m_tvAddress = findViewById(R.id.tv_address);
         m_tvTimeAndTime = findViewById(R.id.tv_time_and_time);
         m_tvHouseType = findViewById(R.id.tv_house_type);
-        m_tvHouseType2 = findViewById(R.id.tv_house_type2);
         m_tvAcreage = findViewById(R.id.tv_acreage);
         m_tvStyleType = findViewById(R.id.tv_style_type);
         m_tvRenovationAmount = findViewById(R.id.tv_renovation_amount);
-        m_tvRenovationAmount2 = findViewById(R.id.tv_renovation_amount2);
         m_tvDetails = findViewById(R.id.tv_details);
         m_tvTitleDetails = findViewById(R.id.tv_title_details);
-        m_llAddress4 = findViewById(R.id.ll_address4);
         m_tvRule = findViewById(R.id.tv_rule);
-        m_tvExamine = findViewById(R.id.tv_examine);
-        m_tvBegining = findViewById(R.id.tv_begining);
-        m_tvFinish = findViewById(R.id.tv_finish);
+//        m_tvExamine = findViewById(R.id.tv_examine);
+//        m_tvBegining = findViewById(R.id.tv_begining);
+//        m_tvFinish = findViewById(R.id.tv_finish);
+        m_tvPersonType = findViewById(R.id.tv_person_type);
 
         m_llShare = findViewById(R.id.ll_share);
         m_llComment = findViewById(R.id.ll_comment);
         m_llMsg = findViewById(R.id.ll_msg);
+
+        recyclerView =  findViewById(R.id.recycle_view);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        recyclerView.addItemDecoration(new SpaceDecoration(10));
+        int itemSize = (MyApplication.getScreenWidth() - Utils.dp2px(this,120)) / 3;
+        m_pictureUrlAdapter = new PhotoAlbumAdapter(this,recyclerView,itemSize);
+        recyclerView.setAdapter(m_pictureUrlAdapter);
+
         viewInit();
         onClickView();
     }
 
     private void viewInit(){
         int nDivisor = 5;
-        switch (m_strCategoryNo){
-            case Const.CategoryNo.TYPE_RENOVATION:
-                m_llType11.setVisibility(View.VISIBLE);
-                m_llType12.setVisibility(View.VISIBLE);
-                break;
-            case Const.CategoryNo.TYPE_BUILDING:
-                m_tvTitleAmount.setText("看样费用:");
-                m_tvTitleAddress.setText("地址:");
-                m_llType21.setVisibility(View.VISIBLE);
-                break;
-            case Const.CategoryNo.TYPE_REDUCE_WEIGHT:
-                m_tvTitleAmount.setText("悬赏赏金:");
-                m_tvTitleAddress.setText("地址:");
-                m_llType31.setVisibility(View.VISIBLE);
-                m_tvCurrentWeight.setText("");
-                m_tvTargetWeight.setText("");
-                break;
-            case Const.CategoryNo.TYPE_QUIT_SMOKING:
-                m_tvTitleAmount.setText("悬赏金额:");
-                m_tvTitlePersonNo.setText("需要人手:");
-                m_tvTitleDetails.setText("悬赏事项:");
-                m_rlBidding4.setVisibility(View.VISIBLE);
-                m_llAddress4.setVisibility(View.GONE);
-                nDivisor = 6;
-                break;
-            case Const.CategoryNo.TYPE_QUIT_DRINKING:
-
-                break;
-            case Const.CategoryNo.TYPE_GIVE_UP_GAMBLING:
-
-                break;
-        }
-
-        //动态设置高度
-        ViewTreeObserver vto = m_progressBar.getViewTreeObserver();
-        final int finalNDivisor = nDivisor;
-        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener(){
-            @Override
-            public void onGlobalLayout() {
-                int width = m_progressBar.getWidth() - (m_progressBar.getWidth()/ finalNDivisor);
-                RelativeLayout.LayoutParams params =  (RelativeLayout.LayoutParams)m_progressBar.getLayoutParams();
-                params.width = width;
-                m_progressBar.setLayoutParams(params);
-                m_progressBar.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-            }
-        });
+//        switch (m_strCategoryNo){
+//            case Const.CategoryNo.TYPE_RENOVATION:
+//                break;
+//            case Const.CategoryNo.TYPE_REDUCE_WEIGHT:
+//                m_tvTitleAmount.setText("悬赏赏金:");
+//                m_tvTitleAddress.setText("地址:");
+//                break;
+//            case Const.CategoryNo.TYPE_QUIT_SMOKING:
+//                m_tvTitleAmount.setText("悬赏金额:");
+//                m_tvTitlePersonNo.setText("需要人手:");
+//                m_tvTitleDetails.setText("悬赏事项:");
+//                nDivisor = 6;
+//                break;
+//            case Const.CategoryNo.TYPE_QUIT_DRINKING:
+//
+//                break;
+//            case Const.CategoryNo.TYPE_GIVE_UP_GAMBLING:
+//
+//                break;
+//        }
     }
 
     private void onClickView() {
@@ -218,7 +204,14 @@ public class DetailsActivity extends BaseAppCompatActivity {
         m_llBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(AppSettings.isAutoLogin()){
+                    Utils.showCommonDialogVerifyCode(DetailsActivity.this, kProgressHUD, AppSettings.getPhone(), "", new OnTaskSuccessComplete() {
+                        @Override
+                        public void onSuccess(Object obj) {
 
+                        }
+                    });
+                }
             }
         });
 
@@ -234,7 +227,8 @@ public class DetailsActivity extends BaseAppCompatActivity {
         m_llComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent it = new Intent(DetailsActivity.this,CommentActivity.class);
+                startActivity(it);
             }
         });
 
@@ -249,60 +243,115 @@ public class DetailsActivity extends BaseAppCompatActivity {
 
     @Override
     protected void setUpData() {
-        ApiStores.schedulesDetails(m_strScheduleNo,new HttpCallback<ResponseMoneyMakingHallBean>() {
+        ApiStores.schedulesDetails(m_strScheduleNo,new HttpCallback<ResponseMoneyMakingDetailsBean>() {
             @Override
-            public void OnSuccess(ResponseMoneyMakingHallBean response) {
+            public void OnSuccess(ResponseMoneyMakingDetailsBean response) {
                 if(response.getSuccess()){
-                    if(response.getData().getContent().size() > 0){
-                        MoneyMakingHallBean data = response.getData().getContent().get(0);
-                        ImageLoader.getInstace().loadCircleImg(DetailsActivity.this, m_ivIcon, data.getUserInfo().getAvatar(),R.mipmap.head_s);
+                    final ResponseMoneyMakingDetailsBean.Data data = response.getData();
+                    ImageLoader.getInstace().loadCircleImg(DetailsActivity.this, m_ivIcon, data.getUserInfo().getAvatar(),R.mipmap.head_s);
 
-                        m_tvName.setText(data.getUserInfo().getNickname());
-                        m_tvTime.setText(TimeUtils.time2String(data.getCreated(),TimeUtils.TIME_FORMAT_NORMAL_SHOW_TYPE));
-                        if(data.getScheduleStatus() == Const.ActivityType.ACTIVITY_IS_PAYMENT){
-                            m_tvActivityType.setText("等待支付");
-                        }else  if(data.getScheduleStatus() == Const.ActivityType.ACTIVITY_IS_EXAMINE){
-                            m_tvActivityType.setText("等待审核");
-                            m_tvExamine.setBackground(getResources().getDrawable(R.drawable.shape_round_brown));
-                            m_tvBegining.setBackground(getResources().getDrawable(R.drawable.shape_round_brown));
-                            m_tvFinish.setBackground(getResources().getDrawable(R.drawable.shape_round_brown));
-                            m_progressBar.setProgress(50);
-                        }else  if(data.getScheduleStatus() == Const.ActivityType.ACTIVITY_IS_BIDDING){
-                            m_tvActivityType.setText("竞标中");
-                        }else  if(data.getScheduleStatus() == Const.ActivityType.ACTIVITY_IS_BEGINING){
-                            m_tvActivityType.setText("进行中");
-                            m_tvExamine.setBackground(getResources().getDrawable(R.drawable.shape_round_green));
-                            m_tvBegining.setBackground(getResources().getDrawable(R.drawable.shape_round_brown));
-                            m_tvFinish.setBackground(getResources().getDrawable(R.drawable.shape_round_brown));
-                            m_progressBar.setProgress(75);
-                        }else  if(data.getScheduleStatus() == Const.ActivityType.ACTIVITY_IS_FINISH){
-                            m_tvExamine.setBackground(getResources().getDrawable(R.drawable.shape_round_green));
-                            m_tvBegining.setBackground(getResources().getDrawable(R.drawable.shape_round_green));
-                            m_tvFinish.setBackground(getResources().getDrawable(R.drawable.shape_round_green));
-                            m_tvActivityType.setText("已完成");
-                            m_progressBar.setProgress(100);
+                    m_tvName.setText(data.getUserInfo().getNickname());
+                    m_tvTime.setText(TimeUtils.time2String(data.getCreated(),TimeUtils.TIME_FORMAT_NORMAL_SHOW_TYPE));
+                    m_tvActivityType.setText(data.getScheduleStatusName());
+
+                    int progress = 0;
+
+                    for(int i = 0 ; i < data.getProcesses().size() ; i ++){
+                        LinearLayout linearLayout = new LinearLayout(DetailsActivity.this);
+                        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
+                        linearLayout.setLayoutParams(param);
+                        linearLayout.setOrientation(LinearLayout.VERTICAL);
+                        linearLayout.setGravity(Gravity.CENTER_HORIZONTAL);
+                        TextView textView1 = new TextView(DetailsActivity.this);
+                        int imageWidth = Utils.dp2px(DetailsActivity.this, 25);
+                        int imageHeight = Utils.dp2px(DetailsActivity.this, 25);
+                        textView1.setLayoutParams(new LinearLayout.LayoutParams(imageWidth, imageHeight));
+                        textView1.setGravity(Gravity.CENTER);
+                        textView1.setTextColor(getResources().getColor(R.color.white_color));
+                        textView1.setText(String.valueOf(i+1));
+
+                        if(data.getProcesses().get(i).isFinished()){
+                            textView1.setBackground(ContextCompat.getDrawable(DetailsActivity.this, R.drawable.shape_round_green));
+                        }else{
+                            textView1.setBackground(ContextCompat.getDrawable(DetailsActivity.this, R.drawable.shape_round_brown));
+                            progress = 100/data.getProcesses().size()*i;
                         }
 
-                        m_tvScheduleNo.setText(data.getScheduleNo());//编号
-                        m_tvTitle.setText(data.getTitle());//活动标题
-                        m_tvAmount.setText(data.getGuaranteeAmount());//量房费用
-                        m_tvPersonNo.setText(data.getPersonnelLimit()+"家");//参与商家
-                        if(data.getScopeType() == Const.ScopeType.ALL_CITY){
-                            m_tvAddress.setText(data.getAreaName());//量房地址
-                        }else if(data.getScopeType() == Const.ScopeType.INDEX_CITY){
-                            m_tvAddress.setText(data.getScheduleScope());//量房地址
-                        }
-                        String time = TimeUtils.time2String(data.getClaimStartDate(),TimeUtils.DAY_FORMAT_NORMAL)+"至"+ TimeUtils.time2String(data.getClaimEndDate(),TimeUtils.DAY_FORMAT_NORMAL);
-                        m_tvTimeAndTime.setText(time);//活动周期
-//                        m_tvHouseType.setText(data.ge);//户型结构
-//                        m_tvHouseType2.setText(data.ge);//户型结构
-//                        m_tvAcreage.setText(data.ge);//建筑面积
-//                        m_tvStyleType.setText(data.ge);//设计风格
-//                        m_tvRenovationAmount.setText(data.ge);//装修预算
-//                        m_tvRenovationAmount2.setText(data.ge);//装修预算
-                        m_tvDetails.setText(data.getRemark());//详细内容
-                        m_tvRule.setText(Html.fromHtml(data.getRuleRemark()));
+                        TextView textView = new TextView(DetailsActivity.this); textView.setTextSize(9);
+                        textView.setTextColor(Color.BLACK);
+                        textView.setGravity(Gravity.CENTER_HORIZONTAL);
+                        textView.setPadding(10, 10, 10, 10);
+                        textView.setText(data.getProcesses().get(i).getTitle());
+                        linearLayout.addView(textView1);
+                        linearLayout.addView(textView);
+                        m_llByWidth.addView(linearLayout);
                     }
+
+                    //动态宽度
+                    ViewTreeObserver vto = m_progressBar.getViewTreeObserver();
+                    final int finalProgress = progress;
+                    vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener(){
+                        @Override
+                        public void onGlobalLayout() {
+                            int width = m_progressBar.getWidth() - (m_progressBar.getWidth()/ data.getProcesses().size());
+                            RelativeLayout.LayoutParams params =  (RelativeLayout.LayoutParams)m_progressBar.getLayoutParams();
+                            params.width = width;
+                            m_progressBar.setLayoutParams(params);
+                            m_progressBar.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                            m_progressBar.setProgress(finalProgress);
+                        }
+                    });
+
+
+                    if(data.getAttachments() != null){
+                        findViewById(R.id.ll_picture).setVisibility(View.VISIBLE);
+                        List<String> list = new ArrayList<>();
+                        for(int i = 0 ; i < data.getAttachments().size(); i ++){
+                            list.add(data.getAttachments().get(i).getUrl());
+                        }
+                        m_pictureUrlAdapter.setData(list);
+                        m_pictureUrlAdapter.notifyDataSetChanged();
+                    }
+
+                    m_tvScheduleNo.setText(data.getScheduleNo());//编号
+                    m_tvTitle.setText(data.getTitle());//活动标题
+                    m_tvAmount.setText(data.getPersonnelAmount());//当前量房费用
+                    m_tvAmountType.setText(data.getPersonnelAmount());//参与量房费用
+                    if("0".equals(data.getPersonnelLimit())){
+                        m_tvPersonType.setText("不限");//参与商家限制
+                    }else{
+                        m_tvPersonType.setText(data.getPersonnelLimit());//参与商家限制
+                    }
+                    m_tvPersonNo.setText(data.getPersonnelLimit());//当前参与商家
+
+                    if(data.getScopeType() == Const.ScopeType.ALL_CITY){
+                        m_tvAddress.setText(data.getAreaName());//量房地址
+                    }else if(data.getScopeType() == Const.ScopeType.INDEX_CITY){
+                        m_tvAddress.setText(data.getScheduleScope());//量房地址指定城市
+                    }
+                    String time = TimeUtils.time2String(data.getClaimStartDate(),TimeUtils.DAY_FORMAT_NORMAL)+"至"+ TimeUtils.time2String(data.getClaimEndDate(),TimeUtils.DAY_FORMAT_NORMAL);
+                    m_tvTimeAndTime.setText(time);//活动周期
+                    if(data.getExtraFieldMap().getHouseType() != null){
+                        m_tvHouseType.setText(data.getExtraFieldMap().getHouseType().getValue());//户型结构
+                    }
+                    if(data.getExtraFieldMap().getHouseStyle() != null) {
+                        m_tvStyleType.setText(data.getExtraFieldMap().getHouseStyle().getValue());//设计风格
+                    }
+                    if(data.getExtraFieldMap().getOutdoorAcreage() != null) {
+                        m_tvAcreage.setText(data.getExtraFieldMap().getOutdoorAcreage().getValue()+"平方");//建筑面积
+                    }
+                    if(data.getExtraFieldMap().getBudgetAmount() != null) {
+                        m_tvRenovationAmount.setText(data.getExtraFieldMap().getBudgetAmount().getValue()+"万");//装修预算
+                    }
+
+                    if(data.getRemark() != null){
+                        findViewById(R.id.ll_details).setVisibility(View.VISIBLE);
+                        m_tvDetails.setText(data.getRemark());//详细内容
+                    }
+
+                    m_tvRule.setText(Html.fromHtml(data.getRuleRemark()));
 
                 }
             }

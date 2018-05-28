@@ -69,10 +69,9 @@ public class ApiStores {
 
     /** 悬赏任务详情 */
     public static <T> void schedulesDetails(String strScheduleNo,HttpCallback<T> httpCallback){
-        String url =  urlVersion+"guarantee/schedules";
+        String url =  urlVersion+"guarantee/schedules/"+strScheduleNo;
 
         Map<String,Object> map = new HashMap<>();
-        map.put("scheduleNo",strScheduleNo);
 
         HttpClient.get(url,map, httpCallback);
     }
