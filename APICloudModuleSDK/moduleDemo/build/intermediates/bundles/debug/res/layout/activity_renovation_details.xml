@@ -20,7 +20,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@mipmap/icon_information"/>
+                android:background="@mipmap/renovation"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,9 +58,9 @@
                             android:gravity="center_vertical"
                             android:layout_marginTop="10dp">
                             <ImageView
-                                android:layout_width="10dp"
-                                android:layout_height="10dp"
-                                android:background="@color/dark"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@mipmap/address_icon"
                                 />
                             <TextView
                                 android:id="@+id/tv_my_address"
@@ -83,8 +83,10 @@
                     >
                     <TextView
                         android:id="@+id/tv_activity_type"
-                        android:layout_width="46dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="21dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:textColor="@color/red"
                         android:background="@drawable/shape_rectangle_btn_red_white"
                         android:text="进行中"
@@ -511,6 +513,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_rectangle_dark_red"
+                    android:textColor="@color/white_color"
                     android:paddingTop="45dp"
                     android:paddingBottom="5dp"
                     android:paddingRight="5dp"
@@ -714,39 +717,28 @@
             </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/ll_enrolls"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginBottom="1dp"
+                android:orientation="vertical"
+                android:paddingTop="14dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/white_color"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+                android:visibility="gone"
+                >
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="量房接单人"
                     android:textColor="@color/black_color"
-                    android:textSize="@dimen/fourteen"
-                    android:gravity="center_horizontal"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
-                android:background="@color/white_color"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
-                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:textSize="@dimen/fifteen"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycleview"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="还没有人接单"
-                    android:gravity="center_horizontal"/>
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -852,13 +844,15 @@
             android:orientation="vertical"
             android:gravity="center">
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@color/red"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/share_icon"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="分享"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/eleven"
                 android:layout_marginTop="5dp"/>
         </LinearLayout>
         <LinearLayout
@@ -869,31 +863,17 @@
             android:orientation="vertical"
             android:gravity="center">
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@color/red"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/comment_icon"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="评论"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/eleven"
                 android:layout_marginTop="5dp"/>
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/ll_msg"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@color/red"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="消息中心"
-                android:layout_marginTop="5dp"/>
-        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>

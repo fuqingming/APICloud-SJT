@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.apicloud.moduleDemo.backhandler.OnTaskSuccessComplete;
 import com.apicloud.moduleDemo.base.BaseAppCompatActivity;
+import com.apicloud.moduleDemo.bean.response.ResponseBaseBean;
 import com.apicloud.moduleDemo.bean.response.ResponseOrderBean;
 import com.apicloud.moduleDemo.http.ApiStores;
 import com.apicloud.moduleDemo.http.HttpCallback;
@@ -32,6 +33,12 @@ public class OrderPaymentActivity extends BaseAppCompatActivity {
     private TextView m_tvAmount;
     private Button m_btnCommit;
 
+    private String m_strOrderNo;
+    private String m_strPaymentNo;
+    private String m_strAmount;
+    private String m_strCreated;
+    private String m_strType;
+
     @Override
     protected int setLayoutResourceId() {
         return R.layout.activity_order_payment;
@@ -41,6 +48,11 @@ public class OrderPaymentActivity extends BaseAppCompatActivity {
     protected void setUpView() {
         Utils.initCommonTitle(this,"订单支付",true);
 
+        m_strOrderNo = getIntent().getStringExtra("strOrderNo");
+        m_strPaymentNo = getIntent().getStringExtra("strPaymentNo");
+        m_strAmount = getIntent().getStringExtra("strAmount");
+        m_strCreated = getIntent().getStringExtra("strCreated");
+
         m_rvWx = findViewById(R.id.rb_wx);
         m_rvZfb = findViewById(R.id.rb_zfb);
         m_tvOrderNo = findViewById(R.id.tv_order_no);
@@ -48,6 +60,11 @@ public class OrderPaymentActivity extends BaseAppCompatActivity {
         m_tvTitle = findViewById(R.id.tv_title);
         m_tvAmount = findViewById(R.id.tv_amount);
         m_btnCommit = findViewById(R.id.btn_commit);
+
+        m_tvOrderNo.setText(m_strOrderNo);
+        m_tvAmount.setText(m_strAmount);
+        m_tvTime.setText(TimeUtils.time2String(Long.valueOf(m_strCreated),TimeUtils.TIME_FORMAT_SHOW));
+        m_tvTitle.setText(getIntent().getStringExtra("strTitleType"));
 
         onCLickView();
     }
@@ -59,6 +76,7 @@ public class OrderPaymentActivity extends BaseAppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked){
                     m_rvZfb.setChecked(false);
+                    m_strType = "wxpay";
                 }
             }
         });
@@ -68,6 +86,7 @@ public class OrderPaymentActivity extends BaseAppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked){
                     m_rvWx.setChecked(false);
+                    m_strType = "alipay";
                 }
             }
         });
@@ -76,14 +95,7 @@ public class OrderPaymentActivity extends BaseAppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(isInputValid()){
-                    Utils.showCommonDialogAcceptSuccess(OrderPaymentActivity.this,new OnTaskSuccessComplete() {
-                        @Override
-                        public void onSuccess(Object obj) {
-                            Utils.showToast(OrderPaymentActivity.this,"支付成功");
-                            setResult(RESULT_OK);
-                            finish();
-                        }
-                    } );
+                    commit();
                 }
             }
         });
@@ -100,17 +112,23 @@ public class OrderPaymentActivity extends BaseAppCompatActivity {
         return true;
     }
 
-    private void commitInformation(){
-        String strScheduleNo = getIntent().getStringExtra("strScheduleNo");
-        ApiStores.myGuaranteesSchedulePreay(strScheduleNo, new HttpCallback<ResponseOrderBean>() {
+    private void commit(){
+        ApiStores.paymentPrepare(m_strOrderNo,m_strPaymentNo,m_strType, new HttpCallback<ResponseBaseBean>() {
 
                     @Override
-                    public void OnSuccess(final ResponseOrderBean response) {
+                    public void OnSuccess(final ResponseBaseBean response) {
                         if(response.getSuccess()){
                             Utils.showCommonDialogReleaseSuccess(OrderPaymentActivity.this,new OnTaskSuccessComplete() {
                                 @Override
                                 public void onSuccess(Object obj) {
-
+                                    Utils.showCommonDialogAcceptSuccess(OrderPaymentActivity.this,new OnTaskSuccessComplete() {
+                                        @Override
+                                        public void onSuccess(Object obj) {
+                                            Utils.showToast(OrderPaymentActivity.this,"支付成功");
+//                                            setResult(RESULT_OK);
+//                                            finish();
+                                        }
+                                    } );
                                 }
                             } );
                         }

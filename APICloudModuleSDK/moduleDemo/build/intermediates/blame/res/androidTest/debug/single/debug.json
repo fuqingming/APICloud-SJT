@@ -764,6 +764,10 @@
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\leakcanary-android-1.5.4.aar\\e3b8da100726d92e4bb73b98e3464ab5\\res\\drawable-xxxhdpi-v4\\leak_canary_icon.png"
     },
     {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_activity_select.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_select.xml"
+    },
+    {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_navigation_empty_icon.xml.flat",
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\70d88f9d80da2ad6b2fd3f6b0ba5a7ab\\res\\drawable\\navigation_empty_icon.xml"
     },
@@ -1454,6 +1458,10 @@
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_ic_launcher_background.png.flat",
         "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\drawable-xxxhdpi-v4\\ic_launcher_background.png"
+    },
+    {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\res\\merged\\androidTest\\debug\\mipmap-xhdpi-v4_renovation.png.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\mipmap-xhdpi-v4\\renovation.png"
     },
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_shape_rectangle_dialog_bg.xml.flat",
@@ -2674,6 +2682,10 @@
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_design_ic_visibility.xml.flat",
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\70d88f9d80da2ad6b2fd3f6b0ba5a7ab\\res\\drawable-anydpi-v21\\design_ic_visibility.xml"
+    },
+    {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_item_enrolls.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\layout\\item_enrolls.xml"
     },
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_notification_bg_low.xml.flat",

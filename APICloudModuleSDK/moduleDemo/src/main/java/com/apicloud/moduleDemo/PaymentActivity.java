@@ -111,7 +111,11 @@ public class PaymentActivity extends BaseAppCompatActivity {
             public void OnSuccess(final ResponseOrderBean response) {
                 if(response.getSuccess()){
                     Intent it = new Intent(PaymentActivity.this,OrderPaymentActivity.class);
-                    it.putExtra("",response.getData().getAmount());
+                    it.putExtra("strAmount",response.getData().getAmount());
+                    it.putExtra("strOrderNo",response.getData().getOrderNo());
+                    it.putExtra("strPaymentNo",response.getData().getPaymentNo());
+                    it.putExtra("strCreated",response.getData().getCreated());
+                    it.putExtra("strTitleType",getIntent().getStringExtra("strTitleType"));
                     startActivityForResult(it,MoneyMakingHallActivity.RELEASE_RENOVATION);
                 }
             }

@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apicloud.moduleDemo.adapter.PictureSelectionAdapter;
@@ -28,6 +29,7 @@ import com.apicloud.sdk.moduledemo.R;
 import org.json.JSONArray;
 
 import java.io.File;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,16 +47,15 @@ public class CommentActivity extends BaseAppCompatActivity {
     private List<MediaBean> m_arrMediaBean = null;
 
     private GridView m_gridView;
-    private EditText m_etName;
-    private EditText m_etPhone;
-    private EditText m_etTitle;
+    private TextView m_tvTitle;
     private EditText m_etText;
     private Button m_btnCommit;
 
+    private String m_strScheduleNo;
+    private String m_strCategoryName;
     private String m_strTitle;
+
     private String m_strText;
-    private String m_strName;
-    private String m_strPhone;
     private JSONArray m_jsonArrData;
 
     private UploadHandler m_uploadHandler = new UploadHandler();
@@ -67,20 +68,21 @@ public class CommentActivity extends BaseAppCompatActivity {
 
     @Override
     protected void setUpView() {
-        Utils.initCommonTitle(this,"咨询与建议",true);
+        Utils.initCommonTitle(this,"评论",true);
+
+        m_strScheduleNo = getIntent().getStringExtra("strScheduleNo");
+        m_strCategoryName = getIntent().getStringExtra("strCategoryName");
+        m_strTitle = getIntent().getStringExtra("strTitle");
 
         m_gridView = (GridView) findViewById(R.id.gridview_functions);
-        m_etName = (EditText) findViewById(R.id.et_name);
-        m_etPhone = (EditText) findViewById(R.id.et_phone);
-        m_etTitle = (EditText) findViewById(R.id.et_title);
+        m_tvTitle = findViewById(R.id.tv_title);
         m_etText = (EditText) findViewById(R.id.et_text);
         m_btnCommit = (Button) findViewById(R.id.btn_commit);
 
+        m_tvTitle.setText(MessageFormat.format("{0}-{1}", m_strCategoryName, m_strTitle));
+
         m_arrDatas = new ArrayList<>();
         m_arrDatas.add(null);
-
-        m_etName.setText(AppSettings.getNickname());
-        m_etPhone.setText(AppSettings.getPhone());
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -131,7 +133,7 @@ public class CommentActivity extends BaseAppCompatActivity {
     }
 
     private void commitInformation(){
-        ApiStores.informationActivity(m_strTitle, m_strName, m_strPhone, m_strText, m_jsonArrData, new HttpCallback<LoginBean>() {
+        ApiStores.comment(m_strScheduleNo,m_strCategoryName,m_strTitle, m_strText, m_jsonArrData, new HttpCallback<LoginBean>() {
 
             @Override
             public void OnSuccess(LoginBean response) {
@@ -210,39 +212,10 @@ public class CommentActivity extends BaseAppCompatActivity {
     private boolean isInputValid() {
         m_strText = m_etText.getText().toString().trim();
         if (m_strText.isEmpty()) {
-            Utils.showToast(CommentActivity.this, "请输入意见建议");
+            Utils.showToast(CommentActivity.this, "请输入评论说明");
             m_etText.requestFocus();
             return false;
         }
-
-        m_strName = m_etName.getText().toString().trim();
-        if (m_strName.isEmpty()) {
-            Utils.showToast(CommentActivity.this, "请输入联系人");
-            m_etName.requestFocus();
-            return false;
-        }
-
-        m_strPhone = m_etPhone.getText().toString().trim();
-        if(m_strPhone.isEmpty())
-        {
-            Utils.showToast(this, "请输入手机号码");
-            m_etPhone.requestFocus();
-            return false;
-        }
-        else if(m_strPhone.length() < 11)
-        {
-            Utils.showToast(this, "联系电话需要11位长度");
-            m_etPhone.requestFocus();
-            return false;
-        }
-        else if(!RegexUtil.checkMobile(m_strPhone))
-        {
-            Utils.showToast(this, "请输入正确的联系电话");
-            m_etPhone.requestFocus();
-            return false;
-        }
-
-        m_strTitle = m_etTitle.getText().toString().trim();
 
         return true;
     }

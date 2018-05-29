@@ -76,6 +76,29 @@ public class ApiStores {
         HttpClient.get(url,map, httpCallback);
     }
 
+    /** 我参与的悬赏任务列表 */
+    public static <T> void myEnrolls(int page,HttpCallback<T> httpCallback){
+        String url =  urlVersion+"my/guarantee/enrolls";
+
+        Map<String,Object> map = new HashMap<>();
+
+        map.put("limit", Constant.PAGE_SIZE);
+        map.put("page",page);
+
+        HttpClient.get(url,map, httpCallback);
+    }
+    /** 我的悬赏任务列表 */
+    public static <T> void mySchedulesList(int page,HttpCallback<T> httpCallback){
+        String url =  urlVersion+"my/guarantee/schedules";
+
+        Map<String,Object> map = new HashMap<>();
+
+        map.put("limit", Constant.PAGE_SIZE);
+        map.put("page",page);
+
+        HttpClient.get(url,map, httpCallback);
+    }
+
     /** 发布装修量房 */
     public static <T> void releaseRenovation(String title, String startDate,
                                              String endDate, int personnelLimit,String personnelAmount,
@@ -204,6 +227,20 @@ public class ApiStores {
         HttpClient.post(url,js.toString(),httpCallback);
     }
 
+    /** 第三交易下单 */
+    public static <T> void paymentPrepare(String orderNo,String paymentNo,String paymentType, HttpCallback<T> httpCallback){
+        String url =  urlVersion+"pays/"+orderNo+"/payments/"+paymentNo+"/prepare-pay";
+
+        JSONObject js = new JSONObject();
+        try {
+            js.put("paymentType",paymentType);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        HttpClient.post(url,js.toString(),httpCallback);
+    }
+
     /** 设计师创业/项目经理创业 */
     public static <T> void applyEntrepreneurship(String contact,String mobile,String workingYear,String companyName,String remark,int roleType,HttpCallback<T> httpCallback){
         String applyEntrepreneurship =  urlVersion+"cooperation/applies";
@@ -217,6 +254,23 @@ public class ApiStores {
             map.put("remark",remark);
             map.put("applyType",1);
             map.put("roleType",roleType);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        HttpClient.post(applyEntrepreneurship, map.toString(),httpCallback);
+    }
+
+    /** 推荐客户 */
+    public static <T> void customers(String fullname,String mobile,String customerName,String customerMobile,HttpCallback<T> httpCallback){
+        String applyEntrepreneurship =  urlVersion+"cooperation/customers";
+
+        JSONObject map = new JSONObject();
+        try {
+            map.put("fullname",fullname);
+            map.put("mobile",mobile);
+            map.put("customerName",customerName);
+            map.put("customerMobile",customerMobile);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -253,13 +307,33 @@ public class ApiStores {
 
     /** 咨询与建议 */
     public static <T> void informationActivity(String title, String contact, String mobile, String content, JSONArray jsonArray, HttpCallback<T> httpCallback){
-        String url =  urlVersion+"/my-suggestions";
+        String url =  urlVersion+"my-suggestions";
 
         JSONObject js = new JSONObject();
         try {
             js.put("title",title);
             js.put("contact",contact);
             js.put("mobile",mobile);
+            js.put("content",content);
+            js.put("attachments",jsonArray);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        HttpClient.post(url,js.toString(),httpCallback);
+    }
+
+    /** 评论 */
+    public static <T> void comment(String bizNo,String title, String subTitle, String content, JSONArray jsonArray, HttpCallback<T> httpCallback){
+        String url =  urlVersion+"my-comments";
+
+        JSONObject js = new JSONObject();
+        try {
+            js.put("bizNo",bizNo);
+            js.put("bizType",1005);
+            js.put("score",0);
+            js.put("title",title);
+            js.put("subTitle",subTitle);
             js.put("content",content);
             js.put("attachments",jsonArray);
         } catch (JSONException e) {

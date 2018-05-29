@@ -89,7 +89,8 @@ public class EntrepreneurshipActivity extends BaseGridViewActivity {
         header.findViewById(R.id.ll_recommend).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent it = new Intent(EntrepreneurshipActivity.this,RecommentActivity.class);
+                startActivity(it);
             }
         });
 

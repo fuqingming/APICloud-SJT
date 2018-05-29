@@ -84,6 +84,18 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="portrait"/>
 
+        <!--评论 活动  详情 评论-->
+        <activity
+            android:name="com.apicloud.moduleDemo.CommentActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"/>
+
+        <!--推荐客户-->
+        <activity
+            android:name="com.apicloud.moduleDemo.RecommentActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"/>
+
         <!--支付保证金-->
         <activity
             android:name="com.apicloud.moduleDemo.PaymentActivity"

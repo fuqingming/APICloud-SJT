@@ -1,5 +1,6 @@
 package com.apicloud.moduleDemo.bean.response;
 
+import com.apicloud.moduleDemo.bean.base.EnrollsBean;
 import com.apicloud.moduleDemo.bean.base.FileBean;
 import com.apicloud.moduleDemo.bean.base.MoneyMakingHallBean;
 import com.apicloud.moduleDemo.bean.base.ProcessesBean;
@@ -69,6 +70,16 @@ public class ResponseMoneyMakingDetailsBean extends ResponseBaseBean {
         private ExtraFieldMap extraFieldMap;
 
         private List<ProcessesBean> processes;
+
+        private List<EnrollsBean> enrolls;
+
+        public List<EnrollsBean> getEnrolls() {
+            return enrolls;
+        }
+
+        public void setEnrolls(List<EnrollsBean> enrolls) {
+            this.enrolls = enrolls;
+        }
 
         public List<ProcessesBean> getProcesses() {
             return processes;

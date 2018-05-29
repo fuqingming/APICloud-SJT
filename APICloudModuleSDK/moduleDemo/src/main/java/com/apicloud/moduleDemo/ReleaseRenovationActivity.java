@@ -372,6 +372,7 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
                             Intent it = new Intent(ReleaseRenovationActivity.this,PaymentActivity.class);
                             it.putExtra("strScheduleNo",response.getData().getScheduleNo());
                             it.putExtra("strTitle",response.getData().getTitle());
+                            it.putExtra("strTitleType",response.getData().getCategoryName()+"-"+response.getData().getTitle()+"活动保证金");
                             it.putExtra("strStartDate",response.getData().getStartDate());
                             it.putExtra("strEndDate",response.getData().getEndDate());
                             it.putExtra("strPersonnelLimit",response.getData().getPersonnelLimit());

@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.apicloud.moduleDemo.adapter.MoneyMakingHallAdapter;
 import com.apicloud.moduleDemo.adapter.MoneyTypeCheckedAdapter;
@@ -39,20 +40,13 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
 
     private CheckBox m_cbAllType;
     private CheckBox m_cbOrderBy;
-    private TextView m_tvBusiness;
-    private CheckBox m_cbAmount;
     private TextView m_teRelease;
-
-    private LinearLayout m_llBusiness;
-    private LinearLayout m_llAmount;
+    private RelativeLayout m_rlBg;
 
     private List<MoneyMakingHallTypeBean> m_arrAllType;
     private List<MoneyMakingHallTypeBean> m_arrOrderByBean;
-    private List<MoneyMakingHallTypeBean> m_arrOrderByBeans;
-    private List<MoneyMakingHallTypeBean> m_arrOrderByAmountBeans;
 
     private String m_strCategoryNo;
-    private String m_strAmount = "";
     private String m_strOrderBy = "";
     private boolean m_isType = true;
 
@@ -71,20 +65,14 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
 
         m_arrAllType = new ArrayList<>();
         m_arrOrderByBean = PopDataUtil.initOrderByData();
-        m_arrOrderByBeans = PopDataUtil.initOrderByDatas();
-        m_arrOrderByAmountBeans = PopDataUtil.initOrderByAmountData();
     }
 
     @Override
     protected void initView() {
         m_cbAllType = (CheckBox) findViewById(R.id.cb_all_type);
         m_cbOrderBy = (CheckBox) findViewById(R.id.cb_order_by);
-        m_tvBusiness = (TextView) findViewById(R.id.tv_business);
         m_teRelease = (TextView) findViewById(R.id.tv_release);
-        m_cbAmount = (CheckBox) findViewById(R.id.cb_amount);
-
-        m_llBusiness = (LinearLayout)findViewById(R.id.ll_business);
-        m_llAmount = (LinearLayout)findViewById(R.id.ll_amount);
+        m_rlBg = findViewById(R.id.rl_bg);
 
         viewInit();
 
@@ -101,33 +89,21 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
         switch (m_strCategoryNo){
             case Const.CategoryNo.TYPE_RENOVATION:
                 m_teRelease.setText("我也发布量房");
-                m_llBusiness.setVisibility(View.VISIBLE);
-                m_llAmount.setVisibility(View.GONE);
                 break;
             case Const.CategoryNo.TYPE_BUILDING:
                 m_teRelease.setText("发布买建材赚赏金");
-                m_llBusiness.setVisibility(View.VISIBLE);
-                m_llAmount.setVisibility(View.GONE);
                 break;
             case Const.CategoryNo.TYPE_REDUCE_WEIGHT:
                 m_teRelease.setText("我也要减肥赚赏金");
-                m_llBusiness.setVisibility(View.GONE);
-                m_llAmount.setVisibility(View.VISIBLE);
                 break;
             case Const.CategoryNo.TYPE_QUIT_SMOKING:
                 m_teRelease.setText("我也要戒烟赚赏金");
-                m_llBusiness.setVisibility(View.GONE);
-                m_llAmount.setVisibility(View.VISIBLE);
                 break;
             case Const.CategoryNo.TYPE_QUIT_DRINKING:
                 m_teRelease.setText("我也要戒酒赚赏金");
-                m_llBusiness.setVisibility(View.GONE);
-                m_llAmount.setVisibility(View.VISIBLE);
                 break;
             case Const.CategoryNo.TYPE_GIVE_UP_GAMBLING:
                 m_teRelease.setText("我也要戒赌赚赏金");
-                m_llBusiness.setVisibility(View.GONE);
-                m_llAmount.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -169,38 +145,14 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
         m_cbOrderBy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                filterTabToggle(isChecked, m_cbOrderBy,new MoneyTypeCheckedAdapter(MoneyMakingHallActivity.this,m_isType ? m_arrOrderByBean : m_arrOrderByBeans),new AdapterView.OnItemClickListener() {
+                filterTabToggle(isChecked, m_rlBg,new MoneyTypeCheckedAdapter(MoneyMakingHallActivity.this,m_arrOrderByBean),new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                        m_strOrderBy = (m_isType ? m_arrOrderByBean : m_arrOrderByBeans).get(position).getCategoryNo();
-                        m_strAmount = "";
+                        m_strOrderBy = (m_arrOrderByBean).get(position).getCategoryNo();
                         hidePopListView();
                         onRefreshView();
                     }
-                }, m_cbOrderBy, m_cbAllType,m_cbAmount);
-            }
-        });
-
-        m_cbAmount.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                filterTabToggle(isChecked, m_cbAmount,new MoneyTypeCheckedAdapter(MoneyMakingHallActivity.this,m_arrOrderByAmountBeans),new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                        m_strOrderBy = "";
-                        m_strAmount = m_arrOrderByAmountBeans.get(position).getCategoryNo();
-                        hidePopListView();
-                        onRefreshView();
-                    }
-                },m_cbAmount , m_cbAllType,m_cbOrderBy);
-            }
-        });
-
-        m_tvBusiness.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent it = new Intent(MoneyMakingHallActivity.this,BusinessActivity.class);
-                startActivity(it);
+                }, m_cbOrderBy, m_cbAllType);
             }
         });
 
@@ -246,7 +198,7 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
     }
 
     private void showPopAllType(boolean isChecked){
-        filterTabToggle(isChecked, m_cbAllType,new MoneyTypeCheckedAdapter(MoneyMakingHallActivity.this,m_arrAllType),new AdapterView.OnItemClickListener() {
+        filterTabToggle(isChecked, m_rlBg,new MoneyTypeCheckedAdapter(MoneyMakingHallActivity.this,m_arrAllType),new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 hidePopListView();
@@ -269,22 +221,22 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
                     m_moneyMakingHallAdapter.setType(m_isType);
                     m_strCategoryNo = m_arrAllType.get(position).getCategoryNo();
                     m_strOrderBy = "";
-                    m_strAmount = "";
+                    kProgressHUD.show();
                     onRefreshView();
                 }else if(strCategoryNo.equals(Const.CategoryNo.TYPE_REDUCE_WEIGHT) || strCategoryNo.equals(Const.CategoryNo.TYPE_QUIT_SMOKING) ||
                         strCategoryNo.equals(Const.CategoryNo.TYPE_QUIT_DRINKING) || strCategoryNo.equals(Const.CategoryNo.TYPE_GIVE_UP_GAMBLING)){
+                    kProgressHUD.show();
                     m_isType = false;
                     m_moneyMakingHallAdapter.setType(m_isType);
                     m_strCategoryNo = m_arrAllType.get(position).getCategoryNo();
                     m_strOrderBy = "";
-                    m_strAmount = "";
                     onRefreshView();
                 }else{
                     Utils.showToast(MoneyMakingHallActivity.this,"敬请期待~!");
                 }
 
             }
-        }, m_cbAllType, m_cbOrderBy,m_cbAmount);
+        }, m_cbAllType, m_cbOrderBy);
     }
 
     protected void requestCheckBoxAllType(final boolean isChecked){
@@ -316,7 +268,7 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
     }
 
     protected void requestData(){
-        ApiStores.categories(mCurrentPage,m_strCategoryNo,m_strAmount,m_strOrderBy, new HttpCallback<ResponseMoneyMakingHallBean>() {
+        ApiStores.categories(mCurrentPage,m_strCategoryNo,"",m_strOrderBy, new HttpCallback<ResponseMoneyMakingHallBean>() {
             @Override
             public void OnSuccess(ResponseMoneyMakingHallBean response) {
                 if(response.getSuccess()){

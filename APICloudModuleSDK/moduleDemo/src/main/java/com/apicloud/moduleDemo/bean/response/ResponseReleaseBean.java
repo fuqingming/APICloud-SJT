@@ -27,6 +27,7 @@ public class ResponseReleaseBean extends ResponseBaseBean{
         private String scheduleNo;
         private String title;
         private String guaranteeAmount;
+        private String categoryName;
 
         public UserInfoBean getUserInfo() {
             return userInfo;
@@ -82,6 +83,14 @@ public class ResponseReleaseBean extends ResponseBaseBean{
 
         public void setGuaranteeAmount(String guaranteeAmount) {
             this.guaranteeAmount = guaranteeAmount;
+        }
+
+        public String getCategoryName() {
+            return categoryName;
+        }
+
+        public void setCategoryName(String categoryName) {
+            this.categoryName = categoryName;
         }
     }
 }

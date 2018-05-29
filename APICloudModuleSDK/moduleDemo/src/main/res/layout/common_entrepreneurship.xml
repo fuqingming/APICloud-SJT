@@ -95,6 +95,7 @@
             android:background="@drawable/shape_rectangle_dark_red"
             android:paddingTop="45dp"
             android:text="@string/rule"
+            android:textColor="@color/white_color"
             android:paddingBottom="5dp"
             android:paddingRight="5dp"
             android:paddingLeft="5dp"

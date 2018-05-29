@@ -110,6 +110,14 @@
         <activity
             android:name="com.apicloud.moduleDemo.DetailsActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> <!-- 评论 活动  详情 评论 -->
+        <activity
+            android:name="com.apicloud.moduleDemo.CommentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> <!-- 推荐客户 -->
+        <activity
+            android:name="com.apicloud.moduleDemo.RecommentActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> <!-- 支付保证金 -->
         <activity
             android:name="com.apicloud.moduleDemo.PaymentActivity"

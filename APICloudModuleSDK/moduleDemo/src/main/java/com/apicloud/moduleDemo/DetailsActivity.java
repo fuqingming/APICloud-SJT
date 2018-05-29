@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.DisplayMetrics;
@@ -21,10 +22,12 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.apicloud.moduleDemo.adapter.EnrollsAdapter;
 import com.apicloud.moduleDemo.adapter.PhotoAlbumAdapter;
 import com.apicloud.moduleDemo.backhandler.OnTaskSuccessComplete;
 import com.apicloud.moduleDemo.base.BaseAppCompatActivity;
 import com.apicloud.moduleDemo.base.MyApplication;
+import com.apicloud.moduleDemo.bean.base.EnrollsBean;
 import com.apicloud.moduleDemo.bean.base.FileBean;
 import com.apicloud.moduleDemo.bean.base.MoneyMakingHallBean;
 import com.apicloud.moduleDemo.bean.response.ResponseMoneyMakingDetailsBean;
@@ -58,12 +61,13 @@ public class DetailsActivity extends BaseAppCompatActivity {
     private LinearLayout m_llBtn;
     private LinearLayout m_llShare;
     private LinearLayout m_llComment;
-    private LinearLayout m_llMsg;
 
     private TelephonePopupWindow m_pwMenu;
 
     private String m_strScheduleNo;
     private String m_strCategoryNo;
+    private String m_strCategoryName;
+    private String m_strTitle;
 
     private ImageView m_ivIcon;
     private TextView m_tvName;
@@ -83,16 +87,16 @@ public class DetailsActivity extends BaseAppCompatActivity {
     private TextView m_tvRenovationAmount;//装修预算
     private TextView m_tvDetails;//详细内容
     private TextView m_tvRule;//活动规则
-//    private TextView m_tvExamine;//审核
-//    private TextView m_tvBegining;//进行中
-//    private TextView m_tvFinish;//完成
     private TextView m_tvTitleAmount;//当前量房金
     private TextView m_tvTitleAddress;//量房地址
     private TextView m_tvTitlePersonNo;//当前参与量房公司
     private TextView m_tvTitleDetails;//详细内容
 
-    private RecyclerView recyclerView;
+    private RecyclerView m_recyclerViewPic;
     private PhotoAlbumAdapter m_pictureUrlAdapter;
+
+    private RecyclerView m_recyclerViewEnrolls;
+    private EnrollsAdapter m_enrollsAdapter = new EnrollsAdapter();
 
     @Override
     protected int setLayoutResourceId() {
@@ -134,24 +138,28 @@ public class DetailsActivity extends BaseAppCompatActivity {
         m_tvDetails = findViewById(R.id.tv_details);
         m_tvTitleDetails = findViewById(R.id.tv_title_details);
         m_tvRule = findViewById(R.id.tv_rule);
-//        m_tvExamine = findViewById(R.id.tv_examine);
-//        m_tvBegining = findViewById(R.id.tv_begining);
-//        m_tvFinish = findViewById(R.id.tv_finish);
         m_tvPersonType = findViewById(R.id.tv_person_type);
 
         m_llShare = findViewById(R.id.ll_share);
         m_llComment = findViewById(R.id.ll_comment);
-        m_llMsg = findViewById(R.id.ll_msg);
 
-        recyclerView =  findViewById(R.id.recycle_view);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-        recyclerView.addItemDecoration(new SpaceDecoration(10));
+        m_recyclerViewPic =  findViewById(R.id.recycle_view);
+        m_recyclerViewPic.setLayoutManager(new GridLayoutManager(this, 3));
+        m_recyclerViewPic.addItemDecoration(new SpaceDecoration(10));
         int itemSize = (MyApplication.getScreenWidth() - Utils.dp2px(this,120)) / 3;
-        m_pictureUrlAdapter = new PhotoAlbumAdapter(this,recyclerView,itemSize);
-        recyclerView.setAdapter(m_pictureUrlAdapter);
+        m_pictureUrlAdapter = new PhotoAlbumAdapter(this,m_recyclerViewPic,itemSize);
+        m_recyclerViewPic.setAdapter(m_pictureUrlAdapter);
+
+        m_recyclerViewEnrolls = findViewById(R.id.recycleview);
+        m_recyclerViewEnrolls.setLayoutManager(new LinearLayoutManager(this));
+        m_recyclerViewEnrolls.setHasFixedSize(true);
+        m_recyclerViewEnrolls.setAdapter(m_enrollsAdapter);
 
         viewInit();
+
         onClickView();
+
+        getData();
     }
 
     private void viewInit(){
@@ -228,26 +236,22 @@ public class DetailsActivity extends BaseAppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent it = new Intent(DetailsActivity.this,CommentActivity.class);
+                it.putExtra("strScheduleNo",m_strScheduleNo);
+                it.putExtra("strCategoryName",m_strCategoryName);
+                it.putExtra("strTitle",m_strTitle);
                 startActivity(it);
-            }
-        });
-
-        //消息中心
-        m_llMsg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
             }
         });
     }
 
-    @Override
-    protected void setUpData() {
+    private void getData() {
         ApiStores.schedulesDetails(m_strScheduleNo,new HttpCallback<ResponseMoneyMakingDetailsBean>() {
             @Override
             public void OnSuccess(ResponseMoneyMakingDetailsBean response) {
                 if(response.getSuccess()){
                     final ResponseMoneyMakingDetailsBean.Data data = response.getData();
+                    m_strCategoryName = data.getCategoryName();
+                    m_strTitle = data.getTitle();
                     ImageLoader.getInstace().loadCircleImg(DetailsActivity.this, m_ivIcon, data.getUserInfo().getAvatar(),R.mipmap.head_s);
 
                     m_tvName.setText(data.getUserInfo().getNickname());
@@ -304,6 +308,11 @@ public class DetailsActivity extends BaseAppCompatActivity {
                         }
                     });
 
+                    //参与商家
+                    if(data.getEnrolls().size() > 0){
+                        findViewById(R.id.ll_enrolls).setVisibility(View.VISIBLE);
+                        m_enrollsAdapter.setDataList(data.getEnrolls());
+                    }
 
                     if(data.getAttachments() != null){
                         findViewById(R.id.ll_picture).setVisibility(View.VISIBLE);

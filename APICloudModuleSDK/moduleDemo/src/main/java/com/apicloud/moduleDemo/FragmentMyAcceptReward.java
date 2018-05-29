@@ -5,6 +5,9 @@ import android.view.View;
 
 import com.apicloud.moduleDemo.adapter.MyRewardAdapter;
 import com.apicloud.moduleDemo.base.BaseListFragment;
+import com.apicloud.moduleDemo.bean.response.ResponseMoneyMakingHallBean;
+import com.apicloud.moduleDemo.http.ApiStores;
+import com.apicloud.moduleDemo.http.HttpCallback;
 import com.apicloud.moduleDemo.util.recycler.BaseRecyclerAdapter;
 import com.apicloud.sdk.moduledemo.R;
 import com.github.jdsjlzx.ItemDecoration.DividerDecoration;
@@ -64,31 +67,27 @@ public class FragmentMyAcceptReward extends BaseListFragment {
     }
 
     protected void requestData(){
-        executeOnLoadDataSuccess(DataUtil.initMyReward(),true);
-        executeOnLoadFinish();
-//        HttpClient.get(ApiStores.changePwd,ApiStores.changePwd("","",""), new HttpCallback<ResponseBaseBean>() {//ResponseHallBean
-//            @Override
-//            public void OnSuccess(ResponseBaseBean response) {
-//                if(response.getResult()){
-//                    List<TeacherAnalysisBean> responseFragmentHallBeen = new ArrayList<>();
-//                    responseFragmentHallBeen.addAll(response.getContent().getJuemi().getData());
-//                    executeOnLoadDataSuccess(responseFragmentHallBeen);
-//                }
-//            }
-//
-//            @Override
-//            public void OnFailure(String message) {
-//                executeOnLoadDataError(null);
-//            }
-//
-//            @Override
-//            public void OnRequestStart() {
-//            }
-//
-//            @Override
-//            public void OnRequestFinish() {
-//                executeOnLoadFinish();
-//            }
-//        });
+        ApiStores.myEnrolls(mCurrentPage, new HttpCallback<ResponseMoneyMakingHallBean>() {
+            @Override
+            public void OnSuccess(ResponseMoneyMakingHallBean response) {
+                if(response.getSuccess()){
+                    executeOnLoadDataSuccess(response.getData().getContent(),false);
+                }
+            }
+
+            @Override
+            public void OnFailure(String message) {
+                executeOnLoadDataError(null);
+            }
+
+            @Override
+            public void OnRequestStart() {
+            }
+
+            @Override
+            public void OnRequestFinish() {
+                executeOnLoadFinish();
+            }
+        });
     }
 }
