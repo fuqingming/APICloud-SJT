@@ -1,10 +1,15 @@
 package com.apicloud.moduleDemo.adapter;
 
 
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.apicloud.moduleDemo.base.MyRewardBean;
+import com.apicloud.moduleDemo.bean.base.MoneyMakingHallBean;
+import com.apicloud.moduleDemo.settings.Const;
+import com.apicloud.moduleDemo.util.ImageLoader;
+import com.apicloud.moduleDemo.util.TimeUtils;
 import com.apicloud.moduleDemo.util.recycler.BaseRecyclerAdapter;
 import com.apicloud.moduleDemo.util.recycler.BaseRecyclerViewHolder;
 import com.apicloud.sdk.moduledemo.R;
@@ -14,7 +19,7 @@ import com.apicloud.sdk.moduledemo.R;
  * Date: 2017/11/13
  */
 
-public class MyRewardAdapter extends BaseRecyclerAdapter<MyRewardBean> {
+public class MyRewardAdapter extends BaseRecyclerAdapter<MoneyMakingHallBean> {
 
     public MyRewardAdapter() {
     }
@@ -25,7 +30,7 @@ public class MyRewardAdapter extends BaseRecyclerAdapter<MyRewardBean> {
     }
 
     @Override
-    protected void covert(BaseRecyclerViewHolder holder, MyRewardBean data, int position) {
+    protected void covert(BaseRecyclerViewHolder holder, MoneyMakingHallBean data, int position) {
         ImageView ivIcon = holder.getView().findViewById(R.id.iv_icon);
         TextView tvName = holder.getView().findViewById(R.id.tv_name);
         TextView tvAddress = holder.getView().findViewById(R.id.tv_address);
@@ -33,14 +38,63 @@ public class MyRewardAdapter extends BaseRecyclerAdapter<MyRewardBean> {
         TextView tvTime = holder.getView().findViewById(R.id.tv_time);
         TextView tvTitle = holder.getView().findViewById(R.id.tv_title);
         TextView tvText = holder.getView().findViewById(R.id.tv_text);
+        ImageView ivType = holder.getView().findViewById(R.id.iv_type);
 
-        ivIcon.setImageResource(data.getIcon());
-        tvName.setText(data.getName());
-        tvAddress.setText(data.getAddress());
-        tvAmount.setText(data.getAmount());
-        tvTime.setText(data.getTime());
+        ImageLoader.getInstace().loadCircleImg(mContext, ivIcon, data.getUserInfo().getAvatar(),R.mipmap.head_s);
+
+        tvName.setText(data.getUserInfo().getNickname());
+        tvAddress.setText(data.getProvinceName()+data.getCityName()+data.getCountyName());
+        tvAmount.setText(data.getGuaranteeAmount());
+        tvTime.setText(TimeUtils.time2String(data.getCreated(),TimeUtils.TIME_FORMAT_SHOW));
+        if(!"".equals(data.getRemark()) && data.getRemark() != null){
+            tvText.setVisibility(View.VISIBLE);
+        }else{
+            tvText.setVisibility(View.GONE);
+        }
         tvTitle.setText(data.getTitle());
-        tvText.setText(data.getText());
+        tvText.setText(data.getRemark());
+
+        switch (data.getScheduleStatus()){
+            case Const.ActivityType.ACTIVITY_IS_PAYMENT://等待支付
+                ivType.setImageResource(R.mipmap.wait_pay);
+                break;
+
+            case Const.ActivityType.ACTIVITY_IS_EXAMINE://等待审核
+
+                break;
+
+            case Const.ActivityType.ACTIVITY_IS_BEGINING://进行中
+                ivType.setImageResource(R.mipmap.begining);
+                break;
+
+            case Const.ActivityType.ACTIVITY_IS_FINISH://已完成
+                if(data.getCloseType() != null){
+                    switch (data.getCloseType()){
+                        case Const.CloseType.CLOSE_TYPE_SUCCESS://成功
+                            ivType.setImageResource(R.mipmap.success);
+                            break;
+
+                        case Const.CloseType.CLOSE_TYPE_DEFAIL://失败
+
+                            break;
+
+                        case Const.CloseType.CLOSE_TYPE_NOT_THROUGH://审核未通过
+                            ivType.setImageResource(R.mipmap.defail);
+                            break;
+
+                        case Const.CloseType.CLOSE_TYPE_NO_DEAL://未成交
+
+                            break;
+                        case Const.CloseType.CLOSE_TYPE_REVOKE://已撤销
+
+                            break;
+                        case Const.CloseType.CLOSE_TYPE_CLOSE://超时关闭
+
+                            break;
+                    }
+                }
+                break;
+        }
     }
 
 }

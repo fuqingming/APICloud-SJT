@@ -34,7 +34,8 @@ import java.util.List;
 
 public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHallBean> {
 
-    public static  final int RELEASE_RENOVATION = 0;//量房result
+    public static  final int RELEASE_RENOVATION = 0;//量房发布startActivityForResult
+    public static final int APPLY_RENOVATION = 1;//申请参加量房startActivityForResult
 
     private MoneyMakingHallAdapter m_moneyMakingHallAdapter = new MoneyMakingHallAdapter();
 
@@ -124,6 +125,7 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
             @Override
             public void onItemClick(View view, int position) {
                 Intent it = new Intent(MoneyMakingHallActivity.this,DetailsActivity.class);
+                it.putExtra("strCallHttpType","1");
                 it.putExtra("strScheduleNo",m_moneyMakingHallAdapter.getListData().get(position).getScheduleNo());
                 it.putExtra("strCategoryNo",m_strCategoryNo);
                 startActivity(it);
@@ -183,6 +185,7 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
                         break;
                 }
                 it.putExtra("strCategoryNo",m_strCategoryNo);
+                it.putExtra("nRequestCode",RELEASE_RENOVATION);
                 startActivityForResult(it,nResultCode);
             }
         });

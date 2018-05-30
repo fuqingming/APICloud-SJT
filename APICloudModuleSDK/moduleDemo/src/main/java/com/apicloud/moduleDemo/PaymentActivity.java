@@ -36,8 +36,10 @@ public class PaymentActivity extends BaseAppCompatActivity {
     private TextView m_tvAmount;
     private CheckBox m_cbClause;
     private Button m_btnCommit;
+    private TextView m_tvAmountType;
 
     private boolean m_isAgree = false;
+    private int m_nRequestCode;
 
     @Override
     protected int setLayoutResourceId() {
@@ -48,6 +50,8 @@ public class PaymentActivity extends BaseAppCompatActivity {
     protected void setUpView() {
         Utils.initCommonTitle(this,"支付量房金",true);
 
+        m_nRequestCode = getIntent().getIntExtra("nRequestCode",MoneyMakingHallActivity.RELEASE_RENOVATION);
+
         m_ivIcon = findViewById(R.id.iv_icon);
         m_tvName = findViewById(R.id.tv_name);
         m_tvTime = findViewById(R.id.tv_time);
@@ -57,19 +61,21 @@ public class PaymentActivity extends BaseAppCompatActivity {
         m_tvAmount = findViewById(R.id.tv_amount);
         m_cbClause = findViewById(R.id.cb_clause);
         m_btnCommit = findViewById(R.id.btn_commit);
+        m_tvAmountType = findViewById(R.id.tv_amount_type);
 
-        String strStartTime = getIntent().getStringExtra("strStartDate");
-        String strEndTime = getIntent().getStringExtra("strEndDate");
-        String stringBuilder = TimeUtils.time2String(Long.valueOf(strStartTime), TimeUtils.DAY_FORMAT_NORMAL) + "-" + TimeUtils.time2String(Long.valueOf(strEndTime), TimeUtils.DAY_FORMAT_NORMAL);
+        String strTime = getIntent().getStringExtra("strTime");
         String strPersonnelLimit = getIntent().getStringExtra("strPersonnelLimit");
 
         ImageLoader.getInstace().loadCircleImg(this, m_ivIcon, AppSettings.getHeadPic(),R.mipmap.head_s);
         m_tvName.setText(AppSettings.getNickname());
         m_tvTime.setText(TimeUtils.time2String(System.currentTimeMillis(),TimeUtils.TIME_FORMAT_SHOW));
-        m_tvTimeActivity.setText(stringBuilder);
+        m_tvTimeActivity.setText(strTime);
         m_tvPersonNo.setText("0".equals(strPersonnelLimit) ? "不限": MessageFormat.format("{0}家", strPersonnelLimit));
-        m_tvAmount.setText(getIntent().getStringExtra("strGuaranteeAmount")+"元");
+        m_tvAmount.setText(MessageFormat.format("{0}元", getIntent().getStringExtra("strGuaranteeAmount")));
         m_tvTitle.setText(getIntent().getStringExtra("strTitle"));
+        if(m_nRequestCode == MoneyMakingHallActivity.APPLY_RENOVATION){
+            m_tvAmountType.setText("量房金");
+        }
 
         onCLickView();
     }
@@ -116,7 +122,7 @@ public class PaymentActivity extends BaseAppCompatActivity {
                     it.putExtra("strPaymentNo",response.getData().getPaymentNo());
                     it.putExtra("strCreated",response.getData().getCreated());
                     it.putExtra("strTitleType",getIntent().getStringExtra("strTitleType"));
-                    startActivityForResult(it,MoneyMakingHallActivity.RELEASE_RENOVATION);
+                    startActivityForResult(it,m_nRequestCode);
                 }
             }
 
@@ -144,6 +150,9 @@ public class PaymentActivity extends BaseAppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == Activity.RESULT_OK){
             if(requestCode == MoneyMakingHallActivity.RELEASE_RENOVATION){
+                setResult(RESULT_OK);
+                finish();
+            }else  if(requestCode == MoneyMakingHallActivity.APPLY_RENOVATION){
                 setResult(RESULT_OK);
                 finish();
             }

@@ -21,8 +21,8 @@ public class ResponseReleaseBean extends ResponseBaseBean{
 
     public class Data{
         private UserInfoBean userInfo;
-        private String startDate;
-        private String endDate;
+        private long startDate;
+        private long endDate;
         private String personnelLimit;
         private String scheduleNo;
         private String title;
@@ -37,19 +37,19 @@ public class ResponseReleaseBean extends ResponseBaseBean{
             this.userInfo = userInfo;
         }
 
-        public String getStartDate() {
+        public long getStartDate() {
             return startDate;
         }
 
-        public void setStartDate(String startDate) {
+        public void setStartDate(long startDate) {
             this.startDate = startDate;
         }
 
-        public String getEndDate() {
+        public long getEndDate() {
             return endDate;
         }
 
-        public void setEndDate(String endDate) {
+        public void setEndDate(long endDate) {
             this.endDate = endDate;
         }
 

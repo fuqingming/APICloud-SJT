@@ -29,6 +29,16 @@ public class Const {
         public static final int ACTIVITY_IS_FINISH = 20;	// 已完成
     }
 
+    public class CloseType
+    {
+        public static final String CLOSE_TYPE_SUCCESS = "1";	    // 成功
+        public static final String CLOSE_TYPE_DEFAIL = "2";	    // 失败
+        public static final String CLOSE_TYPE_NOT_THROUGH  = "8";// 审核未通过
+        public static final String CLOSE_TYPE_NO_DEAL = "10";	// 未成交
+        public static final String CLOSE_TYPE_REVOKE  = "15";	// 已撤销
+        public static final String CLOSE_TYPE_CLOSE = "26";	    // 超时关闭
+    }
+
     public class ScopeType
     {
         public static final int ALL_CITY = 1;	// 全国

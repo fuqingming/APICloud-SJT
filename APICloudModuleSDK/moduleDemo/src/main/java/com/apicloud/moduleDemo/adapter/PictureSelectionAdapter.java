@@ -51,7 +51,7 @@ public class PictureSelectionAdapter extends BaseAdapter {
 		}
 
 		if(m_listItems.get(position) == null){
-			Glide.with(m_context).load(R.mipmap.shejishichuangye).into(holder.m_ivIconPay);
+			Glide.with(m_context).load(R.mipmap.add_icon).into(holder.m_ivIconPay);
 		}else{
 			Glide.with(m_context).load(m_listItems.get(position).getThumbnailBigPath())
 					.placeholder(R.drawable.place_holder)

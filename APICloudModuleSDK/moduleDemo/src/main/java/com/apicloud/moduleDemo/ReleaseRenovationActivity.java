@@ -373,10 +373,11 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
                             it.putExtra("strScheduleNo",response.getData().getScheduleNo());
                             it.putExtra("strTitle",response.getData().getTitle());
                             it.putExtra("strTitleType",response.getData().getCategoryName()+"-"+response.getData().getTitle()+"活动保证金");
-                            it.putExtra("strStartDate",response.getData().getStartDate());
-                            it.putExtra("strEndDate",response.getData().getEndDate());
+                            String strTime = TimeUtils.time2String(response.getData().getStartDate(),TimeUtils.DAY_FORMAT_NORMAL)+"-"+ TimeUtils.time2String(response.getData().getEndDate(),TimeUtils.DAY_FORMAT_NORMAL);
+                            it.putExtra("strTime",strTime);
                             it.putExtra("strPersonnelLimit",response.getData().getPersonnelLimit());
                             it.putExtra("strGuaranteeAmount",response.getData().getGuaranteeAmount());
+                            it.putExtra("nRequestCode",getIntent().getIntExtra("nRequestCode",0));
                             startActivityForResult(it,MoneyMakingHallActivity.RELEASE_RENOVATION);
                         }
                     }

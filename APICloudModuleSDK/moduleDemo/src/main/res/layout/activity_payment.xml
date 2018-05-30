@@ -47,6 +47,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center_vertical"
         android:paddingLeft="15dp"
+        android:gravity="center_vertical"
         android:layout_marginTop="20dp"
         android:background="@color/white_color"
         android:textColor="@color/black_color"
@@ -62,13 +63,13 @@
         android:gravity="center_vertical"
         >
         <TextView
-            android:id="@+id/tv_time_activity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/fifteen"
             android:textColor="@color/black_color"
             android:text="活动时间:"/>
         <TextView
+            android:id="@+id/tv_time_activity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/fifteen"
@@ -85,13 +86,13 @@
         android:gravity="center_vertical"
         >
         <TextView
-            android:id="@+id/tv_person_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/fifteen"
             android:textColor="@color/black_color"
             android:text="参与商家:"/>
         <TextView
+            android:id="@+id/tv_person_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/fifteen"
@@ -108,13 +109,14 @@
         android:gravity="center_vertical"
         >
         <TextView
-            android:id="@+id/tv_amount"
+            android:id="@+id/tv_amount_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/fifteen"
             android:textColor="@color/black_color"
             android:text="保证金:"/>
         <TextView
+            android:id="@+id/tv_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/fifteen"

@@ -62,7 +62,8 @@ public class ResponseMoneyMakingDetailsBean extends ResponseBaseBean {
 //        resourceTypeName
         private String closeType;
         private String closeTypeName;
-
+        private boolean allowProof;
+        private boolean allowEnroll;
         private String topShow;
         private String ruleRemark;
         private UserInfoBean userInfo;
@@ -445,6 +446,22 @@ public class ResponseMoneyMakingDetailsBean extends ResponseBaseBean {
 
         public void setUserInfo(UserInfoBean userInfo) {
             this.userInfo = userInfo;
+        }
+
+        public boolean isAllowProof() {
+            return allowProof;
+        }
+
+        public void setAllowProof(boolean allowProof) {
+            this.allowProof = allowProof;
+        }
+
+        public boolean isAllowEnroll() {
+            return allowEnroll;
+        }
+
+        public void setAllowEnroll(boolean allowEnroll) {
+            this.allowEnroll = allowEnroll;
         }
     }
 }

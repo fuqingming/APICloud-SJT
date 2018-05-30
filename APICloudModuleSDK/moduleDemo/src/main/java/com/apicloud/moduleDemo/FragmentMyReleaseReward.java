@@ -1,5 +1,6 @@
 package com.apicloud.moduleDemo;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -57,9 +58,11 @@ public class FragmentMyReleaseReward extends BaseListFragment {
         mRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-//                Intent it = new Intent(this,NewsWebViewActivity.class);
-//                it.putExtra("webViewUrl",m_adapterNewsAnalysisAdapter.getListData().get(position).getDetail_url());
-//                startActivity(it);
+                Intent it = new Intent(getMContext(),DetailsActivity.class);
+                it.putExtra("strCallHttpType","2");
+                it.putExtra("strScheduleNo",m_myRewardAdapter.getListData().get(position).getScheduleNo());
+                it.putExtra("strCategoryNo",m_myRewardAdapter.getListData().get(position).getCategoryNo());
+                startActivity(it);
             }
 
         });

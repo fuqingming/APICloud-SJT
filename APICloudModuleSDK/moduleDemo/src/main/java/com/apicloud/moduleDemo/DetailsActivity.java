@@ -1,5 +1,6 @@
 package com.apicloud.moduleDemo;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -54,6 +55,8 @@ import java.util.List;
 
 public class DetailsActivity extends BaseAppCompatActivity {
 
+
+
     private ProgressBar m_progressBar;
     private LinearLayout m_llByWidth;
     private CheckBox m_cbRule;
@@ -61,6 +64,9 @@ public class DetailsActivity extends BaseAppCompatActivity {
     private LinearLayout m_llBtn;
     private LinearLayout m_llShare;
     private LinearLayout m_llComment;
+    private LinearLayout m_llClose;//关闭活动
+    private LinearLayout m_llReceive;//领取量房金
+    private LinearLayout m_llSettlement;//待结算
 
     private TelephonePopupWindow m_pwMenu;
 
@@ -68,6 +74,9 @@ public class DetailsActivity extends BaseAppCompatActivity {
     private String m_strCategoryNo;
     private String m_strCategoryName;
     private String m_strTitle;
+    private String m_strTime;
+    private String m_strPersonnelLimit;//参与商家限制
+    private String m_strPersonnelAmount;//参与量房金
 
     private ImageView m_ivIcon;
     private TextView m_tvName;
@@ -142,6 +151,9 @@ public class DetailsActivity extends BaseAppCompatActivity {
 
         m_llShare = findViewById(R.id.ll_share);
         m_llComment = findViewById(R.id.ll_comment);
+        m_llClose = findViewById(R.id.ll_close);//关闭活动
+        m_llReceive = findViewById(R.id.ll_receive);//领取量房金
+        m_llSettlement = findViewById(R.id.ll_settlement);//待结算
 
         m_recyclerViewPic =  findViewById(R.id.recycle_view);
         m_recyclerViewPic.setLayoutManager(new GridLayoutManager(this, 3));
@@ -216,7 +228,16 @@ public class DetailsActivity extends BaseAppCompatActivity {
                     Utils.showCommonDialogVerifyCode(DetailsActivity.this, kProgressHUD, AppSettings.getPhone(), "", new OnTaskSuccessComplete() {
                         @Override
                         public void onSuccess(Object obj) {
-
+                            Intent it = new Intent(DetailsActivity.this,PaymentActivity.class);
+                            it.putExtra("strScheduleNo",m_strScheduleNo);
+                            it.putExtra("strTitle",m_strTitle);
+//                            it.putExtra("strTitleType",response.getData().getCategoryName()+"-"+response.getData().getTitle()+"活动保证金");
+                            it.putExtra("strTitleType",m_strTitle);
+                            it.putExtra("strTime",m_strTime);
+                            it.putExtra("strPersonnelLimit",m_strPersonnelLimit);
+                            it.putExtra("strGuaranteeAmount",m_strPersonnelAmount);
+                            it.putExtra("nRequestCode",MoneyMakingHallActivity.APPLY_RENOVATION);
+                            startActivityForResult(it,MoneyMakingHallActivity.APPLY_RENOVATION);
                         }
                     });
                 }
@@ -242,71 +263,107 @@ public class DetailsActivity extends BaseAppCompatActivity {
                 startActivity(it);
             }
         });
+
+        //关闭活动
+        m_llClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        //领取量房金
+        m_llReceive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        //待结算
+        m_llSettlement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == Activity.RESULT_OK){
+            if(requestCode == MoneyMakingHallActivity.APPLY_RENOVATION){
+
+            }
+        }
     }
 
     private void getData() {
-        ApiStores.schedulesDetails(m_strScheduleNo,new HttpCallback<ResponseMoneyMakingDetailsBean>() {
+        ApiStores.schedulesDetails(m_strScheduleNo,getIntent().getStringExtra("strCallHttpType"),new HttpCallback<ResponseMoneyMakingDetailsBean>() {
             @Override
             public void OnSuccess(ResponseMoneyMakingDetailsBean response) {
                 if(response.getSuccess()){
                     final ResponseMoneyMakingDetailsBean.Data data = response.getData();
                     m_strCategoryName = data.getCategoryName();
                     m_strTitle = data.getTitle();
+                    m_strTime = TimeUtils.time2String(data.getClaimStartDate(),TimeUtils.DAY_FORMAT_NORMAL)+"-"+ TimeUtils.time2String(data.getClaimEndDate(),TimeUtils.DAY_FORMAT_NORMAL);
+                    m_strPersonnelAmount = data.getPersonnelAmount();
+                    m_strPersonnelLimit = data.getPersonnelLimit();
+
                     ImageLoader.getInstace().loadCircleImg(DetailsActivity.this, m_ivIcon, data.getUserInfo().getAvatar(),R.mipmap.head_s);
 
                     m_tvName.setText(data.getUserInfo().getNickname());
                     m_tvTime.setText(TimeUtils.time2String(data.getCreated(),TimeUtils.TIME_FORMAT_NORMAL_SHOW_TYPE));
                     m_tvActivityType.setText(data.getScheduleStatusName());
 
-                    int progress = 0;
-
-                    for(int i = 0 ; i < data.getProcesses().size() ; i ++){
-                        LinearLayout linearLayout = new LinearLayout(DetailsActivity.this);
-                        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
-                        linearLayout.setLayoutParams(param);
-                        linearLayout.setOrientation(LinearLayout.VERTICAL);
-                        linearLayout.setGravity(Gravity.CENTER_HORIZONTAL);
-                        TextView textView1 = new TextView(DetailsActivity.this);
-                        int imageWidth = Utils.dp2px(DetailsActivity.this, 25);
-                        int imageHeight = Utils.dp2px(DetailsActivity.this, 25);
-                        textView1.setLayoutParams(new LinearLayout.LayoutParams(imageWidth, imageHeight));
-                        textView1.setGravity(Gravity.CENTER);
-                        textView1.setTextColor(getResources().getColor(R.color.white_color));
-                        textView1.setText(String.valueOf(i+1));
-
-                        if(data.getProcesses().get(i).isFinished()){
-                            textView1.setBackground(ContextCompat.getDrawable(DetailsActivity.this, R.drawable.shape_round_green));
-                        }else{
-                            textView1.setBackground(ContextCompat.getDrawable(DetailsActivity.this, R.drawable.shape_round_brown));
-                            progress = 100/data.getProcesses().size()*i;
-                        }
-
-                        TextView textView = new TextView(DetailsActivity.this); textView.setTextSize(9);
-                        textView.setTextColor(Color.BLACK);
-                        textView.setGravity(Gravity.CENTER_HORIZONTAL);
-                        textView.setPadding(10, 10, 10, 10);
-                        textView.setText(data.getProcesses().get(i).getTitle());
-                        linearLayout.addView(textView1);
-                        linearLayout.addView(textView);
-                        m_llByWidth.addView(linearLayout);
-                    }
-
-                    //动态宽度
-                    ViewTreeObserver vto = m_progressBar.getViewTreeObserver();
-                    final int finalProgress = progress;
-                    vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener(){
-                        @Override
-                        public void onGlobalLayout() {
-                            int width = m_progressBar.getWidth() - (m_progressBar.getWidth()/ data.getProcesses().size());
-                            RelativeLayout.LayoutParams params =  (RelativeLayout.LayoutParams)m_progressBar.getLayoutParams();
-                            params.width = width;
-                            m_progressBar.setLayoutParams(params);
-                            m_progressBar.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                            m_progressBar.setProgress(finalProgress);
-                        }
-                    });
+//                    int progress = 0;
+//                    for(int i = 0 ; i < data.getProcesses().size() ; i ++){
+//                        LinearLayout linearLayout = new LinearLayout(DetailsActivity.this);
+//                        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+//                                LinearLayout.LayoutParams.MATCH_PARENT,
+//                                LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
+//                        linearLayout.setLayoutParams(param);
+//                        linearLayout.setOrientation(LinearLayout.VERTICAL);
+//                        linearLayout.setGravity(Gravity.CENTER_HORIZONTAL);
+//                        TextView textView1 = new TextView(DetailsActivity.this);
+//                        int imageWidth = Utils.dp2px(DetailsActivity.this, 25);
+//                        int imageHeight = Utils.dp2px(DetailsActivity.this, 25);
+//                        textView1.setLayoutParams(new LinearLayout.LayoutParams(imageWidth, imageHeight));
+//                        textView1.setGravity(Gravity.CENTER);
+//                        textView1.setTextColor(getResources().getColor(R.color.white_color));
+//                        textView1.setText(String.valueOf(i+1));
+//
+//                        if(data.getProcesses().get(i).isFinished()){
+//                            textView1.setBackground(ContextCompat.getDrawable(DetailsActivity.this, R.drawable.shape_round_green));
+//                        }else{
+//                            textView1.setBackground(ContextCompat.getDrawable(DetailsActivity.this, R.drawable.shape_round_brown));
+//                            progress = 100/data.getProcesses().size()*i;
+//                        }
+//
+//                        TextView textView = new TextView(DetailsActivity.this); textView.setTextSize(9);
+//                        textView.setTextColor(Color.BLACK);
+//                        textView.setGravity(Gravity.CENTER_HORIZONTAL);
+//                        textView.setPadding(10, 10, 10, 10);
+//                        textView.setText(data.getProcesses().get(i).getTitle());
+//                        linearLayout.addView(textView1);
+//                        linearLayout.addView(textView);
+//                        m_llByWidth.addView(linearLayout);
+//                    }
+//
+//                    //动态宽度
+//                    ViewTreeObserver vto = m_progressBar.getViewTreeObserver();
+//                    final int finalProgress = progress;
+//                    vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener(){
+//                        @Override
+//                        public void onGlobalLayout() {
+//                            int width = m_progressBar.getWidth() - (m_progressBar.getWidth()/ data.getProcesses().size());
+//                            RelativeLayout.LayoutParams params =  (RelativeLayout.LayoutParams)m_progressBar.getLayoutParams();
+//                            params.width = width;
+//                            m_progressBar.setLayoutParams(params);
+//                            m_progressBar.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+//                            m_progressBar.setProgress(finalProgress);
+//                        }
+//                    });
 
                     //参与商家
                     if(data.getEnrolls().size() > 0){
@@ -328,6 +385,7 @@ public class DetailsActivity extends BaseAppCompatActivity {
                     m_tvTitle.setText(data.getTitle());//活动标题
                     m_tvAmount.setText(data.getPersonnelAmount());//当前量房费用
                     m_tvAmountType.setText(data.getPersonnelAmount());//参与量房费用
+
                     if("0".equals(data.getPersonnelLimit())){
                         m_tvPersonType.setText("不限");//参与商家限制
                     }else{
@@ -340,6 +398,7 @@ public class DetailsActivity extends BaseAppCompatActivity {
                     }else if(data.getScopeType() == Const.ScopeType.INDEX_CITY){
                         m_tvAddress.setText(data.getScheduleScope());//量房地址指定城市
                     }
+
                     String time = TimeUtils.time2String(data.getClaimStartDate(),TimeUtils.DAY_FORMAT_NORMAL)+"至"+ TimeUtils.time2String(data.getClaimEndDate(),TimeUtils.DAY_FORMAT_NORMAL);
                     m_tvTimeAndTime.setText(time);//活动周期
                     if(data.getExtraFieldMap().getHouseType() != null){
@@ -362,6 +421,40 @@ public class DetailsActivity extends BaseAppCompatActivity {
 
                     m_tvRule.setText(Html.fromHtml(data.getRuleRemark()));
 
+                    switch (data.getScheduleStatus()){
+                        case Const.ActivityType.ACTIVITY_IS_BEGINING://进行中
+                            if(data.isAllowProof()){
+                                m_llReceive.setVisibility(View.VISIBLE);//领取量房金
+                            }else{
+                                m_llReceive.setVisibility(View.GONE);//领取量房金
+                            }
+
+                            if(data.isAllowEnroll()){
+                                m_llBtn.setVisibility(View.VISIBLE);
+                            }else{
+                                m_llBtn.setVisibility(View.GONE);
+                            }
+
+                            m_llClose.setVisibility(View.GONE);//关闭活动
+
+                            m_llSettlement.setVisibility(View.GONE);//待结算
+                            break;
+
+                        case Const.ActivityType.ACTIVITY_IS_FINISH://已完成
+                            m_llClose.setVisibility(View.GONE);//关闭活动
+                            m_llBtn.setVisibility(View.GONE);
+                            m_llReceive.setVisibility(View.GONE);//领取量房金
+                            m_llSettlement.setVisibility(View.GONE);//待结算
+                            break;
+
+                        default:
+                            m_llClose.setVisibility(View.VISIBLE);//关闭活动
+                            m_llReceive.setVisibility(View.GONE);//领取量房金
+                            m_llSettlement.setVisibility(View.GONE);//待结算
+                            m_llBtn.setVisibility(View.GONE);
+                            break;
+                    }
+                    m_llBtn.setVisibility(View.VISIBLE);
                 }
             }
 

@@ -601,7 +601,7 @@ public class Utils {
 
     public static Dialog showCommonDialog(final Context context,final OnTaskSuccessComplete onTaskSuccess,int layout)
     {
-        View vContent = LayoutInflater.from(context).inflate(R.layout.dialog_common_release_success, null);
+        View vContent = LayoutInflater.from(context).inflate(layout, null);
         final Dialog dlg = new Dialog(context, R.style.common_dialog);
         dlg.setContentView(vContent);
         dlg.setCanceledOnTouchOutside(false);

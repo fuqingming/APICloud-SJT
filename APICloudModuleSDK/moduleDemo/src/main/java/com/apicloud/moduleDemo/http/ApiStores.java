@@ -68,8 +68,13 @@ public class ApiStores {
     }
 
     /** 悬赏任务详情 */
-    public static <T> void schedulesDetails(String strScheduleNo,HttpCallback<T> httpCallback){
-        String url =  urlVersion+"guarantee/schedules/"+strScheduleNo;
+    public static <T> void schedulesDetails(String strScheduleNo,String strCallHttpType,HttpCallback<T> httpCallback){
+        String url = "";
+        if("1".equals(strCallHttpType)){
+            url =  urlVersion+"guarantee/schedules/"+strScheduleNo;
+        }else{
+            url =  urlVersion+"my/guarantee/schedules/"+strScheduleNo;
+        }
 
         Map<String,Object> map = new HashMap<>();
 

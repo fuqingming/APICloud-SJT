@@ -23,6 +23,8 @@
             android:name="com.apicloud.moduleDemo.MyRewardActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="portrait"/>
+
+        <!--我的悬赏详情-->
         <!--创业加盟-->
         <activity
             android:name="com.apicloud.moduleDemo.MyJoinInActivity"

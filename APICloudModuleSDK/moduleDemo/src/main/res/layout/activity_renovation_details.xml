@@ -551,7 +551,8 @@
                 android:layout_marginTop="1dp"
                 android:background="@color/white_color"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+                android:paddingRight="10dp"
+                android:visibility="gone">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -562,6 +563,7 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white_color"
@@ -740,42 +742,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginBottom="1dp"
-                android:background="@color/white_color"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="最新评论"
-                    android:textColor="@color/black_color"
-                    android:textSize="@dimen/fourteen"
-                    android:gravity="center_horizontal"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
-                android:background="@color/white_color"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="还没有收到评论"
-                    android:gravity="center_horizontal"/>
-            </LinearLayout>
-
-
-            <LinearLayout
                 android:id="@+id/ll_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -796,7 +762,78 @@
                     android:gravity="center"
                     android:background="@drawable/shape_rectangle_btn_red"
                     />
+            </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/ll_close"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:background="@color/white_color"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:textColor="@color/white_color"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="@dimen/fifteen"
+                    android:text="关闭活动"
+                    android:gravity="center"
+                    android:background="@drawable/shape_rectangle_btn_yellow"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_receive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:background="@color/white_color"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:textColor="@color/white_color"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="@dimen/fifteen"
+                    android:text="领取量房金"
+                    android:gravity="center"
+                    android:background="@drawable/shape_rectangle_btn_red"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_settlement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:background="@color/white_color"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:textColor="@color/white_color"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="@dimen/fifteen"
+                    android:text="待结算"
+                    android:gravity="center"
+                    android:background="@drawable/shape_rectangle_btn_dark"
+                    />
             </LinearLayout>
 
             <LinearLayout
