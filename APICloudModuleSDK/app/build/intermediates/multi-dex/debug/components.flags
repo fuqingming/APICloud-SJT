@@ -9,6 +9,7 @@
 -injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\c165316ba36e7df6772b5957508831ea\jars\classes.jar'(**.class)
 -injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\utilcode-1.9.0.aar\5875f8b59666bf74d77b20eaf410f835\jars\classes.jar'(**.class)
 -injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\novate-1.5.5.aar\1f76cb7f87e315e30bcdf2ef8f96dd21\jars\classes.jar'(**.class)
+-injars 'C:\Users\vip\.gradle\caches\modules-2\files-2.1\org.greenrobot\eventbus\3.0.0\ddd99896e9569eaababbe81b35d80e1b91c4ad85\eventbus-3.0.0.jar'(**.class)
 -injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\butterknife-8.8.1.aar\482741dffec49fd8cb152c7202f4300f\jars\classes.jar'(**.class)
 -injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\kprogresshud-1.1.0.aar\22c6479196df12f9128ab2be90139f78\jars\classes.jar'(**.class)
 -injars 'C:\Users\vip\.gradle\caches\transforms-1\files-1.1\glide-transformations-2.0.1.aar\a5d0b0f290d46f3b22ddb3706b27a47b\jars\classes.jar'(**.class)

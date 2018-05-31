@@ -21,6 +21,8 @@ import com.apicloud.moduleDemo.util.Utils;
 import com.apicloud.moduleDemo.util.alert.AlertUtils;
 import com.apicloud.sdk.moduledemo.R;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.text.MessageFormat;
 
 public class OrderPaymentActivity extends BaseAppCompatActivity {
@@ -121,14 +123,9 @@ public class OrderPaymentActivity extends BaseAppCompatActivity {
                             Utils.showCommonDialogReleaseSuccess(OrderPaymentActivity.this,new OnTaskSuccessComplete() {
                                 @Override
                                 public void onSuccess(Object obj) {
-                                    Utils.showCommonDialogAcceptSuccess(OrderPaymentActivity.this,new OnTaskSuccessComplete() {
-                                        @Override
-                                        public void onSuccess(Object obj) {
-                                            Utils.showToast(OrderPaymentActivity.this,"支付成功");
-//                                            setResult(RESULT_OK);
-//                                            finish();
-                                        }
-                                    } );
+                                    Utils.showToast(OrderPaymentActivity.this,"支付成功");
+                                    EventBus.getDefault().post("");
+                                    finish();
                                 }
                             } );
                         }

@@ -615,6 +615,7 @@ javax/annotation/Nullable.class
 android/support/v4/media/AudioAttributesCompat$Builder.class
 android/support/v4/view/ViewCompat$ResolvedLayoutDirectionMode.class
 com/facebook/imagepipeline/request/MediaVariations$1.class
+org/greenrobot/eventbus/Subscribe.class
 com/yalantis/ucrop/callback/BitmapCropCallback.class
 retrofit2/http/Headers.class
 android/support/v7/widget/RecyclerView$OnFlingListener.class
@@ -853,6 +854,7 @@ android/support/annotation/FractionRes.class
 android/support/annotation/PluralsRes.class
 android/support/v4/app/FragmentActivity$1.class
 butterknife/OnItemSelected.class
+org/greenrobot/eventbus/ThreadMode.class
 android/support/v7/widget/ViewBoundsCheck$ViewBounds.class
 android/support/v4/media/session/PlaybackStateCompatApi22.class
 android/support/v4/content/ContextCompat.class
@@ -992,6 +994,7 @@ com/bumptech/glide/load/model/stream/StreamByteArrayLoader.class
 android/support/v4/content/res/ConfigurationHelper.class
 com/facebook/imageformat/ImageFormatChecker.class
 com/facebook/imagepipeline/memory/Bucket.class
+com/apicloud/moduleDemo/PaymentActivity.class
 com/facebook/imagepipeline/image/EncodedImage.class
 com/facebook/drawee/drawable/RoundedBitmapDrawable.class
 com/facebook/imagepipeline/datasource/ListDataSource.class
@@ -1029,6 +1032,7 @@ retrofit2/converter/gson/package-info.class
 retrofit2/adapter/rxjava/HttpException.class
 com/facebook/imagepipeline/cache/BitmapMemoryCacheKey.class
 com/facebook/imagepipeline/request/Postprocessor.class
+com/apicloud/moduleDemo/ReleaseRenovationActivity.class
 retrofit2/RequestBuilder.class
 android/support/v4/text/TextUtilsCompat.class
 com/facebook/imagepipeline/request/ImageRequestBuilder.class
@@ -1053,6 +1057,7 @@ retrofit2/Platform.class
 com/uzmap/pkg/uzcore/uzmodule/b/c.class
 android/support/v4/widget/SimpleCursorAdapter.class
 com/facebook/imagepipeline/producers/BaseProducerContext.class
+com/apicloud/moduleDemo/FragmentMyReleaseReward.class
 io/reactivex/processors/ReplayProcessor.class
 com/facebook/datasource/IncreasingQualityDataSourceSupplier$IncreasingQualityDataSource.class
 okhttp3/Cache$Entry.class
@@ -1174,6 +1179,7 @@ android/support/v4/widget/SwipeRefreshLayout.class
 com/bumptech/glide/GifRequestBuilder.class
 com/facebook/drawee/drawable/ScalingUtils$InterpolatingScaleType.class
 android/support/v4/view/accessibility/AccessibilityManagerCompat$AccessibilityStateChangeListenerCompat.class
+com/apicloud/moduleDemo/DetailsActivity.class
 android/support/v7/widget/FastScroller$AnimationState.class
 com/github/jdsjlzx/interfaces/BaseRefreshHeader.class
 com/facebook/drawee/backends/pipeline/PipelineDraweeController.class

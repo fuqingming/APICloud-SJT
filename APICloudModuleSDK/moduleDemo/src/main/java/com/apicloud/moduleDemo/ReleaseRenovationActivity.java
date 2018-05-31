@@ -2,6 +2,7 @@ package com.apicloud.moduleDemo;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Message;
@@ -37,6 +38,9 @@ import com.apicloud.moduleDemo.util.pickers.AddressPickTask;
 import com.apicloud.moduleDemo.util.pickers.PopUitls;
 import com.apicloud.sdk.moduledemo.R;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONArray;
 
 import java.io.File;
@@ -119,6 +123,7 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
     @Override
     protected void setUpView() {
         Utils.initCommonTitle(this,"发布活动",true);
+        EventBus.getDefault().register(this);
 
         m_strCategoryNo = getIntent().getStringExtra("strCategoryNo");
 
@@ -377,8 +382,7 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
                             it.putExtra("strTime",strTime);
                             it.putExtra("strPersonnelLimit",response.getData().getPersonnelLimit());
                             it.putExtra("strGuaranteeAmount",response.getData().getGuaranteeAmount());
-                            it.putExtra("nRequestCode",getIntent().getIntExtra("nRequestCode",0));
-                            startActivityForResult(it,MoneyMakingHallActivity.RELEASE_RENOVATION);
+                            startActivity(it);
                         }
                     }
 
@@ -400,16 +404,6 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
                         kProgressHUD.dismiss();
                     }
                 });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == Activity.RESULT_OK){
-            if(requestCode == MoneyMakingHallActivity.RELEASE_RENOVATION){
-                setResult(RESULT_OK);
-                finish();
-            }
-        }
     }
 
     private void showToast(String msg) {
@@ -540,5 +534,17 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
         m_strSize = m_etSize.getText().toString().trim();
 
         return true;
+    }
+
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventBus(Object obj){
+        Utils.showToast(this,"发布成功");
+        finish();
     }
 }

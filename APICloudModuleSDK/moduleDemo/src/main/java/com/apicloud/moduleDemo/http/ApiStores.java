@@ -2,6 +2,7 @@ package com.apicloud.moduleDemo.http;
 
 import com.apicloud.moduleDemo.bean.response.LoginBean;
 import com.apicloud.moduleDemo.settings.Constant;
+import com.tamic.novate.BaseSubscriber;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -81,6 +82,29 @@ public class ApiStores {
         HttpClient.get(url,map, httpCallback);
     }
 
+    /** 参与量房 */
+    public static <T> void joinActivity(String strScheduleNo,String amount,HttpCallback<T> httpCallback){
+        String url =  urlVersion+"my/guarantee/schedules/"+strScheduleNo+"/enrolls";
+
+        JSONObject js = new JSONObject();
+        try {
+            js.put("amount",amount);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        HttpClient.post(url,js.toString(),httpCallback);
+    }
+
+    /** 关闭悬赏任务 */
+    public static <T> void closeActivity(String strScheduleNo,BaseSubscriber<ResponseBody> httpCallback){
+        String url =  urlVersion+"my/guarantee/schedules/"+strScheduleNo;
+
+        Map<String,Object> map = new HashMap<>();
+
+        HttpClient.delete(url,map, httpCallback);
+    }
+
     /** 我参与的悬赏任务列表 */
     public static <T> void myEnrolls(int page,HttpCallback<T> httpCallback){
         String url =  urlVersion+"my/guarantee/enrolls";
@@ -129,7 +153,7 @@ public class ApiStores {
 
             js.put("personnelLimit",personnelLimit);
             js.put("personnelAmount",Integer.parseInt(personnelAmount));
-            js.put("guaranteeAmount",guaranteeAmount);
+            js.put("guaranteeAmount",0.01);
             js.put("remark",remark);
             js.put("areaName",areaName);
             js.put("provinceName",provinceName);
@@ -146,20 +170,24 @@ public class ApiStores {
 
             JSONObject jsonHouseType = new JSONObject();
             jsonHouseType.put("name","houseType");
-            jsonHouseType.put("title",houseType);
+            jsonHouseType.put("value",houseType);
+            jsonHouseType.put("title","户型");
 
             JSONObject jsonHouseStyle = new JSONObject();
             jsonHouseStyle.put("name","houseStyle");
-            jsonHouseStyle.put("title",houseStyle);
+            jsonHouseStyle.put("value",houseStyle);
+            jsonHouseStyle.put("title","装修风格");
 
             JSONObject jsonOutdoorAcreage = new JSONObject();
             jsonOutdoorAcreage.put("name","outdoorAcreage");
-            jsonOutdoorAcreage.put("title",outdoorAcreage);
+            jsonOutdoorAcreage.put("title","建筑面积");
+            jsonOutdoorAcreage.put("value",outdoorAcreage);
             jsonOutdoorAcreage.put("icon", "平米");
 
             JSONObject jsonBudgetAmount = new JSONObject();
             jsonBudgetAmount.put("name","budgetAmount");
-            jsonBudgetAmount.put("title",budgetAmount);
+            jsonBudgetAmount.put("title","装修预算");
+            jsonOutdoorAcreage.put("value",budgetAmount);
             jsonBudgetAmount.put("icon", "万");
 
             JSONArray extraFields = new JSONArray();

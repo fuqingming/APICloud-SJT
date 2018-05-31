@@ -758,7 +758,7 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:textSize="@dimen/fifteen"
-                    android:text="申请量房"
+                    android:text="参与量房"
                     android:gravity="center"
                     android:background="@drawable/shape_rectangle_btn_red"
                     />

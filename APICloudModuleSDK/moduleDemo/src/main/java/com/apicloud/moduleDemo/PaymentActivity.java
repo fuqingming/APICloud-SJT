@@ -2,6 +2,7 @@ package com.apicloud.moduleDemo;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -23,9 +24,15 @@ import com.apicloud.moduleDemo.util.Utils;
 import com.apicloud.moduleDemo.util.alert.AlertUtils;
 import com.apicloud.sdk.moduledemo.R;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.text.MessageFormat;
 
 public class PaymentActivity extends BaseAppCompatActivity {
+
+    public static final int APPLY_RENOVATION = 1;//申请量房
 
     private ImageView m_ivIcon;
     private TextView m_tvName;
@@ -39,7 +46,6 @@ public class PaymentActivity extends BaseAppCompatActivity {
     private TextView m_tvAmountType;
 
     private boolean m_isAgree = false;
-    private int m_nRequestCode;
 
     @Override
     protected int setLayoutResourceId() {
@@ -49,8 +55,7 @@ public class PaymentActivity extends BaseAppCompatActivity {
     @Override
     protected void setUpView() {
         Utils.initCommonTitle(this,"支付量房金",true);
-
-        m_nRequestCode = getIntent().getIntExtra("nRequestCode",MoneyMakingHallActivity.RELEASE_RENOVATION);
+        EventBus.getDefault().register(this);
 
         m_ivIcon = findViewById(R.id.iv_icon);
         m_tvName = findViewById(R.id.tv_name);
@@ -73,7 +78,7 @@ public class PaymentActivity extends BaseAppCompatActivity {
         m_tvPersonNo.setText("0".equals(strPersonnelLimit) ? "不限": MessageFormat.format("{0}家", strPersonnelLimit));
         m_tvAmount.setText(MessageFormat.format("{0}元", getIntent().getStringExtra("strGuaranteeAmount")));
         m_tvTitle.setText(getIntent().getStringExtra("strTitle"));
-        if(m_nRequestCode == MoneyMakingHallActivity.APPLY_RENOVATION){
+        if(getIntent().getIntExtra("nApplyRenovation",0) == APPLY_RENOVATION){
             m_tvAmountType.setText("量房金");
         }
 
@@ -122,7 +127,7 @@ public class PaymentActivity extends BaseAppCompatActivity {
                     it.putExtra("strPaymentNo",response.getData().getPaymentNo());
                     it.putExtra("strCreated",response.getData().getCreated());
                     it.putExtra("strTitleType",getIntent().getStringExtra("strTitleType"));
-                    startActivityForResult(it,m_nRequestCode);
+                    startActivity(it);
                 }
             }
 
@@ -147,15 +152,13 @@ public class PaymentActivity extends BaseAppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == Activity.RESULT_OK){
-            if(requestCode == MoneyMakingHallActivity.RELEASE_RENOVATION){
-                setResult(RESULT_OK);
-                finish();
-            }else  if(requestCode == MoneyMakingHallActivity.APPLY_RENOVATION){
-                setResult(RESULT_OK);
-                finish();
-            }
-        }
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventBus(Object obj){
+        finish();
     }
 }

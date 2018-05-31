@@ -20,6 +20,8 @@ import com.apicloud.moduleDemo.util.recycler.BaseRecyclerAdapter;
 import com.apicloud.moduleDemo.view.ErrorLayout;
 import com.apicloud.sdk.moduledemo.R;
 import com.apicloud.moduleDemo.http.HttpClient;
+import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
+import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.github.jdsjlzx.util.RecyclerViewStateUtils;
@@ -137,6 +139,27 @@ public abstract class BaseListFragment<T> extends Fragment {
         mRecyclerView.setHasFixedSize(true);
 
         initLayoutManager();
+
+        mRecyclerView.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                onRefreshView();
+            }
+        });
+
+        mRecyclerView.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+
+                if ( REQUEST_COUNT <= totalPage) {
+                    mCurrentPage++;
+                    requestData();
+                    isRequestInProcess = true;
+                } else {
+                    mRecyclerView.setNoMore(true);
+                }
+            }
+        });
 
         mRecyclerView.setLScrollListener(new LRecyclerView.LScrollListener() {
 

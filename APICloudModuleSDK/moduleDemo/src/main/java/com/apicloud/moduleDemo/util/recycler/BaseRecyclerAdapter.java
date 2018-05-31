@@ -78,4 +78,14 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
         mDatas.clear();
         notifyDataSetChanged();
     }
+
+    protected DoClickListener doClickListener = null;
+
+    public interface DoClickListener{
+        void DoClick(Object obj);
+    }
+
+    public void onDoClickListener (DoClickListener doClickListener){
+        this.doClickListener = doClickListener;
+    }
 }

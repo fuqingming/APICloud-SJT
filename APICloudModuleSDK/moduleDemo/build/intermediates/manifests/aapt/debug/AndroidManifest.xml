@@ -30,7 +30,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
-        <!-- 我的悬赏详情 -->
+        <!-- 提交凭证 -->
+        <activity
+            android:name="com.apicloud.moduleDemo.CommitVoucherActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <!-- 创业加盟 -->
         <activity
             android:name="com.apicloud.moduleDemo.MyJoinInActivity"

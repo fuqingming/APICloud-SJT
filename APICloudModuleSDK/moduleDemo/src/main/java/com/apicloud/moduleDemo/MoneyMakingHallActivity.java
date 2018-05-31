@@ -34,9 +34,6 @@ import java.util.List;
 
 public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHallBean> {
 
-    public static  final int RELEASE_RENOVATION = 0;//量房发布startActivityForResult
-    public static final int APPLY_RENOVATION = 1;//申请参加量房startActivityForResult
-
     private MoneyMakingHallAdapter m_moneyMakingHallAdapter = new MoneyMakingHallAdapter();
 
     private CheckBox m_cbAllType;
@@ -166,7 +163,6 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
                 switch (m_strCategoryNo){
                     case Const.CategoryNo.TYPE_RENOVATION:
                         it = new Intent(MoneyMakingHallActivity.this,ReleaseRenovationActivity.class);
-                        nResultCode = RELEASE_RENOVATION;
                         break;
                     case Const.CategoryNo.TYPE_BUILDING:
                         it = new Intent(MoneyMakingHallActivity.this,ReleaseBuildingActivity.class);
@@ -185,19 +181,9 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
                         break;
                 }
                 it.putExtra("strCategoryNo",m_strCategoryNo);
-                it.putExtra("nRequestCode",RELEASE_RENOVATION);
                 startActivityForResult(it,nResultCode);
             }
         });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == Activity.RESULT_OK){
-            if(requestCode == RELEASE_RENOVATION){
-
-            }
-        }
     }
 
     private void showPopAllType(boolean isChecked){

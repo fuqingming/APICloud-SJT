@@ -1,20 +1,30 @@
 package com.apicloud.moduleDemo;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.apicloud.moduleDemo.adapter.MyRewardAdapter;
 import com.apicloud.moduleDemo.base.BaseListFragment;
+import com.apicloud.moduleDemo.bean.base.MoneyMakingHallBean;
 import com.apicloud.moduleDemo.bean.response.ResponseMoneyMakingHallBean;
 import com.apicloud.moduleDemo.http.ApiStores;
 import com.apicloud.moduleDemo.http.HttpCallback;
+import com.apicloud.moduleDemo.util.TimeUtils;
+import com.apicloud.moduleDemo.util.Utils;
 import com.apicloud.moduleDemo.util.recycler.BaseRecyclerAdapter;
 import com.apicloud.sdk.moduledemo.R;
+import com.blankj.utilcode.util.SPUtils;
 import com.github.jdsjlzx.ItemDecoration.DividerDecoration;
 import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Created on 2/8/18.
@@ -36,7 +46,7 @@ public class FragmentMyReleaseReward extends BaseListFragment {
     @Override
     public void initView() {
         super.initView();
-
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -67,6 +77,22 @@ public class FragmentMyReleaseReward extends BaseListFragment {
 
         });
 
+        m_myRewardAdapter.onDoClickListener(new BaseRecyclerAdapter.DoClickListener() {
+            @Override
+            public void DoClick(Object obj) {
+                MoneyMakingHallBean data = (MoneyMakingHallBean)obj;
+                Intent it = new Intent(getMContext(),PaymentActivity.class);
+                it.putExtra("strScheduleNo",data.getScheduleNo());
+                it.putExtra("strTitle",data.getTitle());
+                it.putExtra("strTitleType",data.getCategoryName()+"-"+data.getTitle()+"活动保证金");
+                String strTime = TimeUtils.time2String(data.getStartDate(),TimeUtils.DAY_FORMAT_NORMAL)+"-"+ TimeUtils.time2String(data.getEndDate(),TimeUtils.DAY_FORMAT_NORMAL);
+                it.putExtra("strTime",strTime);
+                it.putExtra("strPersonnelLimit",data.getPersonnelLimit());
+                it.putExtra("strGuaranteeAmount",data.getGuaranteeAmount());
+                startActivity(it);
+            }
+        });
+
     }
 
     protected void requestData(){
@@ -92,5 +118,16 @@ public class FragmentMyReleaseReward extends BaseListFragment {
                 executeOnLoadFinish();
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventBus(Object obj){
+        onRefreshView();
     }
 }

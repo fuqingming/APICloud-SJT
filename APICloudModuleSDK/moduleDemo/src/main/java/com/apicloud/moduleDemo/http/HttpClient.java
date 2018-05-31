@@ -5,7 +5,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
+import com.tamic.novate.BaseSubscriber;
 import com.tamic.novate.Novate;
+import com.tamic.novate.callback.ResponseCallback;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,6 +23,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import rx.Subscriber;
+import rx.Subscription;
 
 /**
  * Created by HH
@@ -113,4 +116,7 @@ public class HttpClient {
         mNovate.upload(url,requestBody,subscriber);
     }
 
+    public static <T> void delete(String url, Map<String,Object> params,BaseSubscriber<ResponseBody> subscriber){
+        mNovate.delete(url, params,subscriber);
+    }
 }

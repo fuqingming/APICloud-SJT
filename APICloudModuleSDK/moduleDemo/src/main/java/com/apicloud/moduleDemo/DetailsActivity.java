@@ -2,6 +2,7 @@ package com.apicloud.moduleDemo;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
@@ -31,6 +32,8 @@ import com.apicloud.moduleDemo.base.MyApplication;
 import com.apicloud.moduleDemo.bean.base.EnrollsBean;
 import com.apicloud.moduleDemo.bean.base.FileBean;
 import com.apicloud.moduleDemo.bean.base.MoneyMakingHallBean;
+import com.apicloud.moduleDemo.bean.response.ResponseBaseBean;
+import com.apicloud.moduleDemo.bean.response.ResponseFileBean;
 import com.apicloud.moduleDemo.bean.response.ResponseMoneyMakingDetailsBean;
 import com.apicloud.moduleDemo.bean.response.ResponseMoneyMakingHallBean;
 import com.apicloud.moduleDemo.http.ApiStores;
@@ -44,18 +47,27 @@ import com.apicloud.moduleDemo.util.Utils;
 import com.apicloud.moduleDemo.util.alert.AlertUtils;
 import com.apicloud.moduleDemo.view.SpaceDecoration;
 import com.apicloud.sdk.moduledemo.R;
+import com.google.gson.Gson;
+import com.tamic.novate.BaseSubscriber;
+import com.tamic.novate.Throwable;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import okhttp3.ResponseBody;
 
 /**
  * 装修量房详情
  */
 
 public class DetailsActivity extends BaseAppCompatActivity {
-
-
 
     private ProgressBar m_progressBar;
     private LinearLayout m_llByWidth;
@@ -115,6 +127,7 @@ public class DetailsActivity extends BaseAppCompatActivity {
     @Override
     protected void setUpView() {
         Utils.initCommonTitle(this,"活动详情",true);
+        EventBus.getDefault().register(this);
 
         m_strScheduleNo = getIntent().getStringExtra("strScheduleNo");
         m_strCategoryNo = getIntent().getStringExtra("strCategoryNo");
@@ -220,26 +233,12 @@ public class DetailsActivity extends BaseAppCompatActivity {
             }
         });
 
-        //申请量房
+        //参与量房
         m_llBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(AppSettings.isAutoLogin()){
-                    Utils.showCommonDialogVerifyCode(DetailsActivity.this, kProgressHUD, AppSettings.getPhone(), "", new OnTaskSuccessComplete() {
-                        @Override
-                        public void onSuccess(Object obj) {
-                            Intent it = new Intent(DetailsActivity.this,PaymentActivity.class);
-                            it.putExtra("strScheduleNo",m_strScheduleNo);
-                            it.putExtra("strTitle",m_strTitle);
-//                            it.putExtra("strTitleType",response.getData().getCategoryName()+"-"+response.getData().getTitle()+"活动保证金");
-                            it.putExtra("strTitleType",m_strTitle);
-                            it.putExtra("strTime",m_strTime);
-                            it.putExtra("strPersonnelLimit",m_strPersonnelLimit);
-                            it.putExtra("strGuaranteeAmount",m_strPersonnelAmount);
-                            it.putExtra("nRequestCode",MoneyMakingHallActivity.APPLY_RENOVATION);
-                            startActivityForResult(it,MoneyMakingHallActivity.APPLY_RENOVATION);
-                        }
-                    });
+                    joinActivity();
                 }
             }
         });
@@ -268,7 +267,7 @@ public class DetailsActivity extends BaseAppCompatActivity {
         m_llClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                closeActivity();
             }
         });
 
@@ -276,7 +275,8 @@ public class DetailsActivity extends BaseAppCompatActivity {
         m_llReceive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent it = new Intent(DetailsActivity.this,CommitVoucherActivity.class);
+                startActivity(it);
             }
         });
 
@@ -289,32 +289,20 @@ public class DetailsActivity extends BaseAppCompatActivity {
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == Activity.RESULT_OK){
-            if(requestCode == MoneyMakingHallActivity.APPLY_RENOVATION){
 
-            }
-        }
-    }
+    private void initView(ResponseMoneyMakingDetailsBean response){
+        final ResponseMoneyMakingDetailsBean.Data data = response.getData();
+        m_strCategoryName = data.getCategoryName();
+        m_strTitle = data.getTitle();
+        m_strTime = TimeUtils.time2String(data.getClaimStartDate(),TimeUtils.DAY_FORMAT_NORMAL)+"-"+ TimeUtils.time2String(data.getClaimEndDate(),TimeUtils.DAY_FORMAT_NORMAL);
+        m_strPersonnelAmount = data.getPersonnelAmount();
+        m_strPersonnelLimit = data.getPersonnelLimit();
 
-    private void getData() {
-        ApiStores.schedulesDetails(m_strScheduleNo,getIntent().getStringExtra("strCallHttpType"),new HttpCallback<ResponseMoneyMakingDetailsBean>() {
-            @Override
-            public void OnSuccess(ResponseMoneyMakingDetailsBean response) {
-                if(response.getSuccess()){
-                    final ResponseMoneyMakingDetailsBean.Data data = response.getData();
-                    m_strCategoryName = data.getCategoryName();
-                    m_strTitle = data.getTitle();
-                    m_strTime = TimeUtils.time2String(data.getClaimStartDate(),TimeUtils.DAY_FORMAT_NORMAL)+"-"+ TimeUtils.time2String(data.getClaimEndDate(),TimeUtils.DAY_FORMAT_NORMAL);
-                    m_strPersonnelAmount = data.getPersonnelAmount();
-                    m_strPersonnelLimit = data.getPersonnelLimit();
+        ImageLoader.getInstace().loadCircleImg(DetailsActivity.this, m_ivIcon, data.getUserInfo().getAvatar(),R.mipmap.head_s);
 
-                    ImageLoader.getInstace().loadCircleImg(DetailsActivity.this, m_ivIcon, data.getUserInfo().getAvatar(),R.mipmap.head_s);
-
-                    m_tvName.setText(data.getUserInfo().getNickname());
-                    m_tvTime.setText(TimeUtils.time2String(data.getCreated(),TimeUtils.TIME_FORMAT_NORMAL_SHOW_TYPE));
-                    m_tvActivityType.setText(data.getScheduleStatusName());
+        m_tvName.setText(data.getUserInfo().getNickname());
+        m_tvTime.setText(TimeUtils.time2String(data.getCreated(),TimeUtils.TIME_FORMAT_NORMAL_SHOW_TYPE));
+        m_tvActivityType.setText(data.getScheduleStatusName());
 
 //                    int progress = 0;
 //                    for(int i = 0 ; i < data.getProcesses().size() ; i ++){
@@ -365,96 +353,145 @@ public class DetailsActivity extends BaseAppCompatActivity {
 //                        }
 //                    });
 
-                    //参与商家
-                    if(data.getEnrolls().size() > 0){
-                        findViewById(R.id.ll_enrolls).setVisibility(View.VISIBLE);
-                        m_enrollsAdapter.setDataList(data.getEnrolls());
-                    }
+        //参与商家
+        if(data.getEnrolls().size() > 0){
+            findViewById(R.id.ll_enrolls).setVisibility(View.VISIBLE);
+            m_enrollsAdapter.setDataList(data.getEnrolls());
+        }
 
-                    if(data.getAttachments() != null){
-                        findViewById(R.id.ll_picture).setVisibility(View.VISIBLE);
-                        List<String> list = new ArrayList<>();
-                        for(int i = 0 ; i < data.getAttachments().size(); i ++){
-                            list.add(data.getAttachments().get(i).getUrl());
-                        }
-                        m_pictureUrlAdapter.setData(list);
-                        m_pictureUrlAdapter.notifyDataSetChanged();
-                    }
+        if(data.getAttachments() != null){
+            findViewById(R.id.ll_picture).setVisibility(View.VISIBLE);
+            List<String> list = new ArrayList<>();
+            for(int i = 0 ; i < data.getAttachments().size(); i ++){
+                list.add(data.getAttachments().get(i).getUrl());
+            }
+            m_pictureUrlAdapter.setData(list);
+            m_pictureUrlAdapter.notifyDataSetChanged();
+        }
 
-                    m_tvScheduleNo.setText(data.getScheduleNo());//编号
-                    m_tvTitle.setText(data.getTitle());//活动标题
-                    m_tvAmount.setText(data.getPersonnelAmount());//当前量房费用
-                    m_tvAmountType.setText(data.getPersonnelAmount());//参与量房费用
+        m_tvScheduleNo.setText(data.getScheduleNo());//编号
+        m_tvTitle.setText(data.getTitle());//活动标题
+        m_tvAmount.setText(data.getPersonnelAmount());//当前量房费用
+        m_tvAmountType.setText(data.getPersonnelAmount());//参与量房费用
 
-                    if("0".equals(data.getPersonnelLimit())){
-                        m_tvPersonType.setText("不限");//参与商家限制
-                    }else{
-                        m_tvPersonType.setText(data.getPersonnelLimit());//参与商家限制
-                    }
-                    m_tvPersonNo.setText(data.getPersonnelLimit());//当前参与商家
+        if("0".equals(data.getPersonnelLimit())){
+            m_tvPersonType.setText("不限");//参与商家限制
+        }else{
+            m_tvPersonType.setText(data.getPersonnelLimit());//参与商家限制
+        }
+        m_tvPersonNo.setText(data.getPersonnelLimit());//当前参与商家
 
-                    if(data.getScopeType() == Const.ScopeType.ALL_CITY){
-                        m_tvAddress.setText(data.getAreaName());//量房地址
-                    }else if(data.getScopeType() == Const.ScopeType.INDEX_CITY){
-                        m_tvAddress.setText(data.getScheduleScope());//量房地址指定城市
-                    }
+        if(data.getScopeType() == Const.ScopeType.ALL_CITY){
+            m_tvAddress.setText(data.getAreaName());//量房地址
+        }else if(data.getScopeType() == Const.ScopeType.INDEX_CITY){
+            m_tvAddress.setText(data.getScheduleScope());//量房地址指定城市
+        }
 
-                    String time = TimeUtils.time2String(data.getClaimStartDate(),TimeUtils.DAY_FORMAT_NORMAL)+"至"+ TimeUtils.time2String(data.getClaimEndDate(),TimeUtils.DAY_FORMAT_NORMAL);
-                    m_tvTimeAndTime.setText(time);//活动周期
-                    if(data.getExtraFieldMap().getHouseType() != null){
-                        m_tvHouseType.setText(data.getExtraFieldMap().getHouseType().getValue());//户型结构
-                    }
-                    if(data.getExtraFieldMap().getHouseStyle() != null) {
-                        m_tvStyleType.setText(data.getExtraFieldMap().getHouseStyle().getValue());//设计风格
-                    }
-                    if(data.getExtraFieldMap().getOutdoorAcreage() != null) {
-                        m_tvAcreage.setText(data.getExtraFieldMap().getOutdoorAcreage().getValue()+"平方");//建筑面积
-                    }
-                    if(data.getExtraFieldMap().getBudgetAmount() != null) {
-                        m_tvRenovationAmount.setText(data.getExtraFieldMap().getBudgetAmount().getValue()+"万");//装修预算
-                    }
+        String time = TimeUtils.time2String(data.getClaimStartDate(),TimeUtils.DAY_FORMAT_NORMAL)+"至"+ TimeUtils.time2String(data.getClaimEndDate(),TimeUtils.DAY_FORMAT_NORMAL);
+        m_tvTimeAndTime.setText(time);//活动周期
+        if(data.getExtraFieldMap().getHouseType() != null){
+            m_tvHouseType.setText(data.getExtraFieldMap().getHouseType().getValue());//户型结构
+        }
+        if(data.getExtraFieldMap().getHouseStyle() != null) {
+            m_tvStyleType.setText(data.getExtraFieldMap().getHouseStyle().getValue());//设计风格
+        }
+        if(data.getExtraFieldMap().getOutdoorAcreage() != null) {
+            m_tvAcreage.setText(MessageFormat.format("{0}平方", data.getExtraFieldMap().getOutdoorAcreage().getValue()));//建筑面积
+        }
+        if(data.getExtraFieldMap().getBudgetAmount() != null) {
+            m_tvRenovationAmount.setText(MessageFormat.format("{0}万",data.getExtraFieldMap().getBudgetAmount().getValue()));//装修预算
+        }
 
-                    if(data.getRemark() != null){
-                        findViewById(R.id.ll_details).setVisibility(View.VISIBLE);
-                        m_tvDetails.setText(data.getRemark());//详细内容
-                    }
+        if(data.getRemark() != null){
+            findViewById(R.id.ll_details).setVisibility(View.VISIBLE);
+            m_tvDetails.setText(data.getRemark());//详细内容
+        }
 
-                    m_tvRule.setText(Html.fromHtml(data.getRuleRemark()));
+        m_tvRule.setText(Html.fromHtml(data.getRuleRemark()));
 
-                    switch (data.getScheduleStatus()){
-                        case Const.ActivityType.ACTIVITY_IS_BEGINING://进行中
-                            if(data.isAllowProof()){
-                                m_llReceive.setVisibility(View.VISIBLE);//领取量房金
-                            }else{
-                                m_llReceive.setVisibility(View.GONE);//领取量房金
-                            }
+        switch (data.getScheduleStatus()){
+            case Const.ActivityType.ACTIVITY_IS_BEGINING://进行中
+                if(data.isAllowProof()){
+                    m_llReceive.setVisibility(View.VISIBLE);//领取量房金
+                }else{
+                    m_llReceive.setVisibility(View.GONE);//领取量房金
+                }
 
-                            if(data.isAllowEnroll()){
-                                m_llBtn.setVisibility(View.VISIBLE);
-                            }else{
-                                m_llBtn.setVisibility(View.GONE);
-                            }
-
-                            m_llClose.setVisibility(View.GONE);//关闭活动
-
-                            m_llSettlement.setVisibility(View.GONE);//待结算
-                            break;
-
-                        case Const.ActivityType.ACTIVITY_IS_FINISH://已完成
-                            m_llClose.setVisibility(View.GONE);//关闭活动
-                            m_llBtn.setVisibility(View.GONE);
-                            m_llReceive.setVisibility(View.GONE);//领取量房金
-                            m_llSettlement.setVisibility(View.GONE);//待结算
-                            break;
-
-                        default:
-                            m_llClose.setVisibility(View.VISIBLE);//关闭活动
-                            m_llReceive.setVisibility(View.GONE);//领取量房金
-                            m_llSettlement.setVisibility(View.GONE);//待结算
-                            m_llBtn.setVisibility(View.GONE);
-                            break;
-                    }
+                if(data.isAllowEnroll()){
                     m_llBtn.setVisibility(View.VISIBLE);
+                }else{
+                    m_llBtn.setVisibility(View.GONE);
+                }
+
+                m_llClose.setVisibility(View.GONE);//关闭活动
+
+                m_llSettlement.setVisibility(View.GONE);//待结算
+                break;
+
+            case Const.ActivityType.ACTIVITY_IS_FINISH://已完成
+                m_llClose.setVisibility(View.GONE);//关闭活动
+                m_llBtn.setVisibility(View.GONE);
+                m_llReceive.setVisibility(View.GONE);//领取量房金
+                m_llSettlement.setVisibility(View.GONE);//待结算
+                break;
+
+            default:
+                m_llClose.setVisibility(View.VISIBLE);//关闭活动
+                m_llReceive.setVisibility(View.GONE);//领取量房金
+                m_llSettlement.setVisibility(View.GONE);//待结算
+                m_llBtn.setVisibility(View.GONE);
+                break;
+        }
+        m_llReceive.setVisibility(View.VISIBLE);//领取量房金
+    }
+
+    private void closeActivity(){
+        kProgressHUD.show();
+        ApiStores.closeActivity(m_strScheduleNo, new BaseSubscriber<ResponseBody>() {
+            @Override
+            public void onNext(ResponseBody responseBody) {
+                kProgressHUD.dismiss();
+                try {
+                    Gson gson = new Gson();
+                    String json = responseBody.string();
+                    ResponseMoneyMakingDetailsBean beanjson = gson.fromJson(json, ResponseMoneyMakingDetailsBean.class);
+                    if(beanjson.getSuccess()){
+                        Utils.showToast(DetailsActivity.this,"活动已经关闭");
+                        initView(beanjson);
+                        EventBus.getDefault().post("");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                kProgressHUD.dismiss();
+            }
+        });
+    }
+
+    private void joinActivity() {
+        ApiStores.joinActivity(m_strScheduleNo,m_strPersonnelAmount,new HttpCallback<ResponseMoneyMakingDetailsBean>() {
+            @Override
+            public void OnSuccess(ResponseMoneyMakingDetailsBean response) {
+                if(response.getSuccess()){
+                    Utils.showCommonDialogVerifyCode(DetailsActivity.this, kProgressHUD, AppSettings.getPhone(), "", new OnTaskSuccessComplete() {
+                        @Override
+                        public void onSuccess(Object obj) {
+                            Intent it = new Intent(DetailsActivity.this,PaymentActivity.class);
+                            it.putExtra("strScheduleNo",m_strScheduleNo);
+                            it.putExtra("strTitle",m_strTitle);
+//                            it.putExtra("strTitleType",response.getData().getCategoryName()+"-"+response.getData().getTitle()+"活动保证金");
+                            it.putExtra("strTitleType",m_strTitle);
+                            it.putExtra("strTime",m_strTime);
+                            it.putExtra("strPersonnelLimit",m_strPersonnelLimit);
+                            it.putExtra("strGuaranteeAmount",m_strPersonnelAmount);
+                            it.putExtra("nApplyRenovation",PaymentActivity.APPLY_RENOVATION);
+                            startActivity(it);
+                        }
+                    });
                 }
             }
 
@@ -473,5 +510,42 @@ public class DetailsActivity extends BaseAppCompatActivity {
                 kProgressHUD.dismiss();
             }
         });
+    }
+
+    private void getData() {
+        ApiStores.schedulesDetails(m_strScheduleNo,getIntent().getStringExtra("strCallHttpType"),new HttpCallback<ResponseMoneyMakingDetailsBean>() {
+            @Override
+            public void OnSuccess(ResponseMoneyMakingDetailsBean response) {
+                if(response.getSuccess()){
+                    initView(response);
+                }
+            }
+
+            @Override
+            public void OnFailure(String message) {
+                AlertUtils.MessageAlertShow(DetailsActivity.this, "错误", message);
+            }
+
+            @Override
+            public void OnRequestStart() {
+                kProgressHUD.show();
+            }
+
+            @Override
+            public void OnRequestFinish() {
+                kProgressHUD.dismiss();
+            }
+        });
+    }
+
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventBus(Bitmap bitmap){
+
     }
 }
