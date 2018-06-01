@@ -53,10 +53,7 @@ public class PaymentActivity extends BaseAppCompatActivity {
     }
 
     @Override
-    protected void setUpView() {
-        Utils.initCommonTitle(this,"支付量房金",true);
-        EventBus.getDefault().register(this);
-
+    protected void initView() {
         m_ivIcon = findViewById(R.id.iv_icon);
         m_tvName = findViewById(R.id.tv_name);
         m_tvTime = findViewById(R.id.tv_time);
@@ -67,6 +64,12 @@ public class PaymentActivity extends BaseAppCompatActivity {
         m_cbClause = findViewById(R.id.cb_clause);
         m_btnCommit = findViewById(R.id.btn_commit);
         m_tvAmountType = findViewById(R.id.tv_amount_type);
+    }
+
+    @Override
+    protected void initData() {
+        Utils.initCommonTitle(this,"支付量房金",true);
+        setEventBus();
 
         String strTime = getIntent().getStringExtra("strTime");
         String strPersonnelLimit = getIntent().getStringExtra("strPersonnelLimit");
@@ -81,11 +84,10 @@ public class PaymentActivity extends BaseAppCompatActivity {
         if(getIntent().getIntExtra("nApplyRenovation",0) == APPLY_RENOVATION){
             m_tvAmountType.setText("量房金");
         }
-
-        onCLickView();
     }
 
-    private void onCLickView() {
+    @Override
+    protected void clickView() {
         m_cbClause.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -149,12 +151,6 @@ public class PaymentActivity extends BaseAppCompatActivity {
                 kProgressHUD.dismiss();
             }
         });
-    }
-
-    @Override
-    public void onDestroy() {
-        EventBus.getDefault().unregister(this);
-        super.onDestroy();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

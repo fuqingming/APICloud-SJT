@@ -14,6 +14,8 @@ import com.apicloud.moduleDemo.http.HttpClient;
 import com.apicloud.moduleDemo.util.HUDProgressUtils;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
+import org.greenrobot.eventbus.EventBus;
+
 /**
  * Created by HH
  * Date: 2017/11/9
@@ -22,6 +24,7 @@ import com.kaopiz.kprogresshud.KProgressHUD;
 public abstract class BaseAppCompatActivity extends AppCompatActivity {
 
     protected KProgressHUD kProgressHUD;
+    private boolean isHaveEventBus;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,15 +32,10 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
         init();
         kProgressHUD = new HUDProgressUtils().showLoadingImage(this);
         setContentView(setLayoutResourceId());
-        setUpView();
+        initView();
+        initData();
+        clickView();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        setUpData();
     }
 
     @Override
@@ -61,20 +59,11 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
         HttpClient.init(getApplicationContext(),true);
     }
 
-    protected abstract void setUpView();
+    protected void initData(){}
 
-    protected void setUpData(){}
+    protected void initView() {}
 
-    protected void startActivityWithoutExtras(Class<?> clazz) {
-        Intent intent = new Intent(this, clazz);
-        startActivity(intent);
-    }
-
-    protected void startActivityWithExtras(Class<?> clazz, Bundle extras) {
-        Intent intent = new Intent(this, clazz);
-        intent.putExtras(extras);
-        startActivity(intent);
-    }
+    protected void clickView() {}
 
     @Override
     public void onBackPressed() {
@@ -95,5 +84,13 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if(isHaveEventBus){
+            EventBus.getDefault().unregister(this);
+        }
+    }
+
+    protected void setEventBus(){
+        isHaveEventBus = true;
+        EventBus.getDefault().register(this);
     }
 }

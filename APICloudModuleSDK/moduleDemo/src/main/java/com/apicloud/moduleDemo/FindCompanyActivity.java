@@ -60,24 +60,26 @@ public class FindCompanyActivity extends BaseAppCompatActivity {
     }
 
     @Override
-    protected void setUpView() {
-        Utils.initCommonTitle(this,"找适合我的公司",true);
-
-        m_nRoleType = getIntent().getIntExtra("nRoleType",Const.RoleType.DESIGNER_ENTREPRENEURSHIP);
-
+    protected void initView() {
         m_etName = findViewById(R.id.et_name);
         m_etTel = findViewById(R.id.et_tel);
         m_etYears = findViewById(R.id.et_years);
         m_etCompany = findViewById(R.id.et_company);
         m_etEvaluate = findViewById(R.id.et_evaluate);
-        m_rgTeam = this.findViewById(R.id.rg_team);
-        m_rbHave = this.findViewById(R.id.rb_have);
-        m_rbNo = this.findViewById(R.id.rb_no);
+        m_rgTeam = findViewById(R.id.rg_team);
+        m_rbHave = findViewById(R.id.rb_have);
+        m_rbNo = findViewById(R.id.rb_no);
         m_etTargetCompany = findViewById(R.id.et_target_company);
         m_etSalary = findViewById(R.id.et_salary);
         m_etCount = findViewById(R.id.et_count);
-
         m_tvCount = findViewById(R.id.tv_count);
+    }
+
+    @Override
+    protected void initData() {
+        Utils.initCommonTitle(this,"找适合我的公司",true);
+
+        m_nRoleType = getIntent().getIntExtra("nRoleType",Const.RoleType.DESIGNER_ENTREPRENEURSHIP);
 
         switch (m_nRoleType){
             case Const.RoleType.DESIGNER_ENTREPRENEURSHIP:
@@ -90,11 +92,10 @@ public class FindCompanyActivity extends BaseAppCompatActivity {
 
         m_etName.setText(AppSettings.getNickname());
         m_etTel.setText(AppSettings.getPhone());
-
-        onViewClick();
     }
 
-    private void onViewClick() {
+    @Override
+    protected void clickView() {
         //是否有团队
         m_rgTeam.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
 
@@ -126,7 +127,6 @@ public class FindCompanyActivity extends BaseAppCompatActivity {
                 }
             }
         });
-
     }
 
     // 检查输入项是否输入正确

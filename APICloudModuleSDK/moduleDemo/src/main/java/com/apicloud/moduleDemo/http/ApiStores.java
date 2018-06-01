@@ -220,6 +220,13 @@ public class ApiStores {
         HttpClient.get(url,map,httpCallback);
     }
 
+    /** 已入驻设计师详情 */
+    public static <T> void designers(String userNo,HttpCallback<T> httpCallback){
+        String url =  urlVersion+"cooperation/designers/"+userNo;
+
+        HttpClient.post(url,"", httpCallback);
+    }
+
     /** 登陆 */
     public static <T> void login(String username, String password, HttpCallback<T> httpCallback){
         String url =  "/api/login";

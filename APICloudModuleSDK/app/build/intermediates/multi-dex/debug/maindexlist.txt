@@ -1191,6 +1191,7 @@ rx/Notification.class
 android/support/v4/os/ParcelableCompatCreatorCallbacks.class
 android/support/v4/view/VelocityTrackerCompat.class
 com/facebook/imagepipeline/request/ImageRequest.class
+com/apicloud/moduleDemo/select1.class
 io/reactivex/subjects/CompletableSubject.class
 com/facebook/drawee/generic/RootDrawable.class
 okio/AsyncTimeout.class

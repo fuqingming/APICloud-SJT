@@ -32,6 +32,8 @@ import com.github.jdsjlzx.view.CommonHeader;
 import com.github.jdsjlzx.view.LoadingFooter;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +56,7 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
 
     protected boolean isRequestInProcess = false;
     protected boolean mIsStart = false;
+    private boolean isHaveEventBus;
 
     protected CommonHeader headerView;
 
@@ -76,8 +79,10 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
         mNoData = (TextView) findViewById(R.id.tv_error_layout);
         toTopBtn = (Button) findViewById(R.id.top_btn);
         mErrorLayout = (ErrorLayout) findViewById(R.id.error_layout);
-        initData();
         initView();
+        initData();
+        initViewBase();
+        clickView();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
@@ -89,14 +94,13 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
         return 0;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
+    protected void initData(){}
 
-    protected void initData(){};
+    protected void initView() {}
 
-    protected void initView() {
+    protected void clickView() {}
+
+    protected void initViewBase() {
 
         if (mListAdapter != null) {
             mErrorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
@@ -357,6 +361,19 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(isHaveEventBus){
+            EventBus.getDefault().unregister(this);
+        }
+    }
+
+    protected void setEventBus(){
+        isHaveEventBus = true;
+        EventBus.getDefault().register(this);
     }
 
     @Override

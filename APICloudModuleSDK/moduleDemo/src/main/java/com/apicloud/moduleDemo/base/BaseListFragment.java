@@ -29,6 +29,8 @@ import com.github.jdsjlzx.view.CommonHeader;
 import com.github.jdsjlzx.view.LoadingFooter;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +54,7 @@ public abstract class BaseListFragment<T> extends Fragment {
 
     protected boolean isRequestInProcess = false;
     protected boolean mIsStart = false;
+    private boolean isHaveEventBus;
 
     protected CommonHeader headerView;
     private View mContentView;
@@ -84,8 +87,10 @@ public abstract class BaseListFragment<T> extends Fragment {
         mRecyclerView = mContentView.findViewById(R.id.recycler_view);
         toTopBtn = mContentView.findViewById(R.id.top_btn);
         mErrorLayout = mContentView.findViewById(R.id.error_layout);
-        initData();
         initView();
+        initData();
+        initViewBase();
+        clickView();
         return mContentView;
     }
 
@@ -104,11 +109,18 @@ public abstract class BaseListFragment<T> extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if(isHaveEventBus){
+            EventBus.getDefault().unregister(this);
+        }
     }
 
-    protected void initData(){};
+    protected void initData(){}
 
-    protected void initView() {
+    protected void initView() {}
+
+    protected void clickView() {}
+
+    private void initViewBase() {
 
         if (mListAdapter != null) {
             mErrorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
@@ -335,6 +347,11 @@ public abstract class BaseListFragment<T> extends Fragment {
             mErrorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
             mListAdapter.notifyDataSetChanged();
         }
+    }
+
+    protected void setEventBus(){
+        isHaveEventBus = true;
+        EventBus.getDefault().register(this);
     }
 
     protected String getNoDataTip() {

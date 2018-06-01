@@ -37,12 +37,7 @@ public class MyRewardActivity extends BaseAppCompatActivity {
 	}
 
 	@Override
-	protected void init() {
-		super.init();
-	}
-
-	@Override
-	protected void setUpView() {
+	protected void initView() {
 		Utils.initCommonTitle(this,"我的悬赏",true);
 
 		viewPager = (NoScrollViewPager)findViewById(R.id.view_pager);

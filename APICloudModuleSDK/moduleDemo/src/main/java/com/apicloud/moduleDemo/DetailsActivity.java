@@ -28,6 +28,7 @@ import com.apicloud.moduleDemo.adapter.EnrollsAdapter;
 import com.apicloud.moduleDemo.adapter.PhotoAlbumAdapter;
 import com.apicloud.moduleDemo.backhandler.OnTaskSuccessComplete;
 import com.apicloud.moduleDemo.base.BaseAppCompatActivity;
+import com.apicloud.moduleDemo.base.BaseHttpCompatActivity;
 import com.apicloud.moduleDemo.base.MyApplication;
 import com.apicloud.moduleDemo.bean.base.EnrollsBean;
 import com.apicloud.moduleDemo.bean.base.FileBean;
@@ -67,7 +68,7 @@ import okhttp3.ResponseBody;
  * 装修量房详情
  */
 
-public class DetailsActivity extends BaseAppCompatActivity {
+public class DetailsActivity extends BaseHttpCompatActivity {
 
     private ProgressBar m_progressBar;
     private LinearLayout m_llByWidth;
@@ -125,22 +126,14 @@ public class DetailsActivity extends BaseAppCompatActivity {
     }
 
     @Override
-    protected void setUpView() {
-        Utils.initCommonTitle(this,"活动详情",true);
-        EventBus.getDefault().register(this);
-
-        m_strScheduleNo = getIntent().getStringExtra("strScheduleNo");
-        m_strCategoryNo = getIntent().getStringExtra("strCategoryNo");
-
+    protected void initView() {
         m_tvTitleAmount = findViewById(R.id.tv_title_amount);
         m_tvTitleAddress = findViewById(R.id.tv_title_address);
-
         m_progressBar = findViewById(R.id.progress_bar);
         m_llByWidth = findViewById(R.id.ll_by_width);
         m_cbRule = findViewById(R.id.cb_rule);
         m_llPhone = findViewById(R.id.ll_phone);
         m_llBtn = findViewById(R.id.ll_btn);
-
         m_ivIcon = findViewById(R.id.iv_icon);
         m_tvName = findViewById(R.id.tv_name);
         m_tvTime = findViewById(R.id.tv_time);
@@ -161,14 +154,22 @@ public class DetailsActivity extends BaseAppCompatActivity {
         m_tvTitleDetails = findViewById(R.id.tv_title_details);
         m_tvRule = findViewById(R.id.tv_rule);
         m_tvPersonType = findViewById(R.id.tv_person_type);
-
         m_llShare = findViewById(R.id.ll_share);
         m_llComment = findViewById(R.id.ll_comment);
         m_llClose = findViewById(R.id.ll_close);//关闭活动
         m_llReceive = findViewById(R.id.ll_receive);//领取量房金
         m_llSettlement = findViewById(R.id.ll_settlement);//待结算
-
         m_recyclerViewPic =  findViewById(R.id.recycle_view);
+    }
+
+    @Override
+    protected void initData() {
+        Utils.initCommonTitle(this,"活动详情",true);
+        setEventBus();
+
+        m_strScheduleNo = getIntent().getStringExtra("strScheduleNo");
+        m_strCategoryNo = getIntent().getStringExtra("strCategoryNo");
+
         m_recyclerViewPic.setLayoutManager(new GridLayoutManager(this, 3));
         m_recyclerViewPic.addItemDecoration(new SpaceDecoration(10));
         int itemSize = (MyApplication.getScreenWidth() - Utils.dp2px(this,120)) / 3;
@@ -179,39 +180,11 @@ public class DetailsActivity extends BaseAppCompatActivity {
         m_recyclerViewEnrolls.setLayoutManager(new LinearLayoutManager(this));
         m_recyclerViewEnrolls.setHasFixedSize(true);
         m_recyclerViewEnrolls.setAdapter(m_enrollsAdapter);
-
-        viewInit();
-
-        onClickView();
-
-        getData();
     }
 
-    private void viewInit(){
-        int nDivisor = 5;
-//        switch (m_strCategoryNo){
-//            case Const.CategoryNo.TYPE_RENOVATION:
-//                break;
-//            case Const.CategoryNo.TYPE_REDUCE_WEIGHT:
-//                m_tvTitleAmount.setText("悬赏赏金:");
-//                m_tvTitleAddress.setText("地址:");
-//                break;
-//            case Const.CategoryNo.TYPE_QUIT_SMOKING:
-//                m_tvTitleAmount.setText("悬赏金额:");
-//                m_tvTitlePersonNo.setText("需要人手:");
-//                m_tvTitleDetails.setText("悬赏事项:");
-//                nDivisor = 6;
-//                break;
-//            case Const.CategoryNo.TYPE_QUIT_DRINKING:
-//
-//                break;
-//            case Const.CategoryNo.TYPE_GIVE_UP_GAMBLING:
-//
-//                break;
-//        }
-    }
-
-    private void onClickView() {
+    @Override
+    protected void clickView() {
+        super.clickView();
         //参与活动规则
         m_cbRule.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
@@ -289,8 +262,31 @@ public class DetailsActivity extends BaseAppCompatActivity {
         });
     }
 
+    private void viewInit(){
+        int nDivisor = 5;
+//        switch (m_strCategoryNo){
+//            case Const.CategoryNo.TYPE_RENOVATION:
+//                break;
+//            case Const.CategoryNo.TYPE_REDUCE_WEIGHT:
+//                m_tvTitleAmount.setText("悬赏赏金:");
+//                m_tvTitleAddress.setText("地址:");
+//                break;
+//            case Const.CategoryNo.TYPE_QUIT_SMOKING:
+//                m_tvTitleAmount.setText("悬赏金额:");
+//                m_tvTitlePersonNo.setText("需要人手:");
+//                m_tvTitleDetails.setText("悬赏事项:");
+//                nDivisor = 6;
+//                break;
+//            case Const.CategoryNo.TYPE_QUIT_DRINKING:
+//
+//                break;
+//            case Const.CategoryNo.TYPE_GIVE_UP_GAMBLING:
+//
+//                break;
+//        }
+    }
 
-    private void initView(ResponseMoneyMakingDetailsBean response){
+    private void requestDataInitView(ResponseMoneyMakingDetailsBean response){
         final ResponseMoneyMakingDetailsBean.Data data = response.getData();
         m_strCategoryName = data.getCategoryName();
         m_strTitle = data.getTitle();
@@ -457,7 +453,7 @@ public class DetailsActivity extends BaseAppCompatActivity {
                     ResponseMoneyMakingDetailsBean beanjson = gson.fromJson(json, ResponseMoneyMakingDetailsBean.class);
                     if(beanjson.getSuccess()){
                         Utils.showToast(DetailsActivity.this,"活动已经关闭");
-                        initView(beanjson);
+                        requestDataInitView(beanjson);
                         EventBus.getDefault().post("");
                     }
                 } catch (IOException e) {
@@ -512,40 +508,35 @@ public class DetailsActivity extends BaseAppCompatActivity {
         });
     }
 
-    private void getData() {
+    @Override
+    protected void getData() {
         ApiStores.schedulesDetails(m_strScheduleNo,getIntent().getStringExtra("strCallHttpType"),new HttpCallback<ResponseMoneyMakingDetailsBean>() {
             @Override
             public void OnSuccess(ResponseMoneyMakingDetailsBean response) {
                 if(response.getSuccess()){
-                    initView(response);
+                    requestDataInitView(response);
+                    executeOnLoadDataSuccess(true);
                 }
             }
 
             @Override
             public void OnFailure(String message) {
+                executeOnLoadDataSuccess(false);
                 AlertUtils.MessageAlertShow(DetailsActivity.this, "错误", message);
             }
 
             @Override
             public void OnRequestStart() {
-                kProgressHUD.show();
             }
 
             @Override
             public void OnRequestFinish() {
-                kProgressHUD.dismiss();
             }
         });
     }
 
-    @Override
-    public void onDestroy() {
-        EventBus.getDefault().unregister(this);
-        super.onDestroy();
-    }
-
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventBus(Bitmap bitmap){
+    public void onEventBus(Object obj){
 
     }
 }

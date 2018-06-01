@@ -76,7 +76,7 @@ public class ApplyEntrepreneurshipActivity extends BaseAppCompatActivity {
     }
 
     @Override
-    protected void setUpView() {
+    protected void initView() {
         Utils.initCommonTitle(this,"我要申请创业",true);
 
         m_etName = findViewById(R.id.et_name);
@@ -88,11 +88,10 @@ public class ApplyEntrepreneurshipActivity extends BaseAppCompatActivity {
 
         m_etName.setText(AppSettings.getNickname());
         m_etTel.setText(AppSettings.getPhone());
-
-        onViewClick();
     }
 
-    private void onViewClick() {
+    @Override
+    protected void clickView() {
         //电话
         findViewById(R.id.ll_phone).setOnClickListener(new View.OnClickListener() {
             @Override

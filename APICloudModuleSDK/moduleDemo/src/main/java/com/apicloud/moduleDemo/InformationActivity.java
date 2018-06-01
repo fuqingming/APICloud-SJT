@@ -66,15 +66,18 @@ public class InformationActivity extends BaseAppCompatActivity {
     }
 
     @Override
-    protected void setUpView() {
-        Utils.initCommonTitle(this,"咨询与建议",true);
-
+    protected void initView() {
         m_gridView = (GridView) findViewById(R.id.gridview_functions);
         m_etName = (EditText) findViewById(R.id.et_name);
         m_etPhone = (EditText) findViewById(R.id.et_phone);
         m_etTitle = (EditText) findViewById(R.id.et_title);
         m_etText = (EditText) findViewById(R.id.et_text);
         m_btnCommit = (Button) findViewById(R.id.btn_commit);
+    }
+
+    @Override
+    protected void initData() {
+        Utils.initCommonTitle(this,"咨询与建议",true);
 
         m_arrDatas = new ArrayList<>();
         m_arrDatas.add(null);
@@ -100,7 +103,10 @@ public class InformationActivity extends BaseAppCompatActivity {
                 }
             }
         });
+    }
 
+    @Override
+    protected void clickView() {
         m_btnCommit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

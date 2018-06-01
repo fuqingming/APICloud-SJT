@@ -34,21 +34,24 @@ public class RecommentActivity extends BaseAppCompatActivity {
     }
 
     @Override
-    protected void setUpView() {
-        Utils.initCommonTitle(this,"我要申请创业",true);
+    protected void initView() {
 
         m_etName = findViewById(R.id.et_name);
         m_etTel = findViewById(R.id.et_tel);
         m_etCustomerName = findViewById(R.id.et_customer_name);
         m_etCustomerTel = findViewById(R.id.et_customer_tel);
+    }
+
+    @Override
+    protected void initData() {
+        Utils.initCommonTitle(this,"我要申请创业",true);
 
         m_etName.setText(AppSettings.getNickname());
         m_etTel.setText(AppSettings.getPhone());
-
-        onViewClick();
     }
 
-    private void onViewClick() {
+    @Override
+    protected void clickView() {
         //提交
         findViewById(R.id.btn_commit).setOnClickListener(new View.OnClickListener() {
             @Override

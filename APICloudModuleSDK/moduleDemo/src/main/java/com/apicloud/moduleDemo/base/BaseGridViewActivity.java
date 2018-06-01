@@ -30,6 +30,8 @@ import com.github.jdsjlzx.util.RecyclerViewStateUtils;
 import com.github.jdsjlzx.view.CommonHeader;
 import com.github.jdsjlzx.view.LoadingFooter;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +54,7 @@ public abstract class BaseGridViewActivity<T> extends AppCompatActivity {
 
     protected boolean isRequestInProcess = false;
     protected boolean mIsStart = false;
+    private boolean isHaveEventBus;
 
     protected CommonHeader headerView;
 
@@ -73,8 +76,10 @@ public abstract class BaseGridViewActivity<T> extends AppCompatActivity {
         mNoData = (TextView) findViewById(R.id.tv_error_layout);
         toTopBtn = (Button) findViewById(R.id.top_btn);
         mErrorLayout = (ErrorLayout) findViewById(R.id.error_layout);
-        initData();
         initView();
+        initData();
+        initViewBase();
+        clickView();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
@@ -89,11 +94,18 @@ public abstract class BaseGridViewActivity<T> extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if(isHaveEventBus){
+            EventBus.getDefault().unregister(this);
+        }
     }
 
-    protected void initData(){};
+    protected void initData(){}
 
-    protected void initView() {
+    protected void initView() {}
+
+    protected void clickView() {}
+
+    private void initViewBase() {
 
         if (mListAdapter != null) {
             mErrorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
@@ -328,6 +340,11 @@ public abstract class BaseGridViewActivity<T> extends AppCompatActivity {
         if (!BackHandlerHelper.handleBackPress(this)) {
             super.onBackPressed();
         }
+    }
+
+    protected void setEventBus(){
+        isHaveEventBus = true;
+        EventBus.getDefault().register(this);
     }
 
     @Override

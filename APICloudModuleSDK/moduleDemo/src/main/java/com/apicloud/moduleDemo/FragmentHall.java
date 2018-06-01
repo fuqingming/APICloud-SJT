@@ -72,15 +72,13 @@ public class FragmentHall extends BaseFragment {
 	}
 
 	@Override
-	public void init() {
-		super.init();
+	protected void initView() {
 		Utils.initCommonTitle(getContentView(),"赏金堂");
+		m_gridView = getContentView().findViewById(R.id.gridview_functions);
 	}
 
 	@Override
-	protected void setUpView() {
-		m_gridView = getContentView().findViewById(R.id.gridview_functions);
-
+	protected void initData() {
 		// 换算gridview中item高度
 		DisplayMetrics dm = new DisplayMetrics();
 		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -89,9 +87,7 @@ public class FragmentHall extends BaseFragment {
 		// 获取数据
 		m_listData = getData(m_arrIcon, m_arrText);
 		m_adapter = new ModuleSelectionAdapter(getMContext(), m_listData, nWidth);
-
 		m_gridView.setAdapter(m_adapter);
-
 		m_gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
 
 		m_gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

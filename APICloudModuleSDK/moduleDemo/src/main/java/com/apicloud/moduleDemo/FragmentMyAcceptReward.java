@@ -28,17 +28,6 @@ public class FragmentMyAcceptReward extends BaseListFragment {
     }
 
     @Override
-    protected void initData() {
-
-    }
-
-    @Override
-    public void initView() {
-        super.initView();
-
-    }
-
-    @Override
     protected BaseRecyclerAdapter getListAdapter() {
         return m_myRewardAdapter;
     }

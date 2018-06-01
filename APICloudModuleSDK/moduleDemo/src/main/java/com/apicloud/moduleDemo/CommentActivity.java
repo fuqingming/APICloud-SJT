@@ -54,7 +54,6 @@ public class CommentActivity extends BaseAppCompatActivity {
     private String m_strScheduleNo;
     private String m_strCategoryName;
     private String m_strTitle;
-
     private String m_strText;
     private JSONArray m_jsonArrData;
 
@@ -67,17 +66,20 @@ public class CommentActivity extends BaseAppCompatActivity {
     }
 
     @Override
-    protected void setUpView() {
+    protected void initView() {
+        m_gridView = (GridView) findViewById(R.id.gridview_functions);
+        m_tvTitle = findViewById(R.id.tv_title);
+        m_etText = (EditText) findViewById(R.id.et_text);
+        m_btnCommit = (Button) findViewById(R.id.btn_commit);
+    }
+
+    @Override
+    protected void initData() {
         Utils.initCommonTitle(this,"评论",true);
 
         m_strScheduleNo = getIntent().getStringExtra("strScheduleNo");
         m_strCategoryName = getIntent().getStringExtra("strCategoryName");
         m_strTitle = getIntent().getStringExtra("strTitle");
-
-        m_gridView = (GridView) findViewById(R.id.gridview_functions);
-        m_tvTitle = findViewById(R.id.tv_title);
-        m_etText = (EditText) findViewById(R.id.et_text);
-        m_btnCommit = (Button) findViewById(R.id.btn_commit);
 
         m_tvTitle.setText(MessageFormat.format("{0}-{1}", m_strCategoryName, m_strTitle));
 
@@ -102,7 +104,10 @@ public class CommentActivity extends BaseAppCompatActivity {
                 }
             }
         });
+    }
 
+    @Override
+    protected void clickView() {
         m_btnCommit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

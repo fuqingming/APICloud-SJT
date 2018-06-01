@@ -39,14 +39,9 @@ public class FragmentMyReleaseReward extends BaseListFragment {
     }
 
     @Override
-    protected void initData() {
-
-    }
-
-    @Override
     public void initView() {
         super.initView();
-        EventBus.getDefault().register(this);
+        setEventBus();
     }
 
     @Override
@@ -118,12 +113,6 @@ public class FragmentMyReleaseReward extends BaseListFragment {
                 executeOnLoadFinish();
             }
         });
-    }
-
-    @Override
-    public void onDestroy() {
-        EventBus.getDefault().unregister(this);
-        super.onDestroy();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

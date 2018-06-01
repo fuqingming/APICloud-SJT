@@ -63,6 +63,8 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
 
         m_arrAllType = new ArrayList<>();
         m_arrOrderByBean = PopDataUtil.initOrderByData();
+
+        viewInit();
     }
 
     @Override
@@ -71,10 +73,6 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
         m_cbOrderBy = (CheckBox) findViewById(R.id.cb_order_by);
         m_teRelease = (TextView) findViewById(R.id.tv_release);
         m_rlBg = findViewById(R.id.rl_bg);
-
-        viewInit();
-
-        super.initView();
     }
 
     @Override
@@ -129,7 +127,10 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
             }
 
         });
+    }
 
+    @Override
+    protected void clickView() {
         m_cbAllType.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {

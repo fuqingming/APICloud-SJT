@@ -12,6 +12,8 @@ import com.apicloud.moduleDemo.http.HttpClient;
 import com.apicloud.moduleDemo.util.HUDProgressUtils;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -27,6 +29,8 @@ public abstract class BaseFragment extends Fragment {
 
     protected KProgressHUD kProgressHUD;
     protected Unbinder unbinder;
+
+    private boolean isHaveEventBus;
 
     @Nullable
     @Override
@@ -49,20 +53,23 @@ public abstract class BaseFragment extends Fragment {
         kProgressHUD = new HUDProgressUtils().showLoadingImage(getMContext());
         unbinder = ButterKnife.bind(this, getContentView());
         init();
-        setUpView();
-        setUpData();
+        initView();
+        initData();
+        clickView();
 
         return mContentView;
     }
 
     protected abstract int setLayoutResourceId();
-    protected void init(){
+    private void init(){
         HttpClient.init(getContext().getApplicationContext(),false);
     }
 
-    protected void setUpView(){}
+    protected void initData(){}
 
-    protected void setUpData(){}
+    protected void initView() {}
+
+    protected void clickView() {}
 
     protected View getContentView() {
         return mContentView;
@@ -80,5 +87,13 @@ public abstract class BaseFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+        if(isHaveEventBus){
+            EventBus.getDefault().unregister(this);
+        }
+    }
+
+    protected void setEventBus(){
+        isHaveEventBus = true;
+        EventBus.getDefault().register(this);
     }
 }

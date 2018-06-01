@@ -47,14 +47,7 @@ public class OrderPaymentActivity extends BaseAppCompatActivity {
     }
 
     @Override
-    protected void setUpView() {
-        Utils.initCommonTitle(this,"订单支付",true);
-
-        m_strOrderNo = getIntent().getStringExtra("strOrderNo");
-        m_strPaymentNo = getIntent().getStringExtra("strPaymentNo");
-        m_strAmount = getIntent().getStringExtra("strAmount");
-        m_strCreated = getIntent().getStringExtra("strCreated");
-
+    protected void initView() {
         m_rvWx = findViewById(R.id.rb_wx);
         m_rvZfb = findViewById(R.id.rb_zfb);
         m_tvOrderNo = findViewById(R.id.tv_order_no);
@@ -62,16 +55,25 @@ public class OrderPaymentActivity extends BaseAppCompatActivity {
         m_tvTitle = findViewById(R.id.tv_title);
         m_tvAmount = findViewById(R.id.tv_amount);
         m_btnCommit = findViewById(R.id.btn_commit);
+    }
+
+    @Override
+    protected void initData() {
+        Utils.initCommonTitle(this,"订单支付",true);
+
+        m_strOrderNo = getIntent().getStringExtra("strOrderNo");
+        m_strPaymentNo = getIntent().getStringExtra("strPaymentNo");
+        m_strAmount = getIntent().getStringExtra("strAmount");
+        m_strCreated = getIntent().getStringExtra("strCreated");
 
         m_tvOrderNo.setText(m_strOrderNo);
         m_tvAmount.setText(m_strAmount);
         m_tvTime.setText(TimeUtils.time2String(Long.valueOf(m_strCreated),TimeUtils.TIME_FORMAT_SHOW));
         m_tvTitle.setText(getIntent().getStringExtra("strTitleType"));
-
-        onCLickView();
     }
 
-    private void onCLickView() {
+    @Override
+    protected void clickView() {
 
         m_rvWx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

@@ -121,15 +121,9 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
     }
 
     @Override
-    protected void setUpView() {
+    protected void initView() {
         Utils.initCommonTitle(this,"发布活动",true);
-        EventBus.getDefault().register(this);
-
-        m_strCategoryNo = getIntent().getStringExtra("strCategoryNo");
-
-        m_strArrStyle  =  getResources().getStringArray(R.array.house_style_text);
-        m_strArrHouseType  = getResources().getStringArray(R.array.house_type_text);
-        m_strArrNoSelect  = getResources().getStringArray(R.array.house_no_text);
+        setEventBus();
 
         m_llCity = findViewById(R.id.ll_city);
         m_gridView =  findViewById(R.id.gridview_functions);
@@ -150,6 +144,15 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
         m_etAdress = findViewById(R.id.et_address);
         m_etSize = findViewById(R.id.et_size);
         m_etMobile = findViewById(R.id.et_mobile);
+    }
+
+    @Override
+    protected void initData() {
+        m_strCategoryNo = getIntent().getStringExtra("strCategoryNo");
+
+        m_strArrStyle  =  getResources().getStringArray(R.array.house_style_text);
+        m_strArrHouseType  = getResources().getStringArray(R.array.house_type_text);
+        m_strArrNoSelect  = getResources().getStringArray(R.array.house_no_text);
 
         m_arrDatas = new ArrayList<>();
         m_arrDatas.add(null);
@@ -172,11 +175,10 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
                 }
             }
         });
-
-        onCLickView();
     }
 
-    private void onCLickView() {
+    @Override
+    protected void clickView() {
         //开始日期选择
         m_tvStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -534,12 +536,6 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
         m_strSize = m_etSize.getText().toString().trim();
 
         return true;
-    }
-
-    @Override
-    public void onDestroy() {
-        EventBus.getDefault().unregister(this);
-        super.onDestroy();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

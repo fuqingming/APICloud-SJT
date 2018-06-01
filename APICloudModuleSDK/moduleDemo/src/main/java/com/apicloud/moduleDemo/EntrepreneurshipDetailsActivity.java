@@ -27,7 +27,7 @@ public class EntrepreneurshipDetailsActivity extends BaseAppCompatActivity {
     }
 
     @Override
-    protected void setUpView() {
+    protected void initView() {
         m_entrepreneurshipBean = (EntrepreneurshipBean) getIntent().getSerializableExtra("entrepreneurshipBean");
         Utils.initCommonTitle(this,m_entrepreneurshipBean.getRoleType() == 2 ? "设计师详情":"项目经理详情",true);
 

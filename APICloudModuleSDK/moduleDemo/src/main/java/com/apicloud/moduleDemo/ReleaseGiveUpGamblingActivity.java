@@ -61,49 +61,49 @@ public class ReleaseGiveUpGamblingActivity extends BaseAppCompatActivity {
         return R.layout.activity_release_give_up_gambling;
     }
 
-    @Override
-    protected void setUpView() {
-        Utils.initCommonTitle(this,"发布活动",true);
-
-        m_strArrNoSelect  = getResources().getStringArray(R.array.house_no_text);
-
-        m_llCity = (LinearLayout)findViewById(R.id.ll_city);
-        m_gridView = (GridView) findViewById(R.id.gridview_functions);
-        m_btnCommit = (Button) findViewById(R.id.btn_commit);
-        m_rgCity = (RadioGroup) this.findViewById(R.id.rg_city);
-        m_rbCityAll = (RadioButton) this.findViewById(R.id.rb_city_all);
-        m_rbCityIndex = (RadioButton) this.findViewById(R.id.rb_city_index);
-        m_tvStartData = (TextView)findViewById(R.id.tv_start_data);
-        m_tvEndData = (TextView)findViewById(R.id.tv_end_data);
-        m_tvJoinCount = (TextView)findViewById(R.id.tv_join_count);
-        m_tvCity = (TextView)findViewById(R.id.tv_city);
-        m_tvCityLocation = (TextView)findViewById(R.id.tv_city_location);
-        m_tvClosingDate = (TextView)findViewById(R.id.tv_closing_date);
-
-        m_arrDatas = new ArrayList<>();
-        m_arrDatas.add(null);
-
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int nWidth = (dm.widthPixels - Utils.dp2px(this,40))/3;
-
-        m_pictureSelectionAdapter = new PictureSelectionAdapter(this, m_arrDatas, nWidth);
-        m_gridView.setAdapter(m_pictureSelectionAdapter);
-        m_gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
-
-        m_gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                if(list == null || list.isEmpty() || list.size() == 9){
-                    openRadios();
-                }else if(position == 0 && m_arrDatas.get(position) == null){
-                    openRadios();
-                }
-            }
-        });
-
-        onCLickView();
-    }
+//    @Override
+//    protected void setUpView() {
+//        Utils.initCommonTitle(this,"发布活动",true);
+//
+//        m_strArrNoSelect  = getResources().getStringArray(R.array.house_no_text);
+//
+//        m_llCity = (LinearLayout)findViewById(R.id.ll_city);
+//        m_gridView = (GridView) findViewById(R.id.gridview_functions);
+//        m_btnCommit = (Button) findViewById(R.id.btn_commit);
+//        m_rgCity = (RadioGroup) this.findViewById(R.id.rg_city);
+//        m_rbCityAll = (RadioButton) this.findViewById(R.id.rb_city_all);
+//        m_rbCityIndex = (RadioButton) this.findViewById(R.id.rb_city_index);
+//        m_tvStartData = (TextView)findViewById(R.id.tv_start_data);
+//        m_tvEndData = (TextView)findViewById(R.id.tv_end_data);
+//        m_tvJoinCount = (TextView)findViewById(R.id.tv_join_count);
+//        m_tvCity = (TextView)findViewById(R.id.tv_city);
+//        m_tvCityLocation = (TextView)findViewById(R.id.tv_city_location);
+//        m_tvClosingDate = (TextView)findViewById(R.id.tv_closing_date);
+//
+//        m_arrDatas = new ArrayList<>();
+//        m_arrDatas.add(null);
+//
+//        DisplayMetrics dm = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(dm);
+//        int nWidth = (dm.widthPixels - Utils.dp2px(this,40))/3;
+//
+//        m_pictureSelectionAdapter = new PictureSelectionAdapter(this, m_arrDatas, nWidth);
+//        m_gridView.setAdapter(m_pictureSelectionAdapter);
+//        m_gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
+//
+//        m_gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+//                if(list == null || list.isEmpty() || list.size() == 9){
+//                    openRadios();
+//                }else if(position == 0 && m_arrDatas.get(position) == null){
+//                    openRadios();
+//                }
+//            }
+//        });
+//
+//        onCLickView();
+//    }
 
     private void onCLickView() {
         //参与截止时间

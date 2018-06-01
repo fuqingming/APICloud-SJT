@@ -76,8 +76,7 @@ public class CommitVoucherActivity extends BaseAppCompatActivity {
     }
 
     @Override
-    protected void setUpView() {
-        Utils.initCommonTitle(this,"提交凭证",true);
+    protected void initView() {
 
         m_llCompany = findViewById(R.id.ll_company);
         m_llType = findViewById(R.id.ll_type);
@@ -88,6 +87,11 @@ public class CommitVoucherActivity extends BaseAppCompatActivity {
         m_cbClause = findViewById(R.id.cb_clause);
         m_gridView = (GridView) findViewById(R.id.gridview_functions);
         m_btnCommit = (Button) findViewById(R.id.btn_commit);
+    }
+
+    @Override
+    protected void initData() {
+        Utils.initCommonTitle(this,"提交凭证",true);
 
         m_arrDatas = new ArrayList<>();
         m_arrDatas.add(null);
@@ -110,8 +114,11 @@ public class CommitVoucherActivity extends BaseAppCompatActivity {
                 }
             }
         });
+    }
 
-        //协议
+    @Override
+    protected void clickView() {
+//协议
         m_cbClause.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
