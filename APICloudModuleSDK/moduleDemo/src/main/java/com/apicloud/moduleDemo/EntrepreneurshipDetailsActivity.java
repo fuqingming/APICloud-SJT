@@ -10,7 +10,8 @@ import com.apicloud.moduleDemo.util.ImageLoader;
 import com.apicloud.moduleDemo.util.Utils;
 import com.apicloud.sdk.moduledemo.R;
 
-public class EntrepreneurshipDetailsActivity extends BaseAppCompatActivity {
+public class EntrepreneurshipDetailsActivity extends BaseAppCompatActivity
+{
 
     private EntrepreneurshipBean m_entrepreneurshipBean;
 
@@ -22,12 +23,14 @@ public class EntrepreneurshipDetailsActivity extends BaseAppCompatActivity {
     private TextView m_tvComment;
 
     @Override
-    protected int setLayoutResourceId() {
+    protected int setLayoutResourceId()
+    {
         return R.layout.activity_entrepreneurship;
     }
 
     @Override
-    protected void initView() {
+    protected void initView()
+    {
         m_entrepreneurshipBean = (EntrepreneurshipBean) getIntent().getSerializableExtra("entrepreneurshipBean");
         Utils.initCommonTitle(this,m_entrepreneurshipBean.getRoleType() == 2 ? "设计师详情":"项目经理详情",true);
 

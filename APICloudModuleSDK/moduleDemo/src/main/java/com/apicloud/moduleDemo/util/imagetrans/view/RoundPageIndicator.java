@@ -19,7 +19,8 @@ import com.apicloud.sdk.moduledemo.R;
 
 import static android.support.v4.view.ViewPager.OnPageChangeListener;
 
-public class RoundPageIndicator extends LinearLayout {
+public class RoundPageIndicator extends LinearLayout
+{
 
     private final static int DEFAULT_INDICATOR_WIDTH = 4;
     private ViewPager mViewpager;
@@ -36,38 +37,44 @@ public class RoundPageIndicator extends LinearLayout {
     private Animator mImmediateAnimatorIn;
 
     private int mLastPosition = -1;
-    private final OnPageChangeListener mInternalPageChangeListener = new OnPageChangeListener() {
+    private final OnPageChangeListener mInternalPageChangeListener = new OnPageChangeListener()
+    {
 
         @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        }
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
 
         @Override
-        public void onPageSelected(int position) {
+        public void onPageSelected(int position)
+        {
 
-            if (mViewpager.getAdapter() == null || mViewpager.getAdapter().getCount() <= 0) {
+            if (mViewpager.getAdapter() == null || mViewpager.getAdapter().getCount() <= 0)
+            {
                 return;
             }
 
-            if (mAnimatorIn.isRunning()) {
+            if (mAnimatorIn.isRunning())
+            {
                 mAnimatorIn.end();
                 mAnimatorIn.cancel();
             }
 
-            if (mAnimatorOut.isRunning()) {
+            if (mAnimatorOut.isRunning())
+            {
                 mAnimatorOut.end();
                 mAnimatorOut.cancel();
             }
 
             View currentIndicator;
-            if (mLastPosition >= 0 && (currentIndicator = getChildAt(mLastPosition)) != null) {
+            if (mLastPosition >= 0 && (currentIndicator = getChildAt(mLastPosition)) != null)
+            {
                 currentIndicator.setBackgroundDrawable(mIndicatorUnselectedBackgroundRes);
                 mAnimatorIn.setTarget(currentIndicator);
                 mAnimatorIn.start();
             }
 
             View selectedIndicator = getChildAt(position);
-            if (selectedIndicator != null) {
+            if (selectedIndicator != null)
+            {
                 selectedIndicator.setBackgroundDrawable(mIndicatorBackgroundRes);
                 mAnimatorOut.setTarget(selectedIndicator);
                 mAnimatorOut.start();
@@ -76,25 +83,32 @@ public class RoundPageIndicator extends LinearLayout {
         }
 
         @Override
-        public void onPageScrollStateChanged(int state) {
-        }
+        public void onPageScrollStateChanged(int state) {}
     };
-    private DataSetObserver mInternalDataSetObserver = new DataSetObserver() {
+    private DataSetObserver mInternalDataSetObserver = new DataSetObserver()
+    {
         @Override
-        public void onChanged() {
+        public void onChanged()
+        {
             super.onChanged();
-            if (mViewpager == null) {
+            if (mViewpager == null)
+            {
                 return;
             }
 
             int newCount = mViewpager.getAdapter().getCount();
             int currentCount = getChildCount();
 
-            if (newCount == currentCount) {  // No change
+            if (newCount == currentCount)
+            {  // No change
                 return;
-            } else if (mLastPosition < newCount) {
+            }
+            else if (mLastPosition < newCount)
+            {
                 mLastPosition = mViewpager.getCurrentItem();
-            } else {
+            }
+            else
+            {
                 mLastPosition = -1;
             }
 
@@ -102,30 +116,36 @@ public class RoundPageIndicator extends LinearLayout {
         }
     };
 
-    public RoundPageIndicator(Context context) {
+    public RoundPageIndicator(Context context)
+    {
         super(context);
         init(context, null);
     }
 
-    public RoundPageIndicator(Context context, AttributeSet attrs) {
+    public RoundPageIndicator(Context context, AttributeSet attrs)
+    {
         super(context, attrs);
         init(context, attrs);
     }
 
-    public RoundPageIndicator(Context context, AttributeSet attrs, int defStyleAttr) {
+    public RoundPageIndicator(Context context, AttributeSet attrs, int defStyleAttr)
+    {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public RoundPageIndicator(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public RoundPageIndicator(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes)
+    {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
     }
 
-    private void init(Context context, AttributeSet attrs) {
+    private void init(Context context, AttributeSet attrs)
+    {
         checkIndicatorConfig(context);
-        if (!isInEditMode()) {
+        if (!isInEditMode())
+        {
             mIndicatorBackgroundRes = context.getResources().getDrawable(R.drawable.white_radius).mutate();
             mIndicatorUnselectedBackgroundRes = mIndicatorBackgroundRes.mutate();
             mIndicatorUnselectedBackgroundRes.setAlpha(127);
@@ -135,7 +155,8 @@ public class RoundPageIndicator extends LinearLayout {
     /**
      * 有几个不跟主题走的页面，需要调用该方法
      */
-    public void omitTheme() {
+    public void omitTheme()
+    {
         mIndicatorBackgroundRes = getContext().getResources().getDrawable(R.drawable.white_radius);
         mIndicatorUnselectedBackgroundRes = mIndicatorBackgroundRes.mutate();
         mIndicatorUnselectedBackgroundRes.setAlpha(127);
@@ -144,7 +165,8 @@ public class RoundPageIndicator extends LinearLayout {
     /**
      * Create and configure Indicator in Java code.
      */
-    public void configureIndicator(int indicatorWidth, int indicatorHeight, int indicatorMargin) {
+    public void configureIndicator(int indicatorWidth, int indicatorHeight, int indicatorMargin)
+    {
         configureIndicator(indicatorWidth, indicatorHeight, indicatorMargin,
                 R.animator.scale_with_alpha, 0, R.drawable.white_radius, R.drawable.white_radius);
     }
@@ -152,7 +174,8 @@ public class RoundPageIndicator extends LinearLayout {
     public void configureIndicator(int indicatorWidth, int indicatorHeight, int indicatorMargin,
                                    @AnimatorRes int animatorId, @AnimatorRes int animatorReverseId,
                                    @DrawableRes int indicatorBackgroundId,
-                                   @DrawableRes int indicatorUnselectedBackgroundId) {
+                                   @DrawableRes int indicatorUnselectedBackgroundId)
+    {
 
         mIndicatorWidth = indicatorWidth;
         mIndicatorHeight = indicatorHeight;
@@ -166,7 +189,8 @@ public class RoundPageIndicator extends LinearLayout {
         checkIndicatorConfig(getContext());
     }
 
-    private void checkIndicatorConfig(Context context) {
+    private void checkIndicatorConfig(Context context)
+    {
         mIndicatorWidth = (mIndicatorWidth < 0) ? dip2px(DEFAULT_INDICATOR_WIDTH) : mIndicatorWidth;
         mIndicatorHeight =
                 (mIndicatorHeight < 0) ? dip2px(DEFAULT_INDICATOR_WIDTH) : mIndicatorHeight;
@@ -190,24 +214,31 @@ public class RoundPageIndicator extends LinearLayout {
 //                        : mIndicatorUnselectedBackgroundRes;
     }
 
-    private Animator createAnimatorOut(Context context) {
+    private Animator createAnimatorOut(Context context)
+    {
         return AnimatorInflater.loadAnimator(context, mAnimatorResId);
     }
 
-    private Animator createAnimatorIn(Context context) {
+    private Animator createAnimatorIn(Context context)
+    {
         Animator animatorIn;
-        if (mAnimatorReverseResId == 0) {
+        if (mAnimatorReverseResId == 0)
+        {
             animatorIn = AnimatorInflater.loadAnimator(context, mAnimatorResId);
             animatorIn.setInterpolator(new ReverseInterpolator());
-        } else {
+        }
+        else
+        {
             animatorIn = AnimatorInflater.loadAnimator(context, mAnimatorReverseResId);
         }
         return animatorIn;
     }
 
-    public void setViewPager(ViewPager viewPager) {
+    public void setViewPager(ViewPager viewPager)
+    {
         mViewpager = viewPager;
-        if (mViewpager != null && mViewpager.getAdapter() != null) {
+        if (mViewpager != null && mViewpager.getAdapter() != null)
+        {
             mLastPosition = -1;
             createIndicators();
             mViewpager.removeOnPageChangeListener(mInternalPageChangeListener);
@@ -216,7 +247,8 @@ public class RoundPageIndicator extends LinearLayout {
         }
     }
 
-    public DataSetObserver getDataSetObserver() {
+    public DataSetObserver getDataSetObserver()
+    {
         return mInternalDataSetObserver;
     }
 
@@ -224,36 +256,44 @@ public class RoundPageIndicator extends LinearLayout {
      * @deprecated User ViewPager addOnPageChangeListener
      */
     @Deprecated
-    public void setOnPageChangeListener(OnPageChangeListener onPageChangeListener) {
-        if (mViewpager == null) {
+    public void setOnPageChangeListener(OnPageChangeListener onPageChangeListener)
+    {
+        if (mViewpager == null)
+        {
             throw new NullPointerException("can not find Viewpager , setViewPager first");
         }
         mViewpager.removeOnPageChangeListener(onPageChangeListener);
         mViewpager.addOnPageChangeListener(onPageChangeListener);
     }
 
-    private void createIndicators() {
+    private void createIndicators()
+    {
         removeAllViews();
         int count = mViewpager.getAdapter().getCount();
-        if (count <= 0) {
+        if (count <= 0)
+        {
             return;
         }
         int currentItem = mViewpager.getCurrentItem();
         int orientation = getOrientation();
 
-        for (int i = 0; i < count; i++) {
-            if (currentItem == i) {
+        for (int i = 0; i < count; i++)
+        {
+            if (currentItem == i)
+            {
                 addIndicator(orientation, mIndicatorBackgroundRes, mImmediateAnimatorOut);
-            } else {
+            }
+            else
+            {
                 addIndicator(orientation, mIndicatorUnselectedBackgroundRes,
                         mImmediateAnimatorIn);
             }
         }
     }
 
-    private void addIndicator(int orientation, Drawable backgroundDrawableId,
-                              Animator animator) {
-        if (animator.isRunning()) {
+    private void addIndicator(int orientation, Drawable backgroundDrawableId,Animator animator) {
+        if (animator.isRunning())
+        {
             animator.end();
             animator.cancel();
         }
@@ -263,10 +303,13 @@ public class RoundPageIndicator extends LinearLayout {
         addView(Indicator, mIndicatorWidth, mIndicatorHeight);
         LayoutParams lp = (LayoutParams) Indicator.getLayoutParams();
 
-        if (orientation == HORIZONTAL) {
+        if (orientation == HORIZONTAL)
+        {
             lp.leftMargin = mIndicatorMargin;
             lp.rightMargin = mIndicatorMargin;
-        } else {
+        }
+        else
+        {
             lp.topMargin = mIndicatorMargin;
             lp.bottomMargin = mIndicatorMargin;
         }
@@ -277,14 +320,17 @@ public class RoundPageIndicator extends LinearLayout {
         animator.start();
     }
 
-    public int dip2px(float dpValue) {
+    public int dip2px(float dpValue)
+    {
         final float scale = getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
-    private class ReverseInterpolator implements Interpolator {
+    private class ReverseInterpolator implements Interpolator
+    {
         @Override
-        public float getInterpolation(float value) {
+        public float getInterpolation(float value)
+        {
             return Math.abs(1.0f - value);
         }
     }

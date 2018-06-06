@@ -12,19 +12,21 @@ import com.apicloud.sdk.moduledemo.R;
  * Date: 2017/11/13
  */
 
-public class MyJoinInAdapter extends BaseRecyclerAdapter<MyJoinInBean> {
+public class MyJoinInAdapter extends BaseRecyclerAdapter<MyJoinInBean>
+{
 
 
-    public MyJoinInAdapter() {
-    }
+    public MyJoinInAdapter() {    }
 
     @Override
-    protected int getContentView(int viewType) {
+    protected int getContentView(int viewType)
+    {
         return R.layout.item_my_join;
     }
 
     @Override
-    protected void covert(BaseRecyclerViewHolder holder, MyJoinInBean data, int position) {
+    protected void covert(BaseRecyclerViewHolder holder, MyJoinInBean data, int position)
+    {
         TextView ivTitle = holder.getView().findViewById(R.id.tv_title);
         TextView tvName = holder.getView().findViewById(R.id.tv_name);
         TextView tvType = holder.getView().findViewById(R.id.tv_type);

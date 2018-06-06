@@ -5,7 +5,8 @@ package com.apicloud.moduleDemo.util.alert;
  * Date: 2017/11/23
  */
 
-public abstract class AlertCallback {
+public abstract class AlertCallback
+{
 
     public abstract void onPositive();
 

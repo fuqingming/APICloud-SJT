@@ -11,18 +11,22 @@ import java.util.concurrent.Executors;
 /**
  * Created by liuting on 16/8/26.
  */
-public class Platform {
+public class Platform
+{
     private static final Platform PLATFORM = findPlatform();
 
-    public static Platform get() {
+    public static Platform get()
+    {
         Log.e("Platform",PLATFORM.getClass().toString());
         return PLATFORM;
     }
 
-    private static Platform findPlatform() {
+    private static Platform findPlatform()
+    {
         try {
             Class.forName("android.os.Build");
-            if (Build.VERSION.SDK_INT != 0) {
+            if (Build.VERSION.SDK_INT != 0)
+            {
                 return new Android();
             }
         } catch (ClassNotFoundException ignored) {
@@ -30,27 +34,33 @@ public class Platform {
         return new Platform();
     }
 
-    public Executor defaultCallbackExecutor() {
+    public Executor defaultCallbackExecutor()
+    {
         return Executors.newCachedThreadPool();
     }
 
-    public void execute(Runnable runnable) {
+    public void execute(Runnable runnable)
+    {
         defaultCallbackExecutor().execute(runnable);
     }
 
 
-    static class Android extends Platform {
+    static class Android extends Platform
+    {
 
         @Override
-        public Executor defaultCallbackExecutor() {
+        public Executor defaultCallbackExecutor()
+        {
             return new MainThreadExecutor();
         }
 
-        static class MainThreadExecutor implements Executor {
+        static class MainThreadExecutor implements Executor
+        {
             private final Handler handler = new Handler(Looper.getMainLooper());
 
             @Override
-            public void execute(Runnable r) {
+            public void execute(Runnable r)
+            {
                 handler.post(r);
             }
         }

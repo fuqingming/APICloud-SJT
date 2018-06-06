@@ -8,16 +8,19 @@ import android.view.View;
  * Date: 2017/11/13
  */
 
-public class BaseRecyclerViewHolder extends RecyclerView.ViewHolder {
+public class BaseRecyclerViewHolder extends RecyclerView.ViewHolder
+{
 
     View mView;
 
-    public BaseRecyclerViewHolder(View itemView) {
+    public BaseRecyclerViewHolder(View itemView)
+    {
         super(itemView);
         mView = itemView;
     }
 
-    public View getView() {
+    public View getView()
+    {
         return mView;
     }
 }

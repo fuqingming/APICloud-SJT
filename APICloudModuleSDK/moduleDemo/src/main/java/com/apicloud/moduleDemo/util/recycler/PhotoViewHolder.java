@@ -8,16 +8,19 @@ import android.view.View;
  * Date: 2017/11/13
  */
 
-public class PhotoViewHolder extends RecyclerView.ViewHolder {
+public class PhotoViewHolder extends RecyclerView.ViewHolder
+{
 
     View mView;
 
-    public PhotoViewHolder(View itemView) {
+    public PhotoViewHolder(View itemView)
+    {
         super(itemView);
         mView = itemView;
     }
 
-    public View getView() {
+    public View getView()
+    {
         return mView;
     }
 }

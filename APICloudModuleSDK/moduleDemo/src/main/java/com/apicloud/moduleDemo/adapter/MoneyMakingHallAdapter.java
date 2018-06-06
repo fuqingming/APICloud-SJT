@@ -19,24 +19,27 @@ import java.util.List;
  * Date: 2017/11/13
  */
 
-public class MoneyMakingHallAdapter extends BaseRecyclerAdapter<MoneyMakingHallBean> {
+public class MoneyMakingHallAdapter extends BaseRecyclerAdapter<MoneyMakingHallBean>
+{
 
     private boolean mIsType;
 
-    public MoneyMakingHallAdapter() {
-    }
+    public MoneyMakingHallAdapter() {}
 
-    public void setType(boolean isType) {
+    public void setType(boolean isType)
+    {
         this.mIsType = isType;
     }
 
     @Override
-    protected int getContentView(int viewType) {
+    protected int getContentView(int viewType)
+    {
         return R.layout.item_money_making_hall;
     }
 
     @Override
-    protected void covert(BaseRecyclerViewHolder holder, MoneyMakingHallBean data, int position) {
+    protected void covert(BaseRecyclerViewHolder holder, MoneyMakingHallBean data, int position)
+    {
         ImageView ivIcon = holder.getView().findViewById(R.id.iv_icon);
         TextView tvName = holder.getView().findViewById(R.id.tv_name);
         TextView tvAddress = holder.getView().findViewById(R.id.tv_address);
@@ -50,16 +53,22 @@ public class MoneyMakingHallAdapter extends BaseRecyclerAdapter<MoneyMakingHallB
 
         tvName.setText(data.getUserInfo().getNickname());
         tvAddress.setText(data.getProvinceName()+data.getCityName()+data.getCountyName());
-        if(mIsType){
+        if(mIsType)
+        {
             tvAmount.setText(data.getPersonnelAmount());
-        }else{
+        }
+        else
+        {
             tvAmount.setText(data.getGuaranteeAmount());
         }
 
         tvTime.setText(TimeUtils.time2String(data.getCreated(),TimeUtils.TIME_FORMAT_SHOW));
-        if(!"".equals(data.getRemark()) && data.getRemark() != null){
+        if(!"".equals(data.getRemark()) && data.getRemark() != null)
+        {
             tvText.setVisibility(View.VISIBLE);
-        }else{
+        }
+        else
+        {
             tvText.setVisibility(View.GONE);
         }
         tvTitle.setText(data.getTitle());

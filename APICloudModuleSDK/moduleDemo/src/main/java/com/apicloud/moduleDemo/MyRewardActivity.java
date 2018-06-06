@@ -18,7 +18,8 @@ import java.util.List;
 /**
  *
  * */
-public class MyRewardActivity extends BaseAppCompatActivity {
+public class MyRewardActivity extends BaseAppCompatActivity
+{
 
 	// ViewPager
 	private NoScrollViewPager viewPager;
@@ -32,12 +33,14 @@ public class MyRewardActivity extends BaseAppCompatActivity {
 	private List<Fragment> fragments = new ArrayList<>();
 
 	@Override
-	protected int setLayoutResourceId() {
+	protected int setLayoutResourceId()
+	{
 		return R.layout.activity_my_reward;
 	}
 
 	@Override
-	protected void initView() {
+	protected void initView()
+	{
 		Utils.initCommonTitle(this,"我的悬赏",true);
 
 		viewPager = (NoScrollViewPager)findViewById(R.id.view_pager);
@@ -50,15 +53,18 @@ public class MyRewardActivity extends BaseAppCompatActivity {
 		fragments.add(new FragmentMyAcceptReward());
 
 		// PagerAdapter
-		pagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+		pagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager())
+		{
 			@Override
-			public int getCount() {
+			public int getCount()
+			{
 				Log.d("",""+fragments.size());
 				return fragments.size();
 			}
 
 			@Override
-			public Fragment getItem(int position) {
+			public Fragment getItem(int position)
+			{
 				Log.d("",""+fragments.size());
 				return fragments.get(position);
 			}

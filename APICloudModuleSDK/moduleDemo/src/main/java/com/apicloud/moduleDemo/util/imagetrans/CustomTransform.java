@@ -15,30 +15,38 @@ import com.bumptech.glide.load.resource.bitmap.TransformationUtils;
  * Created by liuting on 17/6/1.
  */
 
-public class CustomTransform extends BitmapTransformation {
+public class CustomTransform extends BitmapTransformation
+{
     it.liuting.imagetrans.ScaleType scaleType;
 
-    public CustomTransform(Context context, it.liuting.imagetrans.ScaleType scaleType) {
+    public CustomTransform(Context context, it.liuting.imagetrans.ScaleType scaleType)
+    {
         super(context);
         this.scaleType = scaleType;
     }
 
     @Override
-    protected Bitmap transform(BitmapPool pool, Bitmap source, int outWidth, int outHeight) {
-        if (null == source || source.isRecycled()) {
+    protected Bitmap transform(BitmapPool pool, Bitmap source, int outWidth, int outHeight)
+    {
+        if (null == source || source.isRecycled())
+        {
             return null;
         }
-        switch (scaleType) {
-            case CENTER_CROP: {
+        switch (scaleType)
+        {
+            case CENTER_CROP:
+             {
                 final Bitmap toReuse = pool.get(outWidth, outHeight, source.getConfig() != null
                         ? source.getConfig() : Bitmap.Config.ARGB_8888);
                 Bitmap transformed = TransformationUtils.centerCrop(toReuse, source, outWidth, outHeight);
-                if (toReuse != null && toReuse != transformed && !pool.put(toReuse)) {
+                if (toReuse != null && toReuse != transformed && !pool.put(toReuse))
+                {
                     toReuse.recycle();
                 }
                 return transformed;
             }
-            case START_CROP: {
+            case START_CROP:
+            {
                 float scaleX = (float) outWidth / source.getWidth();
                 float scaleY = (float) outHeight / source.getHeight();
                 float scale = Math.max(scaleX, scaleY);
@@ -49,7 +57,8 @@ public class CustomTransform extends BitmapTransformation {
                 Bitmap result = Bitmap.createBitmap(source, 0, 0, finalWidth, finalHeight);
                 return result;
             }
-            case END_CROP: {
+            case END_CROP:
+             {
                 float scaleX = (float) outWidth / source.getWidth();
                 float scaleY = (float) outHeight / source.getHeight();
                 float scale = Math.max(scaleX, scaleY);
@@ -60,7 +69,8 @@ public class CustomTransform extends BitmapTransformation {
                 Bitmap result = Bitmap.createBitmap(source, source.getWidth() - finalWidth, source.getHeight() - finalHeight, finalWidth, finalHeight);
                 return result;
             }
-            case FIT_XY: {
+            case FIT_XY:
+            {
                 float scaleX = (float) outWidth / source.getWidth();
                 float scaleY = (float) outHeight / source.getHeight();
                 Bitmap result = Bitmap.createBitmap(outWidth, outHeight, getSafeConfig(source));
@@ -75,12 +85,14 @@ public class CustomTransform extends BitmapTransformation {
         return source;
     }
 
-    private static Bitmap.Config getSafeConfig(Bitmap bitmap) {
+    private static Bitmap.Config getSafeConfig(Bitmap bitmap)
+    {
         return bitmap.getConfig() != null ? bitmap.getConfig() : Bitmap.Config.ARGB_8888;
     }
 
     @Override
-    public String getId() {
+    public String getId()
+    {
         return scaleType.name();
     }
 }

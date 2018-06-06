@@ -1,23 +1,23 @@
 -- Merging decision tree log ---
 manifest
-ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-152:12
-INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-152:12
-INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-152:12
-INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-152:12
-INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-152:12
-INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-152:12
-INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-152:12
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-168:12
+INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-168:12
+INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-168:12
+INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-168:12
+INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-168:12
+INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-168:12
+INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-168:12
 	package
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:3:5-42
 		INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml
 		INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-152:12
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-168:12
 		INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-152:12
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:1-168:12
 		INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:1:11-69
@@ -26,7 +26,7 @@ ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidMan
 	android:name
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:5:22-63
 application
-ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:7:5-150:19
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:7:5-166:19
 	android:supportsRtl
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:9:9-35
 	android:label
@@ -75,166 +75,190 @@ ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidMan
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:36:13-69
 	android:name
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:35:13-68
-activity#com.apicloud.moduleDemo.MoneyMakingHallActivity
+activity#com.apicloud.moduleDemo.AgreementWebViewActivity
 ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:39:9-42:51
 	android:screenOrientation
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:42:13-49
 	android:theme
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:41:13-69
 	android:name
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:40:13-75
-activity#com.apicloud.moduleDemo.BusinessActivity
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:40:13-76
+activity#com.apicloud.moduleDemo.MoneyMakingHallActivity
 ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:44:9-47:51
 	android:screenOrientation
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:47:13-49
 	android:theme
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:46:13-69
 	android:name
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:45:13-68
-activity#com.apicloud.moduleDemo.InformationActivity
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:45:13-75
+activity#com.apicloud.moduleDemo.BusinessActivity
 ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:49:9-52:51
 	android:screenOrientation
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:52:13-49
 	android:theme
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:51:13-69
 	android:name
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:50:13-71
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:50:13-68
+activity#com.apicloud.moduleDemo.InformationActivity
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:54:9-57:51
+	android:screenOrientation
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:57:13-49
+	android:theme
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:56:13-69
+	android:name
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:55:13-71
 activity#com.apicloud.moduleDemo.ReleaseRenovationActivity
-ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:55:9-58:51
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:60:9-63:51
 	android:screenOrientation
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:58:13-49
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:63:13-49
 	android:theme
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:57:13-69
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:62:13-69
 	android:name
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:56:13-77
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:61:13-77
 activity#com.apicloud.moduleDemo.ReleaseBuildingActivity
-ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:61:9-64:51
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:66:9-69:51
 	android:screenOrientation
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:64:13-49
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:69:13-49
 	android:theme
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:63:13-69
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:68:13-69
 	android:name
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:62:13-75
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:67:13-75
 activity#com.apicloud.moduleDemo.ReleaseReduceWeightActivity
-ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:67:9-70:51
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:72:9-75:51
 	android:screenOrientation
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:70:13-49
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:75:13-49
 	android:theme
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:69:13-69
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:74:13-69
 	android:name
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:68:13-79
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:73:13-79
 activity#com.apicloud.moduleDemo.ReleaseSmokingActivity
-ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:73:9-76:51
-	android:screenOrientation
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:76:13-49
-	android:theme
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:75:13-69
-	android:name
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:74:13-74
-activity#com.apicloud.moduleDemo.ReleaseDrinkingActivity
 ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:78:9-81:51
 	android:screenOrientation
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:81:13-49
 	android:theme
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:80:13-69
 	android:name
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:79:13-75
-activity#com.apicloud.moduleDemo.ReleaseGiveUpGamblingActivity
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:79:13-74
+activity#com.apicloud.moduleDemo.ReleaseDrinkingActivity
 ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:83:9-86:51
 	android:screenOrientation
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:86:13-49
 	android:theme
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:85:13-69
 	android:name
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:84:13-81
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:84:13-75
+activity#com.apicloud.moduleDemo.ReleaseGiveUpGamblingActivity
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:88:9-91:51
+	android:screenOrientation
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:91:13-49
+	android:theme
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:90:13-69
+	android:name
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:89:13-81
 activity#com.apicloud.moduleDemo.DetailsActivity
-ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:89:9-92:51
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:94:9-97:51
 	android:screenOrientation
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:92:13-49
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:97:13-49
 	android:theme
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:91:13-69
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:96:13-69
 	android:name
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:90:13-67
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:95:13-67
 activity#com.apicloud.moduleDemo.CommentActivity
-ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:95:9-98:51
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:100:9-103:51
 	android:screenOrientation
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:98:13-49
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:103:13-49
 	android:theme
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:97:13-69
-	android:name
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:96:13-67
-activity#com.apicloud.moduleDemo.RecommentActivity
-ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:101:9-104:51
-	android:screenOrientation
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:104:13-49
-	android:theme
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:103:13-69
-	android:name
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:102:13-69
-activity#com.apicloud.moduleDemo.PaymentActivity
-ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:107:9-110:51
-	android:screenOrientation
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:110:13-49
-	android:theme
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:109:13-69
 	android:name
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:108:13-67
-activity#com.apicloud.moduleDemo.OrderPaymentActivity
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:101:13-67
+activity#com.apicloud.moduleDemo.RecommentActivity
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:106:9-109:51
+	android:screenOrientation
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:109:13-49
+	android:theme
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:108:13-69
+	android:name
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:107:13-69
+activity#com.apicloud.moduleDemo.MyRecommentActivity
 ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:112:9-115:51
 	android:screenOrientation
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:115:13-49
 	android:theme
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:114:13-69
 	android:name
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:113:13-72
-activity#com.apicloud.moduleDemo.EntrepreneurshipActivity
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:113:13-71
+activity#com.apicloud.moduleDemo.PaymentActivity
 ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:118:9-121:51
 	android:screenOrientation
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:121:13-49
 	android:theme
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:120:13-69
 	android:name
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:119:13-76
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:119:13-67
+activity#com.apicloud.moduleDemo.JoinPaymentActivity
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:123:9-126:51
+	android:screenOrientation
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:126:13-49
+	android:theme
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:125:13-69
+	android:name
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:124:13-71
+activity#com.apicloud.moduleDemo.OrderPaymentActivity
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:128:9-131:51
+	android:screenOrientation
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:131:13-49
+	android:theme
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:130:13-69
+	android:name
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:129:13-72
+activity#com.apicloud.moduleDemo.EntrepreneurshipActivity
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:134:9-137:51
+	android:screenOrientation
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:137:13-49
+	android:theme
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:136:13-69
+	android:name
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:135:13-76
 activity#com.apicloud.moduleDemo.EntrepreneurshipDetailsActivity
-ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:124:9-127:51
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:140:9-143:51
 	android:screenOrientation
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:127:13-49
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:143:13-49
 	android:theme
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:126:13-69
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:142:13-69
 	android:name
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:125:13-83
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:141:13-83
 activity#com.apicloud.moduleDemo.ApplyEntrepreneurshipActivity
-ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:130:9-133:51
-	android:screenOrientation
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:133:13-49
-	android:theme
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:132:13-69
-	android:name
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:131:13-81
-activity#com.apicloud.moduleDemo.FindCompanyActivity
-ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:136:9-139:51
-	android:screenOrientation
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:139:13-49
-	android:theme
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:138:13-69
-	android:name
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:137:13-71
-activity#cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity
-ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:142:9-145:39
-	android:exported
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:145:13-36
-	android:theme
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:144:13-69
-	android:name
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:143:13-81
-activity#com.yalantis.ucrop.UCropActivity
-ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:146:9-149:52
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:146:9-149:51
 	android:screenOrientation
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:149:13-49
 	android:theme
 		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:148:13-69
 	android:name
-		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:147:13-60
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:147:13-81
+activity#com.apicloud.moduleDemo.FindCompanyActivity
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:152:9-155:51
+	android:screenOrientation
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:155:13-49
+	android:theme
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:154:13-69
+	android:name
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:153:13-71
+activity#cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:158:9-161:39
+	android:exported
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:161:13-36
+	android:theme
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:160:13-69
+	android:name
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:159:13-81
+activity#com.yalantis.ucrop.UCropActivity
+ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:162:9-165:52
+	android:screenOrientation
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:165:13-49
+	android:theme
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:164:13-69
+	android:name
+		ADDED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml:163:13-60
 uses-sdk
 INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from F:\work\APICloud-SJT\APICloudModuleSDK\moduleDemo\src\main\AndroidManifest.xml

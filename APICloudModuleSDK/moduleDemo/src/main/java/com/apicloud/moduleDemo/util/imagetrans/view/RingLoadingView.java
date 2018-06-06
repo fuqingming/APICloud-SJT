@@ -15,7 +15,8 @@ import com.apicloud.sdk.moduledemo.R;
 /**
  * Created by qihuan on 16/9/6.
  */
-public class RingLoadingView extends View {
+public class RingLoadingView extends View
+{
     private static final float DEFAULT_SIZE = BaseApplication.dpToPx(48);
     private final Paint mPaint = new Paint();
     private float mStrokeWidth = BaseApplication.dpToPx(1);
@@ -27,22 +28,26 @@ public class RingLoadingView extends View {
     private RectF mProgressBounds;
     private int mBgColor;
 
-    public RingLoadingView(Context context) {
+    public RingLoadingView(Context context)
+    {
         super(context);
         init();
     }
 
-    public RingLoadingView(Context context, AttributeSet attrs) {
+    public RingLoadingView(Context context, AttributeSet attrs)
+    {
         super(context, attrs);
         init();
     }
 
-    public RingLoadingView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public RingLoadingView(Context context, AttributeSet attrs, int defStyleAttr)
+    {
         super(context, attrs, defStyleAttr);
         init();
     }
 
-    private void init() {
+    private void init()
+    {
         setBackgroundResource(android.R.color.transparent);
         //根据默认的宽高,构建view矩阵
         mBounds = new RectF(0, 0, DEFAULT_SIZE, DEFAULT_SIZE);
@@ -64,7 +69,8 @@ public class RingLoadingView extends View {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(Canvas canvas)
+    {
         super.onDraw(canvas);
 
         //背景描边
@@ -88,12 +94,14 @@ public class RingLoadingView extends View {
      *
      * @param percent
      */
-    public void setProgress(float percent) {
+    public void setProgress(float percent)
+    {
         mpercent = (percent >= 1 ? 1 : percent);
         postInvalidate();
     }
 
-    private int halfAlphaColor(int colorValue) {
+    private int halfAlphaColor(int colorValue)
+    {
         int startA = (colorValue >> 24) & 0xff;
         int startR = (colorValue >> 16) & 0xff;
         int startG = (colorValue >> 8) & 0xff;

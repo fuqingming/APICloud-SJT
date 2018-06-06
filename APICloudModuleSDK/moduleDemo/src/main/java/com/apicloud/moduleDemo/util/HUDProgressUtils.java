@@ -9,14 +9,16 @@ import com.kaopiz.kprogresshud.KProgressHUD;
  * Date: 2017/11/23
  */
 
-public class HUDProgressUtils {
+public class HUDProgressUtils
+{
     /**
      * 菊花加载
      *
      * @param context
      * @return
      */
-    public KProgressHUD showLoadingImage(Context context) {
+    public KProgressHUD showLoadingImage(Context context)
+    {
 
         return KProgressHUD.create(context)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
@@ -25,7 +27,8 @@ public class HUDProgressUtils {
                 .setCancellable(false);
     }
 
-    public KProgressHUD showMessage(Context context, String message){
+    public KProgressHUD showMessage(Context context, String message)
+    {
         return KProgressHUD.create(context, KProgressHUD.Style.ANNULAR_DETERMINATE)
                 .setLabel(message)
                 .setCancellable(true)

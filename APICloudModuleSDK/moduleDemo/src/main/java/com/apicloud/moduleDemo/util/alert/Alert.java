@@ -14,7 +14,8 @@ import com.apicloud.sdk.moduledemo.R;
  * Date: 2017/11/24
  */
 
-public class Alert extends Dialog implements View.OnClickListener {
+public class Alert extends Dialog implements View.OnClickListener
+{
     private TextView contentTxt;
     private TextView titleTxt;
     private TextView submitTxt;
@@ -28,59 +29,69 @@ public class Alert extends Dialog implements View.OnClickListener {
     private String title;
 
 
-    public Alert(Context context) {
+    public Alert(Context context)
+    {
         super(context);
         this.mContext = context;
     }
-    public Alert(Context context, String content) {
+    public Alert(Context context, String content)
+    {
         super(context, R.style.dialog);
         this.mContext = context;
         this.content = content;
     }
 
-    public Alert(Context context, int themeResId, String content) {
+    public Alert(Context context, int themeResId, String content)
+    {
         super(context, themeResId);
         this.mContext = context;
         this.content = content;
     }
 
-    public Alert(Context context, int themeResId, String content, OnCloseListener listener) {
+    public Alert(Context context, int themeResId, String content, OnCloseListener listener)
+    {
         super(context, themeResId);
         this.mContext = context;
         this.content = content;
         this.listener = listener;
     }
 
-    protected Alert(Context context, boolean cancelable, OnCancelListener cancelListener) {
+    protected Alert(Context context, boolean cancelable, OnCancelListener cancelListener)
+    {
         super(context, cancelable, cancelListener);
         this.mContext = context;
     }
 
-    public Alert setTitle(String title){
+    public Alert setTitle(String title)
+    {
         this.title = title;
         return this;
     }
 
-    public Alert setPositiveButton(String name){
+    public Alert setPositiveButton(String name)
+    {
         this.positiveName = name;
         return this;
     }
 
-    public Alert setNegativeButton(String name){
+    public Alert setNegativeButton(String name)
+    {
         this.negativeName = "×";
         return this;
     }
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_commom);
         setCanceledOnTouchOutside(false);
         initView();
     }
 
-    private void initView(){
+    private void initView()
+    {
         contentTxt = (TextView)findViewById(R.id.content);
         titleTxt = (TextView)findViewById(R.id.title);
         submitTxt = (TextView)findViewById(R.id.submit);
@@ -89,40 +100,51 @@ public class Alert extends Dialog implements View.OnClickListener {
         cancelTxt.setOnClickListener(this);
 
         contentTxt.setText(content);
-        if(!TextUtils.isEmpty(positiveName)){
+        if(!TextUtils.isEmpty(positiveName))
+        {
             submitTxt.setText(positiveName);
-        }else {
+        }
+        else
+        {
             this.submitTxt.setVisibility(View.GONE);
         }
 
-        if(!TextUtils.isEmpty(negativeName)){
+        if(!TextUtils.isEmpty(negativeName))
+        {
             cancelTxt.setText(negativeName);
         }
 
-        if(!TextUtils.isEmpty(title)){
+        if(!TextUtils.isEmpty(title))
+        {
             titleTxt.setText(title);
         }
 
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         int i = v.getId();
-        if (i == R.id.cancel) {
-            if (listener != null) {
+        if (i == R.id.cancel)
+        {
+            if (listener != null)
+            {
                 listener.onClick(this, false);
             }
             this.dismiss();
 
-        } else if (i == R.id.submit) {
-            if (listener != null) {
+        } else if (i == R.id.submit)
+        {
+            if (listener != null)
+            {
                 listener.onClick(this, true);
             }
 
         }
     }
 
-    public interface OnCloseListener{
+    public interface OnCloseListener
+    {
         void onClick(Dialog dialog, boolean confirm);
     }
 }

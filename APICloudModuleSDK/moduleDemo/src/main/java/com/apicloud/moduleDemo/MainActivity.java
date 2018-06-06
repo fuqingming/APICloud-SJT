@@ -15,21 +15,22 @@ import com.apicloud.sdk.moduledemo.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MainActivity extends FragmentActivityBase {
+public class MainActivity extends FragmentActivityBase
+{
 
     // Tab文字及图标
     private int m_iconArray[] = {R.drawable.main_tab_hall_selector,
-            R.drawable.main_tab_join_selector,
-            R.drawable.main_tab_match_selector,
-            R.drawable.main_tab_share_selector,
-            R.drawable.main_tab_mine_selector};
+                                 R.drawable.main_tab_join_selector,
+                                 R.drawable.main_tab_match_selector,
+                                 R.drawable.main_tab_share_selector,
+                                 R.drawable.main_tab_mine_selector};
 
     // 各tab页对应的fragment
-    private Class<?> m_fragmentArray[] = { FragmentHall.class,
-            FragmentHall.class,
-            FragmentHall.class,
-            FragmentHall.class,
-            FragmentHall.class};
+    private Class<?> m_fragmentArray[] = {  FragmentHall.class,
+                                            FragmentHall.class,
+                                            FragmentHall.class,
+                                            FragmentHall.class,
+                                            FragmentHall.class};
 
     private String m_textArray[] = null;
 
@@ -37,12 +38,14 @@ public class MainActivity extends FragmentActivityBase {
     private LayoutInflater m_layoutInflater = null;
 
     @Override
-    protected int setLayoutResourceId() {
+    protected int setLayoutResourceId()
+    {
         return R.layout.activity_main;
     }
 
     @Override
-    protected void init() {
+    protected void init()
+    {
         super.init();
         m_textArray = getResources().getStringArray(R.array.main_tab_text);
         m_layoutInflater = LayoutInflater.from(this);
@@ -57,7 +60,8 @@ public class MainActivity extends FragmentActivityBase {
     }
 
     @Override
-    protected void setUpView() {
+    protected void setUpView()
+    {
 
         m_tabHost = findViewById(android.R.id.tabhost);
         m_tabHost.setup(this, getSupportFragmentManager(), R.id.fl_real_tabcontent);
@@ -81,7 +85,8 @@ public class MainActivity extends FragmentActivityBase {
      */
     private View getTabItemView(int index)
     {
-        if(index == 2){
+        if(index == 2)
+        {
             View vTab = m_layoutInflater.inflate(R.layout.main_tab_item_view_share, null);
 
             ImageView ivIcon = vTab.findViewById(R.id.iv_icon);

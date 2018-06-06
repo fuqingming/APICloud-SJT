@@ -11,6 +11,7 @@ import android.view.WindowManager;
 
 import com.apicloud.moduleDemo.backhandler.BackHandlerHelper;
 import com.apicloud.moduleDemo.http.HttpClient;
+import com.apicloud.moduleDemo.settings.GlobalInstanceStateHelper;
 import com.apicloud.moduleDemo.util.HUDProgressUtils;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
@@ -21,13 +22,15 @@ import org.greenrobot.eventbus.EventBus;
  * Date: 2017/11/9
  */
 
-public abstract class BaseAppCompatActivity extends AppCompatActivity {
+public abstract class BaseAppCompatActivity extends AppCompatActivity
+{
 
     protected KProgressHUD kProgressHUD;
     private boolean isHaveEventBus;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         init();
         kProgressHUD = new HUDProgressUtils().showLoadingImage(this);
@@ -39,8 +42,10 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        if(getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT){
+    protected void onResume()
+    {
+        if(getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+        {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
 
@@ -48,14 +53,16 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
+    protected void onPause()
+    {
 
         super.onPause();
     }
 
     protected abstract int setLayoutResourceId();
 
-    protected void init(){
+    protected void init()
+    {
         HttpClient.init(getApplicationContext(),true);
     }
 
@@ -66,14 +73,17 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     protected void clickView() {}
 
     @Override
-    public void onBackPressed() {
-        if (!BackHandlerHelper.handleBackPress(this)) {
+    public void onBackPressed()
+    {
+        if (!BackHandlerHelper.handleBackPress(this))
+        {
             super.onBackPressed();
         }
     }
 
     @Override
-    public Resources getResources() {
+    public Resources getResources()
+    {
         Resources res = super.getResources();
         Configuration config=new Configuration();
         config.setToDefaults();
@@ -82,15 +92,35 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onDestroy()
+    {
         super.onDestroy();
-        if(isHaveEventBus){
+        if(isHaveEventBus)
+        {
             EventBus.getDefault().unregister(this);
         }
     }
 
-    protected void setEventBus(){
+    protected void setEventBus()
+    {
         isHaveEventBus = true;
         EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+
+        // 保存MyApplication中保存的全局变量
+        GlobalInstanceStateHelper.saveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState)
+    {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        GlobalInstanceStateHelper.restoreInstanceState(this, savedInstanceState);
     }
 }

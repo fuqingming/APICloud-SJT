@@ -1,8 +1,6 @@
 package com.apicloud.moduleDemo;
 
-import com.apicloud.moduleDemo.base.MyRewardBean;
-import com.apicloud.moduleDemo.bean.base.BusinessBean;
-import com.apicloud.moduleDemo.bean.base.MoneyMakingHallBean;
+import com.apicloud.moduleDemo.bean.base.MyRewardBean;
 import com.apicloud.moduleDemo.bean.base.MyJoinInBean;
 import com.apicloud.moduleDemo.bean.base.MyMessageBean;
 import com.apicloud.sdk.moduledemo.R;

@@ -19,43 +19,52 @@ import java.util.List;
 import it.liuting.imagetrans.ImageTrans;
 import it.liuting.imagetrans.listener.SourceImageViewGet;
 
-public class PhotoAlbumAdapter extends RecyclerView.Adapter<PhotoViewHolder> {
+public class PhotoAlbumAdapter extends RecyclerView.Adapter<PhotoViewHolder>
+{
 
 	private Context context;
 	private List<String> images = new ArrayList<>();
 	private RecyclerView recyclerView;
 	private int itemSize;
 
-	public PhotoAlbumAdapter(Context context,RecyclerView recyclerView,int itemSize) {
+	public PhotoAlbumAdapter(Context context,RecyclerView recyclerView,int itemSize)
+	{
 		this.context = context;
 		this.recyclerView = recyclerView;
 		this.itemSize = itemSize;
 	}
 
-	public void setData(List<String> images) {
+	public void setData(List<String> images)
+	{
 		this.images = images;
 	}
 
 	@Override
-	public PhotoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+	public PhotoViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+	{
 		ImageView imageView = new ImageView(parent.getContext());
 		imageView.setLayoutParams(new ViewGroup.LayoutParams(itemSize, itemSize));
 		return new PhotoViewHolder(imageView);
 	}
 
 	@Override
-	public void onBindViewHolder(final PhotoViewHolder holder, final int position) {
+	public void onBindViewHolder(final PhotoViewHolder holder, final int position)
+	{
 
 		((ImageView)holder.itemView).setScaleType(ImageView.ScaleType.CENTER_CROP);
 		ImageLoader.getInstace().loadRoundedCornersImg(context, (ImageView) holder.itemView, images.get(position),5,R.drawable.place_holder);
-		holder.itemView.setOnClickListener(new View.OnClickListener() {
+		holder.itemView.setOnClickListener(new View.OnClickListener()
+		{
 			@Override
-			public void onClick(View v) {
+			public void onClick(View v)
+			{
 				ImageTrans.with(context)
 						.setImageList(images)
-						.setSourceImageView(new SourceImageViewGet() {
+						.setSourceImageView(new SourceImageViewGet()
+						{
 							@Override
-							public ImageView getImageView(int pos) {
+							public ImageView getImageView(int pos)
+							{
 								int layoutPos = recyclerView.indexOfChild(holder.itemView);
 								View view = recyclerView.getChildAt(layoutPos + pos - position);
 								if (view != null) return (ImageView) view;
@@ -72,7 +81,8 @@ public class PhotoAlbumAdapter extends RecyclerView.Adapter<PhotoViewHolder> {
 	}
 
 	@Override
-	public int getItemCount() {
+	public int getItemCount()
+	{
 		return images.size();
 	}
 }

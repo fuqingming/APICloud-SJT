@@ -20,13 +20,15 @@ import cn.finalteam.rxgalleryfinal.bean.MediaBean;
 //import com.apicloud.moduleDemo.util.imagetrans.CustomTransform;
 //import com.apicloud.moduleDemo.util.imagetrans.ScaleType;
 
-public class PictureSelectionAdapter extends BaseAdapter {
+public class PictureSelectionAdapter extends BaseAdapter
+{
 
 	private LayoutInflater m_listContainer;
 	private Context m_context;
 	private int m_height;
 	private List<MediaBean> m_listItems;
-	public PictureSelectionAdapter(Context context, List<MediaBean> listItems, int height) {
+	public PictureSelectionAdapter(Context context, List<MediaBean> listItems, int height)
+	{
 		super();
 		this.m_context = context;
 		this.m_height = height;
@@ -38,21 +40,28 @@ public class PictureSelectionAdapter extends BaseAdapter {
 	 * ListView Item设置
 	 */
 	@SuppressLint("InflateParams")
-	public View getView(final int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent)
+	{
 		final Holder holder;
-		if (convertView == null) {
+		if (convertView == null)
+		{
 			holder = new Holder();
 			convertView = m_listContainer.inflate(R.layout.index_item_picture, null);
 			holder.m_ivIconPay = convertView.findViewById(R.id.iv_icon);
 			holder.m_llSize = convertView.findViewById(R.id.ll_size);
 			convertView.setTag(holder);
-		} else {
+		}
+		else
+		{
 			holder = (Holder) convertView.getTag();
 		}
 
-		if(m_listItems.get(position) == null){
+		if(m_listItems.get(position) == null)
+		{
 			Glide.with(m_context).load(R.mipmap.add_icon).into(holder.m_ivIconPay);
-		}else{
+		}
+		else
+		{
 			Glide.with(m_context).load(m_listItems.get(position).getThumbnailBigPath())
 					.placeholder(R.drawable.place_holder)
 					.transform(new CustomTransform(m_context, it.liuting.imagetrans.ScaleType.CENTER_CROP))
@@ -65,19 +74,23 @@ public class PictureSelectionAdapter extends BaseAdapter {
 
 	}
 
-	public int getCount() {
+	public int getCount()
+	{
 		return m_listItems.size();
 	}
 
-	public Object getItem(int position) {
+	public Object getItem(int position)
+	{
 		return position;
 	}
 
-	public long getItemId(int position) {
+	public long getItemId(int position)
+	{
 		return position;
 	}
 
-	private class Holder {
+	private class Holder
+	{
 		ImageView m_ivIconPay;
 		LinearLayout m_llSize;
 	}

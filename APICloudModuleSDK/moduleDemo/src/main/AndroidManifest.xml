@@ -2,6 +2,7 @@
 
     package="com.apicloud.sdk.moduledemo">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application android:allowBackup="true"
@@ -33,6 +34,11 @@
         <!--创业加盟-->
         <activity
             android:name="com.apicloud.moduleDemo.MyJoinInActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <!--协议WebView-->
+        <activity
+            android:name="com.apicloud.moduleDemo.AgreementWebViewActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="portrait"/>
         <!--赚钱大厅-->
@@ -103,9 +109,20 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="portrait"/>
 
+        <!--推荐客户-->
+        <activity
+            android:name="com.apicloud.moduleDemo.MyRecommentActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"/>
+
         <!--支付保证金-->
         <activity
             android:name="com.apicloud.moduleDemo.PaymentActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <!--参与支付保证金-->
+        <activity
+            android:name="com.apicloud.moduleDemo.JoinPaymentActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="portrait"/>
         <!--订单支付-->

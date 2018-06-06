@@ -7,7 +7,8 @@ import android.widget.ImageView;
  * Created by liuting on 18/3/15.
  */
 
-public interface ImageLoad {
+public interface ImageLoad
+{
     /**
      * 加载图片
      *
@@ -37,7 +38,8 @@ public interface ImageLoad {
     /**
      * 图片加载器中用来回传下载好的图片
      */
-    interface LoadCallback {
+    interface LoadCallback
+    {
         /**
          * 进度
          *

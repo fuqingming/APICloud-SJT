@@ -10,12 +10,14 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.apicloud.moduleDemo.backhandler.OnTaskComplete;
 import com.apicloud.moduleDemo.backhandler.OnTaskSuccessComplete;
 import com.apicloud.moduleDemo.base.BaseAppCompatActivity;
 import com.apicloud.moduleDemo.bean.response.LoginBean;
 import com.apicloud.moduleDemo.bean.response.ResponseOrderBean;
 import com.apicloud.moduleDemo.http.ApiStores;
 import com.apicloud.moduleDemo.http.HttpCallback;
+import com.apicloud.moduleDemo.http.HttpUtils;
 import com.apicloud.moduleDemo.settings.AppSettings;
 import com.apicloud.moduleDemo.util.ImageLoader;
 import com.apicloud.moduleDemo.util.RegexUtil;
@@ -30,7 +32,8 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.MessageFormat;
 
-public class PaymentActivity extends BaseAppCompatActivity {
+public class PaymentActivity extends BaseAppCompatActivity
+{
 
     public static final int APPLY_RENOVATION = 1;//申请量房
 
@@ -48,12 +51,14 @@ public class PaymentActivity extends BaseAppCompatActivity {
     private boolean m_isAgree = false;
 
     @Override
-    protected int setLayoutResourceId() {
+    protected int setLayoutResourceId()
+    {
         return R.layout.activity_payment;
     }
 
     @Override
-    protected void initView() {
+    protected void initView()
+    {
         m_ivIcon = findViewById(R.id.iv_icon);
         m_tvName = findViewById(R.id.tv_name);
         m_tvTime = findViewById(R.id.tv_time);
@@ -67,8 +72,9 @@ public class PaymentActivity extends BaseAppCompatActivity {
     }
 
     @Override
-    protected void initData() {
-        Utils.initCommonTitle(this,"支付量房金",true);
+    protected void initData()
+    {
+        Utils.initCommonTitle(this,"支付保障金",true);
         setEventBus();
 
         String strTime = getIntent().getStringExtra("strTime");
@@ -81,24 +87,27 @@ public class PaymentActivity extends BaseAppCompatActivity {
         m_tvPersonNo.setText("0".equals(strPersonnelLimit) ? "不限": MessageFormat.format("{0}家", strPersonnelLimit));
         m_tvAmount.setText(MessageFormat.format("{0}元", getIntent().getStringExtra("strGuaranteeAmount")));
         m_tvTitle.setText(getIntent().getStringExtra("strTitle"));
-        if(getIntent().getIntExtra("nApplyRenovation",0) == APPLY_RENOVATION){
-            m_tvAmountType.setText("量房金");
-        }
     }
 
     @Override
-    protected void clickView() {
-        m_cbClause.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+    protected void clickView()
+    {
+        m_cbClause.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
                 m_isAgree = isChecked;
             }
         });
 
-        m_btnCommit.setOnClickListener(new View.OnClickListener() {
+        m_btnCommit.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                if(isInputValid()){
+            public void onClick(View view)
+            {
+                if(isInputValid())
+                {
                     commitInformation();
                 }
             }
@@ -106,9 +115,11 @@ public class PaymentActivity extends BaseAppCompatActivity {
     }
 
     // 检查输入项是否输入正确
-    private boolean isInputValid() {
+    private boolean isInputValid()
+    {
 
-        if(!m_isAgree){
+        if(!m_isAgree)
+        {
             Utils.showToast(this, "请阅读并同意协议才能继续");
             return false;
         }
@@ -116,45 +127,77 @@ public class PaymentActivity extends BaseAppCompatActivity {
         return true;
     }
 
-    private void commitInformation(){
+    private void commitInformation()
+    {
         String strScheduleNo = getIntent().getStringExtra("strScheduleNo");
-        ApiStores.myGuaranteesSchedulePreay(strScheduleNo, new HttpCallback<ResponseOrderBean>() {
+        ApiStores.myGuaranteesSchedulePreay(strScheduleNo, new HttpCallback<ResponseOrderBean>()
+        {
 
             @Override
-            public void OnSuccess(final ResponseOrderBean response) {
-                if(response.getSuccess()){
+            public void OnSuccess(final ResponseOrderBean response)
+            {
+                if(response.getSuccess())
+                {
+                    kProgressHUD.dismiss();
                     Intent it = new Intent(PaymentActivity.this,OrderPaymentActivity.class);
                     it.putExtra("strAmount",response.getData().getAmount());
                     it.putExtra("strOrderNo",response.getData().getOrderNo());
                     it.putExtra("strPaymentNo",response.getData().getPaymentNo());
                     it.putExtra("strCreated",response.getData().getCreated());
                     it.putExtra("strTitleType",getIntent().getStringExtra("strTitleType"));
+                    it.putExtra("nApplyRenovation",APPLY_RENOVATION);
                     startActivity(it);
                 }
             }
 
             @Override
-            public void OnFailure(String message) {
-                kProgressHUD.dismiss();
-                AlertUtils.MessageAlertShow(PaymentActivity.this,"错误",message);
+            public void OnFailure(final String message)
+            {
+                if(HttpUtils.isValidResponse(message))
+                {
+                    kProgressHUD.dismiss();
+                    AlertUtils.MessageAlertShow(PaymentActivity.this, "错误", message);
+                }
+                else
+                {
+                    HttpUtils.httpRequestFailure(PaymentActivity.this, new OnTaskComplete()
+                    {
+                        @Override
+                        public void onComplete(Object obj) { }
+
+                        @Override
+                        public void onSuccess(Object obj)
+                        {
+                            commitInformation();
+                        }
+
+                        @Override
+                        public void onFail(Object obj)
+                        {
+                            kProgressHUD.dismiss();
+                            AlertUtils.MessageAlertShow(PaymentActivity.this, "错误", message);
+                        }
+                    });
+                }
             }
 
             @Override
-            public void OnRequestStart() {
-                if(!kProgressHUD.isShowing()){
+            public void OnRequestStart()
+            {
+                if(!kProgressHUD.isShowing())
+                {
                     kProgressHUD.show();
                 }
             }
 
             @Override
-            public void OnRequestFinish() {
-                kProgressHUD.dismiss();
-            }
+            public void OnRequestFinish() {}
         });
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventBus(Object obj){
+    public void onEventBus(Object obj)
+    {
         finish();
     }
 }

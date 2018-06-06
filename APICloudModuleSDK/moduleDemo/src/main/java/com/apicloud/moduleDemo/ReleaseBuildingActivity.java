@@ -34,7 +34,8 @@ import cn.finalteam.rxgalleryfinal.imageloader.ImageLoaderType;
 import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
 import cn.finalteam.rxgalleryfinal.rxbus.event.ImageMultipleResultEvent;
 
-public class ReleaseBuildingActivity extends BaseAppCompatActivity {
+public class ReleaseBuildingActivity extends BaseAppCompatActivity
+{
 
     private PictureSelectionAdapter m_pictureSelectionAdapter;
 
@@ -58,7 +59,8 @@ public class ReleaseBuildingActivity extends BaseAppCompatActivity {
     private String m_strArrNoSelect[]  = null;
 
     @Override
-    protected int setLayoutResourceId() {
+    protected int setLayoutResourceId()
+    {
         return R.layout.activity_release_building;
     }
 
@@ -107,14 +109,18 @@ public class ReleaseBuildingActivity extends BaseAppCompatActivity {
 //        onCLickView();
 //    }
 
-    private void onCLickView() {
+    private void onCLickView()
+    {
         //开始日期选择
-        m_tvStartData.setOnClickListener(new View.OnClickListener() {
+        m_tvStartData.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view) {
-                PopUitls.showDataSelect(ReleaseBuildingActivity.this, new OnTaskSuccessComplete() {
+                PopUitls.showDataSelect(ReleaseBuildingActivity.this, new OnTaskSuccessComplete()
+                {
                     @Override
-                    public void onSuccess(Object obj) {
+                    public void onSuccess(Object obj)
+                    {
                         DateBean dataBean = (DateBean) obj;
                         m_tvStartData.setText(dataBean.getYear() + "-" + dataBean.getMonth() + "-" + dataBean.getDay());
                     }
@@ -122,12 +128,16 @@ public class ReleaseBuildingActivity extends BaseAppCompatActivity {
             }
         });
         //结束日期选择
-        m_tvEndData.setOnClickListener(new View.OnClickListener() {
+        m_tvEndData.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                PopUitls.showDataSelect(ReleaseBuildingActivity.this, new OnTaskSuccessComplete() {
+            public void onClick(View view)
+            {
+                PopUitls.showDataSelect(ReleaseBuildingActivity.this, new OnTaskSuccessComplete()
+                {
                     @Override
-                    public void onSuccess(Object obj) {
+                    public void onSuccess(Object obj)
+                    {
                         DateBean dataBean = (DateBean) obj;
                         m_tvEndData.setText(dataBean.getYear() + "-" + dataBean.getMonth() + "-" + dataBean.getDay());
                     }
@@ -136,46 +146,62 @@ public class ReleaseBuildingActivity extends BaseAppCompatActivity {
         });
        
         //户型
-        m_tvHouseType.setOnClickListener(new View.OnClickListener() {
+        m_tvHouseType.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                PopUitls.showPopSelect(ReleaseBuildingActivity.this, m_strArrHouseType, "户型结构", new OnTaskSuccessComplete() {
+            public void onClick(View view)
+            {
+                PopUitls.showPopSelect(ReleaseBuildingActivity.this, m_strArrHouseType, "户型结构", new OnTaskSuccessComplete()
+                {
                     @Override
-                    public void onSuccess(Object obj) {
+                    public void onSuccess(Object obj)
+                    {
                         m_tvHouseType.setText(obj.toString());
                     }
                 });
             }
         });
         //参与商家数
-        m_tvJoinCount.setOnClickListener(new View.OnClickListener() {
+        m_tvJoinCount.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                PopUitls.showPopSelect(ReleaseBuildingActivity.this, m_strArrNoSelect, "参与商家数量", new OnTaskSuccessComplete() {
+            public void onClick(View view)
+            {
+                PopUitls.showPopSelect(ReleaseBuildingActivity.this, m_strArrNoSelect, "参与商家数量", new OnTaskSuccessComplete()
+                {
                     @Override
-                    public void onSuccess(Object obj) {
+                    public void onSuccess(Object obj)
+                    {
                         m_tvJoinCount.setText(obj.toString());
                     }
                 });
             }
         });
-        m_tvCity.setOnClickListener(new View.OnClickListener() {
+        m_tvCity.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 AddressPickTask task = new AddressPickTask(ReleaseBuildingActivity.this);
                 task.setHideProvince(false);
                 task.setHideCounty(false);
-                task.setCallback(new AddressPickTask.Callback() {
+                task.setCallback(new AddressPickTask.Callback()
+                {
                     @Override
-                    public void onAddressInitFailed() {
+                    public void onAddressInitFailed()
+                    {
                         showToast("数据初始化失败");
                     }
 
                     @Override
-                    public void onAddressPicked(Province province, City city, County county) {
-                        if (county == null) {
+                    public void onAddressPicked(Province province, City city, County county)
+                    {
+                        if (county == null)
+                        {
                             m_tvCity.setText(province.getAreaName() + city.getAreaName());
-                        } else {
+                        }
+                        else
+                        {
                             m_tvCity.setText(province.getAreaName() + city.getAreaName() + county.getAreaName());
                         }
                     }
@@ -184,52 +210,65 @@ public class ReleaseBuildingActivity extends BaseAppCompatActivity {
             }
         });
         //提交
-        m_btnCommit.setOnClickListener(new View.OnClickListener() {
+        m_btnCommit.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
 
             }
         });
         //全国or选择城市
-        m_rgCity.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+        m_rgCity.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
 
             @Override
-            public void onCheckedChanged(RadioGroup rg, int checkedId) {
+            public void onCheckedChanged(RadioGroup rg, int checkedId)
+            {
                 // TODO Auto-generated method stub
-                if(checkedId == m_rbCityAll.getId()){
+                if(checkedId == m_rbCityAll.getId())
+                {
                     m_llCity.setVisibility(View.GONE);
                     m_tvCity.setText("");
-                }else if(checkedId == m_rbCityIndex.getId()){
+                }
+                else if(checkedId == m_rbCityIndex.getId())
+                {
                     m_llCity.setVisibility(View.VISIBLE);
                 }
             }
         });
     }
 
-    private void showToast(String msg) {
+    private void showToast(String msg)
+    {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     /**
      * 多选
      */
-    private void openRadios() {
+    private void openRadios()
+    {
         RxGalleryFinal rxGalleryFinal = RxGalleryFinal
                 .with(ReleaseBuildingActivity.this)
                 .image()
                 .multiple();
-        if (list != null && !list.isEmpty()) {
+        if (list != null && !list.isEmpty())
+        {
             rxGalleryFinal.selected(list);
         }
         rxGalleryFinal.maxSize(9)
                 .imageLoader(ImageLoaderType.FRESCO)
-                .subscribe(new RxBusResultDisposable<ImageMultipleResultEvent>() {
+                .subscribe(new RxBusResultDisposable<ImageMultipleResultEvent>()
+                {
 
                     @Override
-                    protected void onEvent(ImageMultipleResultEvent imageMultipleResultEvent) throws Exception {
+                    protected void onEvent(ImageMultipleResultEvent imageMultipleResultEvent) throws Exception
+                    {
                         list = imageMultipleResultEvent.getResult();
                         m_arrDatas.clear();
-                        if(list.size() < 9){
+                        if(list.size() < 9)
+                        {
                             m_arrDatas.add(null);
                         }
                         m_arrDatas.addAll(list);
@@ -238,7 +277,8 @@ public class ReleaseBuildingActivity extends BaseAppCompatActivity {
                     }
 
                     @Override
-                    public void onComplete() {
+                    public void onComplete()
+                    {
                         super.onComplete();
                         Toast.makeText(getBaseContext(), "OVER", Toast.LENGTH_SHORT).show();
                     }
@@ -247,7 +287,8 @@ public class ReleaseBuildingActivity extends BaseAppCompatActivity {
     }
 
     // 检查输入项是否输入正确
-    private boolean isInputValid() {
+    private boolean isInputValid()
+    {
 //        m_strText = m_etText.getText().toString().trim();
 //        if (m_strText.isEmpty()) {
 //            Utils.showToast(ReleaseRenovationActivity.this, "请输入意见建议");

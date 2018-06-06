@@ -31,6 +31,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+import com.apicloud.moduleDemo.DetailsActivity;
+import com.apicloud.moduleDemo.backhandler.OnTaskComplete;
 import com.apicloud.moduleDemo.backhandler.OnTaskSuccessComplete;
 import com.apicloud.moduleDemo.bean.base.VerifyMobileBean;
 import com.apicloud.moduleDemo.bean.response.LoginBean;
@@ -39,6 +41,7 @@ import com.apicloud.moduleDemo.http.ApiStores;
 import com.apicloud.moduleDemo.http.HttpCallback;
 import com.apicloud.moduleDemo.http.HttpClient;
 import com.apicloud.moduleDemo.http.HttpSetUrl;
+import com.apicloud.moduleDemo.http.HttpUtils;
 import com.apicloud.moduleDemo.settings.AppSettings;
 import com.apicloud.moduleDemo.util.alert.AlertUtils;
 import com.apicloud.sdk.moduledemo.R;
@@ -74,7 +77,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-public class Utils {
+public class Utils
+{
 
     // 设置通用Title
     public static void initCommonTitle(final Activity activity, final String strTitle)
@@ -278,7 +282,8 @@ public class Utils {
      *
      * 将px转换为与之相等的dp
      */
-    public static int px2dp(Context context, float pxValue) {
+    public static int px2dp(Context context, float pxValue)
+    {
         final float scale =  context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
@@ -289,7 +294,8 @@ public class Utils {
      *
      * 将dp转换为与之相等的px
      */
-    public static int dp2px(Context context, float dipValue) {
+    public static int dp2px(Context context, float dipValue)
+    {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dipValue * scale + 0.5f);
     }
@@ -298,7 +304,8 @@ public class Utils {
      * 打开软键盘
      * @param context
      */
-    public static void showKeyboard(final Context context){
+    public static void showKeyboard(final Context context)
+    {
         new Timer().schedule(new TimerTask()
         {
             public void run()
@@ -314,7 +321,8 @@ public class Utils {
      * 关闭软键盘
      * @param mContext
      */
-    public static void hintKeyboard(final Context mContext,final EditText mEditText){
+    public static void hintKeyboard(final Context mContext,final EditText mEditText)
+    {
         new Timer().schedule(new TimerTask()
         {
             public void run()
@@ -516,36 +524,7 @@ public class Utils {
             @Override
             public void onClick(View v)
             {
-                ApiStores.smsSend(mobile, new HttpCallback<ResponseBaseBean>() {
-                    @Override
-                    public void OnSuccess(ResponseBaseBean response) {
-                        if(response.getSuccess()){
-                            tvSendVerifyCode.setEnabled(false);
-                            tvSendVerifyCode.setText(String.valueOf(RESEND_VERIFY_CODE_SECOND));
-                            m_myCount = new SmsSendCounter(context,tvSendVerifyCode, RESEND_VERIFY_CODE_SECOND * 1000, 1000);
-                            m_myCount.start();
-                        }else{
-                            Utils.showToast(context,response.getMessage());
-                        }
-                    }
-
-                    @Override
-                    public void OnFailure(String message) {
-                        dlg.dismiss();
-                        Utils.showToast(context,message);
-                    }
-
-                    @Override
-                    public void OnRequestStart() {
-                        kProgressHUD.show();
-                    }
-
-                    @Override
-                    public void OnRequestFinish() {
-                        kProgressHUD.dismiss();
-                    }
-                });
-
+                smsSendYzm(context,  kProgressHUD,mobile,tvSendVerifyCode);
             }
         });
         // right button
@@ -591,11 +570,79 @@ public class Utils {
         return dlg;
     }
 
-    public static Dialog showCommonDialogAcceptSuccess(final Context context,final OnTaskSuccessComplete onTaskSuccess){
+    private static void smsSendYzm(final Context context, final KProgressHUD kProgressHUD, final String mobile, final TextView tvSendVerifyCode)
+    {
+        ApiStores.smsSend(mobile, new HttpCallback<ResponseBaseBean>()
+        {
+            @Override
+            public void OnSuccess(ResponseBaseBean response)
+            {
+                if(response.getSuccess())
+                {
+                    kProgressHUD.dismiss();
+                    tvSendVerifyCode.setEnabled(false);
+                    tvSendVerifyCode.setText(String.valueOf(RESEND_VERIFY_CODE_SECOND));
+                    m_myCount = new SmsSendCounter(context,tvSendVerifyCode, RESEND_VERIFY_CODE_SECOND * 1000, 1000);
+                    m_myCount.start();
+                }
+                else
+                {
+                    Utils.showToast(context,response.getMessage());
+                }
+            }
+
+            @Override
+            public void OnFailure(final String message)
+            {
+                if(HttpUtils.isValidResponse(message))
+                {
+                    kProgressHUD.dismiss();
+                    AlertUtils.MessageAlertShow(context, "错误", message);
+                }
+                else
+                {
+                    HttpUtils.httpRequestFailure(context,new OnTaskComplete()
+                    {
+                        @Override
+                        public void onComplete(Object obj) { }
+
+                        @Override
+                        public void onSuccess(Object obj)
+                        {
+                            smsSendYzm(context,  kProgressHUD,mobile,tvSendVerifyCode);
+                        }
+
+                        @Override
+                        public void onFail(Object obj)
+                        {
+                            kProgressHUD.dismiss();
+                            AlertUtils.MessageAlertShow(context, "错误", message);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void OnRequestStart()
+            {
+                if(!kProgressHUD.isShowing())
+                {
+                    kProgressHUD.show();
+                }
+            }
+
+            @Override
+            public void OnRequestFinish() {}
+        });
+    }
+
+    public static Dialog showCommonDialogAcceptSuccess(final Context context,final OnTaskSuccessComplete onTaskSuccess)
+    {
         return showCommonDialog(context,onTaskSuccess,R.layout.dialog_common_accept_success);
     }
 
-    public static Dialog showCommonDialogReleaseSuccess(final Context context,final OnTaskSuccessComplete onTaskSuccess){
+    public static Dialog showCommonDialogReleaseSuccess(final Context context,final OnTaskSuccessComplete onTaskSuccess)
+    {
         return showCommonDialog(context,onTaskSuccess,R.layout.dialog_common_release_success);
     }
 
@@ -612,10 +659,13 @@ public class Utils {
         lp.width = (int) context.getResources().getDimension(R.dimen.dialog_width);
         dlg.getWindow().setAttributes(lp);
         final TextView etBtn =  vContent.findViewById(R.id.tv_btn);
-        etBtn.setOnClickListener(new View.OnClickListener() {
+        etBtn.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                if(onTaskSuccess != null){
+            public void onClick(View view)
+            {
+                if(onTaskSuccess != null)
+                {
                     onTaskSuccess.onSuccess(null);
                 }
                 dlg.dismiss();
@@ -730,11 +780,13 @@ public class Utils {
         return dlg;
     }
 
-    public static void showToast(Context context,String text){
+    public static void showToast(Context context,String text)
+    {
         Toast.makeText(context,text,Toast.LENGTH_LONG).show();
     }
 
-    public static Uri getMediaUriFromPath(Context context, String path) {
+    public static Uri getMediaUriFromPath(Context context, String path)
+    {
         Uri mediaUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
         Cursor cursor = context.getContentResolver().query(mediaUri,
                 null,
@@ -743,7 +795,8 @@ public class Utils {
                 null);
 
         Uri uri = null;
-        if(cursor.moveToFirst()) {
+        if(cursor.moveToFirst())
+        {
             uri = ContentUris.withAppendedId(mediaUri,
                     cursor.getLong(cursor.getColumnIndex(MediaStore.Images.Media._ID)));
         }
@@ -768,7 +821,8 @@ public class Utils {
      * 定义空格回车换行符
      */
     private static final String REGEX_SPACE = "\\s*|\t|\r|\n";
-    public static String delHTMLTag(String htmlStr) {
+    public static String delHTMLTag(String htmlStr)
+    {
         // 过滤script标签
         Pattern p_script = Pattern.compile(REGEX_SCRIPT, Pattern.CASE_INSENSITIVE);
         Matcher m_script = p_script.matcher(htmlStr);
@@ -984,7 +1038,8 @@ public class Utils {
      * @param mContext
      * @return
      */
-    public static String getVersionCode(Context mContext) {
+    public static String getVersionCode(Context mContext)
+    {
         String mVersionName = "";
         PackageManager packageManager = mContext.getPackageManager();
         try {
@@ -1012,67 +1067,4 @@ public class Utils {
 //                .setAdapter(new MyImageTransAdapter())
 //                .show();
 //    }
-
-    public static void login(final Context context ,final OnTaskSuccessComplete onTaskSuccessComplete,final KProgressHUD kProgressHUD){
-        OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象。
-
-        JSONObject js = new JSONObject();
-        try {
-            js.put("remember-me",1);
-            js.put("authChannel",1000);
-            js.put("password","123456");
-            js.put("username","13386174433");
-//            js.put("password","111111");
-//            js.put("username","13175220672");
-//            js.put("username","18019086117");
-//            js.put("password","ysy1314ysy");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), js.toString());
-
-        final Request request = new Request.Builder()
-                .addHeader("X-Requested-With", "XMLHttpRequest")
-                .addHeader("Content-Type", "application/json")
-                .addHeader("X-Auth-City", HttpSetUrl.getHeaderAuthCity())
-
-                .addHeader("X-Auth-uuid",  HttpSetUrl.getHeaderAuthUuid())
-                .addHeader("X-Auth-App", "5006")
-                .addHeader("X-Auth-Token", HttpSetUrl.getHeaderAuthToken())
-                .url( "http://sjt.dev.dems.cc/api/login")
-                .post(body)
-                .build();
-        kProgressHUD.show();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                kProgressHUD.dismiss();
-                if(onTaskSuccessComplete!=null){
-                    onTaskSuccessComplete.onSuccess(false);
-                }
-            }
-
-            //成功时调用的方法
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                kProgressHUD.dismiss();
-                Gson gson = new Gson();
-
-                String json = response.body().string();
-                LoginBean beanjson = gson.fromJson(json, LoginBean.class);
-
-                HttpSetUrl.setHeaderAuthToken(response.header("X-Auth-Token"));
-                HttpSetUrl.setHeaderAuthUuid(beanjson.getData().getUid());
-                AppSettings.setAutoLogin(true);
-                AppSettings.setNickname("1111111");
-                AppSettings.setPhone("13175220672");
-                AppSettings.setUserId(beanjson.getData().getUid());
-                AppSettings.setHeadPic("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2966021298,3341101515&fm=23&gp=0.jpg");
-                HttpClient.init(context.getApplicationContext(),true);
-                if(onTaskSuccessComplete!=null){
-                    onTaskSuccessComplete.onSuccess(true);
-                }
-            }
-        });
-    }
 }

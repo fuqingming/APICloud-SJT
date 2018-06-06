@@ -20,6 +20,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.apicloud.moduleDemo.adapter.PictureSelectionAdapter;
+import com.apicloud.moduleDemo.backhandler.OnTaskComplete;
 import com.apicloud.moduleDemo.backhandler.OnTaskSuccessComplete;
 import com.apicloud.moduleDemo.base.BaseAppCompatActivity;
 import com.apicloud.moduleDemo.bean.base.DateBean;
@@ -28,6 +29,8 @@ import com.apicloud.moduleDemo.bean.response.LoginBean;
 import com.apicloud.moduleDemo.bean.response.ResponseReleaseBean;
 import com.apicloud.moduleDemo.http.ApiStores;
 import com.apicloud.moduleDemo.http.HttpCallback;
+import com.apicloud.moduleDemo.http.HttpUtils;
+import com.apicloud.moduleDemo.util.RadiosUtils;
 import com.apicloud.moduleDemo.util.RegexUtil;
 import com.apicloud.moduleDemo.util.UploadThread;
 import com.apicloud.moduleDemo.util.TimeUtils;
@@ -44,6 +47,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONArray;
 
 import java.io.File;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +60,8 @@ import cn.finalteam.rxgalleryfinal.imageloader.ImageLoaderType;
 import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
 import cn.finalteam.rxgalleryfinal.rxbus.event.ImageMultipleResultEvent;
 
-public class ReleaseRenovationActivity extends BaseAppCompatActivity {
+public class ReleaseRenovationActivity extends BaseAppCompatActivity
+{
 
     private PictureSelectionAdapter m_pictureSelectionAdapter;
 
@@ -116,12 +121,14 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
     private String m_strCategoryNo;
 
     @Override
-    protected int setLayoutResourceId() {
+    protected int setLayoutResourceId()
+    {
         return R.layout.activity_release_renovation;
     }
 
     @Override
-    protected void initView() {
+    protected void initView()
+    {
         Utils.initCommonTitle(this,"发布活动",true);
         setEventBus();
 
@@ -147,7 +154,8 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
     }
 
     @Override
-    protected void initData() {
+    protected void initData()
+    {
         m_strCategoryNo = getIntent().getStringExtra("strCategoryNo");
 
         m_strArrStyle  =  getResources().getStringArray(R.array.house_style_text);
@@ -165,12 +173,17 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
         m_gridView.setAdapter(m_pictureSelectionAdapter);
         m_gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
 
-        m_gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        m_gridView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                if(m_arrMediaBean == null || m_arrMediaBean.isEmpty() || m_arrMediaBean.size() == 9){
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l)
+            {
+                if(m_arrMediaBean == null || m_arrMediaBean.isEmpty() || m_arrMediaBean.size() == 9)
+                {
                     openRadios();
-                }else if(position == 0 && m_arrDatas.get(position) == null){
+                }
+                else if(position == 0 && m_arrDatas.get(position) == null)
+                {
                     openRadios();
                 }
             }
@@ -178,14 +191,19 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
     }
 
     @Override
-    protected void clickView() {
+    protected void clickView()
+    {
         //开始日期选择
-        m_tvStartDate.setOnClickListener(new View.OnClickListener() {
+        m_tvStartDate.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                PopUitls.showDataSelect(ReleaseRenovationActivity.this, new OnTaskSuccessComplete() {
+            public void onClick(View view)
+            {
+                PopUitls.showDataSelect(ReleaseRenovationActivity.this, new OnTaskSuccessComplete()
+                {
                     @Override
-                    public void onSuccess(Object obj) {
+                    public void onSuccess(Object obj)
+                    {
                         DateBean dataBean = (DateBean) obj;
                         m_lonStartDate = dataBean.getYear() + "-" + dataBean.getMonth() + "-" + dataBean.getDay();
                         m_tvStartDate.setText(m_lonStartDate);
@@ -194,12 +212,16 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
             }
         });
         //结束日期选择
-        m_tvEndDate.setOnClickListener(new View.OnClickListener() {
+        m_tvEndDate.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                PopUitls.showDataSelect(ReleaseRenovationActivity.this, new OnTaskSuccessComplete() {
+            public void onClick(View view)
+            {
+                PopUitls.showDataSelect(ReleaseRenovationActivity.this, new OnTaskSuccessComplete()
+                {
                     @Override
-                    public void onSuccess(Object obj) {
+                    public void onSuccess(Object obj)
+                    {
                         DateBean dataBean = (DateBean) obj;
                         m_lonEndDate = dataBean.getYear() + "-" + dataBean.getMonth() + "-" + dataBean.getDay();
                         m_tvEndDate.setText(m_lonEndDate);
@@ -208,12 +230,16 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
             }
         });
         //装修风格
-        m_tvStyle.setOnClickListener(new View.OnClickListener() {
+        m_tvStyle.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                PopUitls.showPopSelect(ReleaseRenovationActivity.this, m_strArrStyle, "装修风格", new OnTaskSuccessComplete() {
+            public void onClick(View view)
+            {
+                PopUitls.showPopSelect(ReleaseRenovationActivity.this, m_strArrStyle, "装修风格", new OnTaskSuccessComplete()
+                {
                     @Override
-                    public void onSuccess(Object obj) {
+                    public void onSuccess(Object obj)
+                    {
                         m_tvStyle.setText(m_strArrStyle[(int) obj]);
                         m_strStyle = m_strArrStyle[(int) obj];
                     }
@@ -221,12 +247,16 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
             }
         });
         //户型
-        m_tvHouseType.setOnClickListener(new View.OnClickListener() {
+        m_tvHouseType.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                PopUitls.showPopSelect(ReleaseRenovationActivity.this, m_strArrHouseType, "户型结构", new OnTaskSuccessComplete() {
+            public void onClick(View view)
+            {
+                PopUitls.showPopSelect(ReleaseRenovationActivity.this, m_strArrHouseType, "户型结构", new OnTaskSuccessComplete()
+                {
                     @Override
-                    public void onSuccess(Object obj) {
+                    public void onSuccess(Object obj)
+                    {
                         m_tvHouseType.setText(m_strArrHouseType[(int) obj]);
                         m_strHouseType = m_strArrHouseType[(int) obj];
                     }
@@ -234,36 +264,48 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
             }
         });
         //参与商家数
-        m_tvJoinCount.setOnClickListener(new View.OnClickListener() {
+        m_tvJoinCount.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                PopUitls.showPopSelect(ReleaseRenovationActivity.this, m_strArrNoSelect, "参与商家数量", new OnTaskSuccessComplete() {
+            public void onClick(View view)
+            {
+                PopUitls.showPopSelect(ReleaseRenovationActivity.this, m_strArrNoSelect, "参与商家数量", new OnTaskSuccessComplete()
+                {
                     @Override
-                    public void onSuccess(Object obj) {
+                    public void onSuccess(Object obj)
+                    {
                         m_tvJoinCount.setText(m_strArrNoSelect[(int) obj]);
                         m_nJoinNo = (int) obj;
                     }
                 });
             }
         });
-        m_tvCity.setOnClickListener(new View.OnClickListener() {
+        m_tvCity.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 AddressPickTask task = new AddressPickTask(ReleaseRenovationActivity.this);
                 task.setHideProvince(false);
                 task.setHideCounty(false);
-                task.setCallback(new AddressPickTask.Callback() {
+                task.setCallback(new AddressPickTask.Callback()
+                {
                     @Override
-                    public void onAddressInitFailed() {
+                    public void onAddressInitFailed()
+                    {
                         showToast("数据初始化失败");
                     }
 
                     @Override
-                    public void onAddressPicked(Province province, City city, County county) {
-                        if (county == null) {
-                            m_tvCity.setText(province.getAreaName() + city.getAreaName());
-                        } else {
-                            m_tvCity.setText(province.getAreaName() + city.getAreaName() + county.getAreaName());
+                    public void onAddressPicked(Province province, City city, County county)
+                    {
+                        if (county == null)
+                        {
+                            m_tvCity.setText(MessageFormat.format("{0}{1}", province.getAreaName(), city.getAreaName()));
+                        }
+                        else
+                        {
+                            m_tvCity.setText(MessageFormat.format("{0}{1}{2}", province.getAreaName(), city.getAreaName(), county.getAreaName()));
                         }
                     }
                 });
@@ -272,26 +314,33 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
         });
 
         //所在区域
-        m_tvCityLocation.setOnClickListener(new View.OnClickListener() {
+        m_tvCityLocation.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 AddressPickTask task = new AddressPickTask(ReleaseRenovationActivity.this);
                 task.setHideProvince(false);
                 task.setHideCounty(false);
-                task.setCallback(new AddressPickTask.Callback() {
+                task.setCallback(new AddressPickTask.Callback()
+                {
                     @Override
-                    public void onAddressInitFailed() {
+                    public void onAddressInitFailed()
+                    {
                         showToast("数据初始化失败");
                     }
 
                     @Override
-                    public void onAddressPicked(Province province, City city, County county) {
-                        if (county == null) {
-                            m_tvCityLocation.setText(province.getAreaName() + city.getAreaName());
+                    public void onAddressPicked(Province province, City city, County county)
+                    {
+                        if (county == null)
+                        {
+                            m_tvCityLocation.setText(MessageFormat.format("{0}{1}", province.getAreaName(), city.getAreaName()));
                             m_strCityName = city.getAreaName();
-                            m_strCountyName = county.getAreaName();
-                        } else {
-                            m_tvCityLocation.setText(province.getAreaName() + city.getAreaName() + county.getAreaName());
+                        }
+                        else
+                        {
+                            m_tvCityLocation.setText(MessageFormat.format("{0}{1}{2}", province.getAreaName(), city.getAreaName(), county.getAreaName()));
                             m_strProvinceName = province.getAreaName();
                             m_strCityName = city.getAreaName();
                             m_strCountyName = county.getAreaName();
@@ -302,20 +351,29 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
             }
         });
         //提交
-        m_btnCommit.setOnClickListener(new View.OnClickListener() {
+        m_btnCommit.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
 
-                if(isInputValid()){
-                    if(m_arrMediaBean != null && m_arrMediaBean.size() > 0){
+                if(isInputValid())
+                {
+                    if(m_arrMediaBean != null && m_arrMediaBean.size() > 0)
+                    {
                         kProgressHUD.show();
-                        m_uploadHandler.setMessages(m_arrThreads, new OnTaskSuccessComplete() {
+                        m_uploadHandler.setMessages(m_arrThreads, new OnTaskSuccessComplete()
+                        {
                             @Override
-                            public void onSuccess(Object obj) {
-                                if(obj != null){
+                            public void onSuccess(Object obj)
+                            {
+                                if(obj != null)
+                                {
                                     m_jsonArrData = (JSONArray) obj;
                                     commitMobileSend();
-                                }else{
+                                }
+                                else
+                                {
                                     Utils.showToast(ReleaseRenovationActivity.this,"图片上传失败，请重新上传！");
                                     kProgressHUD.dismiss();
                                 }
@@ -324,17 +382,22 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
                         Message message = new Message();
                         message.what = UploadThread.THREAD_BEGIN;
                         m_uploadHandler.sendMessage(message);
-                    }else{
+                    }
+                    else
+                    {
                         commitMobileSend();
                     }
                 }
             }
         });
         //全国
-        m_rbCityAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+        m_rbCityAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked){
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked)
+            {
+                if(isChecked)
+                {
                     m_rbCityIndex.setChecked(false);
                     m_strAddress = "";
                     m_nAddressType = 1;
@@ -344,14 +407,19 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
         });
 
         //选择城市
-        m_rbCityIndex.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+        m_rbCityIndex.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked){
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked)
+            {
+                if(isChecked)
+                {
                     m_rbCityAll.setChecked(false);
                     m_llCity.setVisibility(View.VISIBLE);
                     m_nAddressType = 2;
-                }else{
+                }
+                else
+                {
                     m_llCity.setVisibility(View.GONE);
                 }
 
@@ -359,23 +427,31 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
         });
     }
 
-    private void commitMobileSend(){
-        Utils.showCommonDialogVerifyCode(ReleaseRenovationActivity.this, kProgressHUD, m_strMobile, "", new OnTaskSuccessComplete() {
+    private void commitMobileSend()
+    {
+        Utils.showCommonDialogVerifyCode(ReleaseRenovationActivity.this, kProgressHUD, m_strMobile, "", new OnTaskSuccessComplete()
+        {
             @Override
-            public void onSuccess(Object obj) {
+            public void onSuccess(Object obj)
+            {
                 commitInformation((String)obj);
             }
         });
     }
 
-    private void commitInformation(String verifyCode){
+    private void commitInformation(final String verifyCode)
+    {
         ApiStores.releaseRenovation(m_strTitle, m_lonStartDate, m_lonEndDate, m_nJoinNo,m_strAmount, 1,m_strText,m_strCityLocation,m_strProvinceName,m_strCityName,m_strCountyName,
                 m_strArs,m_dLat,m_dLng,m_strCategoryNo,m_nAddressType,m_strAddress,m_strHouseType,m_strStyle,m_strSize,m_strBudget,m_strMobile,verifyCode,
-                m_jsonArrData, new HttpCallback<ResponseReleaseBean>() {
+                m_jsonArrData, new HttpCallback<ResponseReleaseBean>()
+                {
 
                     @Override
-                    public void OnSuccess(ResponseReleaseBean response) {
-                        if(response.getSuccess()){
+                    public void OnSuccess(ResponseReleaseBean response)
+                    {
+                        if(response.getSuccess())
+                        {
+                            kProgressHUD.dismiss();
                             Intent it = new Intent(ReleaseRenovationActivity.this,PaymentActivity.class);
                             it.putExtra("strScheduleNo",response.getData().getScheduleNo());
                             it.putExtra("strTitle",response.getData().getTitle());
@@ -389,96 +465,117 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
                     }
 
                     @Override
-                    public void OnFailure(String message) {
-                        kProgressHUD.dismiss();
-                        AlertUtils.MessageAlertShow(ReleaseRenovationActivity.this,"错误",message);
+                    public void OnFailure(final String message)
+                    {
+                        if(HttpUtils.isValidResponse(message))
+                        {
+                            kProgressHUD.dismiss();
+                            AlertUtils.MessageAlertShow(ReleaseRenovationActivity.this,"错误",message);
+                        }
+                        else
+                        {
+                            HttpUtils.httpRequestFailure(ReleaseRenovationActivity.this, new OnTaskComplete()
+                            {
+                                @Override
+                                public void onComplete(Object obj) { }
+
+                                @Override
+                                public void onSuccess(Object obj)
+                                {
+                                    commitInformation(verifyCode);
+                                }
+
+                                @Override
+                                public void onFail(Object obj)
+                                {
+                                    kProgressHUD.dismiss();
+                                    AlertUtils.MessageAlertShow(ReleaseRenovationActivity.this,"错误",message);
+                                }
+                            });
+                        }
                     }
 
                     @Override
-                    public void OnRequestStart() {
-                        if(!kProgressHUD.isShowing()){
+                    public void OnRequestStart()
+                    {
+                        if(!kProgressHUD.isShowing())
+                        {
                             kProgressHUD.show();
                         }
                     }
 
                     @Override
-                    public void OnRequestFinish() {
-                        kProgressHUD.dismiss();
-                    }
+                    public void OnRequestFinish() {}
                 });
     }
 
-    private void showToast(String msg) {
+    private void showToast(String msg)
+    {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     /**
      * 多选
      */
-    private void openRadios() {
-        RxGalleryFinal rxGalleryFinal = RxGalleryFinal
-                .with(ReleaseRenovationActivity.this)
-                .image()
-                .multiple();
-        if (m_arrMediaBean != null && !m_arrMediaBean.isEmpty()) {
-            rxGalleryFinal.selected(m_arrMediaBean);
-        }
-        rxGalleryFinal.maxSize(9)
-                .imageLoader(ImageLoaderType.FRESCO)
-                .subscribe(new RxBusResultDisposable<ImageMultipleResultEvent>() {
+    private void openRadios()
+    {
+        RadiosUtils.openRadios(this, m_arrMediaBean, 9, new OnTaskSuccessComplete()
+        {
+            @Override
+            public void onSuccess(Object obj)
+            {
+                List<MediaBean> list = (List<MediaBean>) obj;
+                m_arrMediaBean = list;
+                m_arrDatas.clear();
+                m_arrThreads.clear();
+                if(m_arrMediaBean.size() < 9)
+                {
+                    m_arrDatas.add(null);
+                }
+                m_arrDatas.addAll(m_arrMediaBean);
 
-                    @Override
-                    protected void onEvent(ImageMultipleResultEvent imageMultipleResultEvent) throws Exception {
-                        m_arrMediaBean = imageMultipleResultEvent.getResult();
-                        m_arrDatas.clear();
-                        m_arrThreads.clear();
-                        if(m_arrMediaBean.size() < 9){
-                            m_arrDatas.add(null);
-                        }
-                        m_arrDatas.addAll(m_arrMediaBean);
+                for(int i = 0 ; i < m_arrMediaBean.size(); i ++)
+                {
+                    File file = new File( m_arrMediaBean.get(i).getThumbnailBigPath());
+                    m_arrThreads.add(new UploadThread(file,m_uploadHandler));
+                }
 
-                        for(int i = 0 ; i < m_arrMediaBean.size(); i ++){
-                            File file = new File( m_arrMediaBean.get(i).getThumbnailBigPath());
-                            m_arrThreads.add(new UploadThread(file,m_uploadHandler));
-                        }
-
-                        m_pictureSelectionAdapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        super.onComplete();
-                        Toast.makeText(getBaseContext(), "OVER", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .openGallery();
+                m_pictureSelectionAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     // 检查输入项是否输入正确
-    private boolean isInputValid() {
+    private boolean isInputValid()
+    {
         m_strTitle = m_etTitle.getText().toString().trim();
-        if (m_strTitle.isEmpty()) {
+        if (m_strTitle.isEmpty())
+        {
             Utils.showToast(ReleaseRenovationActivity.this, "请输入活动标题");
             m_etTitle.requestFocus();
             return false;
         }
 
-        if(m_lonStartDate.isEmpty()){
+        if(m_lonStartDate.isEmpty())
+        {
             Utils.showToast(ReleaseRenovationActivity.this, "请选择活动开始时间");
             return false;
         }
 
-        if(m_lonEndDate.isEmpty()){
+        if(m_lonEndDate.isEmpty())
+        {
             Utils.showToast(ReleaseRenovationActivity.this, "请选择活动结束时间");
             return false;
         }
 
-        if(!TimeUtils.time2Time(m_lonStartDate,m_lonEndDate,TimeUtils.TIME_FORMAT)){
+        if(!TimeUtils.time2Time(m_lonStartDate,m_lonEndDate,TimeUtils.TIME_FORMAT))
+        {
             Utils.showToast(ReleaseRenovationActivity.this, "结束时间不能早于开始时间");
             return false;
         }
 
-        if(!m_rbCityAll.isChecked() && !m_rbCityIndex.isChecked()){
+        if(!m_rbCityAll.isChecked() && !m_rbCityIndex.isChecked())
+        {
             Utils.showToast(ReleaseRenovationActivity.this, "请选择活动范围");
             return false;
         }
@@ -503,29 +600,34 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
             return false;
         }
 
-        if(m_rbCityIndex.isChecked()){
+        if(m_rbCityIndex.isChecked())
+        {
             m_strAddress = m_tvCity.getText().toString().trim();
-            if(m_strAddress.isEmpty()){
+            if(m_strAddress.isEmpty())
+            {
                 Utils.showToast(ReleaseRenovationActivity.this, "请选择指定城市");
                 return false;
             }
         }
 
         m_strCityLocation = m_tvCityLocation.getText().toString();
-        if(m_strCityLocation.isEmpty()){
+        if(m_strCityLocation.isEmpty())
+        {
             Utils.showToast(ReleaseRenovationActivity.this, "请选择所在区域");
             return false;
         }
 
         m_strBudget = m_etBudget.getText().toString().trim();
-        if (m_strBudget.isEmpty()) {
+        if (m_strBudget.isEmpty())
+        {
             Utils.showToast(ReleaseRenovationActivity.this, "请输入装修预算");
             m_etBudget.requestFocus();
             return false;
         }
 
         m_strAmount = m_etAmount.getText().toString().trim();
-        if (m_strAmount.isEmpty()) {
+        if (m_strAmount.isEmpty())
+        {
             Utils.showToast(ReleaseRenovationActivity.this, "请输入量房金");
             m_etAmount.requestFocus();
             return false;
@@ -539,7 +641,8 @@ public class ReleaseRenovationActivity extends BaseAppCompatActivity {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventBus(Object obj){
+    public void onEventBus(Object obj)
+    {
         Utils.showToast(this,"发布成功");
         finish();
     }

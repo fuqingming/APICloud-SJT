@@ -15,7 +15,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * Created by vip on 2018/5/23.
  */
 
-public class UploadHandler extends Handler {
+public class UploadHandler extends Handler
+{
 
     private Lock lock = new ReentrantLock();
     private List<UploadThread> mThreads;
@@ -25,22 +26,28 @@ public class UploadHandler extends Handler {
 
     private JSONArray mData;
 
-    public void setMessages(List<UploadThread> threads, OnTaskSuccessComplete onTaskSuccessComplete){
+    public void setMessages(List<UploadThread> threads, OnTaskSuccessComplete onTaskSuccessComplete)
+    {
         this.mThreads = threads;
         this.onTaskSuccessComplete = onTaskSuccessComplete;
         mData = new JSONArray();
     }
 
     @Override
-    public void handleMessage(Message msg) {
-        switch (msg.what) {
+    public void handleMessage(Message msg)
+    {
+        switch (msg.what)
+        {
             case UploadThread.THREAD_BEGIN:
                 lock.lock();
-                if (mThreads.size() > m_nThreadFinishedCount) {
+                if (mThreads.size() > m_nThreadFinishedCount)
+                {
                     if (!mThreads.get(m_nThreadFinishedCount).isStarted()) {
                         mThreads.get(m_nThreadFinishedCount).start();
                     }
-                }else{
+                }
+                else
+                {
                     onTaskSuccessComplete.onSuccess(mData);
                 }
                 lock.unlock();
@@ -48,7 +55,8 @@ public class UploadHandler extends Handler {
 
             case UploadThread.THREAD_FINISHED:
                 lock.lock();
-                if (mThreads.size() >= m_nThreadFinishedCount) {
+                if (mThreads.size() >= m_nThreadFinishedCount)
+                {
                     mData.put(mThreads.get(m_nThreadFinishedCount).getmData());
                     m_nThreadFinishedCount++;
                     Message message = new Message();

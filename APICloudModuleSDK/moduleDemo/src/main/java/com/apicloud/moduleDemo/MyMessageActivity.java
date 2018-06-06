@@ -14,7 +14,8 @@ import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
 
-public class MyMessageActivity extends BaseListActivity {
+public class MyMessageActivity extends BaseListActivity
+{
 
     private MyMessageAdapter m_myMessageAdapter = new MyMessageAdapter();
 
@@ -24,35 +25,45 @@ public class MyMessageActivity extends BaseListActivity {
     private boolean m_isEdit = false;
 
     @Override
-    protected int setLayoutResourceId() {
+    protected int setLayoutResourceId()
+    {
         return R.layout.activity_my_message;
     }
 
     @Override
-    protected void initData() {
+    protected void initData()
+    {
         Utils.initCommonTitle(this,"我的消息",true,"编辑");
     }
 
     @Override
-    protected void initView() {
+    protected void initView()
+    {
         m_tvTitleRight = (TextView)findViewById(R.id.tv_title_right);
         m_rlSetType = (RelativeLayout)findViewById(R.id.rl_select_type);
         super.initView();
-        m_tvTitleRight.setOnClickListener(new View.OnClickListener() {
+        m_tvTitleRight.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                if(m_isEdit){
+            public void onClick(View view)
+            {
+                if(m_isEdit)
+                {
                     m_isEdit = false;
                     m_tvTitleRight.setText("编辑");
                     m_rlSetType.setVisibility(View.GONE);
-                }else{
+                }
+                else
+                {
                     m_isEdit = true;
                     m_tvTitleRight.setText("取消");
                     m_rlSetType.setVisibility(View.VISIBLE);
                 }
 
-                if(m_myMessageAdapter.getListData().size() > 0){
-                    for(int i = 0 ;i < m_myMessageAdapter.getListData().size() ; i ++){
+                if(m_myMessageAdapter.getListData().size() > 0)
+                {
+                    for(int i = 0 ;i < m_myMessageAdapter.getListData().size() ; i ++)
+                    {
                         m_myMessageAdapter.getListData().get(i).setVisible(m_isEdit);
                     }
                 }
@@ -60,9 +71,11 @@ public class MyMessageActivity extends BaseListActivity {
                 m_myMessageAdapter.notifyDataSetChanged();
             }
         });
-        m_rlSetType.setOnClickListener(new View.OnClickListener() {
+        m_rlSetType.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 m_isEdit = false;
                 m_tvTitleRight.setText("编辑");
                 m_rlSetType.setVisibility(View.GONE);
@@ -71,17 +84,21 @@ public class MyMessageActivity extends BaseListActivity {
     }
 
     @Override
-    protected BaseRecyclerAdapter getListAdapter() {
+    protected BaseRecyclerAdapter getListAdapter()
+    {
         return m_myMessageAdapter;
     }
 
     @Override
-    protected void initLayoutManager() {
+    protected void initLayoutManager()
+    {
         mRecyclerView.setLoadMoreEnabled(false);
 
-        mRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
+        mRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener()
+        {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(View view, int position)
+            {
 //                Intent it = new Intent(this,NewsWebViewActivity.class);
 //                it.putExtra("webViewUrl",m_adapterNewsAnalysisAdapter.getListData().get(position).getDetail_url());
 //                startActivity(it);
@@ -91,7 +108,8 @@ public class MyMessageActivity extends BaseListActivity {
         });
     }
 
-    protected void requestData(){
+    protected void requestData()
+    {
 
         executeOnLoadDataSuccess(DataUtil.initMyMessage(),true);
         executeOnLoadFinish();

@@ -11,7 +11,8 @@ import java.util.List;
  * Created by vip on 2018/5/18.
  */
 
-public class PopDataUtil {
+public class PopDataUtil
+{
 
     public static List<MoneyMakingHallTypeBean> initOrderByData()
     {

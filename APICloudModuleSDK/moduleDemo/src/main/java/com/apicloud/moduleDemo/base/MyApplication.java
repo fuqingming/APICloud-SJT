@@ -12,16 +12,13 @@ public class MyApplication extends MyTransApplication
 	private static MyApplication s_instance = null;
 	
 	/*****************************************************************************/
-	private String m_strWorkKey = "";
 
 	// Activity被回收时，保存全局变量的版本号（每保存一次，自增1）
 	public int m_nSaveInstanceStateVersion = 0;
 	/*****************************************************************************/
 
-	//登录手机号
-	public String m_strMobile = "";
 	//登录用户Id
-	public String m_strUserId = "";
+	public String m_strUuid = "";
 	// 用户登录令牌
 	public String m_strUserToken = "";
 	
@@ -41,6 +38,7 @@ public class MyApplication extends MyTransApplication
 	}
 	
 	public static MyApplication getInstance()
+
 	{
 		return s_instance;
 	}
@@ -48,52 +46,11 @@ public class MyApplication extends MyTransApplication
 	public void init()
 	{
 		/*****************************************************************************/
-		m_strWorkKey = "";
 		// Activity被回收时，保存全局变量的版本号（每保存一次，自增1）
 		m_nSaveInstanceStateVersion = 0;
 		/*****************************************************************************/
 
-		m_strMobile = "";
-		m_strUserId = "";
+		m_strUuid = "";
 		m_strUserToken = "";
 	}
-	
-	public String getWorkKey()
-	{
-		if(m_strWorkKey.isEmpty())
-		{
-			return Const.DEFAULT_WORK_KEY;
-		}
-		else
-		{
-			return m_strWorkKey;
-		}
-	}
-	
-	public void setWorkKey(String strWorkKey)
-	{
-		m_strWorkKey = strWorkKey;
-	}
-
-	public static String getAppVersion()
-	{
-		return "V" + String.valueOf(Utils.getAppVersionName(s_instance));
-	}
-	
-	public void exit() 
-	{
-		// logout
-		//UserService.doLogout(s_instance.getWorkKey());
-		
-		try
-		{
-			Thread.sleep(100);
-		}
-		catch (InterruptedException e)
-		{
-			e.printStackTrace();
-		}
-		
-		System.exit(0);
-	}	
 }

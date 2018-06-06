@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by vip on 2018/5/2.
  */
 
-public class AddressBean implements Serializable{
+public class AddressBean implements Serializable {
     private String id;
     private String provinceName;
     private String cityName;

@@ -13,7 +13,8 @@ import cn.addapp.pickers.util.LogUtils;
  * @author matt
  * blog: addapp.cn
  */
-public class AppManager {
+public class AppManager
+{
     //本类的实例
     private static AppManager instance;
     //保存所有Activity
@@ -21,8 +22,10 @@ public class AppManager {
     //保存所有Service
     private LinkedList<Service> services = new LinkedList<Service>();
 
-    public static AppManager getInstance() {
-        if (instance == null) {
+    public static AppManager getInstance()
+    {
+        if (instance == null)
+        {
             instance = new AppManager();
         }
         return instance;
@@ -35,7 +38,8 @@ public class AppManager {
      * @see Activity#onCreate(Bundle)
      * @see Activity#onStart()
      */
-    public void addActivity(Activity activity) {
+    public void addActivity(Activity activity)
+    {
         activities.add(activity);
     }
 
@@ -46,7 +50,8 @@ public class AppManager {
      * @see Activity#onDestroy()
      * @see Activity#onStop()
      */
-    public void removeActivity(Activity activity) {
+    public void removeActivity(Activity activity)
+    {
         activities.remove(activity);
     }
 
@@ -55,7 +60,8 @@ public class AppManager {
      *
      * @return the activities
      */
-    public LinkedList<Activity> getActivities() {
+    public LinkedList<Activity> getActivities()
+    {
         return activities;
     }
 
@@ -64,7 +70,8 @@ public class AppManager {
      *
      * @return the activity
      */
-    public Activity getLastActivity() {
+    public Activity getLastActivity()
+    {
         Activity activity = activities.getLast();
         LogUtils.debug(this, "last activity is " + activity.getClass().getName());
         return activity;
@@ -75,7 +82,8 @@ public class AppManager {
      *
      * @param service the service
      */
-    public void addService(Service service) {
+    public void addService(Service service)
+    {
         services.add(service);
     }
 
@@ -84,7 +92,8 @@ public class AppManager {
      *
      * @param service the service
      */
-    public void removeService(Service service) {
+    public void removeService(Service service)
+    {
         services.remove(service);
     }
 
@@ -93,14 +102,16 @@ public class AppManager {
      *
      * @return the services
      */
-    public LinkedList<Service> getServices() {
+    public LinkedList<Service> getServices()
+    {
         return services;
     }
 
     /**
      * 退出软件
      */
-    public void exitApp() {
+    public void exitApp()
+    {
         clearActivitiesAndServices();
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(0);//normal exit application
@@ -111,13 +122,17 @@ public class AppManager {
      *
      * @see android.app.Application#onLowMemory()
      */
-    public void clearActivitiesAndServices() {
-        for (Activity activity : activities) {
-            if (!activity.isFinishing()) {
+    public void clearActivitiesAndServices()
+    {
+        for (Activity activity : activities)
+        {
+            if (!activity.isFinishing())
+            {
                 activity.finish();
             }
         }
-        for (Service service : services) {
+        for (Service service : services)
+        {
             service.stopSelf();
         }
     }

@@ -19,7 +19,8 @@ import cn.addapp.pickers.util.ConvertUtils;
  * @author matt
  * blog: addapp.cn
  */
-public class AddressPickTask extends AsyncTask<String, Void, ArrayList<Province>> {
+public class AddressPickTask extends AsyncTask<String, Void, ArrayList<Province>>
+{
     private Activity activity;
     private ProgressDialog dialog;
     private Callback callback;
@@ -27,31 +28,39 @@ public class AddressPickTask extends AsyncTask<String, Void, ArrayList<Province>
     private boolean hideProvince = false;
     private boolean hideCounty = false;
 
-    public AddressPickTask(Activity activity) {
+    public AddressPickTask(Activity activity)
+    {
         this.activity = activity;
     }
 
-    public void setHideProvince(boolean hideProvince) {
+    public void setHideProvince(boolean hideProvince)
+    {
         this.hideProvince = hideProvince;
     }
 
-    public void setHideCounty(boolean hideCounty) {
+    public void setHideCounty(boolean hideCounty)
+    {
         this.hideCounty = hideCounty;
     }
 
-    public void setCallback(Callback callback) {
+    public void setCallback(Callback callback)
+    {
         this.callback = callback;
     }
 
     @Override
-    protected void onPreExecute() {
+    protected void onPreExecute()
+    {
         dialog = ProgressDialog.show(activity, null, "正在初始化数据...", true, true);
     }
 
     @Override
-    protected ArrayList<Province> doInBackground(String... params) {
-        if (params != null) {
-            switch (params.length) {
+    protected ArrayList<Province> doInBackground(String... params)
+    {
+        if (params != null)
+        {
+            switch (params.length)
+            {
                 case 1:
                     selectedProvince = params[0];
                     break;

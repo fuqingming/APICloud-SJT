@@ -470,7 +470,6 @@ butterknife/BindFont.class
 android/support/v4/view/NestedScrollingParent.class
 com/blankj/utilcode/util/SpanUtils$1.class
 android/support/v4/view/ViewPager$4.class
-com/apicloud/moduleDemo/settings/Const.class
 retrofit2/http/Field.class
 android/support/annotation/ColorInt.class
 android/support/design/widget/FloatingActionButtonImpl.class
@@ -810,7 +809,6 @@ android/support/design/widget/TabLayout$PagerAdapterObserver.class
 com/yalantis/ucrop/R$dimen.class
 android/support/v4/app/NotificationBuilderWithActions.class
 io/reactivex/annotations/BackpressureKind.class
-com/apicloud/moduleDemo/util/Utils.class
 android/support/v7/appcompat/R$dimen.class
 android/support/v4/app/FragmentManager.class
 android/support/design/widget/CoordinatorLayout$1.class
@@ -948,6 +946,7 @@ com/alibaba/fastjson/JSON.class
 com/facebook/imagepipeline/producers/PartialDiskCacheProducer.class
 rx/android/schedulers/HandlerScheduler.class
 com/facebook/imagepipeline/cache/MediaVariationsIndexDatabase$LazyIndexDbOpenHelper.class
+com/apicloud/moduleDemo/FragmentMyAcceptReward.class
 com/squareup/haha/guava/base/Joiner.class
 okhttp3/Dispatcher.class
 android/support/v7/app/NotificationCompat.class
@@ -1020,6 +1019,7 @@ com/facebook/drawee/generic/WrappingUtils.class
 retrofit2/OkHttpCall.class
 com/facebook/datasource/DataSource.class
 com/facebook/datasource/FirstAvailableDataSourceSupplier$FirstAvailableDataSource.class
+com/apicloud/moduleDemo/JoinPaymentActivity.class
 com/facebook/imagepipeline/producers/LocalContentUriFetchProducer.class
 rx/observers/TestSubscriber.class
 com/facebook/common/util/UriUtil.class
@@ -1187,6 +1187,7 @@ android/support/v7/app/NotificationCompat$DecoratedMediaCustomViewStyle.class
 retrofit2/adapter/rxjava/Result.class
 com/facebook/imageformat/ImageFormat$FormatChecker.class
 okhttp3/Request.class
+com/apicloud/moduleDemo/AgreementWebViewActivity.class
 rx/Notification.class
 android/support/v4/os/ParcelableCompatCreatorCallbacks.class
 android/support/v4/view/VelocityTrackerCompat.class

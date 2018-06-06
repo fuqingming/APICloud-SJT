@@ -12,7 +12,8 @@ import java.util.TimeZone;
  * Created by asus on 2018/2/7.
  */
 
-public class TimeUtils {
+public class TimeUtils
+{
 
     public static final long SECONONDS_PER_DAY = 24*60*60;
     public static final long MILLISECONONDS_PER_DAY = SECONONDS_PER_DAY * 1000;
@@ -281,7 +282,8 @@ public class TimeUtils {
     }
 
     //获取当前日期往后一周的时间
-    public static List<String> getNextSevenData() {
+    public static List<String> getNextSevenData()
+    {
 
         int mYear; //当前年
         int mMonth; //当前月
@@ -303,16 +305,23 @@ public class TimeUtils {
         String today = String.valueOf(mDay);
         dates.add("今天");
         //往后6天
-        for (int i = 0; i < dayAmount; i++) {
-            if (mDay + 1 > maxDay) { //超过最大天数
-                if (mMonth + 1 > 12) {//该年最后一个月
+        for (int i = 0; i < dayAmount; i++)
+        {
+            if (mDay + 1 > maxDay)
+            { //超过最大天数
+                if (mMonth + 1 > 12)
+                {//该年最后一个月
                     mYear = mYear + 1;
                     mMonth = 1;
-                } else {
+                }
+                else
+                {
                     mMonth = mMonth + 1;
                 }
                 mDay = 1;
-            } else {
+            }
+            else
+            {
                 mDay = mDay + 1;
             }
             String date = today+"-"+mDay;
@@ -322,13 +331,15 @@ public class TimeUtils {
     }
 
     //根据当前日期获得所在周的日期区间（周一和周日日期）
-    public static String getTimeInterval(Date date) {
+    public static String getTimeInterval(Date date)
+    {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         // 判断要计算的日期是否是周日，如果是则减一天计算周六的，否则会出问题，计算到下一周去了
         int dayWeek = cal.get(Calendar.DAY_OF_WEEK);// 获得当前日期是一个星期的第几天
-        if (1 == dayWeek) {
+        if (1 == dayWeek)
+        {
             cal.add(Calendar.DAY_OF_MONTH, -1);
         }
         // System.out.println("要计算日期为:" + sdf.format(cal.getTime())); // 输出要计算日期
@@ -366,7 +377,8 @@ public class TimeUtils {
         return lDate;
     }
 
-    public static List<String> findThisWeekDates(){
+    public static List<String> findThisWeekDates()
+    {
         List<String> arrList = new ArrayList<>();
         String yz_time=getTimeInterval(new Date());//获取本周时间
         String array[]=yz_time.split(",");

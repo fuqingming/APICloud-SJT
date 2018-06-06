@@ -10,18 +10,20 @@ import com.apicloud.moduleDemo.util.recycler.BaseRecyclerAdapter;
 import com.apicloud.moduleDemo.util.recycler.BaseRecyclerViewHolder;
 import com.apicloud.sdk.moduledemo.R;
 
-public class MyMessageAdapter extends BaseRecyclerAdapter<MyMessageBean> {
+public class MyMessageAdapter extends BaseRecyclerAdapter<MyMessageBean>
+{
 
-    public MyMessageAdapter() {
-    }
+    public MyMessageAdapter() {    }
 
     @Override
-    protected int getContentView(int viewType) {
+    protected int getContentView(int viewType)
+    {
         return R.layout.item_my_message;
     }
 
     @Override
-    protected void covert(BaseRecyclerViewHolder holder, final MyMessageBean data, final int position) {
+    protected void covert(BaseRecyclerViewHolder holder, final MyMessageBean data, final int position)
+    {
         TextView tvTime = holder.getView().findViewById(R.id.tv_time);
         TextView tvTitle = holder.getView().findViewById(R.id.tv_title);
         TextView tvText = holder.getView().findViewById(R.id.tv_text);
@@ -30,15 +32,20 @@ public class MyMessageAdapter extends BaseRecyclerAdapter<MyMessageBean> {
         tvTitle.setText(data.getTitle());
         tvText.setText(data.getText());
 
-        if(data.isVisible()){
+        if(data.isVisible())
+        {
             cbDelete.setVisibility(View.VISIBLE);
-        }else{
+        }
+        else
+        {
             cbDelete.setVisibility(View.GONE);
         }
 
-        cbDelete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+        cbDelete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
                 data.setChecked(isChecked);
             }
         });

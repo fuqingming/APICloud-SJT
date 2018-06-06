@@ -31,7 +31,8 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class TileBitmapDrawable extends Drawable {
+public class TileBitmapDrawable extends Drawable
+{
 
     private static final int TILE_SIZE_DENSITY_HIGH = 256;
 
@@ -68,10 +69,12 @@ public class TileBitmapDrawable extends Drawable {
     private Matrix mMatrix;
     private float[] mLastMatrixValues = new float[9];
 
-    private TileBitmapDrawable(ImageView parentView, BitmapRegionDecoder decoder, Bitmap screenNail) {
+    private TileBitmapDrawable(ImageView parentView, BitmapRegionDecoder decoder, Bitmap screenNail)
+    {
         mParentView = new WeakReference<ImageView>(parentView);
 
-        synchronized (decoder) {
+        synchronized (decoder)
+        {
             mRegionDecoder = decoder;
             mIntrinsicWidth = mRegionDecoder.getWidth();
             mIntrinsicHeight = mRegionDecoder.getHeight();
@@ -84,8 +87,10 @@ public class TileBitmapDrawable extends Drawable {
 
         mScreenNail = screenNail;
 
-        synchronized (sBitmapCacheLock) {
-            if (sBitmapCache == null) {
+        synchronized (sBitmapCacheLock)
+        {
+            if (sBitmapCache == null)
+            {
                 // The Tile can be reduced up to half of its size until the next level of tiles is displayed
                 final int maxHorizontalTiles = (int) Math.ceil(2 * metrics.widthPixels / (float) mTileSize);
                 final int maxVerticalTiles = (int) Math.ceil(2 * metrics.heightPixels / (float) mTileSize);
@@ -102,54 +107,66 @@ public class TileBitmapDrawable extends Drawable {
         mDecoderWorker.start();
     }
 
-    public static void attachTileBitmapDrawable(ImageView imageView, String path,OnLoadListener listener) {
+    public static void attachTileBitmapDrawable(ImageView imageView, String path,OnLoadListener listener)
+    {
         new InitializationTask(imageView, listener).execute(path);
     }
 
-    public static void attachTileBitmapDrawable(ImageView imageView, FileDescriptor fd, OnLoadListener listener) {
+    public static void attachTileBitmapDrawable(ImageView imageView, FileDescriptor fd, OnLoadListener listener)
+    {
         new InitializationTask(imageView, listener).execute(fd);
     }
 
-    public static void attachTileBitmapDrawable(ImageView imageView, InputStream is, OnLoadListener listener) {
+    public static void attachTileBitmapDrawable(ImageView imageView, InputStream is, OnLoadListener listener)
+    {
         new InitializationTask(imageView, listener).execute(is);
     }
 
     /**
      * Clears any bitmap cache
      */
-    public static void clearCache() {
-        if (sBitmapCache != null) {
+    public static void clearCache()
+    {
+        if (sBitmapCache != null)
+        {
             sBitmapCache.evictAll();
         }
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    private static void getDisplayMetrics(Context context, DisplayMetrics outMetrics) {
+    private static void getDisplayMetrics(Context context, DisplayMetrics outMetrics)
+    {
         final WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         final Display display = wm.getDefaultDisplay();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+        {
             display.getRealMetrics(outMetrics);
-        } else {
+        }
+        else
+        {
             display.getMetrics(outMetrics);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+            {
+                try
+                {
                     outMetrics.widthPixels = (Integer) Display.class.getMethod("getRawWidth").invoke(display);
                     outMetrics.heightPixels = (Integer) Display.class.getMethod("getRawHeight").invoke(display);
                     return;
-                } catch (Exception e) {
-                }
+                } catch (Exception e) { }
             }
         }
     }
 
     @Override
-    public int getAlpha() {
+    public int getAlpha()
+    {
         return mPaint.getAlpha();
     }
 
     @Override
-    public void setAlpha(int alpha) {
+    public void setAlpha(int alpha)
+    {
         final int oldAlpha = mPaint.getAlpha();
         if (alpha != oldAlpha) {
             mPaint.setAlpha(alpha);
@@ -158,33 +175,40 @@ public class TileBitmapDrawable extends Drawable {
     }
 
     @Override
-    public int getOpacity() {
-        if (mScreenNail == null || mScreenNail.hasAlpha() || mPaint.getAlpha() < 255) {
+    public int getOpacity()
+    {
+        if (mScreenNail == null || mScreenNail.hasAlpha() || mPaint.getAlpha() < 255)
+        {
             return PixelFormat.TRANSLUCENT;
         }
         return PixelFormat.OPAQUE;
     }
 
     @Override
-    public void setColorFilter(ColorFilter cf) {
+    public void setColorFilter(ColorFilter cf)
+    {
         mPaint.setColorFilter(cf);
         invalidateSelf();
     }
 
     @Override
-    public int getIntrinsicWidth() {
+    public int getIntrinsicWidth()
+    {
         return mIntrinsicWidth;
     }
 
     @Override
-    public int getIntrinsicHeight() {
+    public int getIntrinsicHeight()
+    {
         return mIntrinsicHeight;
     }
 
     @Override
-    public void draw(Canvas canvas) {
+    public void draw(Canvas canvas)
+    {
         final ImageView parentView = mParentView.get();
-        if (parentView == null) {
+        if (parentView == null)
+        {
             return;
         }
 
@@ -226,8 +250,10 @@ public class TileBitmapDrawable extends Drawable {
 
         boolean cacheMiss = false;
 
-        for (int i = 0; i < horizontalTiles; i++) {
-            for (int j = 0; j < verticalTiles; j++) {
+        for (int i = 0; i < horizontalTiles; i++)
+        {
+            for (int j = 0; j < verticalTiles; j++)
+            {
 
                 final int tileLeft = i * currentTileSize;
                 final int tileTop = j * currentTileSize;
@@ -235,24 +261,31 @@ public class TileBitmapDrawable extends Drawable {
                 final int tileBottom = (j + 1) * currentTileSize <= mIntrinsicHeight ? (j + 1) * currentTileSize : mIntrinsicHeight;
                 mTileRect.set(tileLeft, tileTop, tileRight, tileBottom);
 
-                if (Rect.intersects(mVisibleAreaRect, mTileRect)) {
+                if (Rect.intersects(mVisibleAreaRect, mTileRect))
+                {
 
                     final Tile tile = new Tile(mInstanceId, mTileRect, i, j, currentLevel);
 
                     Bitmap cached = null;
-                    synchronized (sBitmapCacheLock) {
+                    synchronized (sBitmapCacheLock)
+                    {
                         cached = sBitmapCache.get(tile.getKey());
                     }
 
-                    if (cached != null) {
+                    if (cached != null)
+                    {
                         canvas.drawBitmap(cached, null, mTileRect, mPaint);
-                    } else {
+                    }
+                    else
+                    {
                         cacheMiss = true;
 
-                        if (!mDecodeQueue.contains(tile)) {
+                        if (!mDecodeQueue.contains(tile))
+                        {
                             mDecodeQueue.add(tile);
                         }
-                        if (null != mScreenNail) {
+                        if (null != mScreenNail)
+                        {
                             // The screenNail is used while the proper tile is being decoded
                             final int screenNailLeft = Math.round(tileLeft * mScreenNail.getWidth() / (float) mIntrinsicWidth);
                             final int screenNailTop = Math.round(tileTop * mScreenNail.getHeight() / (float) mIntrinsicHeight);
@@ -270,24 +303,28 @@ public class TileBitmapDrawable extends Drawable {
         }
 
         // If we had a cache miss, we will need to redraw until all needed tiles have been decoded by our worker thread
-        if (cacheMiss) {
+        if (cacheMiss)
+        {
             invalidateSelf();
         }
     }
 
     @Override
-    protected void finalize() throws Throwable {
+    protected void finalize() throws Throwable
+    {
         mDecoderWorker.quit();
         super.finalize();
     }
 
-    public interface OnLoadListener {
+    public interface OnLoadListener
+    {
         public void onLoadFinish(TileBitmapDrawable drawable);
 
         public void onError(Exception ex);
     }
 
-    private static final class Tile {
+    private static final class Tile
+    {
 
         private final int mInstanceId;
 
@@ -299,7 +336,8 @@ public class TileBitmapDrawable extends Drawable {
 
         private final int mLevel;
 
-        private Tile(int instanceId, Rect tileRect, int horizontalPos, int verticalPos, int level) {
+        private Tile(int instanceId, Rect tileRect, int horizontalPos, int verticalPos, int level)
+        {
             mInstanceId = instanceId;
             mTileRect = new Rect();
             mTileRect.set(tileRect);
@@ -308,73 +346,94 @@ public class TileBitmapDrawable extends Drawable {
             mLevel = level;
         }
 
-        public String getKey() {
+        public String getKey()
+        {
             return "#" + mInstanceId + "#" + mHorizontalPos + "#" + mVerticalPos + "#" + mLevel;
         }
 
         @Override
-        public int hashCode() {
+        public int hashCode()
+        {
             return getKey().hashCode();
         }
 
         @Override
-        public boolean equals(Object o) {
-            if (this == o) {
+        public boolean equals(Object o)
+        {
+            if (this == o)
+            {
                 return true;
             }
-            if (o instanceof TileBitmapDrawable) {
+            if (o instanceof TileBitmapDrawable)
+            {
                 return getKey().equals(((Tile) o).getKey());
             }
             return false;
         }
     }
 
-    private static final class BitmapLruCache extends LruCache<String, Bitmap> {
+    private static final class BitmapLruCache extends LruCache<String, Bitmap>
+    {
 
-        private BitmapLruCache(int maxSize) {
+        private BitmapLruCache(int maxSize)
+        {
             super(maxSize);
         }
 
         @TargetApi(Build.VERSION_CODES.KITKAT)
-        private static int getBitmapSize(Bitmap bitmap) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        private static int getBitmapSize(Bitmap bitmap)
+        {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+            {
                 return bitmap.getAllocationByteCount();
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1) {
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1)
+            {
                 return bitmap.getByteCount();
             }
             return bitmap.getRowBytes() * bitmap.getHeight();
         }
 
         @Override
-        protected int sizeOf(String key, Bitmap value) {
+        protected int sizeOf(String key, Bitmap value)
+        {
             return getBitmapSize(value);
         }
     }
 
-    private static final class InitializationTask extends AsyncTask<Object, Void, Object> {
+    private static final class InitializationTask extends AsyncTask<Object, Void, Object>
+    {
 
         private final ImageView mImageView;
 
         private final OnLoadListener mListener;
 
-        private InitializationTask(ImageView imageView, OnLoadListener listener) {
+        private InitializationTask(ImageView imageView, OnLoadListener listener)
+        {
             mImageView = imageView;
             mListener = listener;
         }
 
         @Override
-        protected Object doInBackground(Object... params) {
+        protected Object doInBackground(Object... params)
+        {
             BitmapRegionDecoder decoder = null;
 
-            try {
-                if (params[0] instanceof String) {
+            try
+            {
+                if (params[0] instanceof String)
+                {
                     decoder = BitmapRegionDecoder.newInstance((String) params[0], false);
-                } else if (params[0] instanceof FileDescriptor) {
+                }
+                else if (params[0] instanceof FileDescriptor)
+                {
                     decoder = BitmapRegionDecoder.newInstance((FileDescriptor) params[0], false);
-                } else {
+                }
+                else
+                {
                     decoder = BitmapRegionDecoder.newInstance((InputStream) params[0], false);
                 }
-            } catch (Exception e) {
+            } catch (Exception e)
+            {
                 return e;
             }
 
@@ -391,16 +450,19 @@ public class TileBitmapDrawable extends Drawable {
             Bitmap screenNail;
             try {
                 final Bitmap bitmap = decoder.decodeRegion(screenNailRect, options);
-                if (null == bitmap) {
+                if (null == bitmap)
+                {
                     //下载的图片有问题,将其删掉
                     BaseApplication.deleteFiles((String) params[0]);
                     return new Exception();
                 }
                 screenNail = Bitmap.createScaledBitmap(bitmap, Math.round(decoder.getWidth() * minScale), Math.round(decoder.getHeight() * minScale), true);
-                if (!bitmap.equals(screenNail)) {
+                if (!bitmap.equals(screenNail))
+                {
                     bitmap.recycle();
                 }
-            } catch (OutOfMemoryError e) {
+            } catch (OutOfMemoryError e)
+            {
                 // We're under memory pressure. Let's try again with a smaller size
                 screenNail = decodeRegion(decoder, screenNailRect, options, 2);
             }
@@ -421,12 +483,16 @@ public class TileBitmapDrawable extends Drawable {
          * @param tryTimes       重试次数
          * @return
          */
-        private Bitmap decodeRegion(BitmapRegionDecoder decoder, Rect screenNailRect, BitmapFactory.Options options, int tryTimes) {
-            try {
+        private Bitmap decodeRegion(BitmapRegionDecoder decoder, Rect screenNailRect, BitmapFactory.Options options, int tryTimes)
+        {
+            try
+            {
                 options.inSampleSize <<= 1;
                 return decoder.decodeRegion(screenNailRect, options);
-            } catch (Throwable e) {
-                if (tryTimes == 1) {
+            } catch (Throwable e)
+            {
+                if (tryTimes == 1)
+                {
                     return null;
                 }
                 return decodeRegion(decoder, screenNailRect, options, tryTimes - 1);
@@ -434,22 +500,29 @@ public class TileBitmapDrawable extends Drawable {
         }
 
         @Override
-        protected void onPostExecute(Object result) {
-            if (result instanceof TileBitmapDrawable) {
+        protected void onPostExecute(Object result)
+        {
+            if (result instanceof TileBitmapDrawable)
+            {
                 // Success
 //                mImageView.setImageDrawable((TileBitmapDrawable) result);
                 if (mListener != null) mListener.onLoadFinish((TileBitmapDrawable) result);
-            } else if (result instanceof Exception && mListener != null) {
+            }
+            else if (result instanceof Exception && mListener != null)
+            {
                 // Exception was thrown
                 mListener.onError((Exception) result);
-            } else if (mListener != null) {
+            }
+            else if (mListener != null)
+            {
                 // This state should never happen
                 mListener.onError(new Exception("Did not receive an exception or TileBitmapDrawable from doInBackground"));
             }
         }
     }
 
-    private static final class DecoderWorker extends Thread {
+    private static final class DecoderWorker extends Thread
+    {
 
         private final WeakReference<TileBitmapDrawable> mDrawableReference;
 
@@ -459,16 +532,20 @@ public class TileBitmapDrawable extends Drawable {
 
         private boolean mQuit;
 
-        private DecoderWorker(TileBitmapDrawable drawable, BitmapRegionDecoder decoder, BlockingQueue<Tile> decodeQueue) {
+        private DecoderWorker(TileBitmapDrawable drawable, BitmapRegionDecoder decoder, BlockingQueue<Tile> decodeQueue)
+        {
             mDrawableReference = new WeakReference<TileBitmapDrawable>(drawable);
             mDecoder = decoder;
             mDecodeQueue = decodeQueue;
         }
 
         @Override
-        public void run() {
-            while (true) {
-                if (mDrawableReference.get() == null) {
+        public void run()
+        {
+            while (true)
+            {
+                if (mDrawableReference.get() == null)
+                {
                     return;
                 }
 
@@ -482,8 +559,10 @@ public class TileBitmapDrawable extends Drawable {
                     continue;
                 }
 
-                synchronized (sBitmapCacheLock) {
-                    if (sBitmapCache.get(tile.getKey()) != null) {
+                synchronized (sBitmapCacheLock)
+                {
+                    if (sBitmapCache.get(tile.getKey()) != null)
+                    {
                         continue;
                     }
                 }
@@ -494,7 +573,8 @@ public class TileBitmapDrawable extends Drawable {
                 options.inSampleSize = (1 << tile.mLevel);
 
                 Bitmap bitmap = null;
-                synchronized (mDecoder) {
+                synchronized (mDecoder)
+                {
                     try {
                         bitmap = mDecoder.decodeRegion(tile.mTileRect, options);
                     } catch (OutOfMemoryError e) {
@@ -502,17 +582,20 @@ public class TileBitmapDrawable extends Drawable {
                     }
                 }
 
-                if (bitmap == null) {
+                if (bitmap == null)
+                {
                     continue;
                 }
 
-                synchronized (sBitmapCacheLock) {
+                synchronized (sBitmapCacheLock)
+                {
                     sBitmapCache.put(tile.getKey(), bitmap);
                 }
             }
         }
 
-        public void quit() {
+        public void quit()
+        {
             mQuit = true;
             interrupt();
         }

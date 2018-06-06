@@ -8,12 +8,14 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.apicloud.moduleDemo.backhandler.OnTaskComplete;
 import com.apicloud.moduleDemo.backhandler.OnTaskSuccessComplete;
 import com.apicloud.moduleDemo.base.BaseAppCompatActivity;
 import com.apicloud.moduleDemo.bean.response.ResponseBaseBean;
 import com.apicloud.moduleDemo.bean.response.ResponseOrderBean;
 import com.apicloud.moduleDemo.http.ApiStores;
 import com.apicloud.moduleDemo.http.HttpCallback;
+import com.apicloud.moduleDemo.http.HttpUtils;
 import com.apicloud.moduleDemo.settings.AppSettings;
 import com.apicloud.moduleDemo.util.ImageLoader;
 import com.apicloud.moduleDemo.util.TimeUtils;
@@ -25,7 +27,8 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.text.MessageFormat;
 
-public class OrderPaymentActivity extends BaseAppCompatActivity {
+public class OrderPaymentActivity extends BaseAppCompatActivity
+{
 
     private RadioButton m_rvWx;
     private RadioButton m_rvZfb;
@@ -42,12 +45,14 @@ public class OrderPaymentActivity extends BaseAppCompatActivity {
     private String m_strType;
 
     @Override
-    protected int setLayoutResourceId() {
+    protected int setLayoutResourceId()
+    {
         return R.layout.activity_order_payment;
     }
 
     @Override
-    protected void initView() {
+    protected void initView()
+    {
         m_rvWx = findViewById(R.id.rb_wx);
         m_rvZfb = findViewById(R.id.rb_zfb);
         m_tvOrderNo = findViewById(R.id.tv_order_no);
@@ -58,7 +63,8 @@ public class OrderPaymentActivity extends BaseAppCompatActivity {
     }
 
     @Override
-    protected void initData() {
+    protected void initData()
+    {
         Utils.initCommonTitle(this,"订单支付",true);
 
         m_strOrderNo = getIntent().getStringExtra("strOrderNo");
@@ -73,32 +79,42 @@ public class OrderPaymentActivity extends BaseAppCompatActivity {
     }
 
     @Override
-    protected void clickView() {
+    protected void clickView()
+    {
 
-        m_rvWx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        m_rvWx.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked){
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked)
+            {
+                if(isChecked)
+                {
                     m_rvZfb.setChecked(false);
                     m_strType = "wxpay";
                 }
             }
         });
 
-        m_rvZfb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        m_rvZfb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked){
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked)
+            {
+                if(isChecked)
+                {
                     m_rvWx.setChecked(false);
                     m_strType = "alipay";
                 }
             }
         });
 
-        m_btnCommit.setOnClickListener(new View.OnClickListener() {
+        m_btnCommit.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                if(isInputValid()){
+            public void onClick(View view)
+            {
+                if(isInputValid())
+                {
                     commit();
                 }
             }
@@ -106,9 +122,11 @@ public class OrderPaymentActivity extends BaseAppCompatActivity {
     }
 
     // 检查输入项是否输入正确
-    private boolean isInputValid() {
+    private boolean isInputValid()
+    {
 
-        if(!m_rvZfb.isChecked() && !m_rvWx.isChecked()){
+        if(!m_rvZfb.isChecked() && !m_rvWx.isChecked())
+        {
             Utils.showToast(this, "请选择支付方式");
             return false;
         }
@@ -116,40 +134,88 @@ public class OrderPaymentActivity extends BaseAppCompatActivity {
         return true;
     }
 
-    private void commit(){
-        ApiStores.paymentPrepare(m_strOrderNo,m_strPaymentNo,m_strType, new HttpCallback<ResponseBaseBean>() {
+    private void commit()
+    {
+        ApiStores.paymentPrepare(m_strOrderNo,m_strPaymentNo,m_strType, new HttpCallback<ResponseBaseBean>()
+        {
 
                     @Override
-                    public void OnSuccess(final ResponseBaseBean response) {
-                        if(response.getSuccess()){
-                            Utils.showCommonDialogReleaseSuccess(OrderPaymentActivity.this,new OnTaskSuccessComplete() {
-                                @Override
-                                public void onSuccess(Object obj) {
-                                    Utils.showToast(OrderPaymentActivity.this,"支付成功");
-                                    EventBus.getDefault().post("");
-                                    finish();
-                                }
-                            } );
+                    public void OnSuccess(final ResponseBaseBean response)
+                    {
+                        if(response.getSuccess())
+                        {
+                            kProgressHUD.dismiss();
+                            if(getIntent().getIntExtra("nApplyRenovation",0) == PaymentActivity.APPLY_RENOVATION)
+                            {
+                                Utils.showCommonDialogAcceptSuccess(OrderPaymentActivity.this,new OnTaskSuccessComplete()
+                                {
+                                    @Override
+                                    public void onSuccess(Object obj) {
+                                        Utils.showToast(OrderPaymentActivity.this,"支付成功");
+                                        EventBus.getDefault().post("");
+                                        finish();
+                                    }
+                                } );
+
+                            }
+                            else
+                            {
+                                Utils.showCommonDialogReleaseSuccess(OrderPaymentActivity.this,new OnTaskSuccessComplete()
+                                {
+                                    @Override
+                                    public void onSuccess(Object obj)
+                                    {
+                                        Utils.showToast(OrderPaymentActivity.this,"支付成功");
+                                        EventBus.getDefault().post("");
+                                        finish();
+                                    }
+                                } );
+                            }
                         }
                     }
 
                     @Override
-                    public void OnFailure(String message) {
-                        kProgressHUD.dismiss();
-                        AlertUtils.MessageAlertShow(OrderPaymentActivity.this,"错误",message);
+                    public void OnFailure(final String message)
+                    {
+                        if(HttpUtils.isValidResponse(message))
+                        {
+                            kProgressHUD.dismiss();
+                            AlertUtils.MessageAlertShow(OrderPaymentActivity.this, "错误", message);
+                        }
+                        else
+                        {
+                            HttpUtils.httpRequestFailure(OrderPaymentActivity.this, new OnTaskComplete()
+                            {
+                                @Override
+                                public void onComplete(Object obj) { }
+
+                                @Override
+                                public void onSuccess(Object obj)
+                                {
+                                    commit();
+                                }
+
+                                @Override
+                                public void onFail(Object obj)
+                                {
+                                    kProgressHUD.dismiss();
+                                    AlertUtils.MessageAlertShow(OrderPaymentActivity.this, "错误", message);
+                                }
+                            });
+                        }
                     }
 
                     @Override
-                    public void OnRequestStart() {
-                        if(!kProgressHUD.isShowing()){
+                    public void OnRequestStart()
+                    {
+                        if(!kProgressHUD.isShowing())
+                        {
                             kProgressHUD.show();
                         }
                     }
 
                     @Override
-                    public void OnRequestFinish() {
-                        kProgressHUD.dismiss();
-                    }
+                    public void OnRequestFinish() {}
                 });
     }
 }

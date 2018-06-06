@@ -13,27 +13,32 @@ import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
 
-public class MyJoinInActivity extends BaseListActivity {
+public class MyJoinInActivity extends BaseListActivity
+{
 
     private MyJoinInAdapter m_myJoinInAdapter = new MyJoinInAdapter();
 
     @Override
-    protected int setLayoutResourceId() {
+    protected int setLayoutResourceId()
+    {
         return R.layout.activity_common_list;
     }
 
     @Override
-    protected void initData() {
+    protected void initData()
+    {
         Utils.initCommonTitle(this,"创业加盟",true);
     }
 
     @Override
-    protected BaseRecyclerAdapter getListAdapter() {
+    protected BaseRecyclerAdapter getListAdapter()
+    {
         return m_myJoinInAdapter;
     }
 
     @Override
-    protected void initLayoutManager() {
+    protected void initLayoutManager()
+    {
         mRecyclerView.setLoadMoreEnabled(false);
         DividerDecoration divider = new DividerDecoration.Builder(this)
                 .setHeight(R.dimen.one)
@@ -42,9 +47,11 @@ public class MyJoinInActivity extends BaseListActivity {
 
         mRecyclerView.addItemDecoration(divider);
 
-        mRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
+        mRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener()
+        {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(View view, int position)
+            {
 //                Intent it = new Intent(this,NewsWebViewActivity.class);
 //                it.putExtra("webViewUrl",m_adapterNewsAnalysisAdapter.getListData().get(position).getDetail_url());
 //                startActivity(it);
@@ -53,7 +60,8 @@ public class MyJoinInActivity extends BaseListActivity {
         });
     }
 
-    protected void requestData(){
+    protected void requestData()
+    {
 
         executeOnLoadDataSuccess(DataUtil.initMyJoinIn(),true);
         executeOnLoadFinish();

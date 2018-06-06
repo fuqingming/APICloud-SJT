@@ -40,7 +40,8 @@ import java.util.List;
 import jp.wasabeef.recyclerview.adapters.AnimationAdapter;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
-public abstract class BaseListActivity<T> extends AppCompatActivity {
+public abstract class BaseListActivity<T> extends AppCompatActivity
+{
     protected KProgressHUD kProgressHUD;
     /**每一页展示多少条数据*/
     protected int mCurrentPage = 0;
@@ -60,16 +61,19 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
 
     protected CommonHeader headerView;
 
-    private View.OnClickListener mFooterClick = new View.OnClickListener() {
+    private View.OnClickListener mFooterClick = new View.OnClickListener()
+    {
         @Override
-        public void onClick(View v) {
+        public void onClick(View v)
+        {
             RecyclerViewStateUtils.setFooterViewState(BaseListActivity.this, mRecyclerView, getPageSize(), LoadingFooter.State.Loading, null);
             requestData();
         }
     };
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         init();
         kProgressHUD = new HUDProgressUtils().showLoadingImage(this);
@@ -86,7 +90,8 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
-    protected void init(){
+    protected void init()
+    {
         HttpClient.init(getApplicationContext(),false);
     }
 
@@ -100,19 +105,26 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
 
     protected void clickView() {}
 
-    protected void initViewBase() {
+    protected void initViewBase()
+    {
 
-        if (mListAdapter != null) {
+        if (mListAdapter != null)
+        {
             mErrorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
-        } else {
+        }
+        else
+        {
             mListAdapter = getListAdapter();
 
-            if (requestDataIfViewCreated()) {
+            if (requestDataIfViewCreated())
+            {
                 mErrorLayout.setErrorType(ErrorLayout.NETWORK_LOADING);
                 mCurrentPage++;
                 isRequestInProcess = true;
                 requestData();
-            } else {
+            }
+            else
+            {
                 mErrorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
             }
         }
@@ -132,71 +144,91 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
 
         initLayoutManager();
 
-        mRecyclerView.setOnLoadMoreListener(new OnLoadMoreListener() {
+        mRecyclerView.setOnLoadMoreListener(new OnLoadMoreListener()
+        {
             @Override
-            public void onLoadMore() {
-
-                if ( REQUEST_COUNT <= totalPage) {
+            public void onLoadMore()
+            {
+                if ( REQUEST_COUNT <= totalPage)
+                {
                     mCurrentPage++;
                     requestData();
                     isRequestInProcess = true;
-                } else {
+                }
+                else
+                {
                     mRecyclerView.setNoMore(true);
                 }
             }
         });
 
-        mRecyclerView.setOnRefreshListener(new OnRefreshListener() {
+        mRecyclerView.setOnRefreshListener(new OnRefreshListener()
+        {
             @Override
-            public void onRefresh() {
+            public void onRefresh()
+            {
                 onRefreshView();
             }
         });
 
-        mRecyclerView.setLScrollListener(new LRecyclerView.LScrollListener() {
+        mRecyclerView.setLScrollListener(new LRecyclerView.LScrollListener()
+        {
 
             @Override
-            public void onScrollUp() {
+            public void onScrollUp()
+            {
                 // 滑动时隐藏float button
-                if (toTopBtn.getVisibility() == View.VISIBLE) {
+                if (toTopBtn.getVisibility() == View.VISIBLE)
+                {
                     toTopBtn.setVisibility(View.GONE);
                     animate(toTopBtn, R.anim.floating_action_button_hide);
                 }
             }
 
             @Override
-            public void onScrollDown() {
-                if (toTopBtn.getVisibility() != View.VISIBLE) {
+            public void onScrollDown()
+            {
+                if (toTopBtn.getVisibility() != View.VISIBLE)
+                {
                     toTopBtn.setVisibility(View.VISIBLE);
                     animate(toTopBtn, R.anim.floating_action_button_show);
                 }
             }
 
             @Override
-            public void onScrolled(int distanceX, int distanceY) {
+            public void onScrolled(int distanceX, int distanceY)
+            {
 
-                if (null != headerView) {
-                    if (distanceY == 0 || distanceY < headerView.getHeight()) {
+                if (null != headerView)
+                {
+                    if (distanceY == 0 || distanceY < headerView.getHeight())
+                    {
                         toTopBtn.setVisibility(View.GONE);
                     }
-                } else {
-                    if (distanceY == 0) {
+                }
+                else
+                {
+                    if (distanceY == 0)
+                    {
                         toTopBtn.setVisibility(View.GONE);
                     }
                 }
             }
 
             @Override
-            public void onScrollStateChanged(int state) {
+            public void onScrollStateChanged(int state)
+            {
 
             }
 
         });
 
-        mErrorLayout.setOnLayoutClickListener(new View.OnClickListener() {
+        mErrorLayout.setOnLayoutClickListener(new View.OnClickListener()
+        {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 mCurrentPage = 0;
                 mErrorLayout.setErrorType(ErrorLayout.NETWORK_LOADING);
                 mCurrentPage++;
@@ -205,9 +237,11 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
             }
         });
 
-        toTopBtn.setOnClickListener(new View.OnClickListener() {
+        toTopBtn.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 mRecyclerView.scrollToPosition(0);
                 toTopBtn.setVisibility(View.GONE);
             }
@@ -219,34 +253,42 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
         mRecyclerView.setFooterViewColor(R.color.gray_text, R.color.gray_text, R.color.app_bg);
     }
 
-    protected boolean requestDataIfViewCreated() {
+    protected boolean requestDataIfViewCreated()
+    {
         return true;
     }
 
-    private void animate(View view, int anim) {
-        if (anim != 0) {
+    private void animate(View view, int anim)
+    {
+        if (anim != 0)
+        {
             Animation a = AnimationUtils.loadAnimation(view.getContext(), anim);
             view.startAnimation(a);
         }
     }
 
     /** 设置顶部正在加载的状态 */
-    protected void setSwipeRefreshLoadingState() {
+    protected void setSwipeRefreshLoadingState()
+    {
     }
 
     /**
      * 设置顶部加载完毕的状态
      */
-    protected void setSwipeRefreshLoadedState() {
-        if(null != mRecyclerView) {
+    protected void setSwipeRefreshLoadedState()
+    {
+        if(null != mRecyclerView)
+        {
             mRecyclerView.refreshComplete(REQUEST_COUNT);
         }
 
     }
 
     // 完成刷新
-    protected void executeOnLoadFinish() {
-        if(kProgressHUD.isShowing()){
+    protected void executeOnLoadFinish()
+    {
+        if(kProgressHUD.isShowing())
+        {
             kProgressHUD.dismiss();
         }
         setSwipeRefreshLoadedState();
@@ -256,11 +298,14 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
 
     protected abstract BaseRecyclerAdapter<T> getListAdapter();
 
-    protected void requestData() {
+    protected void requestData()
+    {
     }
 
-    protected void onRefreshView() {
-        if (isRequestInProcess) {
+    protected void onRefreshView()
+    {
+        if (isRequestInProcess)
+        {
             return;
         }
         // 设置顶部正在刷新
@@ -278,46 +323,62 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
         return Constant.PAGE_SIZE;
     }
 
-    protected void executeOnLoadDataSuccess(List<T> data,boolean isHavaHead) {
+    protected void executeOnLoadDataSuccess(List<T> data,boolean isHavaHead)
+    {
         totalPage = data.size();
-        if (data == null) {
+        if (data == null)
+        {
             data = new ArrayList<T>();
         }
 
         mErrorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
 
         // 判断等于是因为最后有一项是listview的状态
-        if (mListAdapter.getItemCount() == 0) {
+        if (mListAdapter.getItemCount() == 0)
+        {
 
-            if (needShowEmptyNoData()) {
+            if (needShowEmptyNoData())
+            {
                 mErrorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
             }
         }
 
-        if (mCurrentPage == 1) {
+        if (mCurrentPage == 1)
+        {
             mListAdapter.setDataList(data);
-            if(mListAdapter.getItemCount() == 0){
-                if(isHavaHead){
+            if(mListAdapter.getItemCount() == 0)
+            {
+                if(isHavaHead)
+                {
                     mErrorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
-                }else{
+                }
+                else
+                {
                     mErrorLayout.setErrorType(ErrorLayout.NODATA);
                 }
 
             }
-        } else {
+        }
+        else
+        {
             mListAdapter.addAll(data);
         }
     }
 
-    protected boolean needShowEmptyNoData() {
+    protected boolean needShowEmptyNoData()
+    {
         return true;
     }
 
-    protected void executeOnLoadDataError(String error) {
+    protected void executeOnLoadDataError(String error)
+    {
         executeOnLoadFinish();
-        if (mCurrentPage == 1) {
+        if (mCurrentPage == 1)
+        {
             mErrorLayout.setErrorType(ErrorLayout.NETWORK_ERROR);
-        } else {
+        }
+        else
+        {
 
             //在无网络时，滚动到底部时，mCurrentPage先自加了，然而在失败时却
             //没有减回来，如果刻意在无网络的情况下上拉，可以出现漏页问题
@@ -329,23 +390,28 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
         }
     }
 
-    protected String getNoDataTip() {
+    protected String getNoDataTip()
+    {
         return "";
     }
 
     @Override
-    public void onBackPressed() {
-        if(kProgressHUD.isShowing()){
+    public void onBackPressed()
+    {
+        if(kProgressHUD.isShowing())
+        {
             kProgressHUD.dismiss();
         }
 
-        if (!BackHandlerHelper.handleBackPress(this)) {
+        if (!BackHandlerHelper.handleBackPress(this))
+        {
             super.onBackPressed();
         }
     }
 
     @Override
-    public Resources getResources() {
+    public Resources getResources()
+    {
         Resources res = super.getResources();
         Configuration config=new Configuration();
         config.setToDefaults();
@@ -354,24 +420,29 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
+    protected void onPause()
+    {
         super.onPause();
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
     }
 
     @Override
-    public void onDestroy() {
+    public void onDestroy()
+    {
         super.onDestroy();
-        if(isHaveEventBus){
+        if(isHaveEventBus)
+        {
             EventBus.getDefault().unregister(this);
         }
     }
 
-    protected void setEventBus(){
+    protected void setEventBus()
+    {
         isHaveEventBus = true;
         EventBus.getDefault().register(this);
     }

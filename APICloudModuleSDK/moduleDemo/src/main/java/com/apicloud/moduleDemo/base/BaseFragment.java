@@ -22,7 +22,8 @@ import butterknife.Unbinder;
  * Date: 2017/11/9
  */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment
+{
     private View mContentView;
     private Context mContext;
     private LayoutInflater mLayoutInflater;
@@ -34,7 +35,8 @@ public abstract class BaseFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
         if(mContentView != null)
         {
             ViewGroup vgParent = (ViewGroup) mContentView.getParent();
@@ -61,7 +63,8 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected abstract int setLayoutResourceId();
-    private void init(){
+    private void init()
+    {
         HttpClient.init(getContext().getApplicationContext(),false);
     }
 
@@ -71,28 +74,34 @@ public abstract class BaseFragment extends Fragment {
 
     protected void clickView() {}
 
-    protected View getContentView() {
+    protected View getContentView()
+    {
         return mContentView;
     }
 
-    public Context getMContext() {
+    public Context getMContext()
+    {
         return mContext;
     }
 
-    public LayoutInflater getMLayoutInflater() {
+    public LayoutInflater getMLayoutInflater()
+    {
         return mLayoutInflater;
     }
 
     @Override
-    public void onDestroy() {
+    public void onDestroy()
+    {
         super.onDestroy();
         unbinder.unbind();
-        if(isHaveEventBus){
+        if(isHaveEventBus)
+        {
             EventBus.getDefault().unregister(this);
         }
     }
 
-    protected void setEventBus(){
+    protected void setEventBus()
+    {
         isHaveEventBus = true;
         EventBus.getDefault().register(this);
     }

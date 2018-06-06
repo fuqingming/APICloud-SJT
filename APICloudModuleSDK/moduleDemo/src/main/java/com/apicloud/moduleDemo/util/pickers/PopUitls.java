@@ -18,8 +18,10 @@ import cn.addapp.pickers.picker.SinglePicker;
  * Created by vip on 2018/5/14.
  */
 
-public class PopUitls {
-    public static void showPopSelect(Activity activity,String strArr[] ,String strTitle,final OnTaskSuccessComplete onTaskSuccess){
+public class PopUitls
+{
+    public static void showPopSelect(Activity activity,String strArr[] ,String strTitle,final OnTaskSuccessComplete onTaskSuccess)
+    {
         SinglePicker<String> picker = new SinglePicker<>(activity,strArr);
         picker.setCanLoop(false);//不禁用循环
         picker.setTopBackgroundColor(0xFFEEEEEE);
@@ -45,9 +47,11 @@ public class PopUitls {
         picker.setBackgroundColor(0xFFE1E1E1);
 //                picker.setSelectedItem( "不限");
         picker.setSelectedIndex(0);
-        picker.setOnItemPickListener(new OnItemPickListener<String>() {
+        picker.setOnItemPickListener(new OnItemPickListener<String>()
+        {
             @Override
-            public void onItemPicked(int index, String item) {
+            public void onItemPicked(int index, String item)
+            {
                 if (onTaskSuccess != null)
                 {
                     onTaskSuccess.onSuccess(index);
@@ -57,7 +61,8 @@ public class PopUitls {
         picker.show();
     }
 
-    public static void showDataSelect(Activity activity,final OnTaskSuccessComplete onTaskSuccess){
+    public static void showDataSelect(Activity activity,final OnTaskSuccessComplete onTaskSuccess)
+    {
         Time t = new Time();
         t.setToNow();
         final DatePicker picker = new DatePicker(activity);
@@ -69,9 +74,11 @@ public class PopUitls {
         picker.setSelectedItem(t.year,t.month+1,t.monthDay);
         picker.setWeightEnable(true);
         picker.setLineColor(Color.BLACK);
-        picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
+        picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener()
+        {
             @Override
-            public void onDatePicked(String year, String month, String day) {
+            public void onDatePicked(String year, String month, String day)
+            {
                 DateBean dataBean = new DateBean(year,month,day);
                 if (onTaskSuccess != null)
                 {
@@ -79,19 +86,23 @@ public class PopUitls {
                 }
             }
         });
-        picker.setOnWheelListener(new DatePicker.OnWheelListener() {
+        picker.setOnWheelListener(new DatePicker.OnWheelListener()
+        {
             @Override
-            public void onYearWheeled(int index, String year) {
+            public void onYearWheeled(int index, String year)
+            {
                 picker.setTitleText(year + "-" + picker.getSelectedMonth() + "-" + picker.getSelectedDay());
             }
 
             @Override
-            public void onMonthWheeled(int index, String month) {
+            public void onMonthWheeled(int index, String month)
+            {
                 picker.setTitleText(picker.getSelectedYear() + "-" + month + "-" + picker.getSelectedDay());
             }
 
             @Override
-            public void onDayWheeled(int index, String day) {
+            public void onDayWheeled(int index, String day)
+            {
                 picker.setTitleText(picker.getSelectedYear() + "-" + picker.getSelectedMonth() + "-" + day);
             }
         });

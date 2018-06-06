@@ -13,6 +13,7 @@
  */
 package com.apicloud.moduleDemo.settings;
 
-public class Constant {
+public class Constant
+{
 	public static final int PAGE_SIZE = 10;// 默认分页大小
 }

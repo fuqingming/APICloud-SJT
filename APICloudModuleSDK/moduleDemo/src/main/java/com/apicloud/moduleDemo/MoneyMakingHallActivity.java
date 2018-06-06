@@ -32,7 +32,8 @@ import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHallBean> {
+public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHallBean>
+{
 
     private MoneyMakingHallAdapter m_moneyMakingHallAdapter = new MoneyMakingHallAdapter();
 
@@ -49,12 +50,14 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
     private boolean m_isType = true;
 
     @Override
-    protected int setLayoutResourceId() {
+    protected int setLayoutResourceId()
+    {
         return R.layout.activity_money_making_hall;
     }
 
     @Override
-    protected void initData() {
+    protected void initData()
+    {
         Utils.initCommonTitle(this,"赚钱大厅",true);
 
         m_moneyMakingHallAdapter.setType(m_isType);
@@ -68,7 +71,8 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
     }
 
     @Override
-    protected void initView() {
+    protected void initView()
+    {
         m_cbAllType = (CheckBox) findViewById(R.id.cb_all_type);
         m_cbOrderBy = (CheckBox) findViewById(R.id.cb_order_by);
         m_teRelease = (TextView) findViewById(R.id.tv_release);
@@ -76,13 +80,16 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
     }
 
     @Override
-    protected BaseRecyclerAdapter<MoneyMakingHallBean> getListAdapter() {
+    protected BaseRecyclerAdapter<MoneyMakingHallBean> getListAdapter()
+    {
         return m_moneyMakingHallAdapter;
     }
 
-    private void viewInit(){
+    private void viewInit()
+    {
 
-        switch (m_strCategoryNo){
+        switch (m_strCategoryNo)
+        {
             case Const.CategoryNo.TYPE_RENOVATION:
                 m_teRelease.setText("我也发布量房");
                 break;
@@ -105,8 +112,8 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
     }
 
     @Override
-    protected void initLayoutManager() {
-
+    protected void initLayoutManager()
+    {
         View m_headerBanner = LayoutInflater.from(this).inflate(R.layout.common_money_making_hall_head,mRecyclerView, false);
         mRecyclerViewAdapter.addHeaderView(m_headerBanner);
         DividerDecoration divider = new DividerDecoration.Builder(this)
@@ -116,9 +123,11 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
         mRecyclerView.addItemDecoration(divider);
         mRecyclerView.setLoadMoreEnabled(true);
 
-        mRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
+        mRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener()
+        {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(View view, int position)
+            {
                 Intent it = new Intent(MoneyMakingHallActivity.this,DetailsActivity.class);
                 it.putExtra("strCallHttpType","1");
                 it.putExtra("strScheduleNo",m_moneyMakingHallAdapter.getListData().get(position).getScheduleNo());
@@ -130,24 +139,34 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
     }
 
     @Override
-    protected void clickView() {
-        m_cbAllType.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+    protected void clickView()
+    {
+        m_cbAllType.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(m_arrAllType.size() > 0){
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked)
+            {
+                if(m_arrAllType.size() > 0)
+                {
                     showPopAllType(isChecked);
-                }else{
+                }
+                else
+                {
                     requestCheckBoxAllType(isChecked);
                 }
             }
         });
 
-        m_cbOrderBy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+        m_cbOrderBy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                filterTabToggle(isChecked, m_rlBg,new MoneyTypeCheckedAdapter(MoneyMakingHallActivity.this,m_arrOrderByBean),new AdapterView.OnItemClickListener() {
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked)
+            {
+                filterTabToggle(isChecked, m_rlBg,new MoneyTypeCheckedAdapter(MoneyMakingHallActivity.this,m_arrOrderByBean),new AdapterView.OnItemClickListener()
+                {
                     @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l)
+                    {
                         m_strOrderBy = (m_arrOrderByBean).get(position).getCategoryNo();
                         hidePopListView();
                         onRefreshView();
@@ -156,12 +175,15 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
             }
         });
 
-        m_teRelease.setOnClickListener(new View.OnClickListener() {
+        m_teRelease.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 Intent it = null;
                 int nResultCode = 0;
-                switch (m_strCategoryNo){
+                switch (m_strCategoryNo)
+                {
                     case Const.CategoryNo.TYPE_RENOVATION:
                         it = new Intent(MoneyMakingHallActivity.this,ReleaseRenovationActivity.class);
                         break;
@@ -187,41 +209,51 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
         });
     }
 
-    private void showPopAllType(boolean isChecked){
+    private void showPopAllType(boolean isChecked)
+    {
         filterTabToggle(isChecked, m_rlBg,new MoneyTypeCheckedAdapter(MoneyMakingHallActivity.this,m_arrAllType),new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 hidePopListView();
                 String strCategoryNo = m_arrAllType.get(position).getCategoryNo();
                 Intent it ;
-                if(strCategoryNo.equals(Const.CategoryNo.DESIGNER_ENTREPRENEURSHIP)){
+                if(strCategoryNo.equals(Const.CategoryNo.DESIGNER_ENTREPRENEURSHIP))
+                {
                     it = new Intent(MoneyMakingHallActivity.this,EntrepreneurshipActivity.class);
                     it.putExtra("strTitle","设计师创业");
                     it.putExtra("nRoleType", Const.RoleType.DESIGNER_ENTREPRENEURSHIP);
                     startActivity(it);
                     return;
-                }else if(strCategoryNo.equals(Const.CategoryNo.MANAGER_ENTREPRENEURSHIP)){
+                }
+                else if(strCategoryNo.equals(Const.CategoryNo.MANAGER_ENTREPRENEURSHIP))
+                {
                     it = new Intent(MoneyMakingHallActivity.this,EntrepreneurshipActivity.class);
                     it.putExtra("strTitle","项目经理创业");
                     it.putExtra("nRoleType", Const.RoleType.MANAGER_ENTREPRENEURSHIP);
                     startActivity(it);
                     return;
-                }else if(strCategoryNo.equals(Const.CategoryNo.TYPE_RENOVATION) || strCategoryNo.equals(Const.CategoryNo.TYPE_BUILDING)){
+                }
+                else if(strCategoryNo.equals(Const.CategoryNo.TYPE_RENOVATION) || strCategoryNo.equals(Const.CategoryNo.TYPE_BUILDING))
+                {
                     m_isType = true;
                     m_moneyMakingHallAdapter.setType(m_isType);
                     m_strCategoryNo = m_arrAllType.get(position).getCategoryNo();
                     m_strOrderBy = "";
                     kProgressHUD.show();
                     onRefreshView();
-                }else if(strCategoryNo.equals(Const.CategoryNo.TYPE_REDUCE_WEIGHT) || strCategoryNo.equals(Const.CategoryNo.TYPE_QUIT_SMOKING) ||
-                        strCategoryNo.equals(Const.CategoryNo.TYPE_QUIT_DRINKING) || strCategoryNo.equals(Const.CategoryNo.TYPE_GIVE_UP_GAMBLING)){
+                }
+                else if(strCategoryNo.equals(Const.CategoryNo.TYPE_REDUCE_WEIGHT) || strCategoryNo.equals(Const.CategoryNo.TYPE_QUIT_SMOKING) ||
+                        strCategoryNo.equals(Const.CategoryNo.TYPE_QUIT_DRINKING) || strCategoryNo.equals(Const.CategoryNo.TYPE_GIVE_UP_GAMBLING))
+                {
                     kProgressHUD.show();
                     m_isType = false;
                     m_moneyMakingHallAdapter.setType(m_isType);
                     m_strCategoryNo = m_arrAllType.get(position).getCategoryNo();
                     m_strOrderBy = "";
                     onRefreshView();
-                }else{
+                }
+                else
+                {
                     Utils.showToast(MoneyMakingHallActivity.this,"敬请期待~!");
                 }
 
@@ -229,58 +261,73 @@ public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHall
         }, m_cbAllType, m_cbOrderBy);
     }
 
-    protected void requestCheckBoxAllType(final boolean isChecked){
-        HttpClient.get(ApiStores.categories, new HttpCallback<ResponseMoneyMakingHallTypeBean>() {
+    protected void requestCheckBoxAllType(final boolean isChecked)
+    {
+        HttpClient.get(ApiStores.categories, new HttpCallback<ResponseMoneyMakingHallTypeBean>()
+        {
             @Override
-            public void OnSuccess(ResponseMoneyMakingHallTypeBean response) {
-                if(response.getSuccess()){
+            public void OnSuccess(ResponseMoneyMakingHallTypeBean response)
+            {
+                if(response.getSuccess())
+                {
                     m_arrAllType.addAll(response.getData());
                     showPopAllType(isChecked);
                 }
             }
 
             @Override
-            public void OnFailure(String message) {
+            public void OnFailure(String message)
+            {
                 m_cbAllType.setChecked(false);
                 AlertUtils.MessageAlertShow(MoneyMakingHallActivity.this, "错误", message);
             }
 
             @Override
-            public void OnRequestStart() {
+            public void OnRequestStart()
+            {
                 kProgressHUD.show();
             }
 
             @Override
-            public void OnRequestFinish() {
+            public void OnRequestFinish()
+            {
                 kProgressHUD.dismiss();
             }
         });
     }
 
-    protected void requestData(){
-        ApiStores.categories(mCurrentPage,m_strCategoryNo,"",m_strOrderBy, new HttpCallback<ResponseMoneyMakingHallBean>() {
+    protected void requestData()
+    {
+        ApiStores.categories(mCurrentPage,m_strCategoryNo,"",m_strOrderBy, new HttpCallback<ResponseMoneyMakingHallBean>()
+        {
             @Override
-            public void OnSuccess(ResponseMoneyMakingHallBean response) {
-                if(response.getSuccess()){
+            public void OnSuccess(ResponseMoneyMakingHallBean response)
+            {
+                if(response.getSuccess())
+                {
                     viewInit();
                     executeOnLoadDataSuccess(response.getData().getContent(),true);
                 }
             }
 
             @Override
-            public void OnFailure(String message) {
+            public void OnFailure(String message)
+            {
                 executeOnLoadDataError(null);
             }
 
             @Override
-            public void OnRequestStart() {
-                if(mCurrentPage > 1){
+            public void OnRequestStart()
+            {
+                if(mCurrentPage > 1)
+                {
                     kProgressHUD.show();
                 }
             }
 
             @Override
-            public void OnRequestFinish() {
+            public void OnRequestFinish()
+            {
                 executeOnLoadFinish();
             }
         });

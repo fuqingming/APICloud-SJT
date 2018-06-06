@@ -4,7 +4,8 @@ package com.apicloud.moduleDemo.util.imagetrans;
  * Created by liuting on 17/5/31.
  */
 
-public enum ScaleType {
+public enum ScaleType
+{
     /**
      * 居中裁剪
      **/

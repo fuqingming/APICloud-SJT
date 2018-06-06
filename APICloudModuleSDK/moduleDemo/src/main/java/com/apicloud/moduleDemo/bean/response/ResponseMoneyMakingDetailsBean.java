@@ -62,6 +62,7 @@ public class ResponseMoneyMakingDetailsBean extends ResponseBaseBean {
 //        resourceTypeName
         private String closeType;
         private String closeTypeName;
+        private String mobile;
         private boolean allowProof;
         private boolean allowEnroll;
         private String topShow;
@@ -462,6 +463,14 @@ public class ResponseMoneyMakingDetailsBean extends ResponseBaseBean {
 
         public void setAllowEnroll(boolean allowEnroll) {
             this.allowEnroll = allowEnroll;
+        }
+
+        public String getMobile() {
+            return mobile;
+        }
+
+        public void setMobile(String mobile) {
+            this.mobile = mobile;
         }
     }
 }

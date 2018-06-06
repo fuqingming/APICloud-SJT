@@ -21,27 +21,32 @@ import com.tamic.novate.RxApiManager;
 
 import java.util.ArrayList;
 
-public class BusinessActivity extends BaseListActivity {
+public class BusinessActivity extends BaseListActivity
+{
 
     private BusinessAdapter m_myJoinInAdapter = new BusinessAdapter();
 
     @Override
-    protected int setLayoutResourceId() {
+    protected int setLayoutResourceId()
+    {
         return R.layout.activity_common_list;
     }
 
     @Override
-    protected void initData() {
+    protected void initData()
+    {
         Utils.initCommonTitle(this,"资格商家",true);
     }
 
     @Override
-    protected BaseRecyclerAdapter getListAdapter() {
+    protected BaseRecyclerAdapter getListAdapter()
+    {
         return m_myJoinInAdapter;
     }
 
     @Override
-    protected void initLayoutManager() {
+    protected void initLayoutManager()
+    {
 
         mRecyclerView.setLoadMoreEnabled(true);
         DividerDecoration divider = new DividerDecoration.Builder(this)
@@ -51,9 +56,11 @@ public class BusinessActivity extends BaseListActivity {
 
         mRecyclerView.addItemDecoration(divider);
 
-        mRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
+        mRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener()
+        {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(View view, int position)
+            {
 //                Intent it = new Intent(this,NewsWebViewActivity.class);
 //                it.putExtra("webViewUrl",m_adapterNewsAnalysisAdapter.getListData().get(position).getDetail_url());
 //                startActivity(it);
@@ -62,33 +69,40 @@ public class BusinessActivity extends BaseListActivity {
         });
     }
 
-    protected void requestData(){
+    protected void requestData()
+    {
         ApiStores.companies(mCurrentPage, new HttpCallback<ResponseBusinessBean>() {//ResponseHallBean
             @Override
-            public void OnSuccess(ResponseBusinessBean response) {
-                if(response.getSuccess()){
+            public void OnSuccess(ResponseBusinessBean response)
+            {
+                if(response.getSuccess())
+                {
                     executeOnLoadDataSuccess(response.getData().getContent(),false);
                 }
             }
 
             @Override
-            public void OnFailure(String message) {
+            public void OnFailure(String message)
+            {
                 executeOnLoadDataError(null);
             }
 
             @Override
-            public void OnRequestStart() {
+            public void OnRequestStart()
+            {
             }
 
             @Override
-            public void OnRequestFinish() {
+            public void OnRequestFinish()
+            {
                 executeOnLoadFinish();
             }
         });
     }
 
     @Override
-    public void onDestroy() {
+    public void onDestroy()
+    {
         super.onDestroy();
         RxApiManager.get().cancel(0);
     }

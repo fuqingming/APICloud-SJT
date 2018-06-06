@@ -16,18 +16,20 @@ import com.apicloud.sdk.moduledemo.R;
  * Date: 2017/11/13
  */
 
-public class EnrollsAdapter extends BaseRecyclerAdapter<EnrollsBean> {
+public class EnrollsAdapter extends BaseRecyclerAdapter<EnrollsBean>
+{
 
-    public EnrollsAdapter() {
-    }
+    public EnrollsAdapter() {    }
 
     @Override
-    protected int getContentView(int viewType) {
+    protected int getContentView(int viewType)
+    {
         return R.layout.item_enrolls;
     }
 
     @Override
-    protected void covert(BaseRecyclerViewHolder holder, EnrollsBean data, int position) {
+    protected void covert(BaseRecyclerViewHolder holder, EnrollsBean data, int position)
+    {
         ImageView ivIcon = holder.getView().findViewById(R.id.iv_icon);
         TextView tvName = holder.getView().findViewById(R.id.tv_name);
         TextView tvTime = holder.getView().findViewById(R.id.tv_time);

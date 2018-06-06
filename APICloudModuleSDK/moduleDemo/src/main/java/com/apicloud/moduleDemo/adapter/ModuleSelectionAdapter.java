@@ -17,19 +17,24 @@ import java.util.List;
 import java.util.Map;
 
 
-public class ModuleSelectionAdapter extends BaseAdapter {
+public class ModuleSelectionAdapter extends BaseAdapter
+{
 	
 	private LayoutInflater m_listContainer;
 	private Context m_context;
 	private int m_height;
 	private List<Map<String, Object>> m_listItems;
-	public ModuleSelectionAdapter(Context context, List<Map<String, Object>> listItems, int height) {
+	public ModuleSelectionAdapter(Context context, List<Map<String, Object>> listItems, int height)
+	{
 		super();
 		this.m_context = context;
 		this.m_height = height;
-		if (listItems == null) {
+		if (listItems == null)
+		{
 			listItems = new ArrayList<Map<String, Object>>();
-		} else {
+		}
+		else
+		{
 			this.m_listItems = listItems;
 		}
 		m_listContainer = LayoutInflater.from(context);
@@ -39,16 +44,20 @@ public class ModuleSelectionAdapter extends BaseAdapter {
 	 * ListView Item设置
 	 */
 	@SuppressLint("InflateParams")
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(int position, View convertView, ViewGroup parent)
+	{
 		final Holder holder;
-		if (convertView == null) {
+		if (convertView == null)
+		{
 			holder = new Holder();
 			convertView = m_listContainer.inflate(R.layout.index_item, null);
 			holder.m_ivIconPay = (ImageView) convertView.findViewById(R.id.iv_icon);
 			holder.m_tvTextPay = (TextView) convertView.findViewById(R.id.tv_text);
 			holder.m_llSize = (LinearLayout)convertView.findViewById(R.id.ll_size);
 			convertView.setTag(holder);
-		} else {
+		}
+		else
+		{
 			holder = (Holder) convertView.getTag();
 		}
 		
@@ -61,19 +70,23 @@ public class ModuleSelectionAdapter extends BaseAdapter {
 
 	}
 
-	public int getCount() {
+	public int getCount()
+	{
 		return m_listItems.size();
 	}
 
-	public Object getItem(int position) {
+	public Object getItem(int position)
+	{
 		return position;
 	}
 
-	public long getItemId(int position) {
+	public long getItemId(int position)
+	{
 		return position;
 	}
 
-	private class Holder {
+	private class Holder
+	{
 		ImageView m_ivIconPay;
 		TextView m_tvTextPay;
 		LinearLayout m_llSize;

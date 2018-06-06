@@ -21,28 +21,33 @@ import com.github.jdsjlzx.interfaces.OnItemClickListener;
 
 import java.util.ArrayList;
 
-public class EntrepreneurshipActivity extends BaseGridViewActivity {
+public class EntrepreneurshipActivity extends BaseGridViewActivity
+{
 
     private EntrepreneurshipAdapter m_entrepreneurshipAdapter = new EntrepreneurshipAdapter();
     private CheckBox m_cbRule;
 
     @Override
-    protected int setLayoutResourceId() {
+    protected int setLayoutResourceId()
+    {
         return R.layout.activity_common_white_list;
     }
 
     @Override
-    protected void initData() {
+    protected void initData()
+    {
         Utils.initCommonTitle(this,getIntent().getStringExtra("strTitle"),true);
     }
 
     @Override
-    protected BaseRecyclerAdapter getListAdapter() {
+    protected BaseRecyclerAdapter getListAdapter()
+    {
         return m_entrepreneurshipAdapter;
     }
 
     @Override
-    protected void initLayoutManager() {
+    protected void initLayoutManager()
+    {
 
         View header = LayoutInflater.from(this).inflate(R.layout.common_entrepreneurship,mRecyclerView, false);
         m_cbRule = header.findViewById(R.id.cb_rule);
@@ -51,9 +56,11 @@ public class EntrepreneurshipActivity extends BaseGridViewActivity {
 //        int spacing = getResources().getDimensionPixelSize(R.dimen.dp_4);
 //        mRecyclerView.addItemDecoration(SpacesItemDecoration.newInstance(spacing, spacing, manager.getSpanCount(), Color.WHITE));
 
-        mRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
+        mRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener()
+        {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(View view, int position)
+            {
                 Intent it = new Intent(EntrepreneurshipActivity.this,EntrepreneurshipDetailsActivity.class);
                 it.putExtra("entrepreneurshipBean",m_entrepreneurshipAdapter.getListData().get(position));
                 startActivity(it);
@@ -64,11 +71,14 @@ public class EntrepreneurshipActivity extends BaseGridViewActivity {
         onViewClick(header);
     }
 
-    private void onViewClick(final View header) {
+    private void onViewClick(final View header)
+    {
         //申请创业
-        header.findViewById(R.id.ll_apply).setOnClickListener(new View.OnClickListener() {
+        header.findViewById(R.id.ll_apply).setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 Intent it = new Intent(EntrepreneurshipActivity.this,ApplyEntrepreneurshipActivity.class);
                 it.putExtra("strRoleType", getIntent().getIntExtra("nRoleType",Const.RoleType.DESIGNER_ENTREPRENEURSHIP));
                 startActivity(it);
@@ -76,9 +86,11 @@ public class EntrepreneurshipActivity extends BaseGridViewActivity {
         });
 
         //找公司
-        header.findViewById(R.id.ll_find).setOnClickListener(new View.OnClickListener() {
+        header.findViewById(R.id.ll_find).setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 Intent it = new Intent(EntrepreneurshipActivity.this,ApplyEntrepreneurshipActivity.class);
                 it.putExtra("strRoleType", getIntent().getIntExtra("nRoleType",Const.RoleType.DESIGNER_ENTREPRENEURSHIP));
                 startActivity(it);
@@ -86,47 +98,61 @@ public class EntrepreneurshipActivity extends BaseGridViewActivity {
         });
 
         //推荐客户
-        header.findViewById(R.id.ll_recommend).setOnClickListener(new View.OnClickListener() {
+        header.findViewById(R.id.ll_recommend).setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 Intent it = new Intent(EntrepreneurshipActivity.this,RecommentActivity.class);
                 startActivity(it);
             }
         });
 
         //参与活动规则
-        m_cbRule.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+        m_cbRule.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked){
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked)
+            {
+                if(isChecked)
+                {
                     header.findViewById(R.id.tv_rule).setVisibility(View.VISIBLE);
-                }else{
+                }
+                else
+                {
                     header.findViewById(R.id.tv_rule).setVisibility(View.GONE);
                 }
             }
         });
     }
 
-    protected void requestData(){
-        ApiStores.designers(getIntent().getIntExtra("nRoleType",Const.RoleType.DESIGNER_ENTREPRENEURSHIP),mCurrentPage,new HttpCallback<ResponseEntrepreneurshipBean>(){
+    protected void requestData()
+    {
+        ApiStores.designers(getIntent().getIntExtra("nRoleType",Const.RoleType.DESIGNER_ENTREPRENEURSHIP),mCurrentPage,new HttpCallback<ResponseEntrepreneurshipBean>()
+        {
             @Override
-            public void OnSuccess(ResponseEntrepreneurshipBean response) {
-                if(response.getSuccess()){
+            public void OnSuccess(ResponseEntrepreneurshipBean response)
+            {
+                if(response.getSuccess())
+                {
                     executeOnLoadDataSuccess(response.getData().getContent(),true);
                 }
             }
 
             @Override
-            public void OnFailure(String message) {
+            public void OnFailure(String message)
+            {
                 executeOnLoadDataError(null);
             }
 
             @Override
-            public void OnRequestStart() {
+            public void OnRequestStart()
+            {
             }
 
             @Override
-            public void OnRequestFinish() {
+            public void OnRequestFinish()
+            {
                 executeOnLoadFinish();
             }
         });

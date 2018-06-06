@@ -8,10 +8,12 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import cn.finalteam.rxgalleryfinal.utils.ModelUtils;
 
-public class BaseApplication extends MyApplication {
+public class BaseApplication extends MyApplication
+{
 
     @Override
-    public void onCreate() {
+    public void onCreate()
+    {
         super.onCreate();
         Utils.init(this);//shardPrefrences
         HttpSetUrl.setAppUrl("http://sjt.dev.dems.cc");

@@ -13,33 +13,39 @@ import java.lang.reflect.ParameterizedType;
  * Date: 2017/11/21
  */
 
-public abstract class HttpCallback<T> extends RxStringCallback {
+public abstract class HttpCallback<T> extends RxStringCallback
+{
 
     @Override
-    public void onStart(Object tag) {
+    public void onStart(Object tag)
+    {
         super.onStart(tag);
         OnRequestStart();
     }
 
     @Override
-    public void onCompleted(Object tag) {
+    public void onCompleted(Object tag)
+    {
         super.onCompleted(tag);
         OnRequestFinish();
     }
 
     @Override
-    public void onNext(Object tag, String response) {
+    public void onNext(Object tag, String response)
+    {
         Class<T> entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         OnSuccess(transform(response,entityClass));
     }
 
     @Override
-    public void onError(Object tag, Throwable e) {
+    public void onError(Object tag, Throwable e)
+    {
         OnFailure(e.getMessage());
     }
 
     @Override
-    public void onCancel(Object tag, Throwable e) {
+    public void onCancel(Object tag, Throwable e)
+    {
         OnFailure(e.getMessage());
     }
 
@@ -53,7 +59,8 @@ public abstract class HttpCallback<T> extends RxStringCallback {
 
 
 
-    private T transform(String response, final Class<T> classOfT) throws ClassCastException {
+    private T transform(String response, final Class<T> classOfT) throws ClassCastException
+    {
         T dataResponse = null;
         try {
             if (response.charAt(0) == '{'){

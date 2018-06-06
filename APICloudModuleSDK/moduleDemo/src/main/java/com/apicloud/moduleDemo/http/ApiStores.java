@@ -1,6 +1,7 @@
 package com.apicloud.moduleDemo.http;
 
 import com.apicloud.moduleDemo.bean.response.LoginBean;
+import com.apicloud.moduleDemo.settings.AppSettings;
 import com.apicloud.moduleDemo.settings.Constant;
 import com.tamic.novate.BaseSubscriber;
 
@@ -15,6 +16,7 @@ import java.util.Map;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 import okhttp3.ResponseBody;
 import rx.Subscriber;
 
@@ -23,27 +25,34 @@ import rx.Subscriber;
  * Date: 2017/11/21
  */
 
-public class ApiStores {
+public class ApiStores
+{
 
     static final String urlVersion = "api/userapi/";
 
     /** 悬赏任务列表 */
-    public static <T> void categories(int page,String strCategoryNo,String m_strAmount,String orderby,HttpCallback<T> httpCallback){
+    public static <T> void categories(int page,String strCategoryNo,String m_strAmount,String orderby,HttpCallback<T> httpCallback)
+    {
         String url =  urlVersion+"guarantee/schedules";
 
         Map<String,Object> map = new HashMap<>();
         map.put("categoryNo",strCategoryNo);
-        if("".equals(m_strAmount)){
+        if("".equals(m_strAmount))
+        {
 
-        }else if("0".equals(m_strAmount)){
+        }
+        else if("0".equals(m_strAmount))
+        {
             map.put("minAmount",0);
             map.put("maxAmount",500);
         }
-        else if("500".equals(m_strAmount)){
+        else if("500".equals(m_strAmount))
+        {
             map.put("minAmount",501);
             map.put("maxAmount",1000);
         }
-        else if("1000".equals(m_strAmount)){
+        else if("1000".equals(m_strAmount))
+        {
             map.put("minAmount",1001);
         }
         map.put("categoryNo",strCategoryNo);
@@ -58,7 +67,8 @@ public class ApiStores {
     public static final String categories =  urlVersion+"guarantee/categories";
 
     /** 资格商家列表 */
-    public static <T> void companies(int page,HttpCallback<T> httpCallback){
+    public static <T> void companies(int page,HttpCallback<T> httpCallback)
+    {
         String url =  urlVersion+"guarantee/companies";
 
         Map<String,Object> map = new HashMap<>();
@@ -69,11 +79,15 @@ public class ApiStores {
     }
 
     /** 悬赏任务详情 */
-    public static <T> void schedulesDetails(String strScheduleNo,String strCallHttpType,HttpCallback<T> httpCallback){
+    public static <T> void schedulesDetails(String strScheduleNo,String strCallHttpType,HttpCallback<T> httpCallback)
+    {
         String url = "";
-        if("1".equals(strCallHttpType)){
+        if("1".equals(strCallHttpType))
+        {
             url =  urlVersion+"guarantee/schedules/"+strScheduleNo;
-        }else{
+        }
+        else
+        {
             url =  urlVersion+"my/guarantee/schedules/"+strScheduleNo;
         }
 
@@ -83,7 +97,8 @@ public class ApiStores {
     }
 
     /** 参与量房 */
-    public static <T> void joinActivity(String strScheduleNo,String amount,HttpCallback<T> httpCallback){
+    public static <T> void joinActivity(String strScheduleNo,String amount,HttpCallback<T> httpCallback)
+    {
         String url =  urlVersion+"my/guarantee/schedules/"+strScheduleNo+"/enrolls";
 
         JSONObject js = new JSONObject();
@@ -97,7 +112,8 @@ public class ApiStores {
     }
 
     /** 关闭悬赏任务 */
-    public static <T> void closeActivity(String strScheduleNo,BaseSubscriber<ResponseBody> httpCallback){
+    public static <T> void closeActivity(String strScheduleNo,BaseSubscriber<ResponseBody> httpCallback)
+    {
         String url =  urlVersion+"my/guarantee/schedules/"+strScheduleNo;
 
         Map<String,Object> map = new HashMap<>();
@@ -106,7 +122,8 @@ public class ApiStores {
     }
 
     /** 我参与的悬赏任务列表 */
-    public static <T> void myEnrolls(int page,HttpCallback<T> httpCallback){
+    public static <T> void myEnrolls(int page,HttpCallback<T> httpCallback)
+    {
         String url =  urlVersion+"my/guarantee/enrolls";
 
         Map<String,Object> map = new HashMap<>();
@@ -116,8 +133,10 @@ public class ApiStores {
 
         HttpClient.get(url,map, httpCallback);
     }
+
     /** 我的悬赏任务列表 */
-    public static <T> void mySchedulesList(int page,HttpCallback<T> httpCallback){
+    public static <T> void mySchedulesList(int page,HttpCallback<T> httpCallback)
+    {
         String url =  urlVersion+"my/guarantee/schedules";
 
         Map<String,Object> map = new HashMap<>();
@@ -138,7 +157,8 @@ public class ApiStores {
 
                                              String houseType, String houseStyle, String outdoorAcreage, String budgetAmount,
                                              String mobile,String verifyCode,
-                                             JSONArray jsonArray, HttpCallback<T> httpCallback){
+                                             JSONArray jsonArray, HttpCallback<T> httpCallback)
+    {
         String url =  urlVersion+"my/guarantee/schedules";
 
         JSONObject js = new JSONObject();
@@ -171,7 +191,7 @@ public class ApiStores {
             JSONObject jsonHouseType = new JSONObject();
             jsonHouseType.put("name","houseType");
             jsonHouseType.put("value",houseType);
-            jsonHouseType.put("title","户型");
+            jsonHouseType.put("title","户型结构");
 
             JSONObject jsonHouseStyle = new JSONObject();
             jsonHouseStyle.put("name","houseStyle");
@@ -187,7 +207,7 @@ public class ApiStores {
             JSONObject jsonBudgetAmount = new JSONObject();
             jsonBudgetAmount.put("name","budgetAmount");
             jsonBudgetAmount.put("title","装修预算");
-            jsonOutdoorAcreage.put("value",budgetAmount);
+            jsonBudgetAmount.put("value",budgetAmount);
             jsonBudgetAmount.put("icon", "万");
 
             JSONArray extraFields = new JSONArray();
@@ -197,7 +217,8 @@ public class ApiStores {
             extraFields.put(jsonBudgetAmount);
 
             js.put("extraFields",extraFields);
-            if(jsonArray != null){
+            if(jsonArray != null)
+            {
                 js.put("attachments",jsonArray);
             }
 
@@ -209,7 +230,8 @@ public class ApiStores {
     }
 
     /** 已入驻设计师列表 */
-    public static <T> void designers(int strRoleType,int page,HttpCallback<T> httpCallback){
+    public static <T> void designers(int strRoleType,int page,HttpCallback<T> httpCallback)
+    {
         String url =  urlVersion+"cooperation/designers";
 
         Map<String,Object> map = new HashMap<>();
@@ -221,31 +243,39 @@ public class ApiStores {
     }
 
     /** 已入驻设计师详情 */
-    public static <T> void designers(String userNo,HttpCallback<T> httpCallback){
+    public static <T> void designers(String userNo,HttpCallback<T> httpCallback)
+    {
         String url =  urlVersion+"cooperation/designers/"+userNo;
 
         HttpClient.post(url,"", httpCallback);
     }
 
-    /** 登陆 */
-    public static <T> void login(String username, String password, HttpCallback<T> httpCallback){
-        String url =  "/api/login";
+    /** 登陆
+     * @param callback*/
+    public static <T> void login(LoginCallback callback)
+    {
+        String url =  "http://sjt.dev.dems.cc/api/login";
 
         JSONObject js = new JSONObject();
         try {
             js.put("remember-me",1);
             js.put("authChannel",1000);
-            js.put("password",password);
-            js.put("username",username);
+//            js.put("username","13386174433");
+//            js.put("password","123456");
+            js.put("username","13386174433");
+            js.put("password","123456");
+//            js.put("username","18019086117");
+//            js.put("password","ysy1314ysy");
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        HttpClient.post(url,js.toString(),httpCallback);
+        HttpClient.login(url,js.toString(),callback);
     }
 
     /** 发送短信验证码 */
-    public static <T> void smsSend(String mobile, HttpCallback<T> httpCallback){
+    public static <T> void smsSend(String mobile, HttpCallback<T> httpCallback)
+    {
         String url =  "/api/pub/sms/"+mobile;
 
         JSONObject js = new JSONObject();
@@ -259,7 +289,8 @@ public class ApiStores {
     }
 
     /** 悬赏保证金下单 */
-    public static <T> void myGuaranteesSchedulePreay(String strScheduleNo, HttpCallback<T> httpCallback){
+    public static <T> void myGuaranteesSchedulePreay(String strScheduleNo, HttpCallback<T> httpCallback)
+    {
         String url =  urlVersion+"my/guarantee/schedules/"+strScheduleNo+"/prepay";
 
         JSONObject js = new JSONObject();
@@ -267,8 +298,24 @@ public class ApiStores {
         HttpClient.post(url,js.toString(),httpCallback);
     }
 
+    /** 参与悬赏保证金下单 */
+    public static <T> void myGuaranteesSchedulePreay(String strScheduleNo,String strEnrollNo,int nAmount, HttpCallback<T> httpCallback)
+    {
+        String url =  urlVersion+"my/guarantee/schedules/"+strScheduleNo+"/enrolls/"+strEnrollNo+"/prepay";
+
+        JSONObject js = new JSONObject();
+        try {
+            js.put("amount",nAmount);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        HttpClient.post(url,js.toString(),httpCallback);
+    }
+
     /** 第三交易下单 */
-    public static <T> void paymentPrepare(String orderNo,String paymentNo,String paymentType, HttpCallback<T> httpCallback){
+    public static <T> void paymentPrepare(String orderNo,String paymentNo,String paymentType, HttpCallback<T> httpCallback)
+    {
         String url =  urlVersion+"pays/"+orderNo+"/payments/"+paymentNo+"/prepare-pay";
 
         JSONObject js = new JSONObject();
@@ -282,7 +329,8 @@ public class ApiStores {
     }
 
     /** 设计师创业/项目经理创业 */
-    public static <T> void applyEntrepreneurship(String contact,String mobile,String workingYear,String companyName,String remark,int roleType,HttpCallback<T> httpCallback){
+    public static <T> void applyEntrepreneurship(String contact,String mobile,String workingYear,String companyName,String remark,int roleType,HttpCallback<T> httpCallback)
+    {
         String applyEntrepreneurship =  urlVersion+"cooperation/applies";
 
         JSONObject map = new JSONObject();
@@ -302,7 +350,8 @@ public class ApiStores {
     }
 
     /** 推荐客户 */
-    public static <T> void customers(String fullname,String mobile,String customerName,String customerMobile,HttpCallback<T> httpCallback){
+    public static <T> void customers(String fullname,String mobile,String customerName,String customerMobile,HttpCallback<T> httpCallback)
+    {
         String applyEntrepreneurship =  urlVersion+"cooperation/customers";
 
         JSONObject map = new JSONObject();
@@ -318,11 +367,24 @@ public class ApiStores {
         HttpClient.post(applyEntrepreneurship, map.toString(),httpCallback);
     }
 
+    /** 我推荐的客户 */
+    public static <T> void myCustomers(int page,HttpCallback<T> httpCallback)
+    {
+        String url =  urlVersion+"cooperation/customers";
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("limit", Constant.PAGE_SIZE);
+        map.put("page",page);
+
+        HttpClient.get(url,map,httpCallback);
+    }
+
     /** 找公司 */
     public static <T> void findCompany(String contact,String mobile,String workingYear,
                                        String companyName,String strTargetCompany,String strTeam,
                                        String minSalaryAmount,String minOrderCount,String remark,
-                                       int roleType,HttpCallback<T> httpCallback){
+                                       int roleType,HttpCallback<T> httpCallback)
+    {
         String url =  urlVersion+"cooperation/applies";
 
         JSONObject map = new JSONObject();
@@ -346,7 +408,8 @@ public class ApiStores {
     }
 
     /** 咨询与建议 */
-    public static <T> void informationActivity(String title, String contact, String mobile, String content, JSONArray jsonArray, HttpCallback<T> httpCallback){
+    public static <T> void informationActivity(String title, String contact, String mobile, String content, JSONArray jsonArray, HttpCallback<T> httpCallback)
+    {
         String url =  urlVersion+"my-suggestions";
 
         JSONObject js = new JSONObject();
@@ -364,7 +427,8 @@ public class ApiStores {
     }
 
     /** 评论 */
-    public static <T> void comment(String bizNo,String title, String subTitle, String content, JSONArray jsonArray, HttpCallback<T> httpCallback){
+    public static <T> void comment(String bizNo,String title, String subTitle, String content, JSONArray jsonArray, HttpCallback<T> httpCallback)
+    {
         String url =  urlVersion+"my-comments";
 
         JSONObject js = new JSONObject();
@@ -384,7 +448,8 @@ public class ApiStores {
     }
 
     /** 图片上传 */
-    public static <T> void uploadFiles(File file, Subscriber<ResponseBody> subscriber){
+    public static <T> void uploadFiles(File file, Subscriber<ResponseBody> subscriber)
+    {
         String url =  "/api/web/upload";
 
         RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM)

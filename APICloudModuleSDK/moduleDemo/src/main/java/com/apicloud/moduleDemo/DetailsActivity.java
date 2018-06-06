@@ -1,44 +1,30 @@
 package com.apicloud.moduleDemo;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.apicloud.moduleDemo.adapter.EnrollsAdapter;
 import com.apicloud.moduleDemo.adapter.PhotoAlbumAdapter;
+import com.apicloud.moduleDemo.backhandler.OnTaskComplete;
 import com.apicloud.moduleDemo.backhandler.OnTaskSuccessComplete;
-import com.apicloud.moduleDemo.base.BaseAppCompatActivity;
 import com.apicloud.moduleDemo.base.BaseHttpCompatActivity;
 import com.apicloud.moduleDemo.base.MyApplication;
-import com.apicloud.moduleDemo.bean.base.EnrollsBean;
-import com.apicloud.moduleDemo.bean.base.FileBean;
-import com.apicloud.moduleDemo.bean.base.MoneyMakingHallBean;
-import com.apicloud.moduleDemo.bean.response.ResponseBaseBean;
-import com.apicloud.moduleDemo.bean.response.ResponseFileBean;
+import com.apicloud.moduleDemo.bean.response.ResponseJoinActivityBean;
 import com.apicloud.moduleDemo.bean.response.ResponseMoneyMakingDetailsBean;
-import com.apicloud.moduleDemo.bean.response.ResponseMoneyMakingHallBean;
 import com.apicloud.moduleDemo.http.ApiStores;
 import com.apicloud.moduleDemo.http.HttpCallback;
+import com.apicloud.moduleDemo.http.HttpUtils;
 import com.apicloud.moduleDemo.settings.AppSettings;
 import com.apicloud.moduleDemo.settings.Const;
 import com.apicloud.moduleDemo.util.ImageLoader;
@@ -59,7 +45,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -68,15 +53,16 @@ import okhttp3.ResponseBody;
  * 装修量房详情
  */
 
-public class DetailsActivity extends BaseHttpCompatActivity {
+public class DetailsActivity extends BaseHttpCompatActivity
+{
 
     private ProgressBar m_progressBar;
     private LinearLayout m_llByWidth;
     private CheckBox m_cbRule;
     private LinearLayout m_llPhone;
     private LinearLayout m_llBtn;
-    private LinearLayout m_llShare;
-    private LinearLayout m_llComment;
+//    private LinearLayout m_llShare;
+//    private LinearLayout m_llComment;
     private LinearLayout m_llClose;//关闭活动
     private LinearLayout m_llReceive;//领取量房金
     private LinearLayout m_llSettlement;//待结算
@@ -113,6 +99,7 @@ public class DetailsActivity extends BaseHttpCompatActivity {
     private TextView m_tvTitleAddress;//量房地址
     private TextView m_tvTitlePersonNo;//当前参与量房公司
     private TextView m_tvTitleDetails;//详细内容
+    private TextView m_tvMobile;
 
     private RecyclerView m_recyclerViewPic;
     private PhotoAlbumAdapter m_pictureUrlAdapter;
@@ -121,12 +108,14 @@ public class DetailsActivity extends BaseHttpCompatActivity {
     private EnrollsAdapter m_enrollsAdapter = new EnrollsAdapter();
 
     @Override
-    protected int setLayoutResourceId() {
+    protected int setLayoutResourceId()
+    {
         return R.layout.activity_renovation_details;
     }
 
     @Override
-    protected void initView() {
+    protected void initView()
+    {
         m_tvTitleAmount = findViewById(R.id.tv_title_amount);
         m_tvTitleAddress = findViewById(R.id.tv_title_address);
         m_progressBar = findViewById(R.id.progress_bar);
@@ -153,9 +142,10 @@ public class DetailsActivity extends BaseHttpCompatActivity {
         m_tvDetails = findViewById(R.id.tv_details);
         m_tvTitleDetails = findViewById(R.id.tv_title_details);
         m_tvRule = findViewById(R.id.tv_rule);
+        m_tvMobile = findViewById(R.id.tv_mobile);
         m_tvPersonType = findViewById(R.id.tv_person_type);
-        m_llShare = findViewById(R.id.ll_share);
-        m_llComment = findViewById(R.id.ll_comment);
+//        m_llShare = findViewById(R.id.ll_share);
+//        m_llComment = findViewById(R.id.ll_comment);
         m_llClose = findViewById(R.id.ll_close);//关闭活动
         m_llReceive = findViewById(R.id.ll_receive);//领取量房金
         m_llSettlement = findViewById(R.id.ll_settlement);//待结算
@@ -163,7 +153,8 @@ public class DetailsActivity extends BaseHttpCompatActivity {
     }
 
     @Override
-    protected void initData() {
+    protected void initData()
+    {
         Utils.initCommonTitle(this,"活动详情",true);
         setEventBus();
 
@@ -183,86 +174,104 @@ public class DetailsActivity extends BaseHttpCompatActivity {
     }
 
     @Override
-    protected void clickView() {
+    protected void clickView()
+    {
         super.clickView();
         //参与活动规则
-        m_cbRule.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+        m_cbRule.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked){
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked)
+            {
+                if(isChecked)
+                {
                     m_tvRule.setVisibility(View.VISIBLE);
-                }else{
+                }
+                else
+                {
                     m_tvRule.setVisibility(View.GONE);
                 }
             }
         });
 
         //电话
-        m_llPhone.setOnClickListener(new View.OnClickListener() {
+        m_llPhone.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 m_pwMenu = new TelephonePopupWindow(DetailsActivity.this);
                 m_pwMenu.showAtLocation(findViewById(R.id.ll_pop), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
             }
         });
 
         //参与量房
-        m_llBtn.setOnClickListener(new View.OnClickListener() {
+        m_llBtn.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                if(AppSettings.isAutoLogin()){
+            public void onClick(View view)
+            {
+                if(AppSettings.isAutoLogin())
+                {
                     joinActivity();
                 }
             }
         });
 
-        //分享
-        m_llShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        //评论
-        m_llComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent it = new Intent(DetailsActivity.this,CommentActivity.class);
-                it.putExtra("strScheduleNo",m_strScheduleNo);
-                it.putExtra("strCategoryName",m_strCategoryName);
-                it.putExtra("strTitle",m_strTitle);
-                startActivity(it);
-            }
-        });
+//        //分享
+//        m_llShare.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+//
+//        //评论
+//        m_llComment.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent it = new Intent(DetailsActivity.this,CommentActivity.class);
+//                it.putExtra("strScheduleNo",m_strScheduleNo);
+//                it.putExtra("strCategoryName",m_strCategoryName);
+//                it.putExtra("strTitle",m_strTitle);
+//                startActivity(it);
+//            }
+//        });
 
         //关闭活动
-        m_llClose.setOnClickListener(new View.OnClickListener() {
+        m_llClose.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 closeActivity();
             }
         });
 
         //领取量房金
-        m_llReceive.setOnClickListener(new View.OnClickListener() {
+        m_llReceive.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 Intent it = new Intent(DetailsActivity.this,CommitVoucherActivity.class);
                 startActivity(it);
             }
         });
 
         //待结算
-        m_llSettlement.setOnClickListener(new View.OnClickListener() {
+        m_llSettlement.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
 
             }
         });
     }
 
-    private void viewInit(){
+    private void viewInit()
+    {
         int nDivisor = 5;
 //        switch (m_strCategoryNo){
 //            case Const.CategoryNo.TYPE_RENOVATION:
@@ -286,7 +295,8 @@ public class DetailsActivity extends BaseHttpCompatActivity {
 //        }
     }
 
-    private void requestDataInitView(ResponseMoneyMakingDetailsBean response){
+    private void requestDataInitView(ResponseMoneyMakingDetailsBean response)
+    {
         final ResponseMoneyMakingDetailsBean.Data data = response.getData();
         m_strCategoryName = data.getCategoryName();
         m_strTitle = data.getTitle();
@@ -350,15 +360,18 @@ public class DetailsActivity extends BaseHttpCompatActivity {
 //                    });
 
         //参与商家
-        if(data.getEnrolls().size() > 0){
+        if(data.getEnrolls().size() > 0)
+        {
             findViewById(R.id.ll_enrolls).setVisibility(View.VISIBLE);
             m_enrollsAdapter.setDataList(data.getEnrolls());
         }
 
-        if(data.getAttachments() != null){
+        if(data.getAttachments() != null)
+        {
             findViewById(R.id.ll_picture).setVisibility(View.VISIBLE);
             List<String> list = new ArrayList<>();
-            for(int i = 0 ; i < data.getAttachments().size(); i ++){
+            for(int i = 0 ; i < data.getAttachments().size(); i ++)
+            {
                 list.add(data.getAttachments().get(i).getUrl());
             }
             m_pictureUrlAdapter.setData(list);
@@ -369,53 +382,72 @@ public class DetailsActivity extends BaseHttpCompatActivity {
         m_tvTitle.setText(data.getTitle());//活动标题
         m_tvAmount.setText(data.getPersonnelAmount());//当前量房费用
         m_tvAmountType.setText(data.getPersonnelAmount());//参与量房费用
+        m_tvMobile.setText(data.getMobile());
 
-        if("0".equals(data.getPersonnelLimit())){
+        if("0".equals(data.getPersonnelLimit()))
+        {
             m_tvPersonType.setText("不限");//参与商家限制
-        }else{
+        }
+        else
+        {
             m_tvPersonType.setText(data.getPersonnelLimit());//参与商家限制
         }
         m_tvPersonNo.setText(data.getPersonnelLimit());//当前参与商家
 
-        if(data.getScopeType() == Const.ScopeType.ALL_CITY){
+        if(data.getScopeType() == Const.ScopeType.ALL_CITY)
+        {
             m_tvAddress.setText(data.getAreaName());//量房地址
-        }else if(data.getScopeType() == Const.ScopeType.INDEX_CITY){
+        }
+        else if(data.getScopeType() == Const.ScopeType.INDEX_CITY)
+        {
             m_tvAddress.setText(data.getScheduleScope());//量房地址指定城市
         }
 
         String time = TimeUtils.time2String(data.getClaimStartDate(),TimeUtils.DAY_FORMAT_NORMAL)+"至"+ TimeUtils.time2String(data.getClaimEndDate(),TimeUtils.DAY_FORMAT_NORMAL);
         m_tvTimeAndTime.setText(time);//活动周期
-        if(data.getExtraFieldMap().getHouseType() != null){
+        if(data.getExtraFieldMap().getHouseType() != null)
+        {
             m_tvHouseType.setText(data.getExtraFieldMap().getHouseType().getValue());//户型结构
         }
-        if(data.getExtraFieldMap().getHouseStyle() != null) {
+        if(data.getExtraFieldMap().getHouseStyle() != null)
+        {
             m_tvStyleType.setText(data.getExtraFieldMap().getHouseStyle().getValue());//设计风格
         }
-        if(data.getExtraFieldMap().getOutdoorAcreage() != null) {
+        if(data.getExtraFieldMap().getOutdoorAcreage() != null)
+        {
             m_tvAcreage.setText(MessageFormat.format("{0}平方", data.getExtraFieldMap().getOutdoorAcreage().getValue()));//建筑面积
         }
-        if(data.getExtraFieldMap().getBudgetAmount() != null) {
+        if(data.getExtraFieldMap().getBudgetAmount() != null)
+        {
             m_tvRenovationAmount.setText(MessageFormat.format("{0}万",data.getExtraFieldMap().getBudgetAmount().getValue()));//装修预算
         }
 
-        if(data.getRemark() != null){
+        if(data.getRemark() != null)
+        {
             findViewById(R.id.ll_details).setVisibility(View.VISIBLE);
             m_tvDetails.setText(data.getRemark());//详细内容
         }
 
         m_tvRule.setText(Html.fromHtml(data.getRuleRemark()));
 
-        switch (data.getScheduleStatus()){
+        switch (data.getScheduleStatus())
+        {
             case Const.ActivityType.ACTIVITY_IS_BEGINING://进行中
-                if(data.isAllowProof()){
+                if(data.isAllowProof())
+                {
                     m_llReceive.setVisibility(View.VISIBLE);//领取量房金
-                }else{
+                }
+                else
+                {
                     m_llReceive.setVisibility(View.GONE);//领取量房金
                 }
 
-                if(data.isAllowEnroll()){
+                if(data.isAllowEnroll())
+                {
                     m_llBtn.setVisibility(View.VISIBLE);
-                }else{
+                }
+                else
+                {
                     m_llBtn.setVisibility(View.GONE);
                 }
 
@@ -438,105 +470,151 @@ public class DetailsActivity extends BaseHttpCompatActivity {
                 m_llBtn.setVisibility(View.GONE);
                 break;
         }
-        m_llReceive.setVisibility(View.VISIBLE);//领取量房金
+//        m_llReceive.setVisibility(View.VISIBLE);//领取量房金
     }
 
-    private void closeActivity(){
+    private void closeActivity()
+    {
         kProgressHUD.show();
-        ApiStores.closeActivity(m_strScheduleNo, new BaseSubscriber<ResponseBody>() {
+        ApiStores.closeActivity(m_strScheduleNo, new BaseSubscriber<ResponseBody>()
+        {
             @Override
-            public void onNext(ResponseBody responseBody) {
+            public void onNext(ResponseBody responseBody)
+            {
                 kProgressHUD.dismiss();
-                try {
+                try
+                {
                     Gson gson = new Gson();
                     String json = responseBody.string();
                     ResponseMoneyMakingDetailsBean beanjson = gson.fromJson(json, ResponseMoneyMakingDetailsBean.class);
-                    if(beanjson.getSuccess()){
+                    if(beanjson.getSuccess())
+                    {
                         Utils.showToast(DetailsActivity.this,"活动已经关闭");
                         requestDataInitView(beanjson);
                         EventBus.getDefault().post("");
                     }
-                } catch (IOException e) {
+                }
+                catch (IOException e)
+                {
                     e.printStackTrace();
                 }
             }
 
             @Override
-            public void onError(Throwable e) {
+            public void onError(Throwable e)
+            {
                 kProgressHUD.dismiss();
             }
         });
     }
 
-    private void joinActivity() {
-        ApiStores.joinActivity(m_strScheduleNo,m_strPersonnelAmount,new HttpCallback<ResponseMoneyMakingDetailsBean>() {
+    private void joinActivity()
+    {
+        ApiStores.joinActivity(m_strScheduleNo,m_strPersonnelAmount,new HttpCallback<ResponseJoinActivityBean>()
+        {
             @Override
-            public void OnSuccess(ResponseMoneyMakingDetailsBean response) {
-                if(response.getSuccess()){
-                    Utils.showCommonDialogVerifyCode(DetailsActivity.this, kProgressHUD, AppSettings.getPhone(), "", new OnTaskSuccessComplete() {
-                        @Override
-                        public void onSuccess(Object obj) {
-                            Intent it = new Intent(DetailsActivity.this,PaymentActivity.class);
-                            it.putExtra("strScheduleNo",m_strScheduleNo);
-                            it.putExtra("strTitle",m_strTitle);
+            public void OnSuccess(ResponseJoinActivityBean response)
+            {
+                kProgressHUD.dismiss();
+                if(response.getSuccess())
+                {
+                    Intent it = new Intent(DetailsActivity.this,JoinPaymentActivity.class);
+                    it.putExtra("strScheduleNo",m_strScheduleNo);
+                    it.putExtra("strEnrollNo",response.getData().getEnrollNo());
+                    it.putExtra("nAmount",response.getData().getAmount());
+                    it.putExtra("strTitle",m_strTitle);
 //                            it.putExtra("strTitleType",response.getData().getCategoryName()+"-"+response.getData().getTitle()+"活动保证金");
-                            it.putExtra("strTitleType",m_strTitle);
-                            it.putExtra("strTime",m_strTime);
-                            it.putExtra("strPersonnelLimit",m_strPersonnelLimit);
-                            it.putExtra("strGuaranteeAmount",m_strPersonnelAmount);
-                            it.putExtra("nApplyRenovation",PaymentActivity.APPLY_RENOVATION);
-                            startActivity(it);
+                    it.putExtra("strTitleType",m_strTitle);
+                    it.putExtra("strTime",m_strTime);
+                    it.putExtra("strPersonnelLimit",m_strPersonnelLimit);
+                    it.putExtra("strGuaranteeAmount",m_strPersonnelAmount);
+                    it.putExtra("nApplyRenovation",JoinPaymentActivity.APPLY_RENOVATION);
+                    startActivity(it);
+                }
+            }
+
+            @Override
+            public void OnFailure(final String message)
+            {
+                if(HttpUtils.isValidResponse(message))
+                {
+                    kProgressHUD.dismiss();
+                    AlertUtils.MessageAlertShow(DetailsActivity.this, "错误", message);
+                }
+                else
+                {
+                    HttpUtils.httpRequestFailure(DetailsActivity.this, new OnTaskComplete()
+                    {
+                        @Override
+                        public void onComplete(Object obj) { }
+
+                        @Override
+                        public void onSuccess(Object obj)
+                        {
+                            joinActivity();
+                        }
+
+                        @Override
+                        public void onFail(Object obj)
+                        {
+                            kProgressHUD.dismiss();
+                            AlertUtils.MessageAlertShow(DetailsActivity.this, "错误", message);
                         }
                     });
                 }
             }
 
             @Override
-            public void OnFailure(String message) {
-                AlertUtils.MessageAlertShow(DetailsActivity.this, "错误", message);
+            public void OnRequestStart()
+            {
+                if(!kProgressHUD.isShowing())
+                {
+                    kProgressHUD.show();
+                }
             }
 
             @Override
-            public void OnRequestStart() {
-                kProgressHUD.show();
-            }
-
-            @Override
-            public void OnRequestFinish() {
-                kProgressHUD.dismiss();
-            }
+            public void OnRequestFinish(){}
         });
     }
 
     @Override
-    protected void getData() {
-        ApiStores.schedulesDetails(m_strScheduleNo,getIntent().getStringExtra("strCallHttpType"),new HttpCallback<ResponseMoneyMakingDetailsBean>() {
+    protected void getData()
+    {
+        ApiStores.schedulesDetails(m_strScheduleNo,getIntent().getStringExtra("strCallHttpType"),new HttpCallback<ResponseMoneyMakingDetailsBean>()
+        {
             @Override
-            public void OnSuccess(ResponseMoneyMakingDetailsBean response) {
-                if(response.getSuccess()){
+            public void OnSuccess(ResponseMoneyMakingDetailsBean response)
+            {
+                if(response.getSuccess())
+                {
                     requestDataInitView(response);
                     executeOnLoadDataSuccess(true);
                 }
             }
 
             @Override
-            public void OnFailure(String message) {
+            public void OnFailure(String message)
+            {
                 executeOnLoadDataSuccess(false);
                 AlertUtils.MessageAlertShow(DetailsActivity.this, "错误", message);
             }
 
             @Override
-            public void OnRequestStart() {
+            public void OnRequestStart()
+            {
             }
 
             @Override
-            public void OnRequestFinish() {
+            public void OnRequestFinish()
+            {
             }
         });
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventBus(Object obj){
+    public void onEventBus(Object obj)
+    {
 
     }
 }

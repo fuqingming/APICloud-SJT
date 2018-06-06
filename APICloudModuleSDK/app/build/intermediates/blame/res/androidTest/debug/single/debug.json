@@ -20,20 +20,20 @@
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\ucrop-2.2.0.aar\\6f9db65e505f398e20ccbc52bd19a974\\res\\drawable-hdpi-v4\\ucrop_ic_angle.png"
     },
     {
-        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
-        "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c165316ba36e7df6772b5957508831ea\\res\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
-    },
-    {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_view_empty_layout.xml.flat",
         "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\layout\\view_empty_layout.xml"
     },
     {
-        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_ucrop_ic_cross.png.flat",
-        "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\ucrop-2.2.0.aar\\6f9db65e505f398e20ccbc52bd19a974\\res\\drawable-mdpi-v4\\ucrop_ic_cross.png"
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
+        "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c165316ba36e7df6772b5957508831ea\\res\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
     },
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\mipmap-xhdpi-v4_shenhe.png.flat",
         "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\mipmap-xhdpi-v4\\shenhe.png"
+    },
+    {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_ucrop_ic_cross.png.flat",
+        "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\ucrop-2.2.0.aar\\6f9db65e505f398e20ccbc52bd19a974\\res\\drawable-mdpi-v4\\ucrop_ic_cross.png"
     },
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_notification_template_big_media_narrow.xml.flat",
@@ -100,12 +100,12 @@
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\70d88f9d80da2ad6b2fd3f6b0ba5a7ab\\res\\layout\\design_menu_item_action_area.xml"
     },
     {
-        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_gallery_default_image.xml.flat",
-        "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.1.3.aar\\9d59e7c4eee0ee985ca6848dab0d3b08\\res\\drawable\\gallery_default_image.xml"
-    },
-    {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_alert_dialog_button_bar_material.xml.flat",
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c165316ba36e7df6772b5957508831ea\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_gallery_default_image.xml.flat",
+        "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\library-1.1.3.aar\\9d59e7c4eee0ee985ca6848dab0d3b08\\res\\drawable\\gallery_default_image.xml"
     },
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_text_select_handle_right_mtrl_dark.png.flat",
@@ -694,6 +694,10 @@
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_ic_star_black_16dp.png.flat",
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c165316ba36e7df6772b5957508831ea\\res\\drawable-xxhdpi-v4\\abc_ic_star_black_16dp.png"
+    },
+    {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_activity_agreement_webview.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_agreement_webview.xml"
     },
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21_abc_action_bar_item_background_material.xml.flat",
@@ -1380,6 +1384,10 @@
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\70d88f9d80da2ad6b2fd3f6b0ba5a7ab\\res\\drawable-xhdpi-v4\\design_ic_visibility_off.png"
     },
     {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_item_my_release_reward.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\layout\\item_my_release_reward.xml"
+    },
+    {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_abc_ic_voice_search_api_material.xml.flat",
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c165316ba36e7df6772b5957508831ea\\res\\drawable\\abc_ic_voice_search_api_material.xml"
     },
@@ -1578,6 +1586,10 @@
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_design_ic_visibility.png.flat",
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\70d88f9d80da2ad6b2fd3f6b0ba5a7ab\\res\\drawable-hdpi-v4\\design_ic_visibility.png"
+    },
+    {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_activity_join_payment.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_join_payment.xml"
     },
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_action_bar_title_item.xml.flat",
@@ -2742,6 +2754,10 @@
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_list_longpressed_holo.9.png.flat",
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c165316ba36e7df6772b5957508831ea\\res\\drawable-xhdpi-v4\\abc_list_longpressed_holo.9.png"
+    },
+    {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_select1.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\layout\\select1.xml"
     },
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\androidTest\\debug\\color_abc_secondary_text_material_light.xml.flat",

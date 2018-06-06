@@ -20,7 +20,8 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
  * @author: miao
  * @createTime: 2017年2月18日
  */
-public class ImageLoader {
+public class ImageLoader
+{
 
     //单例
     private static ImageLoader mImageLoader = null;
@@ -36,7 +37,9 @@ public class ImageLoader {
      * @return ImageLoader
      */
     public static ImageLoader getInstace(){
-        if(mImageLoader == null){
+
+        if(mImageLoader == null)
+        {
             mImageLoader = new ImageLoader();
         }
         return mImageLoader;
@@ -50,7 +53,8 @@ public class ImageLoader {
      * @param context,imageView,imgUrl
      * @return void
      */
-    public void loadImg(Context context , ImageView imageView , String imgUrl){
+    public void loadImg(Context context , ImageView imageView , String imgUrl)
+    {
         load(context,imageView,imgUrl,null,null,false,false,false,0);
     }
 
@@ -62,10 +66,12 @@ public class ImageLoader {
      * @param context,imageView,imgUrl
      * @return void
      */
-    public void loadCircleImg(Context context , ImageView imageView , String imgUrl){
+    public void loadCircleImg(Context context , ImageView imageView , String imgUrl)
+    {
         load(context,imageView,imgUrl,null,null,true,false,false,0);
     }
-    public void loadCircleImg(Context context , ImageView imageView , String imgUrl,int pic){
+    public void loadCircleImg(Context context , ImageView imageView , String imgUrl,int pic)
+    {
         load(context,imageView,imgUrl,context.getResources().getDrawable(pic),null,true,false,false,0);
     }
 
@@ -77,10 +83,12 @@ public class ImageLoader {
      * @param context,imageView,imgUrl
      * @return void
      */
-    public void loadRoundedCornersImg(Context context , ImageView imageView , String imgUrl, int radius){
+    public void loadRoundedCornersImg(Context context , ImageView imageView , String imgUrl, int radius)
+    {
         load(context,imageView,imgUrl,null,null,false,true,false,radius);
     }
-    public void loadRoundedCornersImg(Context context , ImageView imageView , String imgUrl, int radius,int pic){
+    public void loadRoundedCornersImg(Context context , ImageView imageView , String imgUrl, int radius,int pic)
+    {
         load(context,imageView,imgUrl,context.getResources().getDrawable(pic),null,false,true,false,radius);
     }
 
@@ -92,7 +100,8 @@ public class ImageLoader {
      * @param context,imageView,imgUrl
      * @return void
      */
-    public void loadGrayscaleImg(Context context , ImageView imageView , String imgUrl){
+    public void loadGrayscaleImg(Context context , ImageView imageView , String imgUrl)
+    {
         load(context,imageView,imgUrl,null,null,false,false,true,0);
     }
 
@@ -148,33 +157,39 @@ public class ImageLoader {
      *      更多API查看官方文档 https://github.com/bumptech/glide
      */
     public void load(Context context , ImageView imageView , String imgUrl, Drawable defaultImage,
-                     Drawable errorImage , boolean isCropCircle, boolean isRoundedCorners, boolean isGrayscale, int radius){
+                     Drawable errorImage , boolean isCropCircle, boolean isRoundedCorners, boolean isGrayscale, int radius)
+    {
 
         //处理选项设置和开始一般resource类型资源的加载
         GenericRequestBuilder genericRequestBuilder =  null;
 
         // 是否切成圆形
-        if (isCropCircle){
+        if (isCropCircle)
+        {
             genericRequestBuilder =  Glide.with(context).load(imgUrl)
                     .bitmapTransform(new CropCircleTransformation(context));
         }
         //是否切成圆角
-        if (isRoundedCorners){
+        if (isRoundedCorners)
+        {
             genericRequestBuilder =  Glide.with(context).load(imgUrl)
                     .bitmapTransform(new RoundedCornersTransformation(context,radius,0, RoundedCornersTransformation.CornerType.ALL));
         }
         //是否做灰度处理
-        if (isGrayscale){
+        if (isGrayscale)
+        {
             genericRequestBuilder =  Glide.with(context).load(imgUrl)
                     .bitmapTransform(new GrayscaleTransformation(context));
         }
         //不做glide-transformations处理
-        if(!isCropCircle && !isRoundedCorners && !isGrayscale){
+        if(!isCropCircle && !isRoundedCorners && !isGrayscale)
+        {
             genericRequestBuilder =  Glide.with(context).load(imgUrl);
         }
 
         //处理选项，加载图片
-        if(genericRequestBuilder == null){
+        if(genericRequestBuilder == null)
+        {
             return;
         }
         genericRequestBuilder.diskCacheStrategy(DiskCacheStrategy.SOURCE)
@@ -192,7 +207,8 @@ public class ImageLoader {
      * @param context
      * @return
      */
-    public void clearMemory(Context context){
+    public void clearMemory(Context context)
+    {
         // 图片加载库采用Glide框架
         // 必须在UI线程中调用
         Glide.get(context).clearMemory();
@@ -207,7 +223,8 @@ public class ImageLoader {
      * @param context
      * @return
      */
-    public void clearDiskCache(Context context){
+    public void clearDiskCache(Context context)
+    {
         // 必须在后台线程中调用，建议同时clearMemory()
         Glide.get(context).clearDiskCache();
     }
@@ -220,7 +237,8 @@ public class ImageLoader {
      * @param view
      * @return
      */
-    public void clearViewCache(View view){
+    public void clearViewCache(View view)
+    {
         Glide.clear(view);
     }
 
@@ -232,7 +250,8 @@ public class ImageLoader {
      * @param fullPath SD下图片完整路径
      * @return
      */
-    public static String getSDSource(String fullPath){
+    public static String getSDSource(String fullPath)
+    {
         return "file://"+ fullPath;
     }
 
@@ -244,7 +263,8 @@ public class ImageLoader {
      * @param fileName 图片名称
      * @return
      */
-    public static String getAssetsSource(String fileName){
+    public static String getAssetsSource(String fileName)
+    {
         return "file:///android_asset/"+fileName;
     }
 
@@ -257,7 +277,8 @@ public class ImageLoader {
      * @param  rawRid 视频id
      * @return
      */
-    public static String getRawSource(Context context, int rawRid){
+    public static String getRawSource(Context context, int rawRid)
+    {
         return "android.resource://"+context.getPackageName()+"/raw/"+rawRid;
     }
 
@@ -270,7 +291,8 @@ public class ImageLoader {
      * @param drawRid drawable目录下图片id
      * @return
      */
-    public static String getDrawableSource(Context context, int drawRid){
+    public static String getDrawableSource(Context context, int drawRid)
+    {
         return "android.resource://"+context.getPackageName()+"/drawable/"+drawRid;
     }
 

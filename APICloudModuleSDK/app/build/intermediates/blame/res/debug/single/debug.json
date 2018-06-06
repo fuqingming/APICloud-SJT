@@ -1164,6 +1164,10 @@
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c165316ba36e7df6772b5957508831ea\\res\\drawable\\abc_dialog_material_background.xml"
     },
     {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_join_payment.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_join_payment.xml"
+    },
+    {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\debug\\color_design_tint_password_toggle.xml.flat",
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\70d88f9d80da2ad6b2fd3f6b0ba5a7ab\\res\\color\\design_tint_password_toggle.xml"
     },
@@ -2040,6 +2044,10 @@
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c165316ba36e7df6772b5957508831ea\\res\\drawable-hdpi-v4\\abc_list_pressed_holo_light.9.png"
     },
     {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\debug\\layout_item_my_recomment.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\layout\\item_my_recomment.xml"
+    },
+    {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_star_black_48dp.png.flat",
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\c165316ba36e7df6772b5957508831ea\\res\\drawable-xhdpi-v4\\abc_ic_star_black_48dp.png"
     },
@@ -2142,6 +2150,10 @@
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4_maijiancai.png.flat",
         "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\mipmap-xhdpi-v4\\maijiancai.png"
+    },
+    {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\debug\\layout_item_my_release_reward.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\layout\\item_my_release_reward.xml"
     },
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4_overtime.png.flat",
@@ -2430,6 +2442,10 @@
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ucrop_shadow_upside.xml.flat",
         "source": "C:\\Users\\vip\\.gradle\\caches\\transforms-1\\files-1.1\\ucrop-2.2.0.aar\\6f9db65e505f398e20ccbc52bd19a974\\res\\drawable\\ucrop_shadow_upside.xml"
+    },
+    {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_agreement_webview.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_agreement_webview.xml"
     },
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4_ucrop_ic_rotate.png.flat",
@@ -2826,6 +2842,10 @@
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\debug\\drawable_main_tab_match_selector.xml.flat",
         "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\drawable\\main_tab_match_selector.xml"
+    },
+    {
+        "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\debug\\layout_common_my_recomment_head.xml.flat",
+        "source": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\moduleDemo\\build\\intermediates\\bundles\\debug\\res\\layout\\common_my_recomment_head.xml"
     },
     {
         "merged": "F:\\work\\APICloud-SJT\\APICloudModuleSDK\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21_abc_action_bar_item_background_material.xml.flat",

@@ -21,7 +21,8 @@ import java.util.concurrent.Executors;
  * Created by liuting on 17/6/1.
  */
 
-public class MyTransApplication extends UZApplication {
+public class MyTransApplication extends UZApplication
+{
     private static final String HASH_ALGORITHM = "MD5";
     private static final int RADIX = 10 + 26; // 10 digits + 26 letters
     static DisplayMetrics mDisplayMetrics;
@@ -30,7 +31,8 @@ public class MyTransApplication extends UZApplication {
 
 
     @Override
-    public void onCreate() {
+    public void onCreate()
+    {
         super.onCreate();
         if (LeakCanary.isInAnalyzerProcess(this)) return;
         LeakCanary.install(this);
@@ -39,53 +41,65 @@ public class MyTransApplication extends UZApplication {
         IMAGE_CACHE_PATH = getExternalCacheDir().getPath();
     }
 
-    public static int dpToPx(int dp) {
+    public static int dpToPx(int dp)
+    {
         return (int) (mDisplayMetrics.density * dp);
     }
 
-    public static int getScreenWidth() {
+    public static int getScreenWidth()
+    {
         return mDisplayMetrics.widthPixels;
     }
 
-    public static int getScreenHeight() {
+    public static int getScreenHeight()
+    {
         return mDisplayMetrics.heightPixels;
     }
 
-    public static void deleteFiles(String path) {
+    public static void deleteFiles(String path)
+    {
         deleteFiles(new File(path));
     }
 
-    public static void deleteFiles(File file) {
-        if (!file.exists()) {
+    public static void deleteFiles(File file)
+    {
+        if (!file.exists())
+        {
             return;
         }
-        if (file.isFile()) {
+        if (file.isFile())
+        {
             file.delete();
             return;
         }
         //文件夹递归删除
         File[] files = file.listFiles();
-        if (null == files) {
+        if (null == files)
+        {
             return;
         }
-        for (File subFile : files) {
+        for (File subFile : files)
+        {
             deleteFiles(subFile);
         }
         file.delete();
     }
 
-    public static String getImageCachePath() {
+    public static String getImageCachePath()
+    {
         return IMAGE_CACHE_PATH;
     }
 
-    public static int getMaxSizeOfBitMap(String path) {
+    public static int getMaxSizeOfBitMap(String path)
+    {
         BitmapFactory.Options op = new BitmapFactory.Options();
         op.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(path, op);
         return Math.max(op.outWidth, op.outHeight);
     }
 
-    private static byte[] getMD5(byte[] data) {
+    private static byte[] getMD5(byte[] data)
+    {
         byte[] hash = null;
         try {
             MessageDigest digest = MessageDigest.getInstance(HASH_ALGORITHM);
@@ -96,22 +110,28 @@ public class MyTransApplication extends UZApplication {
         return hash;
     }
 
-    public static String generate(String imageUri) {
+    public static String generate(String imageUri)
+    {
         byte[] md5 = getMD5(imageUri.getBytes());
         BigInteger bi = new BigInteger(md5).abs();
-        if (imageUri.endsWith(".gif") || imageUri.endsWith(".GIF")) {
+        if (imageUri.endsWith(".gif") || imageUri.endsWith(".GIF"))
+        {
             return bi.toString(RADIX) + ".itgif";
         }
         return bi.toString(RADIX) + ".it";
     }
 
-    public static void clearCache(final Context context) {
-        cThreadPool.submit(new Runnable() {
+    public static void clearCache(final Context context)
+    {
+        cThreadPool.submit(new Runnable()
+        {
             @Override
-            public void run() {
+            public void run()
+            {
                 File file = new File(IMAGE_CACHE_PATH);
                 File[] files = file.listFiles();
-                for (File item : files) {
+                for (File item : files)
+                {
                     item.delete();
                 }
                 Glide.get(context).clearDiskCache();
@@ -120,7 +140,8 @@ public class MyTransApplication extends UZApplication {
 
     }
 
-    public static String getFromAssets(Context context, String fileName) {
+    public static String getFromAssets(Context context, String fileName)
+    {
         try {
             InputStreamReader inputReader = new InputStreamReader(context.getResources().getAssets().open(fileName));
             BufferedReader bufReader = new BufferedReader(inputReader);
@@ -135,7 +156,8 @@ public class MyTransApplication extends UZApplication {
         return "";
     }
 
-    public static String getCachedPath(String url) {
+    public static String getCachedPath(String url)
+    {
         String key = generate(url);
         String destUrl = getImageCachePath() + "/" + key;
         return destUrl;

@@ -10,7 +10,8 @@ import rx.Observable;
  * Date: 2017/11/23
  */
 
-public interface ApiService {
+public interface ApiService
+{
     @GET()
     Observable<ResponseBody> executeGet(@Url String url);
 }

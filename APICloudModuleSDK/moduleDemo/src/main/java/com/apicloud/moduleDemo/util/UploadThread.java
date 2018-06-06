@@ -21,7 +21,8 @@ import okhttp3.ResponseBody;
 /**
  * @author Robert 
  * */  
-public class UploadThread extends Thread{
+public class UploadThread extends Thread
+{
       
     /**开始上传*/
     public final static int THREAD_BEGIN = 1;  
@@ -38,7 +39,8 @@ public class UploadThread extends Thread{
     private File mFile;
     private Context mContext;
 
-    public UploadThread(final File File, Handler mHandler){
+    public UploadThread(final File File, Handler mHandler)
+    {
         this.mFile = File;
         this.mHandler = mHandler;
     }  
@@ -48,10 +50,12 @@ public class UploadThread extends Thread{
     public void run() {  
         isStarted = true;
 
-		ApiStores.uploadFiles(mFile, new BaseSubscriber<ResponseBody>(mContext) {
+		ApiStores.uploadFiles(mFile, new BaseSubscriber<ResponseBody>(mContext)
+        {
 
 			@Override
-			public void onNext(ResponseBody responseBody) {
+			public void onNext(ResponseBody responseBody)
+            {
                 try {
                     Gson gson = new Gson();
                     String json = responseBody.string();
@@ -69,7 +73,9 @@ public class UploadThread extends Thread{
                         Message msg = new Message();
                         msg.what = THREAD_FINISHED;
                         mHandler.sendMessage(msg);
-                    }else{
+                    }
+                    else
+                    {
                         Message msg = new Message();
                         msg.what = THREAD_FAILURE;
                         mHandler.sendMessage(msg);
@@ -82,7 +88,8 @@ public class UploadThread extends Thread{
             }
 
 			@Override
-			public void onError(Throwable e) {
+			public void onError(Throwable e)
+            {
                 Message msg = new Message();
                 msg.what = THREAD_FAILURE;
                 mHandler.sendMessage(msg);
@@ -90,11 +97,13 @@ public class UploadThread extends Thread{
 		});
     }
       
-    public boolean isStarted(){  
+    public boolean isStarted()
+    {
         return isStarted;  
     }
 
-	public JSONObject getmData(){
+	public JSONObject getmData()
+    {
 		return innerjObject;
 	}
 }  

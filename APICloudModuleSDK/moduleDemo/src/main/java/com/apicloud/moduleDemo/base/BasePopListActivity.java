@@ -45,7 +45,8 @@ import java.util.List;
 import jp.wasabeef.recyclerview.adapters.AnimationAdapter;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
-public abstract class BasePopListActivity<T> extends AppCompatActivity {
+public abstract class BasePopListActivity<T> extends AppCompatActivity
+{
     protected KProgressHUD kProgressHUD;
     /**每一页展示多少条数据*/
     protected int mCurrentPage = 0;
@@ -65,15 +66,18 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
     protected CommonHeader headerView;
 
     private View.OnClickListener mFooterClick = new View.OnClickListener() {
+
         @Override
-        public void onClick(View v) {
+        public void onClick(View v)
+        {
             RecyclerViewStateUtils.setFooterViewState(BasePopListActivity.this, mRecyclerView, getPageSize(), LoadingFooter.State.Loading, null);
             requestData();
         }
     };
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         init();
         kProgressHUD = new HUDProgressUtils().showLoadingImage(this);
@@ -88,18 +92,22 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
-    protected void init(){
+    protected void init()
+    {
         HttpClient.init(getApplicationContext(),true);
     }
 
-    protected int setLayoutResourceId() {
+    protected int setLayoutResourceId()
+    {
         return 0;
     }
 
     @Override
-    public void onDestroy() {
+    public void onDestroy()
+    {
         super.onDestroy();
-        if(isHaveEventBus){
+        if(isHaveEventBus)
+        {
             EventBus.getDefault().unregister(this);
         }
     }
@@ -110,19 +118,26 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
 
     protected void clickView() {}
 
-    private void initViewBase() {
+    private void initViewBase()
+    {
 
-        if (mListAdapter != null) {
+        if (mListAdapter != null)
+        {
             mErrorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
-        } else {
+        }
+        else
+        {
             mListAdapter = getListAdapter();
 
-            if (requestDataIfViewCreated()) {
+            if (requestDataIfViewCreated())
+            {
                 mErrorLayout.setErrorType(ErrorLayout.NETWORK_LOADING);
                 mCurrentPage++;
                 isRequestInProcess = true;
                 requestData();
-            } else {
+            }
+            else
+            {
                 mErrorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
             }
         }
@@ -142,71 +157,92 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
 
         initLayoutManager();
 
-        mRecyclerView.setOnRefreshListener(new OnRefreshListener() {
+        mRecyclerView.setOnRefreshListener(new OnRefreshListener()
+        {
             @Override
-            public void onRefresh() {
+            public void onRefresh()
+            {
                 onRefreshView();
             }
         });
 
-        mRecyclerView.setOnLoadMoreListener(new OnLoadMoreListener() {
+        mRecyclerView.setOnLoadMoreListener(new OnLoadMoreListener()
+        {
             @Override
-            public void onLoadMore() {
+            public void onLoadMore()
+            {
 
-                if ( REQUEST_COUNT <= totalPage) {
+                if ( REQUEST_COUNT <= totalPage)
+                {
                     mCurrentPage++;
                     requestData();
                     isRequestInProcess = true;
-                } else {
+                }
+                else
+                {
                     mRecyclerView.setNoMore(true);
                 }
             }
         });
 
-        mRecyclerView.setLScrollListener(new LRecyclerView.LScrollListener() {
+        mRecyclerView.setLScrollListener(new LRecyclerView.LScrollListener()
+        {
 
             @Override
-            public void onScrollUp() {
+            public void onScrollUp()
+            {
                 // 滑动时隐藏float button
-                if (toTopBtn.getVisibility() == View.VISIBLE) {
+                if (toTopBtn.getVisibility() == View.VISIBLE)
+                {
                     toTopBtn.setVisibility(View.GONE);
                     animate(toTopBtn, R.anim.floating_action_button_hide);
                 }
             }
 
             @Override
-            public void onScrollDown() {
-                if (toTopBtn.getVisibility() != View.VISIBLE) {
+            public void onScrollDown()
+            {
+                if (toTopBtn.getVisibility() != View.VISIBLE)
+                {
                     toTopBtn.setVisibility(View.VISIBLE);
                     animate(toTopBtn, R.anim.floating_action_button_show);
                 }
             }
 
             @Override
-            public void onScrolled(int distanceX, int distanceY) {
+            public void onScrolled(int distanceX, int distanceY)
+            {
 
-                if (null != headerView) {
-                    if (distanceY == 0 || distanceY < headerView.getHeight()) {
+                if (null != headerView)
+                {
+                    if (distanceY == 0 || distanceY < headerView.getHeight())
+                    {
                         toTopBtn.setVisibility(View.GONE);
                     }
-                } else {
-                    if (distanceY == 0) {
+                }
+                else
+                {
+                    if (distanceY == 0)
+                    {
                         toTopBtn.setVisibility(View.GONE);
                     }
                 }
             }
 
             @Override
-            public void onScrollStateChanged(int state) {
+            public void onScrollStateChanged(int state)
+            {
 
             }
 
         });
 
-        mErrorLayout.setOnLayoutClickListener(new View.OnClickListener() {
+        mErrorLayout.setOnLayoutClickListener(new View.OnClickListener()
+        {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 mCurrentPage = 0;
                 mErrorLayout.setErrorType(ErrorLayout.NETWORK_LOADING);
                 mCurrentPage++;
@@ -215,9 +251,11 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
             }
         });
 
-        toTopBtn.setOnClickListener(new View.OnClickListener() {
+        toTopBtn.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 mRecyclerView.scrollToPosition(0);
                 toTopBtn.setVisibility(View.GONE);
             }
@@ -229,34 +267,42 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
         mRecyclerView.setFooterViewColor(R.color.gray_text, R.color.gray_text, R.color.app_bg);
     }
 
-    protected boolean requestDataIfViewCreated() {
+    protected boolean requestDataIfViewCreated()
+    {
         return true;
     }
 
-    private void animate(View view, int anim) {
-        if (anim != 0) {
+    private void animate(View view, int anim)
+    {
+        if (anim != 0)
+        {
             Animation a = AnimationUtils.loadAnimation(view.getContext(), anim);
             view.startAnimation(a);
         }
     }
 
     /** 设置顶部正在加载的状态 */
-    protected void setSwipeRefreshLoadingState() {
+    protected void setSwipeRefreshLoadingState()
+    {
     }
 
     /**
      * 设置顶部加载完毕的状态
      */
-    protected void setSwipeRefreshLoadedState() {
-        if(null != mRecyclerView) {
+    protected void setSwipeRefreshLoadedState()
+    {
+        if(null != mRecyclerView)
+        {
             mRecyclerView.refreshComplete(REQUEST_COUNT);
         }
 
     }
 
     // 完成刷新
-    protected void executeOnLoadFinish() {
-        if(kProgressHUD.isShowing()){
+    protected void executeOnLoadFinish()
+    {
+        if(kProgressHUD.isShowing())
+        {
             kProgressHUD.dismiss();
         }
         setSwipeRefreshLoadedState();
@@ -266,11 +312,14 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
 
     protected abstract BaseRecyclerAdapter<T> getListAdapter();
 
-    protected void requestData() {
+    protected void requestData()
+    {
     }
 
-    protected void onRefreshView() {
-        if (isRequestInProcess) {
+    protected void onRefreshView()
+    {
+        if (isRequestInProcess)
+        {
             return;
         }
         // 设置顶部正在刷新
@@ -284,50 +333,67 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
 
     protected abstract void initLayoutManager();
 
-    protected int getPageSize() {
+    protected int getPageSize()
+    {
         return Constant.PAGE_SIZE;
     }
 
-    protected void executeOnLoadDataSuccess(List<T> data,boolean isHavaHead) {
+    protected void executeOnLoadDataSuccess(List<T> data,boolean isHavaHead)
+    {
         totalPage = data.size();
-        if (data == null) {
+        if (data == null)
+        {
             data = new ArrayList<T>();
         }
 
         mErrorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
 
         // 判断等于是因为最后有一项是listview的状态
-        if (mListAdapter.getItemCount() == 0) {
+        if (mListAdapter.getItemCount() == 0)
+        {
 
-            if (needShowEmptyNoData()) {
+            if (needShowEmptyNoData())
+            {
                 mErrorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
             }
         }
 
-        if (mCurrentPage == 1) {
+        if (mCurrentPage == 1)
+        {
             mListAdapter.setDataList(data);
-            if(mListAdapter.getItemCount() == 0){
-                if(isHavaHead){
+            if(mListAdapter.getItemCount() == 0)
+            {
+                if(isHavaHead)
+                {
                     mErrorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
-                }else{
+                }
+                else
+                {
                     mErrorLayout.setErrorType(ErrorLayout.NODATA);
                 }
 
             }
-        } else {
+        }
+        else
+        {
             mListAdapter.addAll(data);
         }
     }
 
-    protected boolean needShowEmptyNoData() {
+    protected boolean needShowEmptyNoData()
+    {
         return true;
     }
 
-    protected void executeOnLoadDataError(String error) {
+    protected void executeOnLoadDataError(String error)
+    {
         executeOnLoadFinish();
-        if (mCurrentPage == 1) {
+        if (mCurrentPage == 1)
+        {
             mErrorLayout.setErrorType(ErrorLayout.NETWORK_ERROR);
-        } else {
+        }
+        else
+        {
 
             //在无网络时，滚动到底部时，mCurrentPage先自加了，然而在失败时却
             //没有减回来，如果刻意在无网络的情况下上拉，可以出现漏页问题
@@ -339,19 +405,23 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
         }
     }
 
-    protected String getNoDataTip() {
+    protected String getNoDataTip()
+    {
         return "";
     }
 
     @Override
-    public void onBackPressed() {
-        if (!BackHandlerHelper.handleBackPress(this)) {
+    public void onBackPressed()
+    {
+        if (!BackHandlerHelper.handleBackPress(this))
+        {
             super.onBackPressed();
         }
     }
 
     @Override
-    public Resources getResources() {
+    public Resources getResources()
+    {
         Resources res = super.getResources();
         Configuration config=new Configuration();
         config.setToDefaults();
@@ -372,7 +442,8 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
      */
     public void showFilterPopupWindow(View parentView,
                                       AdapterView.OnItemClickListener itemClickListener, BaseAdapter mPopAdapter,
-                                      CustomerDismissListener dismissListener) {
+                                      CustomerDismissListener dismissListener)
+    {
         showFilterPopupWindow(parentView, itemClickListener,mPopAdapter, dismissListener, 0);
     }
 
@@ -384,10 +455,12 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
      */
     public void showFilterPopupWindow(View parentView,
                                       AdapterView.OnItemClickListener itemClickListener, BaseAdapter mPopAdapter,
-                                      CustomerDismissListener dismissListener, float alpha) {
+                                      CustomerDismissListener dismissListener, float alpha)
+    {
 
         // 判断当前是否显示
-        if (mPopupWindow != null && mPopupWindow.isShowing()) {
+        if (mPopupWindow != null && mPopupWindow.isShowing())
+        {
             mPopupWindow.dismiss();
             mPopupWindow = null;
         }
@@ -396,7 +469,8 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
         // 绑定筛选点击事件
         mPopupWindow.setOnItemSelectedListener(itemClickListener);
         // 如果透明度设置为0的话,则默认设置为0.6f
-        if (0 == alpha) {
+        if (0 == alpha)
+        {
             alpha = 0.6f;
         }
         // 设置背景透明度
@@ -414,13 +488,17 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
      * @param itemClickListener 点击回调
      * @param tabs              所有的cb(需要几个输入几个就可以,cb1,cb2....)
      */
-    public void filterTabToggle(boolean isChecked, View showView,BaseAdapter mPopAdapter, AdapterView.OnItemClickListener itemClickListener, final CheckBox... tabs) {
-        if (isChecked) {
-            if (tabs.length <= 0) {
+    public void filterTabToggle(boolean isChecked, View showView,BaseAdapter mPopAdapter, AdapterView.OnItemClickListener itemClickListener, final CheckBox... tabs)
+    {
+        if (isChecked)
+        {
+            if (tabs.length <= 0)
+            {
                 return;
             }
             // 第一个checkBox为当前点击选中的cb,其他cb进行setChecked(false);
-            for (int i = 1; i < tabs.length; i++) {
+            for (int i = 1; i < tabs.length; i++)
+            {
                 tabs[i].setChecked(false);
             }
 
@@ -432,7 +510,9 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
                     tabs[0].setChecked(false);
                 }
             });
-        } else {
+        }
+        else
+        {
             // 关闭checkBox时直接隐藏popuwindow
             hidePopListView();
         }
@@ -441,9 +521,11 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
     /**
      * 自定义OnDismissListener
      */
-    public class CustomerDismissListener implements PopupWindow.OnDismissListener {
+    public class CustomerDismissListener implements PopupWindow.OnDismissListener
+    {
         @Override
-        public void onDismiss() {
+        public void onDismiss()
+        {
             // 当pop消失的时候,重置背景色透明度
             WindowManager.LayoutParams lp = getWindow().getAttributes();
             lp.alpha = 1.0f;
@@ -454,15 +536,18 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
     /**
      * 隐藏pop
      */
-    public void hidePopListView() {
+    public void hidePopListView()
+    {
         // 判断当前是否显示,如果显示则dismiss
-        if (mPopupWindow != null && mPopupWindow.isShowing()) {
+        if (mPopupWindow != null && mPopupWindow.isShowing())
+        {
             mPopupWindow.dismiss();
             mPopupWindow = null;
         }
     }
 
-    protected void setEventBus(){
+    protected void setEventBus()
+    {
         isHaveEventBus = true;
         EventBus.getDefault().register(this);
     }

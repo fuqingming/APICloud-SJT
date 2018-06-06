@@ -12,6 +12,7 @@ import android.view.WindowManager;
 
 import com.apicloud.moduleDemo.backhandler.BackHandlerHelper;
 import com.apicloud.moduleDemo.http.HttpClient;
+import com.apicloud.moduleDemo.settings.GlobalInstanceStateHelper;
 import com.apicloud.moduleDemo.util.HUDProgressUtils;
 import com.apicloud.moduleDemo.view.ErrorLayout;
 import com.apicloud.sdk.moduledemo.R;
@@ -24,14 +25,16 @@ import org.greenrobot.eventbus.EventBus;
  * Date: 2017/11/9
  */
 
-public abstract class BaseHttpCompatActivity extends AppCompatActivity {
+public abstract class BaseHttpCompatActivity extends AppCompatActivity
+{
 
     protected KProgressHUD kProgressHUD;
     protected ErrorLayout mErrorLayout;
     private boolean isHaveEventBus;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         init();
         setContentView(setLayoutResourceId());
@@ -54,7 +57,8 @@ public abstract class BaseHttpCompatActivity extends AppCompatActivity {
 
     protected abstract void getData();
 
-    protected void init(){
+    protected void init()
+    {
         HttpClient.init(getApplicationContext(),true);
         kProgressHUD = new HUDProgressUtils().showLoadingImage(this);
     }
@@ -66,8 +70,10 @@ public abstract class BaseHttpCompatActivity extends AppCompatActivity {
     protected void clickView(){}
 
     @Override
-    protected void onResume() {
-        if(getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT){
+    protected void onResume()
+    {
+        if(getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+        {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
 
@@ -78,13 +84,15 @@ public abstract class BaseHttpCompatActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (!BackHandlerHelper.handleBackPress(this)) {
+        if (!BackHandlerHelper.handleBackPress(this))
+        {
             super.onBackPressed();
         }
     }
 
     @Override
-    public Resources getResources() {
+    public Resources getResources()
+    {
         Resources res = super.getResources();
         Configuration config=new Configuration();
         config.setToDefaults();
@@ -92,24 +100,48 @@ public abstract class BaseHttpCompatActivity extends AppCompatActivity {
         return res;
     }
 
-    protected void executeOnLoadDataSuccess(boolean isSuccess) {
-        if(isSuccess){
+    protected void executeOnLoadDataSuccess(boolean isSuccess)
+    {
+        if(isSuccess)
+        {
             mErrorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
-        }else{
+        }
+        else
+        {
             mErrorLayout.setErrorType(ErrorLayout.NETWORK_ERROR);
         }
     }
 
-    protected void setEventBus(){
+    protected void setEventBus()
+    {
         isHaveEventBus = true;
         EventBus.getDefault().register(this);
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onDestroy()
+    {
         super.onDestroy();
-        if(isHaveEventBus){
+        if(isHaveEventBus)
+        {
             EventBus.getDefault().unregister(this);
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+
+        // 保存MyApplication中保存的全局变量
+        GlobalInstanceStateHelper.saveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState)
+    {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        GlobalInstanceStateHelper.restoreInstanceState(this, savedInstanceState);
     }
 }

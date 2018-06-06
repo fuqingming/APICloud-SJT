@@ -41,6 +41,11 @@
             android:name="com.apicloud.moduleDemo.MyJoinInActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- 协议WebView -->
+        <activity
+            android:name="com.apicloud.moduleDemo.AgreementWebViewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <!-- 赚钱大厅 -->
         <activity
             android:name="com.apicloud.moduleDemo.MoneyMakingHallActivity"
@@ -109,9 +114,20 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
+        <!-- 推荐客户 -->
+        <activity
+            android:name="com.apicloud.moduleDemo.MyRecommentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <!-- 支付保证金 -->
         <activity
             android:name="com.apicloud.moduleDemo.PaymentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- 参与支付保证金 -->
+        <activity
+            android:name="com.apicloud.moduleDemo.JoinPaymentActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <!-- 订单支付 -->

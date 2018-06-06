@@ -19,7 +19,8 @@ import java.util.List;
  * Date: 2017/11/13
  */
 
-public class MoneyTypeCheckedAdapter extends BaseAdapter{
+public class MoneyTypeCheckedAdapter extends BaseAdapter
+{
 
     /**
      * 筛选条件数据
@@ -30,18 +31,21 @@ public class MoneyTypeCheckedAdapter extends BaseAdapter{
      */
     private LayoutInflater mInflater;
 
-    public MoneyTypeCheckedAdapter(Context context, List<MoneyMakingHallTypeBean> mDatas) {
+    public MoneyTypeCheckedAdapter(Context context, List<MoneyMakingHallTypeBean> mDatas)
+    {
         this.mDatas = mDatas;
         mInflater = LayoutInflater.from(context);
     }
 
     @Override
-    public int getCount() {
+    public int getCount()
+    {
         return mDatas.size();
     }
 
     @Override
-    public Object getItem(int i) {
+    public Object getItem(int i)
+    {
         return mDatas.get(i);
     }
 
@@ -51,14 +55,18 @@ public class MoneyTypeCheckedAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int i, View convertView, ViewGroup viewGroup) {
+    public View getView(int i, View convertView, ViewGroup viewGroup)
+    {
         ViewHolder viewHolder = null;
-        if (convertView == null) {
+        if (convertView == null)
+        {
             viewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.item_money_making_hall_type, null);
             viewHolder.mTitleTv = convertView.findViewById(R.id.tv_name_checkbox);
             convertView.setTag(viewHolder);
-        } else {
+        }
+        else
+        {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
@@ -70,7 +78,8 @@ public class MoneyTypeCheckedAdapter extends BaseAdapter{
     /**
      * vh
      */
-    public class ViewHolder {
+    public class ViewHolder
+    {
         /**
          * 筛选项文字tv
          */

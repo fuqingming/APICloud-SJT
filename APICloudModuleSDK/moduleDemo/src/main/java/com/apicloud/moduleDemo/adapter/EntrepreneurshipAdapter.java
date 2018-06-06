@@ -19,19 +19,21 @@ import com.apicloud.sdk.moduledemo.R;
  * Date: 2017/11/13
  */
 
-public class EntrepreneurshipAdapter extends BaseRecyclerAdapter<EntrepreneurshipBean> {
+public class EntrepreneurshipAdapter extends BaseRecyclerAdapter<EntrepreneurshipBean>
+{
 
 
-    public EntrepreneurshipAdapter() {
-    }
+    public EntrepreneurshipAdapter() { }
 
     @Override
-    protected int getContentView(int viewType) {
+    protected int getContentView(int viewType)
+    {
         return R.layout.item_entrepreneurship;
     }
 
     @Override
-    protected void covert(BaseRecyclerViewHolder holder, EntrepreneurshipBean data, int position) {
+    protected void covert(BaseRecyclerViewHolder holder, EntrepreneurshipBean data, int position)
+    {
         LinearLayout llItem = holder.getView().findViewById(R.id.ll_item_click);
         LinearLayout.LayoutParams linearParams =(LinearLayout.LayoutParams)llItem.getLayoutParams(); //取控件item当前的布局参数
         DisplayMetrics dm = new DisplayMetrics();

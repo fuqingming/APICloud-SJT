@@ -6,7 +6,8 @@ import com.blankj.utilcode.util.SPUtils;
  * Created by vip on 2018/5/12.
  */
 
-public class HttpSetUrl {
+public class HttpSetUrl
+{
     public final static String serverSp = "serverSp";
 
     private static final String APP_URL = "AppUrl";	// 访问url

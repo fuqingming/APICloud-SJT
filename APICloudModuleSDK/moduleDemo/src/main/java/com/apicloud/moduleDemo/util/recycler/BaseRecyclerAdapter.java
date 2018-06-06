@@ -16,28 +16,31 @@ import java.util.List;
  * Date: 2017/11/13
  */
 
-public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRecyclerViewHolder> {
+public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRecyclerViewHolder>
+{
     protected Context mContext;
     protected List<T> mDatas  = new ArrayList<>();
 
-    public BaseRecyclerAdapter(){
-    }
+    public BaseRecyclerAdapter(){}
 
     @Override
-    public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
         mContext = parent.getContext();
         View itemView = LayoutInflater.from(mContext).inflate(getContentView(viewType),parent,false);
         return new BaseRecyclerViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(BaseRecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(BaseRecyclerViewHolder holder, int position)
+    {
         covert(holder,mDatas.get(position),position);
 
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return mDatas.size();
     }
 
@@ -57,35 +60,42 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
         m_ListenerSelectFragment = listener;
     }
 
-    public void setDataList(Collection<T> list) {
+    public void setDataList(Collection<T> list)
+    {
         this.mDatas.clear();
         this.mDatas.addAll(list);
         notifyDataSetChanged();
     }
 
-    public List<T> getListData() {
+    public List<T> getListData()
+    {
         return mDatas;
     }
 
-    public void addAll(Collection<T> list) {
+    public void addAll(Collection<T> list)
+    {
         int lastIndex = this.mDatas.size();
-        if (this.mDatas.addAll(list)) {
+        if (this.mDatas.addAll(list))
+        {
             notifyItemRangeInserted(lastIndex, list.size());
         }
     }
 
-    public void clear() {
+    public void clear()
+    {
         mDatas.clear();
         notifyDataSetChanged();
     }
 
     protected DoClickListener doClickListener = null;
 
-    public interface DoClickListener{
+    public interface DoClickListener
+    {
         void DoClick(Object obj);
     }
 
-    public void onDoClickListener (DoClickListener doClickListener){
+    public void onDoClickListener (DoClickListener doClickListener)
+    {
         this.doClickListener = doClickListener;
     }
 }

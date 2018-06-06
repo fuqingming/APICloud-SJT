@@ -5,6 +5,7 @@ package com.apicloud.moduleDemo.backhandler;
  * Date: 2017/11/15
  */
 
-public interface FragmentBackHandler {
+public interface FragmentBackHandler
+{
     boolean onBackPressed();
 }
